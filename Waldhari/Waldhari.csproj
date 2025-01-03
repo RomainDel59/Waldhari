@@ -48,10 +48,11 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Common\Entities\Helpers\GroupHelper.cs" />
+        <Compile Include="Common\Entities\Helpers\WGroupHelper.cs" />
         <Compile Include="Common\Entities\Helpers\MarkerHelper.cs" />
         <Compile Include="Common\Entities\Helpers\WBlipHelper.cs" />
         <Compile Include="Common\Entities\Helpers\WeaponsHelper.cs" />
+        <Compile Include="Common\Entities\Helpers\WPositionHelper.cs" />
         <Compile Include="Common\Entities\Helpers\WVehicleHelper.cs" />
         <Compile Include="Common\Entities\WBlip.cs" />
         <Compile Include="Common\Entities\WGroup.cs" />
@@ -66,10 +67,10 @@
         <Compile Include="Common\Files\Localization.cs" />
         <Compile Include="Common\Files\Logger.cs" />
         <Compile Include="Common\Files\PersistenceHandler.cs" />
-        <Compile Include="Common\Misc\PositionHelper.cs" />
         <Compile Include="Common\Misc\RandomHelper.cs" />
         <Compile Include="Common\Mission\AbstractMission.cs" />
         <Compile Include="Common\Mission\Step.cs" />
+        <Compile Include="Common\Scripts\EnemyGroupBehaviorScript.cs" />
         <Compile Include="Common\Scripts\PedActingScript.cs" />
         <Compile Include="Common\UI\MissionAnimationHelper.cs" />
         <Compile Include="Common\UI\NotificationHelper.cs" />

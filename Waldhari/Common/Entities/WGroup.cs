@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using GTA;
 using GTA.Native;
 using Waldhari.Common.Exceptions;
@@ -7,86 +8,146 @@ namespace Waldhari.Common.Entities
 {
     public class WGroup
     {
-        public static int DisappearanceDistance = -1;
-        
-        public PedGroup PedGroup;
-        public List<WPed> WPedList;
-        public int Relationship;
+        public string Name = null;
 
-        public void Create(string name)
+        // If not ally : enemy
+        public bool IsAlly = false;
+
+        public List<WPed> WPeds = null;
+        public List<WVehicle> WVehicles = null;
+
+        public bool AreDead() => WPeds == null || WPeds.All(wPed => wPed == null || wPed.Ped == null || wPed.Ped.IsDead);
+        public bool HasVehicles() => WVehicles != null && WVehicles.Count > 0;
+
+        private RelationshipGroup _relationshipGroup = null;
+        private PedGroup _pedGroup = null;
+        
+        /// <summary>
+        /// Creates a group of empty ped allied to each other.
+        /// If IsAlly is true, all peds will be allied to the player,
+        /// otherwise there will be enemies.
+        /// </summary>
+        /// <exception cref="TechnicalException">If the name is empty</exception>
+        public void Create()
         {
-            int relationshipTemp;
+            if(Name == null) throw new TechnicalException("Name cannot be empty");
+
+            int num;
             unsafe
             {
-                Function.Call(Hash.ADD_RELATIONSHIP_GROUP, name, &relationshipTemp);
+                Function.Call(Hash.ADD_RELATIONSHIP_GROUP, Name, &num);
+            }
+            _relationshipGroup = new RelationshipGroup(num);
+            
+            // All peds in this group will be allies to each other
+            _relationshipGroup.SetRelationshipBetweenGroups(_relationshipGroup, Relationship.Companion);
+
+            if (IsAlly)
+            {
+                // All peds in this group will be allies with the player
+                _relationshipGroup.SetRelationshipBetweenGroups(Game.Player.Character.RelationshipGroup, Relationship.Companion, true);
+            }
+            else
+            {
+                // All peds in this group will be enemies with the player
+                _relationshipGroup.SetRelationshipBetweenGroups(Game.Player.Character.RelationshipGroup, Relationship.Hate, true);
             }
 
-            Relationship = relationshipTemp;
-
-            Function.Call(Hash.SET_RELATIONSHIP_BETWEEN_GROUPS, GTA.Relationship.Hate, Relationship, Game.Player.Character.RelationshipGroup);
-            Function.Call(Hash.SET_RELATIONSHIP_BETWEEN_GROUPS, GTA.Relationship.Hate, Game.Player.Character.RelationshipGroup, Relationship);
-            Function.Call(Hash.SET_RELATIONSHIP_BETWEEN_GROUPS, GTA.Relationship.Companion, Relationship, Relationship);
-
-            PedGroup = new PedGroup();
-            PedGroup.Formation = Formation.Loose;
+            _pedGroup = new PedGroup();
+            _pedGroup.Formation = Formation.Loose;
+            
+            WPeds = new List<WPed>();
+            
+            WVehicles = new List<WVehicle>();
         }
 
-        public void Add(WPed ped, bool leader = false)
+        /// <summary>
+        /// Removes all peds, group and relationship. It deletes everything, not only mark as no longer needed. 
+        /// If something has already been removed, does nothing.
+        /// Nothing is preserved.
+        /// </summary>
+        public void Remove()
         {
-            if (WPedList == null) WPedList = new List<WPed>();
-
-            ped.GtaPed.RelationshipGroup = Relationship;
-
-            PedGroup.Add(ped.GtaPed, leader);
-
-            WPedList.Add(ped);
-        }
-
-        public void AttachEnemyMarker()
-        {
-            foreach (var wPed in WPedList)
+            if(WPeds != null)
             {
-                wPed?.AttachEnemyMarker();
-            }
-        }
-
-        public bool IsDead()
-        {
-            var isDead = true;
-            foreach (var wPed in WPedList)
-            {
-                if (wPed != null && wPed.GtaPed != null && !wPed.GtaPed.IsDead)
+                foreach (var wPed in WPeds)
                 {
-                    isDead = false;
-                    break;
+                    wPed?.Remove();
                 }
+
+                WPeds?.Clear();
+                WPeds = null;
             }
 
-            return isDead;
-        }
-
-        public void Update(bool forceDelete = false)
-        {
-            foreach (var wPed in WPedList)
+            if (WVehicles != null)
             {
-                if (wPed == null) continue;
-                if (wPed.GtaPed == null) continue;
-
-                wPed.AttachEnemyMarker();
+                foreach (var wVehicle in WVehicles)
+                {
+                    wVehicle?.Remove();
+                }
                 
-                if(DisappearanceDistance == -1) throw new TechnicalException("DisappearanceDistance is not defined.");
-
-                if (forceDelete || wPed.GtaPed.Position.DistanceTo(Game.Player.Character.Position) > DisappearanceDistance)
-                {
-                    wPed.Remove();
-                    continue;
-                }
-
-                if (!wPed.GtaPed.IsDead) continue;
-
-                wPed.RemoveBlip();
-                wPed.MarkAsNoLongerNeeded();
+                WVehicles?.Clear();
+                WVehicles = null;
             }
+            
+            _pedGroup?.Dispose();
+            _pedGroup = null;
+            
+            _relationshipGroup = null;
         }
+
+        /// <summary>
+        /// Adds a ped to the group.
+        /// </summary>
+        /// <param name="wPed">Ped to add</param>
+        /// <param name="leader">The ped is the leader</param>
+        public void AddWPed(WPed wPed, bool leader = false)
+        {
+            WPeds.Add(wPed);
+            _pedGroup.Add(wPed.Ped, leader);
+            wPed.Ped.RelationshipGroup = _relationshipGroup;
+            wPed.Ped.NeverLeavesGroup = true;
+        }
+
+        /// <summary>
+        /// Adds a vehicle to the group, so the peds can use it.
+        /// </summary>
+        /// <param name="wVehicle"></param>
+        public void AddWVehicle(WVehicle wVehicle)
+        {
+            WVehicles.Add(wVehicle);
+        }
+
+
+
+
+
+
+
+
+
+        // public void Update(bool forceDelete = false)
+        // {
+        //     foreach (var wPed in WPedList)
+        //     {
+        //         if (wPed == null) continue;
+        //         if (wPed.GtaPed == null) continue;
+        //
+        //         wPed.AttachEnemyMarker();
+        //         
+        //         if(DisappearanceDistance == -1) throw new TechnicalException("DisappearanceDistance is not defined.");
+        //
+        //         if (forceDelete || wPed.GtaPed.Position.DistanceTo(Game.Player.Character.Position) > DisappearanceDistance)
+        //         {
+        //             wPed.Remove();
+        //             continue;
+        //         }
+        //
+        //         if (!wPed.GtaPed.IsDead) continue;
+        //
+        //         wPed.RemoveBlip();
+        //         wPed.MarkAsNoLongerNeeded();
+        //     }
+        // }
     }
 }

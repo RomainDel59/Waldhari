@@ -18,7 +18,6 @@ namespace Waldhari.Common.Scripts
         private bool IsInCombat() => _wPed.Ped.IsInCombat;
         
         private bool IsPlayingScenario() => Function.Call<bool>(Hash.IS_PED_ACTIVE_IN_SCENARIO, _wPed.Ped.Handle);
-        private bool _isPlayingAnimation;
 
         private bool HasScenarioToDo() => !string.IsNullOrEmpty(_wPed.Scenario);
 
@@ -61,7 +60,6 @@ namespace Waldhari.Common.Scripts
                 
                 _hasMoved = true;
                 _isGoingBackPosition = true;
-                _isPlayingAnimation = false;
                 
                 return;
             }

@@ -31,7 +31,6 @@ namespace Waldhari.Common.Entities.Helpers
             {
                 NameKey = nameKey,
                 Sprite = BlipSprite.Enemy,
-                IsShowingRoute = true,
                 IsVisible = true
             };
             
