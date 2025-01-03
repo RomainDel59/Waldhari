@@ -1,11 +1,11 @@
 ﻿using System.Drawing;
 using System.Linq;
-using Common.Files;
 using GTA;
 using GTA.Math;
-using GTAVMods.Utils;
+using Waldhari.Common.Files;
+using Waldhari.Common.UI;
 
-namespace Common.Entities
+namespace Waldhari.Common.Entities
 {
     public class WPed : AbstractEntity
     {

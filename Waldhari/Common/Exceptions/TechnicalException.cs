@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GTAVMods.Utils
+namespace Waldhari.Common.Exceptions
 {
     public class TechnicalException : Exception
     {

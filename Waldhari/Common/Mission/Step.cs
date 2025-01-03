@@ -1,9 +1,9 @@
 ﻿using System;
-using Common.Files;
-using Common.UI;
-using GTAVMods.Utils;
+using Waldhari.Common.Exceptions;
+using Waldhari.Common.Files;
+using Waldhari.Common.UI;
 
-namespace GTAVMods.Missions
+namespace Waldhari.Common.Mission
 {
     public class Step
     {

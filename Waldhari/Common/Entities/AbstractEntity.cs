@@ -1,7 +1,6 @@
-﻿using Common.Entities;
-using GTA;
+﻿using GTA;
 
-namespace GTAVMods.Utils
+namespace Waldhari.Common.Entities
 {
     public abstract class AbstractEntity
     {

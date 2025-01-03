@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{E78A5DCC-4C80-4AEA-B79D-6524B3016A71}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waldhari", "Waldhari\Waldhari.csproj", "{E78A5DCC-4C80-4AEA-B79D-6524B3016A71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

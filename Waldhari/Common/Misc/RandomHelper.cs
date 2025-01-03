@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Math
+namespace Waldhari.Common.Misc
 {
     public static class RandomHelper
     {

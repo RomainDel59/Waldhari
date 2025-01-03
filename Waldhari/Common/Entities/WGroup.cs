@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using GTA;
 using GTA.Native;
-using GTAVMods.Utils;
+using Waldhari.Common.Exceptions;
 
-namespace Common.Entities
+namespace Waldhari.Common.Entities
 {
     public class WGroup
     {

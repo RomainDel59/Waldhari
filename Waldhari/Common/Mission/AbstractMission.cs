@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Common.Entities;
-using Common.Entities.Helpers;
-using Common.Files;
-using Common.Math;
-using Common.UI;
 using GTA;
-using GTAVMods.Missions;
-using GTAVMods.Utils;
 using LemonUI;
+using Waldhari.Common.Entities;
+using Waldhari.Common.Entities.Helpers;
+using Waldhari.Common.Exceptions;
+using Waldhari.Common.Files;
+using Waldhari.Common.Misc;
+using Waldhari.Common.UI;
 
-namespace Common.Mission
+namespace Waldhari.Common.Mission
 {
     public abstract class AbstractMission
     {

@@ -1,10 +1,9 @@
 ﻿using System.Drawing;
-using Common.Files;
 using GTA;
 using GTA.Math;
-using GTAVMods.Utils;
+using Waldhari.Common.Files;
 
-namespace Common.Entities
+namespace Waldhari.Common.Entities
 {
     public class WVehicle : AbstractEntity
     {

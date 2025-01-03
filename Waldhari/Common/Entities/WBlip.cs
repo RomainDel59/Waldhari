@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
-using Common.Files;
 using GTA;
 using GTA.Math;
+using Waldhari.Common.Files;
 
-namespace Common.Entities
+namespace Waldhari.Common.Entities
 {
     public class WBlip
     {

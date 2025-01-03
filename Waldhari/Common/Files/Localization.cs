@@ -9,7 +9,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 
-namespace Common.Files
+namespace Waldhari.Common.Files
 {
     /// <summary>
     /// Static class for handling multiple languages

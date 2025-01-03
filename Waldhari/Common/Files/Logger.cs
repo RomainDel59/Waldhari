@@ -6,7 +6,7 @@
 using System;
 using System.IO;
 
-namespace Common.Files
+namespace Waldhari.Common.Files
 {
     /// <summary>
     /// Static logger class that allows direct logging of anything to a text file

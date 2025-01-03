@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Common.Files;
 using GTA;
 using GTA.Native;
-using GTAVMods.Utils;
+using Waldhari.Common.Files;
 
-namespace Common.UI
+namespace Waldhari.Common.UI
 {
     public static class MissionAnimationHelper
     {

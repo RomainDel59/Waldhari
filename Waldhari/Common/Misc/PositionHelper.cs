@@ -1,8 +1,7 @@
-﻿using Common.Math;
-using GTA;
+﻿using GTA;
 using GTA.Math;
 
-namespace Common.Misc
+namespace Waldhari.Common.Misc
 {
     public static class PositionHelper
     {

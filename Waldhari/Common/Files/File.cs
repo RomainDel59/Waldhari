@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Common.Files
+namespace Waldhari.Common.Files
 {
     [Serializable]
     public abstract class File<T> where T : File<T>, new()

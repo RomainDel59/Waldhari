@@ -1,7 +1,7 @@
 ﻿using GTA;
 using GTA.Native;
 
-namespace GTAVMods.Utils
+namespace Waldhari.Common.UI
 {
     public static class SoundHelper
     {

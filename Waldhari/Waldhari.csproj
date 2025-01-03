@@ -8,8 +8,8 @@
         <ProjectGuid>{E78A5DCC-4C80-4AEA-B79D-6524B3016A71}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Common</RootNamespace>
-        <AssemblyName>Common</AssemblyName>
+        <RootNamespace>Waldhari</RootNamespace>
+        <AssemblyName>Waldhari</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -48,29 +48,32 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Entities\AbstractEntity.cs" />
-        <Compile Include="Entities\Helpers\GroupHelper.cs" />
-        <Compile Include="Entities\WBlip.cs" />
-        <Compile Include="Entities\WGroup.cs" />
-        <Compile Include="Entities\WPed.cs" />
-        <Compile Include="Entities\WVehicle.cs" />
-        <Compile Include="Exceptions\MissionException.cs" />
-        <Compile Include="Exceptions\TechnicalException.cs" />
-        <Compile Include="Files\Localization.cs" />
-        <Compile Include="Files\Logger.cs" />
-        <Compile Include="Files\PersistenceHandler.cs" />
-        <Compile Include="Files\File.cs" />
-        <Compile Include="Misc\PositionHelper.cs" />
-        <Compile Include="Misc\RandomHelper.cs" />
-        <Compile Include="Mission\AbstractMission.cs" />
-        <Compile Include="Mission\Step.cs" />
+        <Compile Include="Common\Entities\AbstractEntity.cs" />
+        <Compile Include="Common\Entities\Helpers\GroupHelper.cs" />
+        <Compile Include="Common\Entities\WBlip.cs" />
+        <Compile Include="Common\Entities\WGroup.cs" />
+        <Compile Include="Common\Entities\WPed.cs" />
+        <Compile Include="Common\Entities\WVehicle.cs" />
+        <Compile Include="Common\Exceptions\MissionException.cs" />
+        <Compile Include="Common\Exceptions\TechnicalException.cs" />
+        <Compile Include="Common\Files\File.cs" />
+        <Compile Include="Common\Files\Localization.cs" />
+        <Compile Include="Common\Files\Logger.cs" />
+        <Compile Include="Common\Files\PersistenceHandler.cs" />
+        <Compile Include="Common\Misc\PositionHelper.cs" />
+        <Compile Include="Common\Misc\RandomHelper.cs" />
+        <Compile Include="Common\Mission\AbstractMission.cs" />
+        <Compile Include="Common\Mission\Step.cs" />
+        <Compile Include="Common\UI\MissionAnimationHelper.cs" />
+        <Compile Include="Common\UI\NotificationHelper.cs" />
+        <Compile Include="Common\UI\SoundHelper.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="UI\MissionAnimationHelper.cs" />
-        <Compile Include="UI\NotificationHelper.cs" />
-        <Compile Include="UI\SoundHelper.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Common\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

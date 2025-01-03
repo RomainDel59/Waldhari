@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GTAVMods.Missions
+namespace Waldhari.Common.Exceptions
 {
     public class MissionException : Exception
     {

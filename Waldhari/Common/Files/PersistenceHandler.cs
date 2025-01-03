@@ -7,9 +7,9 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using Common.UI;
+using Waldhari.Common.UI;
 
-namespace Common.Files
+namespace Waldhari.Common.Files
 {
     /// <summary>
     /// This script controls all the saving and loading procedures called by the other scripts from this mod.

@@ -1,9 +1,9 @@
-﻿using Common.Files;
-using Common.Misc;
-using GTA;
-using GTAVMods.Utils;
+﻿using GTA;
+using Waldhari.Common.Exceptions;
+using Waldhari.Common.Files;
+using Waldhari.Common.Misc;
 
-namespace Common.Entities.Helpers
+namespace Waldhari.Common.Entities.Helpers
 {
     public static class GroupHelper
     {
