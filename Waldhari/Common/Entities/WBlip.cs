@@ -1,117 +1,169 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using GTA;
 using GTA.Math;
+using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
 
 namespace Waldhari.Common.Entities
 {
     public class WBlip
     {
-        public Blip GtaBlip;
+        public Blip Blip = null;
+        
+        public string NameKey = null;
+        public List<string> Values = null;
+        public BlipColor BColor = default;
+        public BlipSprite Sprite = default;
+        public bool IsShortRange = false;
+        public bool IsVisible = true;
+        public bool IsShowingRoute = true;
+        
+        // Only one of these three entities has to be set, not the three!
+        public Vehicle Vehicle = null;
+        public Ped Ped = null;
+        public Vector3 Position = default;
 
-        private readonly string _nameKey;
-        private readonly bool _showRoute;
-        private readonly BlipColor _blipColor;
-
-        public Vector3 Position;
-        public BlipSprite Sprite;
-        public bool IsShortRange;
-        public Entity AttachedEntity;
-
-        public WBlip(
-            string nameKey,
-            bool showRoute = true,
-            BlipColor blipColor = BlipColor.Yellow
-        )
-        {
-            _nameKey = nameKey;
-            _blipColor = blipColor;
-            _showRoute = showRoute;
-        }
-
-        public WBlip(
-            BlipSprite sprite,
-            Vector3 position)
-        {
-            Position = position;
-            Sprite = sprite;
-        }
-
-        public void CreateOnEntity(Entity entity)
-        {
-            AttachedEntity = entity;
-            GtaBlip = AttachedEntity.AddBlip();
-            if (GtaBlip == null)
-            {
-                Logger.Warning("Blip could not be created on entity");
-                return;
-            }
-
-            Complete();
-        }
-
-        public void CreateAtPosition(Vector3 position)
-        {
-            Position = position;
-            GtaBlip = World.CreateBlip(Position);
-            if (GtaBlip == null)
-            {
-                Logger.Warning("Blip could not be created at position");
-                return;
-            }
-
-            Complete();
-        }
-
+        /// <summary>
+        /// Creates the blip according entered properties.
+        /// If the blip has already been created, does nothing.
+        /// Developer has to define : Vehicle, Ped or Position
+        /// to define where the Blip is created.
+        /// </summary>
         public void Create()
         {
-            if (GtaBlip != null) return;
-
-            if (AttachedEntity != null)
-            {
-                CreateOnEntity(AttachedEntity);
-            }
-            else if (Position != Vector3.Zero)
-            {
-                CreateAtPosition(Position);
-            }
+            if (Blip != null) return;
+            
+            if(Vehicle != null)
+                CreateOnVehicle();
+            else if(Ped != null)
+                CreateOnPed();
             else
-            {
-                Logger.Warning("Attempted to recreate a Blip without definition.");
-            }
+                CreateOnMap();
+        }
+        
+        /// <summary>
+        /// Removes the blip. It deletes it, not only hide. 
+        /// If the blip has already been removed, does nothing.
+        /// Properties of WBlip class are preserved,
+        /// only the blip is delete and its property set to null.
+        /// </summary>
+        public void Remove()
+        {
+            if (Blip == null) return;
+        
+            Blip.Delete();
+            Blip = null;
         }
 
-        public void AttachMissionMarkerToPositionBlip()
+        /// <summary>
+        /// Show the blip on map and minimap.
+        /// </summary>
+        public void Show()
         {
-            if (GtaBlip == null || Position == default) return;
+            if(Blip == null) throw new TechnicalException("Blip cannot be empty.");
+            
+            IsVisible = true;
+            Blip.DisplayType = BlipDisplayType.BothMapSelectable;
+        }
 
+        /// <summary>
+        /// Hide the blip on map and minimap.
+        /// </summary>
+        public void Hide()
+        {
+            if(Blip == null) throw new TechnicalException("Blip cannot be empty.");
+            
+            IsVisible = false;
+            Blip.DisplayType = BlipDisplayType.NoDisplay;
+        }
+
+        /// <summary>
+        /// Draw a marker on the world accordingly the blip position and color. 
+        /// </summary>
+        /// <exception cref="TechnicalException">If position has not been set.</exception>
+        public void DrawMarker()
+        {
+            if(Position == Vector3.Zero) throw new TechnicalException("Blip position cannot be empty.");
+            
             var position = Position;
             position.Z = World.GetGroundHeight(position);
-
+            
             World.DrawMarker(
                 MarkerType.VerticalCylinder,
                 position,
                 Vector3.Zero,
                 Vector3.Zero,
                 new Vector3(5, 5, 0.5f),
-                Color.Yellow);
+                GetSystemColor());
         }
 
-        private void Complete()
+        private void DefineProperties()
         {
-            if (Sprite != default) GtaBlip.Sprite = Sprite;
-            if (_blipColor != default) GtaBlip.Color = _blipColor;
-            if (_nameKey != null) GtaBlip.Name = Localization.GetTextByKey(_nameKey);
-            GtaBlip.ShowRoute = _showRoute;
-            GtaBlip.IsShortRange = IsShortRange;
+            if(Blip == null) throw new TechnicalException("Blip cannot be empty.");
+            
+            //Sprite first, so name and color can be overridden
+            if(Sprite != default)
+                Blip.Sprite = Sprite;
+            
+            if(NameKey != null)
+                Blip.Name = Localization.GetTextByKey(NameKey,Values);
+            
+            if(BColor != default)
+                Blip.Color = BColor;
+            
+            Blip.IsShortRange = IsShortRange;
+            
+            Blip.ShowRoute = IsShowingRoute;
+            
+            Blip.DisplayType = IsVisible ? BlipDisplayType.Default : BlipDisplayType.NoDisplay;
         }
 
-        public void Remove()
+        private void CreateOnMap()
         {
-            if (GtaBlip == null) return;
-
-            GtaBlip.Delete();
-            GtaBlip = null;
+            if(Position == Vector3.Zero) throw new TechnicalException("Blip position cannot be empty.");
+            
+            Blip = World.CreateBlip(Position);
+            
+            DefineProperties();
         }
+
+        private void CreateOnPed()
+        {
+            if (Ped == null) throw new TechnicalException("Blip ped cannot be empty.");
+
+            Blip = Ped.AddBlip();
+            
+            DefineProperties();
+        }
+
+        private void CreateOnVehicle()
+        {
+            if (Vehicle == null) throw new TechnicalException("Blip vehicle cannot be empty.");
+            
+            Blip = Vehicle.AddBlip();
+            
+            DefineProperties();
+        }
+
+        private Color GetSystemColor()
+        {
+            switch (BColor)
+            {
+                case BlipColor.White: return Color.White;
+                case BlipColor.Yellow: return Color.Yellow;
+                case BlipColor.Blue: return Color.Blue;
+                case BlipColor.Green: return Color.Green;
+                case BlipColor.Red: return Color.Red;
+                case BlipColor.Orange: return Color.Orange;
+                case BlipColor.Purple: return Color.Purple;
+                case BlipColor.Pink: return Color.Pink;
+                case BlipColor.Michael: return Color.SkyBlue;
+                case BlipColor.Trevor: return Color.SandyBrown;
+                case BlipColor.Franklin: return Color.LightGreen;
+                default: throw new TechnicalException($"Blip color {BColor} cannot be unknown.");
+            }
+        }
+
     }
 }
