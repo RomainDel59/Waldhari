@@ -16,8 +16,8 @@ namespace Waldhari.Common.Entities
         public BlipColor BColor = default;
         public BlipSprite Sprite = default;
         public bool IsShortRange = false;
-        public bool IsVisible = true;
-        public bool IsShowingRoute = true;
+        public bool IsVisible = false;
+        public bool IsShowingRoute = false;
         
         // Only one of these three entities has to be set, not the three!
         public Vehicle Vehicle = null;
@@ -50,9 +50,7 @@ namespace Waldhari.Common.Entities
         /// </summary>
         public void Remove()
         {
-            if (Blip == null) return;
-        
-            Blip.Delete();
+            Blip?.Delete();
             Blip = null;
         }
 
@@ -79,23 +77,27 @@ namespace Waldhari.Common.Entities
         }
 
         /// <summary>
-        /// Draw a marker on the world accordingly the blip position and color. 
+        /// Returns the system color of the current Blip Color.
         /// </summary>
-        /// <exception cref="TechnicalException">If position has not been set.</exception>
-        public void DrawMarker()
+        /// <returns></returns>
+        /// <exception cref="TechnicalException"></exception>
+        public Color GetSystemColor()
         {
-            if(Position == Vector3.Zero) throw new TechnicalException("Blip position cannot be empty.");
-            
-            var position = Position;
-            position.Z = World.GetGroundHeight(position);
-            
-            World.DrawMarker(
-                MarkerType.VerticalCylinder,
-                position,
-                Vector3.Zero,
-                Vector3.Zero,
-                new Vector3(5, 5, 0.5f),
-                GetSystemColor());
+            switch (Blip.Color)
+            {
+                case BlipColor.White: return Color.White;
+                case BlipColor.Yellow: return Color.Yellow;
+                case BlipColor.Blue: return Color.Blue;
+                case BlipColor.Green: return Color.Green;
+                case BlipColor.Red: return Color.Red;
+                case BlipColor.Orange: return Color.Orange;
+                case BlipColor.Purple: return Color.Purple;
+                case BlipColor.Pink: return Color.Pink;
+                case BlipColor.Michael: return Color.SkyBlue;
+                case BlipColor.Trevor: return Color.SandyBrown;
+                case BlipColor.Franklin: return Color.LightGreen;
+                default: throw new TechnicalException($"Blip color {BColor} is unknown.");
+            }
         }
 
         private void DefineProperties()
@@ -145,25 +147,6 @@ namespace Waldhari.Common.Entities
             
             DefineProperties();
         }
-
-        private Color GetSystemColor()
-        {
-            switch (BColor)
-            {
-                case BlipColor.White: return Color.White;
-                case BlipColor.Yellow: return Color.Yellow;
-                case BlipColor.Blue: return Color.Blue;
-                case BlipColor.Green: return Color.Green;
-                case BlipColor.Red: return Color.Red;
-                case BlipColor.Orange: return Color.Orange;
-                case BlipColor.Purple: return Color.Purple;
-                case BlipColor.Pink: return Color.Pink;
-                case BlipColor.Michael: return Color.SkyBlue;
-                case BlipColor.Trevor: return Color.SandyBrown;
-                case BlipColor.Franklin: return Color.LightGreen;
-                default: throw new TechnicalException($"Blip color {BColor} cannot be unknown.");
-            }
-        }
-
+        
     }
 }

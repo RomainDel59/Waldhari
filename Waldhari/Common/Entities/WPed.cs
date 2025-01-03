@@ -1,234 +1,81 @@
-﻿using System.Drawing;
-using System.Linq;
-using GTA;
-using GTA.Math;
-using Waldhari.Common.Files;
-using Waldhari.Common.UI;
+﻿using GTA;
+using Waldhari.Common.Exceptions;
 
 namespace Waldhari.Common.Entities
 {
-    public class WPed : AbstractEntity
+    public class WPed
     {
-        public Ped GtaPed;
-        public Vector3 InitialPosition;
-        public Vector3 InitialRotation;
-        public string InitialScenario;
+        public Ped Ped;
 
-        public bool hasMoved;
-        public bool isGoingBack;
+        public WPosition InitialPosition = null;
+
+        public string Scenario = null;
         
-        public Vehicle Vehicle;
+        public string AnimationDictionnary = null;
+        public string AnimationName = null;
+        
+        public PedHash PedHash = default;
+        
+        public WBlip WBlip = null;
 
-        public WPed(Ped ped)
+        
+        /// <summary>
+        /// Creates the ped according entered properties.
+        /// If the ped has already been created, does nothing.
+        /// If the model cannot be loaded, error will be logged.
+        /// Blip is not created if required.
+        /// </summary>
+        /// <exception cref="TechnicalException">If at least one of required property is empty</exception>
+        public void Create()
         {
-            GtaPed = ped;
-            Entity = GtaPed;
-        }
+            if(InitialPosition == null) throw new TechnicalException("InitialPosition cannot be empty");
+            if(PedHash == default) throw new TechnicalException("PedHash cannot be empty");
 
-        public WPed(PedHash model, Vector3 position, Vector3 rotation = default)
-        {
-            GtaPed = CreatePed(model, position);
-            if (GtaPed == null)
-            {
-                Logger.Error($"Could not create ped {model}!");
-                return;
-            }
-
-            GtaPed.PositionNoOffset = position;
-            if (rotation != default) GtaPed.Rotation = rotation;
-            Entity = GtaPed;
-        }
-
-        private Ped CreatePed(Model model, Vector3 position)
-        {
-            model.Request();
-            model.Request(10000);
-
-            var ped = World.CreatePed(model, position);
-
+            Model model = PedHash;
+            model.Request(1000);
+            Ped = World.CreatePed(model, InitialPosition.Position);
             model.MarkAsNoLongerNeeded();
 
-            return ped;
-        }
-
-        public override void Remove()
-        {
-            if (Vehicle != null)
-            {
-                Vehicle.Delete();
-                Vehicle = null;
-            }
-            
-            base.Remove();
+            MoveInPosition();
         }
         
-        public void GiveWeapons()
+        /// <summary>
+        /// Removes the ped. It deletes it, not only mark as no longer needed. 
+        /// If the ped has already been removed, does nothing.
+        /// Properties of WPed class are preserved,
+        /// only the ped is delete and its property set to null.
+        /// Do the same to the WBlip if exists.
+        /// </summary>
+        public void Remove()
         {
-            GtaPed.Weapons.Give(WeaponHash.AssaultRifle, 9999, true, true);
-            GtaPed.Weapons.Give(WeaponHash.Pistol, 9999, true, true);
-            GtaPed.Weapons.Give(WeaponHash.Bat, 1, true, true);
-            GtaPed.Weapons.Select(GtaPed.Weapons.BestWeapon);
-        }
-
-        public bool GetOnNewVehicle(string modelName, Vector3 position)
-        {
-            var vehicleModel = new Model(modelName);
-            if (!vehicleModel.IsInCdImage || !vehicleModel.IsValid) Logger.Warning($"vehicle {vehicleModel} invalid!");
-            
-            vehicleModel.Request(500);
-            while (!vehicleModel.IsLoaded)
-            {
-                Script.Wait(1);
-            }
-
-            Vehicle = World.CreateVehicle(vehicleModel, position);
-            if (Vehicle == null)
-            {
-                Logger.Warning($"Could not create vehicle {vehicleModel}.");
-                return false;
-            }
-            
-            GtaPed.Task.EnterVehicle(Vehicle, VehicleSeat.Driver, -1, 30.0f, EnterVehicleFlags.WarpIn);
-            
-            var startTime = Game.GameTime;
-            while (!GtaPed.IsInVehicle(Vehicle) && Game.GameTime - startTime < 5000)
-            {
-                Script.Wait(1);
-            }
-            
-            if (GtaPed.IsInVehicle(Vehicle))
-            {
-                Logger.Debug($"Ped is now in the vehicle {modelName}!");
-                return true;
-            }
-            else
-            {
-                Logger.Warning($"Ped failed to enter the vehicle {modelName} in time.");
-                return false;
-            }
-            
+            WBlip?.Remove();
+            Ped?.Delete();
+            Ped = null;
         }
         
-        public void PlayScenario(string scenario)
+        /// <summary>
+        /// Moves the ped immediately in the initial position.
+        /// </summary>
+        public void MoveInPosition()
         {
-            GtaPed.Task.StartScenario(scenario, GtaPed.Position.Z);
-        }
-
-        public void AttachMissionMarker()
-        {
-            var position = GtaPed.Position;
-            position.Z += 1.5f;
-
-            World.DrawMarker(
-                MarkerType.UpsideDownCone,
-                position,
-                Vector3.Zero,
-                Vector3.Zero,
-                new Vector3(0.5f, 0.5f, 0.5f),
-                Color.Yellow);
-        }
-
-        public static WPed GetPed(PedHash pedHash, Vector3 position, bool getNearBy = true)
-        {
-            WPed wPed;
-
-            // Search the ped nearby
-            Ped found = null;
-            if (getNearBy)
-            {
-                var peds = World.GetNearbyPeds(position, 50);
-                found = peds.FirstOrDefault(first => first.Model == pedHash);
-            }
-
-            // If there is this ped nearby : return it
-            if (found != null)
-            {
-                wPed = new WPed(found);
-            }
-            // Else : create it
-            else
-            {
-                wPed = new WPed(pedHash, position, Vector3.Zero);
-            }
-
-            return wPed;
-        }
-
-        public void PlayAnimation(string dictionary, string animation)
-        {
-            GtaPed.Task.PlayAnimation(
-                dictionary,
-                animation,
-                8f,
-                -8f,
-                -1,
-                AnimationFlags.Loop,
-                0f);
-        }
-
-        public void Says(string text)
-        {
-            SoundHelper.PedSays(GtaPed, text);
-        }
-
-        public void StayInInitialPosition()
-        {
-            if (GtaPed == null) return;
-
-            if (GtaPed.IsInCombat) return;
-
-            if (GtaPed.Position.DistanceTo(InitialPosition) > 0.5f)
-            {
-                if (isGoingBack) return;
-
-                hasMoved = true;
-                GtaPed.Task.GoTo(InitialPosition);
-                isGoingBack = true;
-            }
-            else
-            {
-                isGoingBack = false;
-
-                if (hasMoved)
-                {
-                    GtaPed.Rotation = InitialRotation;
-                    GtaPed.Heading = InitialRotation.Z;
-                    if (InitialScenario != null) PlayScenario(InitialScenario);
-                    hasMoved = false;
-                }
-            }
-        }
-
-        public void AttachEnemyBlip(string nameKey)
-        {
-            if (_wBlip != null) return;
-
-            _wBlip = new WBlip(nameKey, false, BlipColor.Red);
-            _wBlip.AttachedEntity = Entity;
-            _wBlip.Sprite = BlipSprite.Enemy;
-            _wBlip.Create();
-        }
-        
-        public void AttachEnemyMarker()
-        {
-            if (GtaPed == null || GtaPed.IsDead) return;
+            if(InitialPosition == null) throw new TechnicalException("InitialPosition cannot be empty");
+            if(Ped == null) throw new TechnicalException("Ped cannot be empty");
             
-            var position = GtaPed.Position;
-            position.Z += 1.5f;
-
-            World.DrawMarker(
-                MarkerType.UpsideDownCone,
-                position,
-                Vector3.Zero,
-                Vector3.Zero,
-                new Vector3(0.5f, 0.5f, 0.5f),
-                Color.Red);
+            Ped.PositionNoOffset = InitialPosition.Position;
+            Ped.Rotation = InitialPosition.Rotation;
+            Ped.Heading = InitialPosition.Heading;
         }
 
-        public void MarkAsNoLongerNeeded()
+        /// <summary>
+        /// Add weapon to the ped with 150 ammo, choosing the best and authorizing to switch if it has multiple.
+        /// </summary>
+        /// <param name="weaponHash">New weapon to add</param>
+        public void AddWeapon(WeaponHash weaponHash)
         {
-            if(GtaPed != null) GtaPed.MarkAsNoLongerNeeded();
-            if(Vehicle != null) Vehicle.MarkAsNoLongerNeeded();
+            Ped.Weapons.Give(weaponHash, 150, true, true);
+            Ped.Weapons.Select(Ped.Weapons.BestWeapon);
+            Ped.CanSwitchWeapons = true;
         }
+
     }
 }

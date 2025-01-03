@@ -1,58 +1,66 @@
-﻿using System.Drawing;
-using GTA;
-using GTA.Math;
-using Waldhari.Common.Files;
+﻿using GTA;
+using Waldhari.Common.Exceptions;
 
 namespace Waldhari.Common.Entities
 {
-    public class WVehicle : AbstractEntity
+    public class WVehicle
     {
+        public Vehicle Vehicle = null;
 
-        public readonly Vehicle GtaVehicle;
+        public WPosition InitialPosition = null;
+        
+        public VehicleHash VehicleHash = default;
+        
+        public WBlip WBlip = null;
 
-        public WVehicle(VehicleHash model, Vector3 position, Vector3 rotation = default)
+        /// <summary>
+        /// Creates the vehicle according entered properties.
+        /// If the vehicle has already been created, does nothing.
+        /// If the model cannot be loaded, error will be logged.
+        /// Blip is not created if required.
+        /// </summary>
+        /// <exception cref="TechnicalException">If at least one of required property is empty</exception>
+        public void Create()
         {
-            GtaVehicle = CreateVehicle(model, position);
-            if (GtaVehicle == null)
-            {
-                Logger.Error($"Could not create vehicle {model}!");
-                return;
-            }
+            if (Vehicle != null) return;
+            
+            if(InitialPosition == null) throw new TechnicalException("InitialPosition cannot be empty");
+            if(VehicleHash == default) throw new TechnicalException("VehicleHash cannot be empty");
 
-            GtaVehicle.PositionNoOffset = position;
-            GtaVehicle.Rotation = rotation;
-            Entity = GtaVehicle;
-        }
-
-        private Vehicle CreateVehicle(Model model, Vector3 position)
-        {
-            model.Request();
-            model.Request(10000);
-
-            var vehicle = World.CreateVehicle(model, position);
-
+            Model model = VehicleHash;
+            model.Request(1000);
+            Vehicle = World.CreateVehicle(model, InitialPosition.Position, InitialPosition.Heading);
             model.MarkAsNoLongerNeeded();
 
-            return vehicle;
+            MoveInPosition();
         }
 
-        public void AttachMissionMarker()
+        /// <summary>
+        /// Removes the vehicle. It deletes it, not only mark as no longer needed. 
+        /// If the vehicle has already been removed, does nothing.
+        /// Properties of WVehicle class are preserved,
+        /// only the vehicle is delete and its property set to null.
+        /// Do the same to the WBlip if exists.
+        /// </summary>
+        public void Remove()
         {
-            var position = GtaVehicle.Position;
-            position.Z += 2.5f;
-
-            World.DrawMarker(
-                MarkerType.UpsideDownCone,
-                position,
-                Vector3.Zero,
-                Vector3.Zero,
-                new Vector3(0.5f, 0.5f, 0.5f),
-                Color.Yellow);
+            WBlip?.Remove();
+            Vehicle?.Delete();
+            Vehicle = null;
         }
-
-        public bool IsDestroyed()
+        
+        /// <summary>
+        /// Moves the vehicle immediately in the initial position.
+        /// </summary>
+        public void MoveInPosition()
         {
-            return GtaVehicle.BodyHealth <= 0 || GtaVehicle.EngineHealth <= 0;
+            if(InitialPosition == null) throw new TechnicalException("InitialPosition cannot be empty");
+            if(Vehicle == null) throw new TechnicalException("Vehicle cannot be empty");
+            
+            Vehicle.PositionNoOffset = InitialPosition.Position;
+            Vehicle.Rotation = InitialPosition.Rotation;
+            Vehicle.Heading = InitialPosition.Heading;
         }
+        
     }
 }

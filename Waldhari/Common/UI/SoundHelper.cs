@@ -1,5 +1,4 @@
-﻿using GTA;
-using GTA.Native;
+﻿using GTA.Native;
 
 namespace Waldhari.Common.UI
 {
@@ -28,12 +27,6 @@ namespace Waldhari.Common.UI
         public static void PlayFailure()
         {
             Function.Call(Hash.PLAY_SOUND_FRONTEND, -1, "OTHER_TEXT", "HUD_AWARDS");
-        }
-
-        public static void PedSays(Ped ped, string text)
-        {
-            Function.Call(Hash.PLAY_PED_AMBIENT_SPEECH_NATIVE, ped, text,
-                "Speech_Params_Force_Normal_Clear");
         }
     }
 }

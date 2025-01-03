@@ -48,12 +48,18 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Common\Entities\AbstractEntity.cs" />
         <Compile Include="Common\Entities\Helpers\GroupHelper.cs" />
+        <Compile Include="Common\Entities\Helpers\MarkerHelper.cs" />
+        <Compile Include="Common\Entities\Helpers\WBlipHelper.cs" />
+        <Compile Include="Common\Entities\Helpers\WeaponsHelper.cs" />
+        <Compile Include="Common\Entities\Helpers\WVehicleHelper.cs" />
         <Compile Include="Common\Entities\WBlip.cs" />
         <Compile Include="Common\Entities\WGroup.cs" />
         <Compile Include="Common\Entities\WPed.cs" />
+        <Compile Include="Common\Entities\WPosition.cs" />
         <Compile Include="Common\Entities\WVehicle.cs" />
+        <Compile Include="Common\Enums\EMovementRatio.cs" />
+        <Compile Include="Common\Enums\ENavigation.cs" />
         <Compile Include="Common\Exceptions\MissionException.cs" />
         <Compile Include="Common\Exceptions\TechnicalException.cs" />
         <Compile Include="Common\Files\File.cs" />
@@ -64,6 +70,7 @@
         <Compile Include="Common\Misc\RandomHelper.cs" />
         <Compile Include="Common\Mission\AbstractMission.cs" />
         <Compile Include="Common\Mission\Step.cs" />
+        <Compile Include="Common\Scripts\PedActingScript.cs" />
         <Compile Include="Common\UI\MissionAnimationHelper.cs" />
         <Compile Include="Common\UI\NotificationHelper.cs" />
         <Compile Include="Common\UI\SoundHelper.cs" />
@@ -71,9 +78,6 @@
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Common\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
