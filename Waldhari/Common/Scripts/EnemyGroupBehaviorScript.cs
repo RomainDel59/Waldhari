@@ -9,10 +9,14 @@ namespace Waldhari.Common.Scripts
 {
     public class EnemyGroupBehaviorScript : Script
     {
+        // Parameters should be defined when game is launched
         public static int AppearanceDistance = -1;
         public static int DisappearanceDistance = -1;
         
-        public WGroup WGroup;
+        /// <summary>
+        /// Group has to be defined on contructor.
+        /// </summary>
+        public readonly WGroup WGroup;
 
         private int _nextExecution;
 
@@ -23,7 +27,7 @@ namespace Waldhari.Common.Scripts
         /// Peds and vehicles position will be calculated when created in this script.
         /// Peds weapons will be given when created in this script.
         /// At the end, before disinstantiation of the script,
-        /// developer has to call method MarkAsNoLongerNeeded to clean up.
+        /// developer has to call methods MarkAsNoLongerNeeded or Remove to clean up.
         /// </summary>
         /// <param name="wGroup">Group to manage</param>
         /// <exception cref="TechnicalException">If distance parameters are empty</exception>
@@ -41,6 +45,10 @@ namespace Waldhari.Common.Scripts
             _nextExecution = Game.GameTime;
         }
 
+        /// <summary>
+        /// Marks peds and vehicles as no longer needed,
+        /// so game can remove its freely when it wants.
+        /// </summary>
         public void MarkAsNoLongerNeeded()
         {
             foreach (var wPed in WGroup.WPeds)
@@ -57,11 +65,13 @@ namespace Waldhari.Common.Scripts
             {
                 if (wVehicle == null) continue;
                 
-                wVehicle.WBlip?.Remove();
                 wVehicle.Vehicle?.MarkAsNoLongerNeeded();
             }
         }
 
+        /// <summary>
+        /// Remove all peds and vehicles (delete everything).
+        /// </summary>
         public void Remove()
         {
             foreach (var wPed in WGroup.WPeds)
@@ -78,11 +88,14 @@ namespace Waldhari.Common.Scripts
             {
                 if (wVehicle == null) continue;
                 
-                wVehicle.WBlip?.Remove();
                 wVehicle.Remove();
             }
         }
-
+        
+        /// <summary>
+        /// Creates vehicles according group definition.
+        /// If there is no vehicle, does nothing.
+        /// </summary>
         private void CreateVehicles()
         {
             if (!WGroup.HasVehicles()) return;
@@ -91,10 +104,12 @@ namespace Waldhari.Common.Scripts
             {
                 wVehicle.InitialPosition = WPositionHelper.GetBehindPosition(AppearanceDistance, true);
                 wVehicle.Create();
-                wVehicle.WBlip?.Create(); // Normally there aren't any.
             }
         }
 
+        /// <summary>
+        /// Creates peds according group definition.
+        /// </summary>
         private void CreatePeds()
         {
             var hasVehicles = WGroup.HasVehicles();
@@ -119,6 +134,11 @@ namespace Waldhari.Common.Scripts
             }
         }
 
+        /// <summary>
+        /// Executes peds and vehicles behavior every 1/2 second.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnTick(object sender, EventArgs e)
         {
             // To lower material usage :
@@ -131,6 +151,10 @@ namespace Waldhari.Common.Scripts
             
         }
 
+        /// <summary>
+        /// Manages vehicles behavior.
+        /// If there is no vehicle, does nothing.
+        /// </summary>
         private void ManageVehicles()
         {
             if(!WGroup.HasVehicles()) return;
@@ -151,11 +175,13 @@ namespace Waldhari.Common.Scripts
                 if (!wVehicle.Vehicle.IsConsideredDestroyed) continue;
                 
                 // Vehicle destroyed : no longer needed
-                wVehicle.WBlip?.Remove();
                 wVehicle.Vehicle.MarkAsNoLongerNeeded();
             }
         }
 
+        /// <summary>
+        /// Manages peds behavior.
+        /// </summary>
         private void ManagePeds()
         {
             foreach (var wPed in WGroup.WPeds)
@@ -182,6 +208,12 @@ namespace Waldhari.Common.Scripts
             }
         }
 
+        /// <summary>
+        /// Make a ped enter a random vehicle within 2 seconds.
+        /// If there is no vehicle, does nothing.
+        /// </summary>
+        /// <param name="wPed">Ped that has to enter vehicle</param>
+        /// <returns>True if ped succeed to enter vehicle</returns>
         private bool GetOnVehicle(WPed wPed)
         {
             var startTime = Game.GameTime;
