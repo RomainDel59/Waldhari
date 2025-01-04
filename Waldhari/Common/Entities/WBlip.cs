@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using GTA;
 using GTA.Math;
 using Waldhari.Common.Exceptions;
@@ -76,49 +75,30 @@ namespace Waldhari.Common.Entities
             Blip.DisplayType = BlipDisplayType.NoDisplay;
         }
 
-        /// <summary>
-        /// Returns the system color of the current Blip Color.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="TechnicalException"></exception>
-        public Color GetSystemColor()
-        {
-            switch (Blip.Color)
-            {
-                case BlipColor.White: return Color.White;
-                case BlipColor.Yellow: return Color.Yellow;
-                case BlipColor.Blue: return Color.Blue;
-                case BlipColor.Green: return Color.Green;
-                case BlipColor.Red: return Color.Red;
-                case BlipColor.Orange: return Color.Orange;
-                case BlipColor.Purple: return Color.Purple;
-                case BlipColor.Pink: return Color.Pink;
-                case BlipColor.Michael: return Color.SkyBlue;
-                case BlipColor.Trevor: return Color.SandyBrown;
-                case BlipColor.Franklin: return Color.LightGreen;
-                default: throw new TechnicalException($"Blip color {BColor} is unknown.");
-            }
-        }
-
         private void DefineProperties()
         {
             if(Blip == null) throw new TechnicalException("Blip cannot be empty.");
             
             //Sprite first, so name and color can be overridden
-            if(Sprite != default)
+            if (Sprite != default)
                 Blip.Sprite = Sprite;
-            
-            if(NameKey != null)
-                Blip.Name = Localization.GetTextByKey(NameKey,Values);
+            else
+                Sprite = Blip.Sprite;
             
             if(BColor != default)
                 Blip.Color = BColor;
+            else
+                BColor = Blip.Color;
+            
+            if(NameKey != null) Blip.Name = Localization.GetTextByKey(NameKey,Values);
             
             Blip.IsShortRange = IsShortRange;
             
             Blip.ShowRoute = IsShowingRoute;
+
+            if (IsVisible) Show();
+            else Hide();
             
-            Blip.DisplayType = IsVisible ? BlipDisplayType.Default : BlipDisplayType.NoDisplay;
         }
 
         private void CreateOnMap()

@@ -22,7 +22,9 @@ Useful external resources :
 - https://wiki.rage.mp/
 - https://forge.plebmasters.de/
 - https://docs.fivem.net/docs/
+  - https://docs.fivem.net/docs/game-references/blips/
 
 Some dumps :
 - https://gist.github.com/Sainan/021bd2f48f1c68d3eb002caab635b5a4
 - https://gist.github.com/alberttheprince/bd083ce03ceb187e9f9ecc7de9aa0a13
+- https://gist.github.com/fingaweg/b88619cba4c267fc2cfdb2cf899e0dad

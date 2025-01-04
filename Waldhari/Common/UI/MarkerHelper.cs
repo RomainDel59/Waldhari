@@ -1,7 +1,9 @@
 ﻿using GTA;
 using GTA.Math;
+using Waldhari.Common.Entities;
+using Waldhari.Common.Misc;
 
-namespace Waldhari.Common.Entities.Helpers
+namespace Waldhari.Common.UI
 {
     public static class MarkerHelper
     {
@@ -22,7 +24,7 @@ namespace Waldhari.Common.Entities.Helpers
                 Vector3.Zero,
                 Vector3.Zero,
                 new Vector3(radius, radius, height),
-                wBlip.GetSystemColor());
+                ColorHelper.GetSystemColor(wBlip.BColor));
         }
         
         /// <summary>
@@ -42,7 +44,7 @@ namespace Waldhari.Common.Entities.Helpers
                 Vector3.Zero,
                 Vector3.Zero,
                 new Vector3(radius, radius, height),
-                wBlip.GetSystemColor());
+                ColorHelper.GetSystemColor(wBlip.BColor));
         }
         
     }

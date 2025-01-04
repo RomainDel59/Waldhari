@@ -1,9 +1,9 @@
 ﻿using System;
 using GTA;
 using GTA.Math;
-using Waldhari.Common.Entities;
+using Waldhari.Common.Misc;
 
-namespace Waldhari.Common.Misc
+namespace Waldhari.Common.Entities.Helpers
 {
     public static class WPositionHelper
     {

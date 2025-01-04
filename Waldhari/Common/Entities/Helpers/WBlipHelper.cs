@@ -1,4 +1,9 @@
-﻿using GTA;
+﻿using System.Collections.Generic;
+using GTA;
+using GTA.Math;
+using GTA.Native;
+using Waldhari.Common.Files;
+using Waldhari.Common.Misc;
 
 namespace Waldhari.Common.Entities.Helpers
 {
@@ -36,6 +41,46 @@ namespace Waldhari.Common.Entities.Helpers
             
             return wBlip;
         }
-        
+
+        public static WBlip CreateProperty(BlipSprite sprite, Vector3 position, int owner, string nameKey, int price)
+        {
+            var values = new List<string>();
+            if (owner == 0)
+            {
+                var name = Localization.GetTextByKey(nameKey);
+                nameKey = "property_with_price";
+                
+                values.Add(name);
+                values.Add(NumberHelper.ConvertToAmount(price));
+                
+                Logger.Debug("name="+name);
+                Logger.Debug("price="+price);
+                Logger.Debug("NumberHelper.ConvertToAmount(price)="+NumberHelper.ConvertToAmount(price));
+            }
+            
+            var propertyBlip = new WBlip
+            {
+                NameKey = nameKey,
+                Values = values,
+                Position = position,
+                Sprite = sprite,
+                BColor = ColorHelper.GetOwnerBlipColor(owner),
+                IsShortRange = true,
+                IsVisible = true
+            };
+
+            propertyBlip.Create();
+            
+            propertyBlip.Blip.CategoryType = BlipCategoryType.Property;
+
+            // https://docs.fivem.net/natives/?_0xE2590BC29220CEBB
+            Function.Call(Hash.SET_BLIP_HIGH_DETAIL, propertyBlip.Blip, false);
+            
+            //SHOW_FOR_SALE_ICON_ON_BLIP
+            Function.Call((Hash)0x19BD6E3C0E16A8FA, propertyBlip.Blip, owner == 0);
+            
+
+            return propertyBlip;
+        }
     }
 }

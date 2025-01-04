@@ -66,19 +66,30 @@
         <Compile Include="Common\Files\Localization.cs" />
         <Compile Include="Common\Files\Logger.cs" />
         <Compile Include="Common\Files\PersistenceHandler.cs" />
+        <Compile Include="Common\Misc\ColorHelper.cs" />
+        <Compile Include="Common\Misc\NumberHelper.cs" />
         <Compile Include="Common\Misc\RandomHelper.cs" />
         <Compile Include="Common\Mission\AbstractMission.cs" />
         <Compile Include="Common\Mission\Step.cs" />
+        <Compile Include="Common\GlobalOptions.cs" />
+        <Compile Include="Common\OptionsHelper.cs" />
         <Compile Include="Common\Scripts\EnemyGroupBehaviorScript.cs" />
         <Compile Include="Common\Scripts\PedActingScript.cs" />
         <Compile Include="Common\UI\MarkerHelper.cs" />
         <Compile Include="Common\UI\MissionAnimationHelper.cs" />
         <Compile Include="Common\UI\NotificationHelper.cs" />
         <Compile Include="Common\UI\SoundHelper.cs" />
+        <Compile Include="MethLab\MethLab.cs" />
+        <Compile Include="MethLab\MethLabOptions.cs" />
+        <Compile Include="MethLab\MethLabSave.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="Properties\Waldhari\localization\en-US.xml" />
+      <Content Include="Properties\Waldhari\localization\fr-FR.xml" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

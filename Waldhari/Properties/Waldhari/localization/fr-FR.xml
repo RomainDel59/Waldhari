@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationFile>
+    <LanguageCode>fr-FR</LanguageCode>
+    <Locales>
+        
+        <!-- 
+        ***************************
+        *** Ressources globales *** 
+        ***************************
+        -->
+        
+        <LocaleKey>
+            <Key>error</Key>
+            <Value>~r~Une erreur est survenue, veuillez envoyer les logs du mod sur https://github.com/RomainDel59/Waldhari/issues svp.~s~</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>property_with_price</Key>
+            <Value>{0} : {1} $</Value>
+        </LocaleKey>
+        
+        <!-- Noms -->
+        <LocaleKey>
+            <Key>ron_sender</Key>
+            <Value>Ron Jakowski</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>chemist_sender</Key>
+            <Value>Chimiste</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>rival_enemy</Key>
+            <Value>Membre de gang rival</Value>
+        </LocaleKey>
+
+        <!-- Véhicules -->
+        <LocaleKey>
+            <Key>van_vehicle</Key>
+            <Value>Fourgon</Value>
+        </LocaleKey>
+
+        <!-- Messages de missions -->
+        <LocaleKey>
+            <Key>already_in_mission</Key>
+            <Value>Une mission est déjà ~r~en cours~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>wanted_during_mission</Key>
+            <Value>Sème les ~r~flics~s~ !</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>rival_during_mission</Key>
+            <Value>Débarrasse-toi des membres du ~r~gang rival~s~ !</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>player_dead</Key>
+            <Value>Vous êtes ~r~mort~s~ !</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>mission_success</Key>
+            <Value>MISSION RÉUSSIE</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>mission_failure</Key>
+            <Value>MISSION ÉCHOUÉE</Value>
+        </LocaleKey>
+
+        <!-- Aide du menu -->
+        <LocaleKey>
+            <Key>menu_select</Key>
+            <Value>Choisir</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>menu_back</Key>
+            <Value>Retour</Value>
+        </LocaleKey>
+        
+
+        
+        <!-- 
+        ***************
+        *** MethLab *** 
+        ***************
+        -->
+        <LocaleKey>
+            <Key>methlab</Key>
+            <Value>Production de méth</Value>
+        </LocaleKey>
+        
+        
+
+    </Locales>
+</LocalizationFile>

@@ -16,9 +16,9 @@ namespace Waldhari.Common.Files
     /// </summary>
     public static class Localization
     {
-        public static string CurCulture = "en-US";
+        public static string CurCulture = "fr-FR";
 
-        private static readonly CultureInfo DefaultCulture = CultureInfo.GetCultureInfo("en-US");
+        private static readonly CultureInfo DefaultCulture = CultureInfo.GetCultureInfo(CurCulture);
 
         internal const string LocaleNotFoundTxt = "-MISSINGLOCALE-";
 
@@ -94,16 +94,22 @@ namespace Waldhari.Common.Files
 
         public static string GetTextByKey(string localeKey, List<string> values = null)
         {
-            if (_currentlyUsedFile == null) return LocaleNotFoundTxt;
+            if (_currentlyUsedFile == null)
+            {
+                Logger.Warning($"localeKey='{localeKey}' is missing");
+                return LocaleNotFoundTxt;
+            }
             
             if (string.IsNullOrEmpty(localeKey)) return string.Empty;
 
             var text = _currentlyUsedFile.GetTextByKey(localeKey);
+            Logger.Debug($"text='{text}'");
             
             // Merge values if exist
             if (values != null && values.Count > 0)
             {
-                text = string.Format(text, values);
+                text = string.Format(text, values.ToArray());
+                Logger.Debug($"text with values='{text}'");
             }
             
             return text;
@@ -144,7 +150,7 @@ namespace Waldhari.Common.Files
         {
         }
 
-        public string GetTextByKey(string localeKey, string fallbackText = Localization.LocaleNotFoundTxt)
+        public string GetTextByKey(string localeKey)
         {
             var entry = Locales.Find(l => l.Key == localeKey);
 
@@ -155,7 +161,7 @@ namespace Waldhari.Common.Files
             }
 
             Logger.Warning($"Locale file {LanguageCode}: key {localeKey} not found.");
-            return fallbackText;
+            return Localization.LocaleNotFoundTxt;
         }
 
         /// <summary>

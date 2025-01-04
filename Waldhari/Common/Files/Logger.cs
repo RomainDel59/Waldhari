@@ -52,8 +52,9 @@ namespace Waldhari.Common.Files
         /// </summary>
         public static void Clear()
         {
-            File.WriteAllText(GetFilePath(),"");
-            Warning("Cleared log! (This happens when the mod is initialized)");
+            //todo: uncomment this lines
+            // File.WriteAllText(GetFilePath(),"");
+            // Warning("Cleared log! (This happens when the mod is initialized)");
         }
 
         public static void Exception(string message)

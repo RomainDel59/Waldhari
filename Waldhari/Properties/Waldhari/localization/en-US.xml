@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationFile>
+    <LanguageCode>en-US</LanguageCode>
+    <Locales>
+
+        <!-- 
+        ***************************
+        *** Ressources globales *** 
+        ***************************
+        -->
+
+        <LocaleKey>
+            <Key>error</Key>
+            <Value>~r~Une erreur est survenue, veuillez envoyer les logs du mod sur https://github.com/RomainDel59/Waldhari/issues svp.~s~</Value>
+        </LocaleKey>
+        
+    </Locales>
+</LocalizationFile>
