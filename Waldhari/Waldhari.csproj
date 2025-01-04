@@ -68,6 +68,7 @@
         <Compile Include="Common\Files\PersistenceHandler.cs" />
         <Compile Include="Common\Misc\ColorHelper.cs" />
         <Compile Include="Common\Misc\NumberHelper.cs" />
+        <Compile Include="Common\Misc\PlayerHelper.cs" />
         <Compile Include="Common\Misc\RandomHelper.cs" />
         <Compile Include="Common\Mission\AbstractMission.cs" />
         <Compile Include="Common\Mission\Step.cs" />
@@ -79,6 +80,7 @@
         <Compile Include="Common\UI\MissionAnimationHelper.cs" />
         <Compile Include="Common\UI\NotificationHelper.cs" />
         <Compile Include="Common\UI\SoundHelper.cs" />
+        <Compile Include="MethLab\Helpers\MethLabNotificationHelper.cs" />
         <Compile Include="MethLab\MethLab.cs" />
         <Compile Include="MethLab\MethLabOptions.cs" />
         <Compile Include="MethLab\MethLabSave.cs" />

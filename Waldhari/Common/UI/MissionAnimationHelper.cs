@@ -19,6 +19,19 @@ namespace Waldhari.Common.UI
         private static int _color;
 
         private static bool _success;
+        
+        public static void PropertyBought(string messageKey, List<string> messageValues = null)
+        {
+            if (_step != -1) return;
+            
+            var message = Localization.GetTextByKey(messageKey, messageValues);
+
+            _title = "~y~" + Localization.GetTextByKey("property_bought") + "~s~";
+            _subtitle = message;
+            _color = 20;
+            _success = true;
+            _step = 0;
+        }
 
         public static void Success(string messageKey, List<string> messageValues = null)
         {

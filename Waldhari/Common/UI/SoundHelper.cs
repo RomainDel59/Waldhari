@@ -18,6 +18,11 @@ namespace Waldhari.Common.UI
         {
             Function.Call(Hash.PLAY_SOUND_FRONTEND, -1, "PURCHASE", "HUD_LIQUOR_STORE_SOUNDSET");
         }
+        
+        public static void PlayEmail()
+        {
+            Function.Call(Hash.PLAY_SOUND_FRONTEND, -1, "TextHit", "WastedSounds", true);
+        }
 
         public static void PlayPayment()
         {

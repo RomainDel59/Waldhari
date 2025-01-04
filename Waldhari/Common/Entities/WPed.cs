@@ -18,8 +18,6 @@ namespace Waldhari.Common.Entities
         
         public WBlip WBlip = null;
 
-        private WeaponCollection _weaponCollection = null;
-
         
         /// <summary>
         /// Creates the ped according entered properties.

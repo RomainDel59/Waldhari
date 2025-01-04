@@ -13,7 +13,7 @@ namespace Waldhari.Common.Mission
 {
     public abstract class AbstractMission
     {
-        // Static objects are to set as param : mandatory !
+        // Static objects are to set as parameters : mandatory !
         
         /// <summary>
         /// Pool for managing menus.
@@ -23,17 +23,17 @@ namespace Waldhari.Common.Mission
         /// <summary>
         /// Chance of triggering a "wanted" random event.
         /// </summary>
-        public static int WantedChance = -1;
+        public int WantedChance = -1;
         
         /// <summary>
         /// Chance of triggering a "rival gang" random event.
         /// </summary>
-        public static int RivalChance = -1;
+        public int RivalChance = -1;
         
         /// <summary>
         /// Number of rival gang members to spawn.
         /// </summary>
-        public static int RivalMembers = -1;
+        public int RivalMembers = -1;
         
         /// <summary>
         /// Name of mission (for logs only).
