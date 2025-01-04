@@ -8,6 +8,7 @@ using Waldhari.Common.UI;
 
 namespace Waldhari.Common.Scripts
 {
+    [ScriptAttributes(NoDefaultInstance = true)]
     public class EnemyGroupBehaviorScript : Script
     {
         // Parameters should be defined when game is launched

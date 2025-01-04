@@ -16,12 +16,14 @@ namespace Waldhari.Common.UI
         
         public static void PlaySuccess()
         {
+            //todo: find the good sound for success in game
             Function.Call(Hash.PLAY_SOUND_FRONTEND, -1, "PURCHASE", "HUD_LIQUOR_STORE_SOUNDSET");
         }
         
         public static void PlayEmail()
         {
-            Function.Call(Hash.PLAY_SOUND_FRONTEND, -1, "TextHit", "WastedSounds", true);
+            //todo: find the good sound for email received in game
+            Function.Call(Hash.PLAY_SOUND_FRONTEND, -1, "PURCHASE", "HUD_LIQUOR_STORE_SOUNDSET");
         }
 
         public static void PlayPayment()
@@ -31,6 +33,7 @@ namespace Waldhari.Common.UI
 
         public static void PlayFailure()
         {
+            //todo: find the good sound for failure in game
             Function.Call(Hash.PLAY_SOUND_FRONTEND, -1, "OTHER_TEXT", "HUD_AWARDS");
         }
     }

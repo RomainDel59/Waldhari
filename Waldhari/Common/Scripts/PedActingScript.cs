@@ -7,6 +7,7 @@ using Waldhari.Common.Exceptions;
 
 namespace Waldhari.Common.Scripts
 {
+    [ScriptAttributes(NoDefaultInstance = true)]
     public class PedActingScript : Script
     {
         private WPed _wPed;

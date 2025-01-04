@@ -76,6 +76,7 @@
         <Compile Include="Common\OptionsHelper.cs" />
         <Compile Include="Common\Scripts\EnemyGroupBehaviorScript.cs" />
         <Compile Include="Common\Scripts\PedActingScript.cs" />
+        <Compile Include="Common\Scripts\PropertyToBuyScript.cs" />
         <Compile Include="Common\UI\MarkerHelper.cs" />
         <Compile Include="Common\UI\MissionAnimationHelper.cs" />
         <Compile Include="Common\UI\NotificationHelper.cs" />
