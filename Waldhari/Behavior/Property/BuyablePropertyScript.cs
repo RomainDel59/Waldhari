@@ -105,7 +105,7 @@ namespace Waldhari.Behavior.Property
 
             BuyableProperty.ShowBuySuccess();
 
-            _timeToFinish = Game.GameTime + 15 * 1000;
+            _timeToFinish = Game.GameTime + 10 * 1000;
             _timeToShowSuccess = -1;
         }
 
