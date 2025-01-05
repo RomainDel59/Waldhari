@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GTA;
-using Waldhari.Common.Files;
 using Waldhari.Common.UI;
 
 namespace Waldhari.Behavior.Animation
@@ -14,8 +13,9 @@ namespace Waldhari.Behavior.Animation
             
             script.Animation = new Animation
             {
-                Title = "~g~" + Localization.GetTextByKey("mission_succeed") + "~s~",
-                Subtitle = Localization.GetTextByKey(messageKey, messageValues),
+                TitleKey = "mission_succeed",
+                SubtitleKey = messageKey,
+                SubtitleValues = messageValues,
                 FadeOutColor = Animation.Color.Green,
                 PlaySoundAtBeginning = SoundHelper.PlayMissionSuccess
             };
@@ -27,8 +27,9 @@ namespace Waldhari.Behavior.Animation
             
             script.Animation = new Animation
             {
-                Title = "~r~" + Localization.GetTextByKey("mission_failed") + "~s~",
-                Subtitle = Localization.GetTextByKey(messageKey, messageValues),
+                TitleKey = "mission_failed",
+                SubtitleKey = messageKey,
+                SubtitleValues = messageValues,
                 FadeOutColor = Animation.Color.Red,
                 PlaySoundAtBeginning = SoundHelper.PlayMissionFailure
             };
@@ -40,8 +41,9 @@ namespace Waldhari.Behavior.Animation
             
             script.Animation = new Animation
             {
-                Title = "~y~" + Localization.GetTextByKey("property_bought") + "~s~",
-                Subtitle = Localization.GetTextByKey(messageKey, messageValues),
+                TitleKey = "property_bought",
+                SubtitleKey = messageKey,
+                SubtitleValues = messageValues,
                 FadeOutColor = Animation.Color.Yellow,
                 PlaySoundAtBeginning = SoundHelper.PlayPayment
             };

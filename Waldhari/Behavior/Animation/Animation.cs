@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using GTA.Native;
+using Waldhari.Common.Files;
 using Waldhari.Common.UI;
 
 namespace Waldhari.Behavior.Animation
@@ -23,8 +25,9 @@ namespace Waldhari.Behavior.Animation
         public int ShowDuration = 5;
         public int FadeOutDuration = 2;
         
-        public string Title;
-        public string Subtitle;
+        public string TitleKey;
+        public string SubtitleKey;
+        public List<string> SubtitleValues;
         public Color FadeOutColor;
         public Action PlaySoundAtBeginning;
         public Action PlaySoundAtEnd = SoundHelper.PlayDisappear;
@@ -48,12 +51,14 @@ namespace Waldhari.Behavior.Animation
 
             Function.Call(Hash.BEGIN_SCALEFORM_MOVIE_METHOD, _id, "SHOW_SHARD_MIDSIZED_MESSAGE");
 
+            var title = Localization.GetTextByKey(TitleKey);
             Function.Call(Hash.BEGIN_TEXT_COMMAND_SCALEFORM_STRING, "STRING");
-            Function.Call(Hash.ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME, Title);
+            Function.Call(Hash.ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME, title);
             Function.Call(Hash.END_TEXT_COMMAND_SCALEFORM_STRING);
 
+            var subtitle = Localization.GetTextByKey(SubtitleKey, SubtitleValues);
             Function.Call(Hash.BEGIN_TEXT_COMMAND_SCALEFORM_STRING, "STRING");
-            Function.Call(Hash.ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME, Subtitle);
+            Function.Call(Hash.ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME, subtitle);
             Function.Call(Hash.END_TEXT_COMMAND_SCALEFORM_STRING);
 
             Function.Call(Hash.END_SCALEFORM_MOVIE_METHOD);
