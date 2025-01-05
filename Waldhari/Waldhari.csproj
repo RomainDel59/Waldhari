@@ -48,6 +48,9 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Behavior\Animation\Animation.cs" />
+        <Compile Include="Behavior\Animation\AnimationHelper.cs" />
+        <Compile Include="Behavior\Animation\AnimationScript.cs" />
         <Compile Include="Common\Entities\Helpers\WGroupHelper.cs" />
         <Compile Include="Common\Entities\Helpers\WBlipHelper.cs" />
         <Compile Include="Common\Entities\Helpers\WeaponsHelper.cs" />
@@ -78,7 +81,6 @@
         <Compile Include="Common\Scripts\PedActingScript.cs" />
         <Compile Include="Common\Scripts\PropertyToBuyScript.cs" />
         <Compile Include="Common\UI\MarkerHelper.cs" />
-        <Compile Include="Common\UI\MissionAnimationHelper.cs" />
         <Compile Include="Common\UI\NotificationHelper.cs" />
         <Compile Include="Common\UI\SoundHelper.cs" />
         <Compile Include="MethLab\Helpers\MethLabNotificationHelper.cs" />

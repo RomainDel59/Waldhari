@@ -34,7 +34,7 @@
 
         <!-- Véhicules -->
         <LocaleKey>
-            <Key>van_vehicle</Key>
+            <Key>vehicle_van</Key>
             <Value>Fourgon</Value>
         </LocaleKey>
 
@@ -43,6 +43,7 @@
             <Key>already_in_mission</Key>
             <Value>Une mission est déjà ~r~en cours~s~.</Value>
         </LocaleKey>
+        
         <LocaleKey>
             <Key>wanted_during_mission</Key>
             <Value>Sème les ~r~flics~s~ !</Value>
@@ -51,17 +52,18 @@
             <Key>rival_during_mission</Key>
             <Value>Débarrasse-toi des membres du ~r~gang rival~s~ !</Value>
         </LocaleKey>
+        
         <LocaleKey>
             <Key>player_dead</Key>
             <Value>Vous êtes ~r~mort~s~ !</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>mission_success</Key>
-            <Value>MISSION RÉUSSIE</Value>
+            <Key>mission_succeed</Key>
+            <Value>Mission réussie</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>mission_failure</Key>
-            <Value>MISSION ÉCHOUÉE</Value>
+            <Key>mission_failed</Key>
+            <Value>Mission échouée</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>property_bought</Key>
@@ -99,7 +101,7 @@
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_buy_success</Key>
-            <Value>Vous avez acheté le ~y~labo de méth~s~.~n~Cet atelier permet de fabriquer et de vendre de la méthamphétamine pour vous faire de l'argent.</Value>
+            <Value>Vous avez acheté le ~y~labo de méth~s~.~n~Cet atelier permet de fabriquer et de vendre de la méthamphétamine pour faire de l'argent.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_intro</Key>

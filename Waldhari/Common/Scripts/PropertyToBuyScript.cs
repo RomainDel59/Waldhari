@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GTA;
 using GTA.Math;
+using Waldhari.Behavior.Animation;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
@@ -46,8 +47,6 @@ namespace Waldhari.Common.Scripts
             // Wait for parameters
             if (Params == null) return;
             
-            MissionAnimationHelper.Show();
-            
             Buy();
             
             // To lower material usage :
@@ -86,7 +85,7 @@ namespace Waldhari.Common.Scripts
             Params.ChangeOwner();
             Params.ReloadBlip();
             
-            MissionAnimationHelper.PropertyBought(Params.NameKey);
+            AnimationHelper.PropertyBought(Params.NameKey);
 
             _timeToShowSuccess = Game.GameTime + 5*1000;
         }

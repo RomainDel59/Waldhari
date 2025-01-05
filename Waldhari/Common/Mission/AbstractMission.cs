@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GTA;
 using LemonUI;
+using Waldhari.Behavior.Animation;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
@@ -278,7 +279,7 @@ namespace Waldhari.Common.Mission
 
             if (_finishWithAnimation)
             {
-                MissionAnimationHelper.Success(_successMessageKey, values);
+                AnimationHelper.MissionSucceed(_successMessageKey, values);
             }
             else
             {
@@ -311,7 +312,7 @@ namespace Waldhari.Common.Mission
 
             if (_finishWithAnimation)
             {
-                MissionAnimationHelper.Fail(messageKey);
+                AnimationHelper.MissionFailed(messageKey);
             }
             else
             {

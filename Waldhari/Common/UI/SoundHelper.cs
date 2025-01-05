@@ -36,5 +36,10 @@ namespace Waldhari.Common.UI
             //todo: find the good sound for failure in game
             Function.Call(Hash.PLAY_SOUND_FRONTEND, -1, "OTHER_TEXT", "HUD_AWARDS");
         }
+
+        public static void PlayDisappear()
+        {
+            Function.Call(Hash.PLAY_SOUND_FRONTEND, -1, "ROUND_ENDING_STINGER_CUSTOM", "CELEBRATION_SOUNDSET", true);
+        }
     }
 }
