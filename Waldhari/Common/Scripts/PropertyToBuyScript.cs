@@ -12,9 +12,9 @@ namespace Waldhari.Common.Scripts
     [ScriptAttributes(NoDefaultInstance = true)]
     public class PropertyToBuyScript : Script
     {
-        public class Structure
+        public class Parameters
         {
-            public Vector3 PropertyPosition;
+            public Vector3 Position;
             public string NameKey;
             public string HelpKey;
             public string BuySuccessKey;
@@ -29,7 +29,7 @@ namespace Waldhari.Common.Scripts
         private int _nextExecution = Game.GameTime;
         
         // Parameters required
-        public Structure Parameters = null;
+        public Parameters Params = null;
         
         // Inner properties
         private bool _helpMessageIsShowing;
@@ -44,7 +44,7 @@ namespace Waldhari.Common.Scripts
         private void OnTick(object sender, EventArgs e)
         {
             // Wait for parameters
-            if (Parameters == null) return;
+            if (Params == null) return;
             
             MissionAnimationHelper.Show();
             
@@ -71,22 +71,22 @@ namespace Waldhari.Common.Scripts
             if (!Game.IsControlJustPressed(Control.ContextSecondary)) return;
             
             // Can't buy if player is poor
-            if (Game.Player.Money < Parameters.Price)
+            if (Game.Player.Money < Params.Price)
             {
-                NotificationHelper.ShowFailure(Parameters.BuyFailureKey);
+                NotificationHelper.ShowFailure(Params.BuyFailureKey);
                 return;
             }
             
             NotificationHelper.HideHelp();
             
             SoundHelper.PlayPayment();
-            Game.Player.Money -= Parameters.Price;
+            Game.Player.Money -= Params.Price;
             Game.DoAutoSave();
 
-            Parameters.ChangeOwner();
-            Parameters.ReloadBlip();
+            Params.ChangeOwner();
+            Params.ReloadBlip();
             
-            MissionAnimationHelper.PropertyBought(Parameters.NameKey);
+            MissionAnimationHelper.PropertyBought(Params.NameKey);
 
             _timeToShowSuccess = Game.GameTime + 5*1000;
         }
@@ -102,7 +102,7 @@ namespace Waldhari.Common.Scripts
             }
             
             // If property already owned
-            if (Parameters.IsOwned.Invoke()) return;
+            if (Params.IsOwned.Invoke()) return;
             
             // If player is not near
             if (!IsNearProperty()) return;
@@ -111,10 +111,10 @@ namespace Waldhari.Common.Scripts
             if(_helpMessageIsShowing) return;
 
             NotificationHelper.ShowHelp(
-                Parameters.HelpKey, new List<string>
+                Params.HelpKey, new List<string>
                 {
-                    Localization.GetTextByKey(Parameters.NameKey),
-                    NumberHelper.ConvertToAmount(Parameters.Price),
+                    Localization.GetTextByKey(Params.NameKey),
+                    NumberHelper.ConvertToAmount(Params.Price),
                     NotificationHelper.GetInputContextSecondary()
                 }
             );
@@ -127,7 +127,7 @@ namespace Waldhari.Common.Scripts
             // If it's not the time to show it yet
             if (_timeToShowSuccess == -1 || _timeToShowSuccess > Game.GameTime) return; 
             
-            NotificationHelper.ShowHelp(Parameters.BuySuccessKey);
+            NotificationHelper.ShowHelp(Params.BuySuccessKey);
             
             _timeToFinish = Game.GameTime + 15*1000;
             _timeToShowSuccess = -1;
@@ -140,7 +140,7 @@ namespace Waldhari.Common.Scripts
             
             NotificationHelper.HideHelp();
             
-            Parameters.Finish();
+            Params.Finish();
             _timeToFinish = -1;
             
             Abort();
@@ -148,7 +148,7 @@ namespace Waldhari.Common.Scripts
 
         private bool IsNearProperty()
         {
-            return WPositionHelper.IsNear(Game.Player.Character.Position, Parameters.PropertyPosition, 5);
+            return WPositionHelper.IsNear(Game.Player.Character.Position, Params.Position, 5);
         }
     }
 }

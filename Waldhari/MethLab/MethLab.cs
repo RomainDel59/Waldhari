@@ -41,9 +41,9 @@ namespace Waldhari.MethLab
                 Logger.Info("Nothing to do if not bought, but");
                 
                 _scriptToBuy = InstantiateScript<PropertyToBuyScript>();
-                var param = new PropertyToBuyScript.Structure
+                var param = new PropertyToBuyScript.Parameters
                 {
-                    PropertyPosition = PropertyPosition,
+                    Position = PropertyPosition,
                     NameKey = "methlab",
                     HelpKey = "methlab_buy", 
                     BuySuccessKey = "methlab_buy_success", 
@@ -55,7 +55,7 @@ namespace Waldhari.MethLab
                     Finish = ShowIntroMessage
                 };
                 
-                _scriptToBuy.Parameters = param;
+                _scriptToBuy.Params = param;
                 _isWaitingForBuyer = true;
                 return;
             }
