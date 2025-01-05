@@ -51,6 +51,9 @@
         <Compile Include="Behavior\Animation\Animation.cs" />
         <Compile Include="Behavior\Animation\AnimationHelper.cs" />
         <Compile Include="Behavior\Animation\AnimationScript.cs" />
+        <Compile Include="Behavior\Property\BuyableProperty.cs" />
+        <Compile Include="Behavior\Property\BuyablePropertyScript.cs" />
+        <Compile Include="Behavior\Property\Property.cs" />
         <Compile Include="Common\Entities\Helpers\WGroupHelper.cs" />
         <Compile Include="Common\Entities\Helpers\WBlipHelper.cs" />
         <Compile Include="Common\Entities\Helpers\WeaponsHelper.cs" />
@@ -79,7 +82,6 @@
         <Compile Include="Common\OptionsHelper.cs" />
         <Compile Include="Common\Scripts\EnemyGroupBehaviorScript.cs" />
         <Compile Include="Common\Scripts\PedActingScript.cs" />
-        <Compile Include="Common\Scripts\PropertyToBuyScript.cs" />
         <Compile Include="Common\UI\MarkerHelper.cs" />
         <Compile Include="Common\UI\NotificationHelper.cs" />
         <Compile Include="Common\UI\SoundHelper.cs" />

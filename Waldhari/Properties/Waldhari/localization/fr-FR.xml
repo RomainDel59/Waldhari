@@ -92,7 +92,7 @@
             <Value>Labo de méth</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>methlab_buy</Key>
+            <Key>methlab_help</Key>
             <Value>{0}~n~Prix : {1} $~n~Donne accès aux ~y~missions du labo~s~~n~Appuyez sur {2} pour acheter.</Value>
         </LocaleKey>
         <LocaleKey>

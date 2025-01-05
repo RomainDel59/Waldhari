@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using GTA;
+using Waldhari.Behavior.Property;
 using Waldhari.Common.Exceptions;
 
 namespace Waldhari.Common.Misc
@@ -32,13 +33,13 @@ namespace Waldhari.Common.Misc
             }
         }
         
-        public static BlipColor GetOwnerBlipColor(int ownerId)
+        public static BlipColor GetOwnerBlipColor(Property.Owner ownerId)
         {
             switch (ownerId)
             {
-                case 1: return BlipColor.Michael;
-                case 2: return BlipColor.Trevor;
-                case 3: return BlipColor.Franklin;
+                case Property.Owner.Michael: return BlipColor.Michael;
+                case Property.Owner.Trevor: return BlipColor.Trevor;
+                case Property.Owner.Franklin: return BlipColor.Franklin;
                 default: return BlipColor.White;
             }
         }

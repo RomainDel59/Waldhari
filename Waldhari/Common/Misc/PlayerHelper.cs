@@ -1,4 +1,5 @@
 ﻿using GTA;
+using Waldhari.Behavior.Property;
 using Waldhari.Common.Exceptions;
 
 namespace Waldhari.Common.Misc
@@ -17,13 +18,13 @@ namespace Waldhari.Common.Misc
             
         }
         
-        public static int GetCharacterId()
+        public static Property.Owner GetCharacterId()
         {
             switch ((PedHash)Game.Player.Character.Model.Hash)
             {
-                case PedHash.Michael: return 1;
-                case PedHash.Trevor: return 2;
-                case PedHash.Franklin: return 3;
+                case PedHash.Michael: return Property.Owner.Michael;
+                case PedHash.Trevor: return Property.Owner.Trevor;
+                case PedHash.Franklin: return Property.Owner.Franklin;
                 default: throw new TechnicalException("Unknown character");
             }
             

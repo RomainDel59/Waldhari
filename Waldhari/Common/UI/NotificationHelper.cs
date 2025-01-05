@@ -68,7 +68,10 @@ namespace Waldhari.Common.UI
 
         public static void ShowHelp(string messageKey, List<string> messageValues = null, int duration = 20)
         {
-            Screen.ShowHelpText(Localization.GetTextByKey(messageKey, messageValues), duration * 1000);
+            Screen.ShowHelpText(
+                Localization.GetTextByKey(messageKey, messageValues),
+                duration > 0 ? duration * 1000 : -1
+            );
         }
 
         public static void HideHelp()

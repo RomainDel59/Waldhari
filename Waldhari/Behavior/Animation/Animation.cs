@@ -40,11 +40,11 @@ namespace Waldhari.Behavior.Animation
             _id = Function.Call<int>(Hash.REQUEST_SCALEFORM_MOVIE, "MIDSIZED_MESSAGE");
         }
 
-        public bool Play()
+        public bool Launch()
         {
             if (!IsLoaded()) return false;
 
-            var postFxDuration = ShowDuration * 1000 + FadeOutDuration * 1000;
+            var postFxDuration = (ShowDuration+FadeOutDuration) * 1000;
             Function.Call(Hash.ANIMPOSTFX_PLAY, "SuccessNeutral", postFxDuration, false);
 
             PlaySoundAtBeginning?.Invoke();

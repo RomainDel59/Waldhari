@@ -19,7 +19,7 @@ namespace Waldhari.Behavior.Animation
 
         private void OnTick(object sender, EventArgs e)
         {
-            // Wait for param
+            // Wait for parameter
             if (Animation == null) return;
 
             // Begin by the first step
@@ -33,7 +33,7 @@ namespace Waldhari.Behavior.Animation
                     _currentStep = 2;
                     break;
                 case 2:
-                    if (!Animation.Play()) break;
+                    if (!Animation.Launch()) break;
                     _timeToNextStep = Game.GameTime + Animation.ShowDuration * 1000;
                     _currentStep = 3;
                     break;

@@ -2,6 +2,7 @@
 using GTA;
 using GTA.Math;
 using GTA.Native;
+using Waldhari.Behavior.Property;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 
@@ -42,10 +43,10 @@ namespace Waldhari.Common.Entities.Helpers
             return wBlip;
         }
 
-        public static WBlip CreateProperty(BlipSprite sprite, Vector3 position, int owner, string nameKey, int price)
+        public static WBlip CreateProperty(BlipSprite sprite, Vector3 position, Property.Owner owner, string nameKey, int price)
         {
             var values = new List<string>();
-            if (owner == 0)
+            if (owner == Property.Owner.None)
             {
                 var name = Localization.GetTextByKey(nameKey);
                 nameKey = "property_with_price";

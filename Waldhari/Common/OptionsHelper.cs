@@ -5,7 +5,7 @@ namespace Waldhari.Common
 {
     public static class OptionsHelper
     {
-        public static void DefineGlobals()
+        public static void GlobalLoad()
         {
             PersistenceHandler.ModName = "Waldhari";
             

@@ -7,7 +7,7 @@ namespace Waldhari.Behavior.Animation
     public static class AnimationHelper
     {
         
-        public static void MissionSucceed(string messageKey, List<string> messageValues = null)
+        public static int MissionSucceed(string messageKey, List<string> messageValues = null)
         {
             var script = Script.InstantiateScript<AnimationScript>();
             
@@ -19,9 +19,11 @@ namespace Waldhari.Behavior.Animation
                 FadeOutColor = Animation.Color.Green,
                 PlaySoundAtBeginning = SoundHelper.PlayMissionSuccess
             };
+            
+            return script.Animation.ShowDuration+script.Animation.FadeOutDuration;
         }
         
-        public static void MissionFailed(string messageKey, List<string> messageValues = null)
+        public static int MissionFailed(string messageKey, List<string> messageValues = null)
         {
             var script = Script.InstantiateScript<AnimationScript>();
             
@@ -33,9 +35,11 @@ namespace Waldhari.Behavior.Animation
                 FadeOutColor = Animation.Color.Red,
                 PlaySoundAtBeginning = SoundHelper.PlayMissionFailure
             };
+            
+            return script.Animation.ShowDuration+script.Animation.FadeOutDuration;
         }
         
-        public static void PropertyBought(string messageKey, List<string> messageValues = null)
+        public static int PropertyBought(string messageKey, List<string> messageValues = null)
         {
             var script = Script.InstantiateScript<AnimationScript>();
             
@@ -47,6 +51,8 @@ namespace Waldhari.Behavior.Animation
                 FadeOutColor = Animation.Color.Yellow,
                 PlaySoundAtBeginning = SoundHelper.PlayPayment
             };
+            
+            return script.Animation.ShowDuration+script.Animation.FadeOutDuration;
         }
         
         
