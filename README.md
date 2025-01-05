@@ -31,3 +31,6 @@ Some dumps :
 - https://gist.github.com/alberttheprince/bd083ce03ceb187e9f9ecc7de9aa0a13
 - https://gist.github.com/fingaweg/b88619cba4c267fc2cfdb2cf899e0dad
 - https://github.com/meta-hub/gta5-cmenu-extracts/blob/master/anim-screenfx-sound.lua
+
+Useful code :
+- https://github.com/scripthookvdotnet/scripthookvdotnet/blob/main/examples/ScriptInstance.cs
