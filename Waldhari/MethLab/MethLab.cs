@@ -1,6 +1,5 @@
 ﻿using System;
 using GTA;
-using GTA.Math;
 using Waldhari.Behavior.Property;
 using Waldhari.Common;
 using Waldhari.Common.Files;
@@ -19,7 +18,9 @@ namespace Waldhari.MethLab
         private BuyablePropertyScript _scriptToBuy;
         private bool _isWaitingForBuyer;
         
-        private static Vector3 LabPosition = new Vector3(1389.134f, 3605.236f, 38.94193f);
+        
+        
+        
 
         public MethLab()
         {
@@ -30,7 +31,7 @@ namespace Waldhari.MethLab
                 NameKey = "methlab",
                 Holder = (Property.Owner)MethLabSave.Instance.Owner,
                 Price = MethLabOptions.Instance.Price,
-                Position = new Vector3(1394.762f, 3599.618f, 35.01107f),
+                Position = MethLabHelper.PropertyPosition,
                 Sprite = BlipSprite.Meth
             };
             
@@ -44,7 +45,7 @@ namespace Waldhari.MethLab
             // if not bought and not waiting for buyer, make it wait for a buyer
             if (!Property.IsOwned() && !_isWaitingForBuyer)
             {
-                Logger.Info("Nothing to do if not bought, but");
+                Logger.Info("Not bought and not waiting for buyer, making it wait for a buyer");
 
                 var buyableProperty = new BuyableProperty(Property)
                 {
@@ -70,6 +71,7 @@ namespace Waldhari.MethLab
             // runs this script every 1/2 second only
             if (_nextExecution > Game.GameTime) return;
             _nextExecution = Game.GameTime + 500;
+            
             
             
         }

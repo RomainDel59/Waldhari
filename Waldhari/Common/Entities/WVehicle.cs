@@ -1,5 +1,7 @@
 ﻿using GTA;
+using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
+using Waldhari.Common.UI;
 
 namespace Waldhari.Common.Entities
 {
@@ -61,6 +63,23 @@ namespace Waldhari.Common.Entities
             Vehicle.Rotation = InitialPosition.Rotation;
             Vehicle.Heading = InitialPosition.Heading;
         }
-        
+
+        public void MakeMissionDestination()
+        {
+            if(WBlip == null)
+            {
+                WBlip = WBlipHelper.GetMission("van_vehicle");
+                WBlip.Vehicle = Vehicle;
+            }
+            
+            WBlip.Create();
+            
+            MarkerHelper.DrawEntityMarkerOnBlip(WBlip);
+        }
+
+        public void RemoveMissionDestination()
+        {
+            WBlip?.Remove();
+        }
     }
 }
