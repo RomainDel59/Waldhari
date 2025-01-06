@@ -6,10 +6,10 @@ using Waldhari.Common.Exceptions;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
 
-namespace Waldhari.Common.Scripts
+namespace Waldhari.Behavior.Ped
 {
     [ScriptAttributes(NoDefaultInstance = true)]
-    public class EnemyGroupBehaviorScript : Script
+    public class EnemyGroupScript : Script
     {
         // Parameters should be defined when game is launched
         public static int AppearanceDistance = -1;
@@ -33,7 +33,7 @@ namespace Waldhari.Common.Scripts
         /// </summary>
         /// <param name="wGroup">Group to manage</param>
         /// <exception cref="TechnicalException">If distance parameters are empty</exception>
-        public EnemyGroupBehaviorScript(WGroup wGroup)
+        public EnemyGroupScript(WGroup wGroup)
         {
             if(AppearanceDistance == -1) throw new TechnicalException("AppearanceDistance cannot be empty.");
             if(DisappearanceDistance == -1) throw new TechnicalException("DisappearanceDistance cannot be empty.");

@@ -1,5 +1,5 @@
-﻿using Waldhari.Common.Files;
-using Waldhari.Common.Scripts;
+﻿using Waldhari.Behavior.Ped;
+using Waldhari.Common.Files;
 
 namespace Waldhari.Common
 {
@@ -17,8 +17,8 @@ namespace Waldhari.Common
             Localization.CurCulture = GlobalOptions.Instance.PreferredLanguage;
             Localization.Initialize();
             
-            EnemyGroupBehaviorScript.AppearanceDistance = GlobalOptions.Instance.EnemiesAppearanceDistance;
-            EnemyGroupBehaviorScript.DisappearanceDistance = GlobalOptions.Instance.EnemiesDisappearanceDistance;
+            EnemyGroupScript.AppearanceDistance = GlobalOptions.Instance.EnemiesAppearanceDistance;
+            EnemyGroupScript.DisappearanceDistance = GlobalOptions.Instance.EnemiesDisappearanceDistance;
             
             
         }

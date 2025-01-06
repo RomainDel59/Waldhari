@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using GTA;
 using LemonUI;
 using Waldhari.Behavior.Animation;
+using Waldhari.Behavior.Ped;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
-using Waldhari.Common.Scripts;
 using Waldhari.Common.UI;
 
 namespace Waldhari.Common.Mission
@@ -92,7 +92,7 @@ namespace Waldhari.Common.Mission
         // /// </summary>
         // private WGroup _rivalWGroup;
 
-        private EnemyGroupBehaviorScript _enemyGroupBehaviorScript;
+        private EnemyGroupScript _enemyGroupScript;
 
         /// <summary>
         /// Ensures random events (e.g., rival gang or police chase) are triggered only once during a mission.
@@ -303,7 +303,7 @@ namespace Waldhari.Common.Mission
 
             if (IsFightingRival())
             {
-                _enemyGroupBehaviorScript.Remove();
+                _enemyGroupScript.Remove();
             }
             
             ClearProperties();
@@ -335,8 +335,8 @@ namespace Waldhari.Common.Mission
             _steps.Clear();
             IsActive = false;
             _randomEventAlreadyLaunchedOnce = false;
-            _enemyGroupBehaviorScript.MarkAsNoLongerNeeded();
-            _enemyGroupBehaviorScript = null;
+            _enemyGroupScript.MarkAsNoLongerNeeded();
+            _enemyGroupScript = null;
             _wantedStepIndex = -1;
         }
 
@@ -417,7 +417,7 @@ namespace Waldhari.Common.Mission
                 // Previous step is always itself by default until it's define manually
                 PreviousIndex = 0,
                 // Can return to previous step if kill all rival gang members
-                AccessCondition = () => !_enemyGroupBehaviorScript.WGroup.AreDead(),
+                AccessCondition = () => !_enemyGroupScript.WGroup.AreDead(),
                 // Can't go to a next step
                 CompletionCondition = () => false
             };
@@ -525,8 +525,8 @@ namespace Waldhari.Common.Mission
                 Logger.Info($"Trying WantedStep chance={RivalChance}");
                 if (RandomHelper.Try(RivalChance))
                 {
-                    _enemyGroupBehaviorScript =
-                        new EnemyGroupBehaviorScript(WGroupHelper.CreateRivalMembers(RivalMembers));
+                    _enemyGroupScript =
+                        new EnemyGroupScript(WGroupHelper.CreateRivalMembers(RivalMembers));
                     // no other random event will be processed during this mission
                     _randomEventAlreadyLaunchedOnce = true;
                 }
@@ -548,7 +548,7 @@ namespace Waldhari.Common.Mission
         /// <returns>The rival group exists and has at least one member still alive</returns>
         private bool IsFightingRival()
         {
-            return _enemyGroupBehaviorScript != null && !_enemyGroupBehaviorScript.WGroup.AreDead();
+            return _enemyGroupScript != null && !_enemyGroupScript.WGroup.AreDead();
         }
 
         /// <summary>

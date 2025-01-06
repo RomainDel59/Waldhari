@@ -51,6 +51,8 @@
         <Compile Include="Behavior\Animation\Animation.cs" />
         <Compile Include="Behavior\Animation\AnimationHelper.cs" />
         <Compile Include="Behavior\Animation\AnimationScript.cs" />
+        <Compile Include="Behavior\Ped\EnemyGroupScript.cs" />
+        <Compile Include="Behavior\Ped\PedActingScript.cs" />
         <Compile Include="Behavior\Property\BuyableProperty.cs" />
         <Compile Include="Behavior\Property\BuyablePropertyScript.cs" />
         <Compile Include="Behavior\Property\Property.cs" />
@@ -80,8 +82,6 @@
         <Compile Include="Common\Mission\Step.cs" />
         <Compile Include="Common\GlobalOptions.cs" />
         <Compile Include="Common\OptionsHelper.cs" />
-        <Compile Include="Common\Scripts\EnemyGroupBehaviorScript.cs" />
-        <Compile Include="Common\Scripts\PedActingScript.cs" />
         <Compile Include="Common\UI\MarkerHelper.cs" />
         <Compile Include="Common\UI\NotificationHelper.cs" />
         <Compile Include="Common\UI\SoundHelper.cs" />

@@ -5,7 +5,7 @@ using Waldhari.Common.Entities;
 using Waldhari.Common.Enums;
 using Waldhari.Common.Exceptions;
 
-namespace Waldhari.Common.Scripts
+namespace Waldhari.Behavior.Ped
 {
     [ScriptAttributes(NoDefaultInstance = true)]
     public class PedActingScript : Script

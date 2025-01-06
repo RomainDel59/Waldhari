@@ -23,8 +23,8 @@ namespace Waldhari.Common.Entities
         private PedGroup _pedGroup = null;
         
         /// <summary>
-        /// Creates a group of empty ped allied to each other.
-        /// If IsAlly is true, all peds will be allied to the player,
+        /// Creates a group of ped allied to each other.
+        /// If IsAlly is true, all peds added to the group will be allied to the player,
         /// otherwise there will be enemies.
         /// </summary>
         /// <exception cref="TechnicalException">If the name is empty</exception>
