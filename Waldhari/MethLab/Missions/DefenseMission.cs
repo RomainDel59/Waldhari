@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using GTA;
 
-namespace GTAVMods.Missions
+namespace Waldhari.MethLab.Missions
 {
     public class DefenseMission : AbstractMission
     {

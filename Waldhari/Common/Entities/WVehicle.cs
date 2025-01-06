@@ -64,11 +64,11 @@ namespace Waldhari.Common.Entities
             Vehicle.Heading = InitialPosition.Heading;
         }
 
-        public void MakeMissionDestination()
+        public void MakeMissionDestination(string nameKey)
         {
             if(WBlip == null)
             {
-                WBlip = WBlipHelper.GetMission("van_vehicle");
+                WBlip = WBlipHelper.GetMission(nameKey);
                 WBlip.Vehicle = Vehicle;
             }
             

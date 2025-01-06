@@ -4,7 +4,7 @@ using GTA;
 using GTA.Math;
 using GTA.UI;
 
-namespace GTAVMods.Missions
+namespace Waldhari.MethLab.Missions
 {
     public class ManufactureMission : AbstractMission
     {

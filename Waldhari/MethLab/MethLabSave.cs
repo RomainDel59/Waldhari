@@ -5,11 +5,16 @@ namespace Waldhari.MethLab
     public class MethLabSave : File<MethLabSave>
     {
         public static MethLabSave Instance;
+
         protected override void SetInstance(MethLabSave instance) => Instance = instance;
         
         #region save
 
         public int Owner;
+        public int Supply;
+        public int Product;
+        
+        //Options
         
         
         #endregion
@@ -17,8 +22,8 @@ namespace Waldhari.MethLab
         protected override void SetDefaults()
         {
             Owner = 0;
-            
-            
+            Supply = 0;
+            Product = 0;
         }
 
     }

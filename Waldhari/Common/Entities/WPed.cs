@@ -1,5 +1,7 @@
 ﻿using GTA;
+using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
+using Waldhari.Common.UI;
 
 namespace Waldhari.Common.Entities
 {
@@ -75,6 +77,19 @@ namespace Waldhari.Common.Entities
             Ped.Weapons.Give(weaponHash, 150, true, true);
             Ped.Weapons.Select(Ped.Weapons.BestWeapon);
             Ped.CanSwitchWeapons = true;
+        }
+        
+        public void MakeMissionDestination(string nameKey)
+        {
+            if(WBlip == null)
+            {
+                WBlip = WBlipHelper.GetMission(nameKey);
+                WBlip.Ped = Ped;
+            }
+            
+            WBlip.Create();
+            
+            MarkerHelper.DrawEntityMarkerOnBlip(WBlip);
         }
 
     }

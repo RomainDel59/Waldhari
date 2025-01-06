@@ -1,26 +1,27 @@
 ﻿using System.Collections.Generic;
 using GTA;
 using GTA.Math;
+using Waldhari.Behavior.Ped;
 using Waldhari.Common.Entities;
+using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
 using Waldhari.Common.Misc;
 using Waldhari.Common.Mission;
 using Waldhari.Common.UI;
-using Waldhari.MethLab;
 
-namespace GTAVMods.Missions
+namespace Waldhari.MethLab.Missions
 {
     public class BulkMission : AbstractMission
     {
         // Scene
         private WBlip _deliveryWBlip;
-        private WPed _wholesaler;
+        private PedActingScript _wholesalerScript;
         private WVehicle _van;
 
         private int _amountToDeal;
         private int _priceToDeal;
 
-        public BulkMission() : base("BulkMission", true, "bulk_success")
+        public BulkMission() : base("MethLabBulkMission", true, "methlab_bulk_success")
         {
         }
 
@@ -35,7 +36,7 @@ namespace GTAVMods.Missions
             _amountToDeal = MethLabSave.Instance.Product;
             _priceToDeal = _amountToDeal * GetPricePerGram();
 
-            NotificationHelper.ShowFromRon("bulk_started_ron",
+            NotificationHelper.ShowFromRon("methlab_bulk_started_ron",
                 new List<string> { _priceToDeal.ToString() });
 
             MethLabSave.Instance.Product -= _amountToDeal;
@@ -46,9 +47,9 @@ namespace GTAVMods.Missions
 
         protected override void UpdateComplement()
         {
-            if (_wholesaler == null || _wholesaler.Ped.IsDead) throw new MissionException("bulk_fail_wholesaler_dead");
+            if (_wholesalerScript.WPed == null || _wholesalerScript.WPed.Ped.IsDead) throw new MissionException("methlab_bulk_fail_wholesaler_dead");
 
-            if (_van == null || _van.Vehicle == null || _van.Vehicle.IsConsideredDestroyed) throw new MissionException("bulk_fail_vehicle_destroyed");
+            if (_van == null || _van.Vehicle == null || _van.Vehicle.IsConsideredDestroyed) throw new MissionException("methlab_bulk_fail_vehicle_destroyed");
         }
 
         protected override List<string> EndComplement()
@@ -79,12 +80,12 @@ namespace GTAVMods.Missions
             return new Step
             {
                 Name = "EnterVehicle",
-                MessageKey = "bulk_in",
+                MessageKey = "methlab_bulk_in",
                 Action =
                     () =>
                     {
                         _deliveryWBlip.Remove();
-                        _van.MakeMissionDestination();
+                        _van.MakeMissionDestination("van_vehicle");
                     },
                 CompletionCondition =
                     () => Game.Player.Character.IsInVehicle(_van.Vehicle)
@@ -96,16 +97,16 @@ namespace GTAVMods.Missions
             return new Step
             {
                 Name = "Rendezvous",
-                MessageKey = "bulk_rendezvous",
+                MessageKey = "methlab_bulk_rendezvous",
                 Action =
                     () =>
                     {
                         _van.RemoveMissionDestination();
                         _deliveryWBlip.Create();
-                        MarkerHelper.DrawEntityMarkerOnBlip(_deliveryWBlip);
+                        MarkerHelper.DrawGroundMarkerOnBlip(_deliveryWBlip);
                     },
                 CompletionCondition =
-                    () => Game.Player.Character.Position.DistanceTo(_deliveryWBlip.Position) <= 10
+                    () => WPositionHelper.IsNear(Game.Player.Character.Position,_deliveryWBlip.Position,10)
             };
         }
 
@@ -114,7 +115,7 @@ namespace GTAVMods.Missions
             return new Step
             {
                 Name = "GetOutVehicle",
-                MessageKey = "bulk_out",
+                MessageKey = "methlab_bulk_out",
                 Action =
                     () => { _deliveryWBlip.Remove(); },
                 CompletionCondition =
@@ -135,70 +136,73 @@ namespace GTAVMods.Missions
             return new Step
             {
                 Name = "Payment",
-                MessageKey = "bulk_payment",
+                MessageKey = "methlab_bulk_payment",
                 Action = () =>
                 {
-                    _wholesaler.AttachMissionBlip("bulk_wholesaler");
-                    _wholesaler.AttachMissionMarker();
+                    _wholesalerScript.WPed.MakeMissionDestination("methlab_bulk_wholesaler");
                 },
                 CompletionCondition =
-                    () => !_wholesaler.GtaPed.IsInCombat &&
-                          Game.Player.Character.IsInRange(_wholesaler.GtaPed.Position, 2.0f)
+                    () => !_wholesalerScript.IsInCombat() &&
+                          WPositionHelper.IsNear(Game.Player.Character.Position, _wholesalerScript.WPed.Ped.Position, 2)
             };
         }
 
         protected override void CreateScene()
         {
-            _wholesaler = new WPed(
-                PedHash.CartelGuards01GMM,
-                new Vector3(1448.546f, 6548.113f, 15.21889f),
-                new Vector3(0, 0, 142.5344f)
-            );
-            _wholesaler.GiveWeapons();
-            _wholesaler.PlayScenario("WORLD_HUMAN_SMOKING");
+            //todo: there is a position for a ped (wholesaler) and a position for a vehicle (for the van that has to be driven there)
+            // make a new object for that, like "scene" object ?
+            // this object can have multiple ped positions, and one vehicle position,
+            // so the script can create multiple peds
+            
+            var wholesaler = new WPed
+            {
+                PedHash = PedHash.CartelGuards01GMM,
+                InitialPosition = new WPosition
+                {
+                    Position = new Vector3(1448.546f, 6548.113f, 15.21889f),
+                    Rotation = new Vector3(0, 0, 142.5344f)
+                    //todo: Add heading
+                },
+                Scenario = "WORLD_HUMAN_SMOKING"
+            };
+            wholesaler.Create();
+            wholesaler.AddWeapon(WeaponsHelper.GetRandomGangWeapon());
+            
+            _wholesalerScript = Script.InstantiateScript<PedActingScript>();
+            _wholesalerScript.WPed = wholesaler;
 
-            _deliveryWBlip = new WBlip("bulk_delivery");
+            _deliveryWBlip = WBlipHelper.GetMission("methlab_bulk_delivery");
             _deliveryWBlip.Position = new Vector3(1444.564f, 6552.647f, 15.07594f);
 
-            _van = new WVehicle(VehicleHash.Burrito, World.GetNextPositionOnStreet(MethLabPositions.LabParking, true));
+
+            _van = new WVehicle
+            {
+                VehicleHash = VehicleHash.Burrito,
+                InitialPosition = new WPosition
+                {
+                    Position = World.GetNextPositionOnStreet(MethLabHelper.PropertyPosition, true)
+                    //todo: Add rotation & heading
+                }
+            };
         }
 
         protected override void CleanScene()
         {
-            if (_wholesaler != null)
-            {
-                _wholesaler.RemoveBlip();
-
-                if (_wholesaler.GtaPed != null)
-                {
-                    _wholesaler.GtaPed.IsPositionFrozen = false;
-                    _wholesaler.GtaPed.IsPersistent = false;
-                    _wholesaler.GtaPed.MarkAsNoLongerNeeded();
-                }
-            }
+            _wholesalerScript?.Abort();
 
             if (_van != null)
             {
-                _van.RemoveBlip();
-
-                if (_van.GtaVehicle != null)
-                {
-                    _van.GtaVehicle.IsPersistent = false;
-                    _van.GtaVehicle.MarkAsNoLongerNeeded();
-                }
+                _van.WBlip?.Remove();
+                _van.Vehicle?.MarkAsNoLongerNeeded();
             }
 
-            if (_deliveryWBlip != null)
-            {
-                _deliveryWBlip.Remove();
-            }
+            _deliveryWBlip?.Remove();
         }
 
         private static int GetPricePerGram()
         {
             return
-                RandomHelper.Next(ModOptions.Instance.BulkMinPrice, ModOptions.Instance.BulkMaxPrice + 1) *
-                (1 + (MethLabSave.Instance.Blue ? ModOptions.Instance.BluePercent / 100 : 0));
+                RandomHelper.Next(MethLabOptions.Instance.BulkMinPrice, MethLabOptions.Instance.BulkMaxPrice + 1);
         }
     }
 }

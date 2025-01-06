@@ -2,6 +2,7 @@
 using GTA;
 using GTA.Native;
 using Waldhari.Common.Entities;
+using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Enums;
 using Waldhari.Common.Exceptions;
 
@@ -10,37 +11,45 @@ namespace Waldhari.Behavior.Ped
     [ScriptAttributes(NoDefaultInstance = true)]
     public class PedActingScript : Script
     {
-        private WPed _wPed;
+        private int _nextExecution = Game.GameTime;
+        
+        public WPed WPed;
         
         private bool _hasMoved;
         
         private bool _isGoingBackPosition;
         
-        private bool IsInCombat() => _wPed.Ped.IsInCombat;
+        public bool IsInCombat() => WPed.Ped.IsInCombat;
         
-        private bool IsPlayingScenario() => Function.Call<bool>(Hash.IS_PED_ACTIVE_IN_SCENARIO, _wPed.Ped.Handle);
+        public bool IsPlayingScenario() => Function.Call<bool>(Hash.IS_PED_ACTIVE_IN_SCENARIO, WPed.Ped.Handle);
 
-        private bool HasScenarioToDo() => !string.IsNullOrEmpty(_wPed.Scenario);
+        private bool HasScenarioToDo() => !string.IsNullOrEmpty(WPed.Scenario);
 
-        private bool HasAnimationToDo() => !string.IsNullOrEmpty(_wPed.AnimationDictionnary) &&
-                                           !string.IsNullOrEmpty(_wPed.AnimationName);
-
-        private int _nextExecution;
+        private bool HasAnimationToDo() => !string.IsNullOrEmpty(WPed.AnimationDictionnary) &&
+                                           !string.IsNullOrEmpty(WPed.AnimationName);
         
-        public PedActingScript(WPed wPed)
+        public PedActingScript()
         {
-            if (!HasAnimationToDo() && !HasScenarioToDo())
-                throw new TechnicalException("Ped should have at least scenario or animation to play");
-            
-            _wPed = wPed;
-
             Tick += OnTick;
+            Aborted += OnAborted;
+        }
 
-            _nextExecution = Game.GameTime;
+        private void OnAborted(object sender, EventArgs e)
+        {
+            if (WPed == null) return;
+            
+            WPed.Ped?.MarkAsNoLongerNeeded();
+            WPed.WBlip?.Remove();
         }
 
         private void OnTick(object sender, EventArgs e)
         {
+            // Wait for parameter
+            if(WPed == null) return;
+            
+            if (!HasAnimationToDo() && !HasScenarioToDo()) 
+                throw new TechnicalException("Ped should have at least scenario or animation to play");
+            
             // To lower material usage :
             // runs this script every 2 seconds only
             if (_nextExecution > Game.GameTime) return;
@@ -50,7 +59,7 @@ namespace Waldhari.Behavior.Ped
             if (IsInCombat()) return;
             
             // If ped is away from initial position, let it goes back to position
-            if (_wPed.Ped.Position.DistanceTo(_wPed.InitialPosition.Position) > 0f)
+            if (WPositionHelper.IsNear(WPed.Ped.Position,WPed.InitialPosition.Position,0))
             {
                 
                 // If ped is already going back, wait it to proceed
@@ -97,12 +106,12 @@ namespace Waldhari.Behavior.Ped
 
         private void PlayAnimation()
         {
-            _wPed.Ped.Task.PlayAnimation(_wPed.AnimationDictionnary, _wPed.AnimationName, 8f,-8f,-1,AnimationFlags.Loop,0f);
+            WPed.Ped.Task.PlayAnimation(WPed.AnimationDictionnary, WPed.AnimationName, 8f,-8f,-1,AnimationFlags.Loop,0f);
         }
 
         private void PlayScenario()
         {
-            _wPed.Ped.Task.StartScenario(_wPed.Scenario, _wPed.InitialPosition.Position, _wPed.InitialPosition.Heading);
+            WPed.Ped.Task.StartScenario(WPed.Scenario, WPed.InitialPosition.Position, WPed.InitialPosition.Heading);
         }
 
         private void RunTo()
@@ -117,17 +126,19 @@ namespace Waldhari.Behavior.Ped
             
             Function.Call(
                 Hash.TASK_FOLLOW_NAV_MESH_TO_COORD, 
-                _wPed.Ped.Handle, 
-                _wPed.InitialPosition.Position.X, 
-                _wPed.InitialPosition.Position.Y,
-                _wPed.InitialPosition.Position.Z,
+                WPed.Ped.Handle, 
+                WPed.InitialPosition.Position.X, 
+                WPed.InitialPosition.Position.Y,
+                WPed.InitialPosition.Position.Z,
                 EMovementRatio.Run, 
                 timeout, 
                 distanceToDestination, 
                 ENavigation.Default, 
-                _wPed.InitialPosition.Heading);
+                WPed.InitialPosition.Heading);
             
         }
+        
+        
         
     }
 }

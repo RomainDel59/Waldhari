@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GTA;
 using GTA.Math;
 using Waldhari.Common.Misc;
@@ -7,20 +8,6 @@ namespace Waldhari.Common.Entities.Helpers
 {
     public static class WPositionHelper
     {
-        // /// <summary>
-        // /// Returns a random position on the street behind the player, at a fixed distance.
-        // /// </summary>
-        // /// <param name="distance">Distance of the random position.</param>
-        // /// <returns>Random position behind the player</returns>
-        // public static Vector3 GetBehindStreetPosition(int distance)
-        // {
-        //     var playerPosition = Game.Player.Character.Position;
-        //     var playerForwardVector = Game.Player.Character.ForwardVector;
-        //     var spawnDistance = distance + RandomHelper.Next(1, 10)*10;
-        //     var spawnPosition = playerPosition - (playerForwardVector * spawnDistance);
-        //     
-        //     return World.GetNextPositionOnStreet(spawnPosition, true);
-        // }
         
         /// <summary>
         /// Returns a position behind the player, with the rotation facing the player, and the heading.
@@ -46,7 +33,7 @@ namespace Waldhari.Common.Entities.Helpers
             var wPosition = new WPosition
             {
                 Position = finalPosition,
-                Rotation = new Vector3(0f, 0f, heading), // rotation sur l'axe Z
+                Rotation = new Vector3(0f, 0f, heading),
                 Heading = heading
             };
 
@@ -57,5 +44,15 @@ namespace Waldhari.Common.Entities.Helpers
         {
             return position1.DistanceTo(position2) <= distance;
         }
+
+        private static List<WPosition> MissionWithVehiclePossiblePositions = new List<WPosition>();
+        {
+            // Near Procopio Beach
+                new WPosition
+                {
+                    Position = new Vector3(1448.546f, 6548.113f, 15.21889f),
+                    Rotation = new Vector3(0, 0, 142.5344f)
+                }
+        });
     }
 }

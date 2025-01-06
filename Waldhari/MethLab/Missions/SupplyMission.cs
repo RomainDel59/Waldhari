@@ -2,7 +2,7 @@
 using GTA;
 using GTA.Math;
 
-namespace GTAVMods.Missions
+namespace Waldhari.MethLab.Missions
 {
     public class SupplyMission : AbstractMission
     {
