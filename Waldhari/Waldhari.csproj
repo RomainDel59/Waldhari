@@ -90,6 +90,7 @@
         <Compile Include="MethLab\MethLabOptions.cs" />
         <Compile Include="MethLab\MethLabSave.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="WaldhariScript.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />
