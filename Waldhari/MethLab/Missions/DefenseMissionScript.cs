@@ -1,25 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GTA;
+using Waldhari.Behavior.Mission;
+using Waldhari.Behavior.Ped;
+using Waldhari.Common.Entities.Helpers;
+using Waldhari.Common.Exceptions;
+using Waldhari.Common.Files;
+using Waldhari.Common.Misc;
 
 namespace Waldhari.MethLab.Missions
 {
     [ScriptAttributes(NoDefaultInstance = true)]
     public class DefenseMissionScript : AbstractMissionScript
     {
-        private DateTime _nextAttackTry;
-        private GroupHelper.Group _attackingGroup;
-        
-        public DefenseMissionScript() : base("DefenseMission", true, "defense_success")
+        private int _nextAttackTry;
+        private EnemyGroupScript _attackingScript;
+
+        public DefenseMissionScript() : base("MethLabDefenseMission", true, "methlab_defense_success")
         {
             AddCooldown();
         }
 
         private void AddCooldown()
         {
-            _nextAttackTry = DateTime.Now.AddSeconds(ModOptions.Instance.DefenseCooldown);
+            // DefenseCooldown => in game minutes
+            _nextAttackTry = Game.GameTime + MethLabOptions.Instance.DefenseCooldown * 60 * 1000;
         }
-        
+
         public void TryToStart(bool hasAnotherMissionActive)
         {
             // If another mission is active
@@ -28,39 +34,33 @@ namespace Waldhari.MethLab.Missions
                 AddCooldown();
                 return;
             }
-            
+
             // Is already defending
-            if (_attackingGroup != null && !_attackingGroup.IsDead())
+            if (_attackingScript != null && !_attackingScript.WGroup.AreDead())
             {
                 AddCooldown();
                 return;
             }
-            
+
             // Is too far
-            if (!(Game.Player.Character.Position.DistanceTo(ManufactureMissionScript.AnimationPosition) < 50))
+            if (!WPositionHelper.IsNear(Game.Player.Character.Position, ManufactureMissionScript.AnimationPosition, 50))
             {
                 AddCooldown();
                 return;
             }
-            
+
             // Has not to try
-            if (DateTime.Now < _nextAttackTry) return;
-            
+            if (_nextAttackTry > Game.GameTime) return;
+
             // Try to attack
-            var chance = ModOptions.Instance.ChanceRivalPercent;
-            if (ModSave.Instance.Intel)
+            Logger.Info("Trying MethLabDefenseMission");
+            if (RandomHelper.Try(RivalChance))
             {
-                chance -= ModOptions.Instance.IntelPercent;
-            }
-            var trying = RandomHelper.Next(0, 100 + 1);
-            
-            Logger.Debug($"Trying DefenseMission chance={chance}, trying={trying}");
-            if (chance > trying)
-            {
-                _attackingGroup = GroupHelper.CreateBikersRival(ModOptions.Instance.RivalNumber * 5, false);
+                _attackingScript = InstantiateScript<EnemyGroupScript>();
+                _attackingScript.DefineGroup(WGroupHelper.CreateRivalMembers(RivalMembers * 5, false));
                 Start(string.Empty);
             }
-            
+
             AddCooldown();
         }
 
@@ -70,28 +70,31 @@ namespace Waldhari.MethLab.Missions
             return true;
         }
 
-        protected override void UpdateComplement()
+        protected override void OnTickComplement()
         {
-            // Override dead condition in Update() to show special message
-            if (Game.Player.IsDead) throw new MissionException("defense_fail_dead");
+            // Override dead condition in OnTick to show special message
+            if (Game.Player.IsDead) throw new MissionException("methlab_defense_fail_dead");
         }
 
         protected override List<string> EndComplement()
         {
-            Logger.Debug($"DefenseMission end complement");
-            _attackingGroup.Update();
-            _attackingGroup = null;
+            _attackingScript.MarkAsNoLongerNeeded();
+            _attackingScript.Abort();
+            
             AddCooldown();
+            
             return null;
         }
 
         protected override void FailComplement()
         {
-            _attackingGroup.Update(true);
-            _attackingGroup = null;
-            ModSave.Instance.Supply = 0;
-            ModSave.Instance.Product = 0;
-            ModSave.Instance.Save();
+            _attackingScript.MarkAsNoLongerNeeded();
+            _attackingScript.Abort();
+            
+            MethLabSave.Instance.Supply = 0;
+            MethLabSave.Instance.Product = 0;
+            MethLabSave.Instance.Save();
+            
             AddCooldown();
         }
 
@@ -105,16 +108,14 @@ namespace Waldhari.MethLab.Missions
             return new Step
             {
                 Name = "Defending",
-                MessageKey = "defense_defending",
+                MessageKey = "methlab_defense_defending",
                 Action = () =>
                 {
-                    _attackingGroup.Update();
-                    
                     // No police during attack
                     Game.Player.WantedLevel = 0;
                 },
                 CompletionCondition = () =>
-                    _attackingGroup.IsDead()
+                    _attackingScript.WGroup.AreDead()
             };
         }
 

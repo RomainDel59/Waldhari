@@ -38,7 +38,7 @@ namespace Waldhari.MethLab.Missions
                 return false;
             }
 
-            _amountToDeal = RandomHelper.Next(1, MethLabOptions.Instance.DealMaxGramsPerPack + 1);
+            _amountToDeal = RandomHelper.Next(MethLabOptions.Instance.DealMinGramsPerPack, MethLabOptions.Instance.DealMaxGramsPerPack + 1);
             _amountToDeal = Math.Min(_amountToDeal, MethLabSave.Instance.Product);
             _priceToDeal = _amountToDeal * GetPricePerGram();
 

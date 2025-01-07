@@ -1,4 +1,5 @@
 ﻿using System;
+using Waldhari.Common.Files;
 
 namespace Waldhari.Common.Misc
 {
@@ -27,8 +28,11 @@ namespace Waldhari.Common.Misc
         /// <returns>Chance is over a random value between 0 and 100</returns>
         public static bool Try(int chance)
         {
+            var trying = Next(0, 100 + 1);
+            Logger.Debug($"Trying chance={chance}, trying={trying}");
+            
             // If chance is over a random percentage
-            return chance > Next(0, 100+1);
+            return chance > trying;
         }
     }
 }

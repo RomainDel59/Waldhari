@@ -4,6 +4,7 @@ using GTA;
 using LemonUI;
 using Waldhari.Behavior.Animation;
 using Waldhari.Behavior.Ped;
+using Waldhari.Common;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
@@ -17,27 +18,27 @@ namespace Waldhari.Behavior.Mission
     {
         private int _nextExecution = Game.GameTime;
         
-        // Parameters MenuPool, WantedChance, RivalChance and RivalMembers are mandatory
+        // Parameters WantedChance, RivalChance and RivalMembers are mandatory (defined in constructor)
+        
+        /// <summary>
+        /// Chance of triggering a "wanted" random event.
+        /// </summary>
+        public int WantedChance;
+        
+        /// <summary>
+        /// Chance of triggering a "rival gang" random event.
+        /// </summary>
+        public int RivalChance;
+        
+        /// <summary>
+        /// Number of rival gang members to spawn.
+        /// </summary>
+        public int RivalMembers;
         
         /// <summary>
         /// Pool for managing menus.
         /// </summary>
         public ObjectPool MenuPool;
-        
-        /// <summary>
-        /// Chance of triggering a "wanted" random event.
-        /// </summary>
-        public int WantedChance = -1;
-        
-        /// <summary>
-        /// Chance of triggering a "rival gang" random event.
-        /// </summary>
-        public int RivalChance = -1;
-        
-        /// <summary>
-        /// Number of rival gang members to spawn.
-        /// </summary>
-        public int RivalMembers = -1;
         
         /// <summary>
         /// Name of mission (for logs only).
@@ -94,7 +95,12 @@ namespace Waldhari.Behavior.Mission
         /// <summary>
         /// Determines the time when next random event trigger is tried.
         /// </summary>
-        private int _nextRandomEventTry = Game.GameTime + 60 * 1000;
+        private int _nextRandomEventTry;
+        private void AddCooldown()
+        {
+            // DefenseCooldown => in game minutes
+            _nextRandomEventTry = Game.GameTime + GlobalOptions.Instance.RandomEventCooldown * 60 * 1000;
+        }
         
         /// <summary>
         /// Determines the index of the first "real" step, excluding optional random events like wanted or rival steps.
@@ -125,6 +131,12 @@ namespace Waldhari.Behavior.Mission
             _name = name;
             _finishWithAnimation = finishWithAnimation;
             _successMessageKey = successMessageKey;
+            
+            WantedChance = GlobalOptions.Instance.WantedChance;
+            RivalChance = GlobalOptions.Instance.RivalChance;
+            RivalMembers = GlobalOptions.Instance.RivalMembers;
+            
+            AddCooldown();
             
             Tick += OnTick;
         }
@@ -248,8 +260,8 @@ namespace Waldhari.Behavior.Mission
                     case Step.ExecutionResult.Continue:
                         if (!_randomEventAlreadyLaunchedOnce && _nextRandomEventTry < Game.GameTime)
                         {
-                            _nextRandomEventTry = Game.GameTime + 60*1000;
                             TryLaunchRandomEvent();
+                            AddCooldown();
                         }
                         break;
                     default:
@@ -512,11 +524,10 @@ namespace Waldhari.Behavior.Mission
             // Random event : Police try to catch player
             if (HasWantedStep())
             {
-                if(WantedChance == -1) throw new TechnicalException("Wanted chance is not defined.");
-                Logger.Info($"Trying WantedStep chance={WantedChance}");
+                Logger.Info("Trying WantedStep");
                 if (RandomHelper.Try(WantedChance))
                 {
-                    Game.Player.WantedLevel = 2;
+                    Game.Player.WantedLevel = GlobalOptions.Instance.WantedStars;
                     // no other random event will be processed during this mission
                     _randomEventAlreadyLaunchedOnce = true;
                     return; //to avoid Rival step to trigger also
@@ -526,9 +537,7 @@ namespace Waldhari.Behavior.Mission
             // Random event : Rival gang try to catch player
             if (HasRivalStep())
             {
-                if(RivalChance == -1) throw new TechnicalException("Rival chance is not defined.");
-                if(RivalMembers == -1) throw new TechnicalException("Rival members is not defined.");
-                Logger.Info($"Trying WantedStep chance={RivalChance}");
+                Logger.Info("Trying RivalStep");
                 if (RandomHelper.Try(RivalChance))
                 {
                     _rivalScript = InstantiateScript<EnemyGroupScript>();
@@ -569,14 +578,9 @@ namespace Waldhari.Behavior.Mission
         /// <summary>
         /// Hides the menu if it exists, otherwise throws an exception.
         /// </summary>
-        /// <exception cref="TechnicalException">The menu is not defined</exception>
         private void HideMenu()
         {
-            if (MenuPool == null)
-            {
-                throw new TechnicalException("No menu pool has been set.");
-            }
-            MenuPool.HideAll();
+            MenuPool?.HideAll();
         }
 
         /// <summary>

@@ -110,7 +110,22 @@
             <Value>Salut patron !~n~Je sens qu'on va se faire un max d'oseille avec ce labo. Je m'occupe du secrétariat, je te laisse gérer les affaires sur le terrain.</Value>
         </LocaleKey>
 
-
+        
+        <!-- Defense mission -->
+        <LocaleKey>
+            <Key>methlab_defense_success</Key>
+            <Value>Le labo reste à ~g~l'abri pour l'instant~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_defense_fail_dead</Key>
+            <Value>Le gang rival a volé tous les ~r~produits~s~ et ~r~matières premières~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_defense_defending</Key>
+            <Value>Défends le labo contre les ~r~membres du gang rival~s~ !</Value>
+        </LocaleKey>
+        
+        
         <!-- Deal mission -->
         <LocaleKey>
             <Key>methlab_deal_no_product</Key>

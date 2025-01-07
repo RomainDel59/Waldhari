@@ -14,7 +14,12 @@ namespace Waldhari.Common
         public int LoggerLevel;
         public bool ShowBlips;
         
+        // In game minutes
+        public int RandomEventCooldown;
+        
         public int WantedChance;
+        public int WantedStars;
+        
         public int RivalChance;
         public int RivalMembers;
         
@@ -28,12 +33,17 @@ namespace Waldhari.Common
         protected override void SetDefaults()
         {
             PreferredLanguage = "fr-FR";
+            
             //todo: set to 3
             LoggerLevel = 5;
             ShowBlips = true;
 
-            WantedChance = 25;
-            RivalChance = 25;
+            RandomEventCooldown = 60;
+            
+            WantedChance = 10;
+            WantedStars = 2;
+            
+            RivalChance = 20;
             RivalMembers = 3;
             
             EnemiesAppearanceDistance = 200;
