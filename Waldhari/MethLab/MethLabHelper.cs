@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GTA;
 using GTA.Math;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Misc;
@@ -16,6 +17,8 @@ namespace Waldhari.MethLab
             Position = new Vector3(1389.134f, 3605.236f, 38.94193f),
             //todo: add rotation and heading
         };
+        
+        public static PedHash Chemist = (PedHash)3988008767;
         
         public static void ShowFromChemist(string messageKey, List<string> messageValues = null)
         {

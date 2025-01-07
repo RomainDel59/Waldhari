@@ -5,6 +5,8 @@ namespace Waldhari.MethLab
     public class MethLabOptions : File<MethLabOptions>
     {
         public static MethLabOptions Instance;
+        public int ManufactureMinGramsPerSupply { get; set; }
+        public int ManufactureMaxGramsPerSupply { get; set; }
 
         protected override void SetInstance(MethLabOptions instance) => Instance = instance;
         

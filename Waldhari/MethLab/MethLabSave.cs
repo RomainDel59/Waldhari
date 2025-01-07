@@ -11,8 +11,12 @@ namespace Waldhari.MethLab
         #region save
 
         public int Owner;
+        
         public int Supply;
         public int Product;
+        
+        public bool Material;
+        public bool Chemist;
         
         //Options
         

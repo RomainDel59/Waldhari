@@ -10,7 +10,6 @@ using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
-using Waldhari.MethLab.Helpers;
 
 namespace Waldhari.MethLab.Missions
 {
@@ -21,8 +20,6 @@ namespace Waldhari.MethLab.Missions
 
         public static readonly Vector3 AnimationPosition = new Vector3(1389.3273f, 3604.7805f, 38.9419f);
         private static readonly Vector3 AnimationRotation = new Vector3(0f, 0f, -70.5439f);
-        private static readonly Vector3 IdlePosition = new Vector3(1398.467f, 3616.657f, 39.00075f);
-        private static readonly Vector3 IdleRotation = new Vector3(0f, 0f, 17.85464f);
 
         private int _amountToManufacture;
         private DateTime _waitUntil;
@@ -44,10 +41,10 @@ namespace Waldhari.MethLab.Missions
                 return false;
             }
 
-            // Without bucket : only small, medium and large are authorized
-            if (!MethLabSave.Instance.Bucket && _amountToManufacture > 50)
+            // Without material : only small, medium and large are authorized
+            if (!MethLabSave.Instance.Material && _amountToManufacture > 50)
             {
-                NotificationHelper.ShowFailure("manufacture_bucket_not_purchased");
+                NotificationHelper.ShowFailure("manufacture_material_not_purchased");
                 return false;
             }
 
@@ -131,11 +128,20 @@ namespace Waldhari.MethLab.Missions
                 CompletionCondition = () => true,
                 CompletionAction = () =>
                 {
-                    WPed wPed;
                     if (MethLabSave.Instance.Chemist)
                     {
                         MethLabHelper.ShowFromChemist("manufacture_started_chemist");
-                        wPed = _chemist;
+                        _chemistScript = InstantiateScript<PedActingScript>();
+                        _chemistScript.WPed = new WPed();
+                        _chemistScript.WPed.PedHash = MethLabHelper.Chemist;
+                        _chemistScript.WPed.InitialPosition = new WPosition
+                        {
+                            Position = new Vector3(1398.467f, 3616.657f, 39.00075f),
+                            Rotation = new Vector3(0f, 0f, 17.85464f),
+                            //todo: add heading
+                        };
+                        
+                        
                         // it will wait for chef to go to position
                         _waitUntil = DateTime.Now.AddSeconds(SecondsToReachDestination);
                     }
@@ -143,7 +149,7 @@ namespace Waldhari.MethLab.Missions
                     {
                         wPed = new WPed(Game.Player.Character);
                         Screen.FadeOut(1000);
-                        wPed.GtaPed.Weapons.Select(WeaponHash.Unarmed);
+                        wPed.Ped.Weapons.Select(WeaponHash.Unarmed);
                         // it will wait 1 second for fade out
                         _waitUntil = DateTime.Now.AddSeconds(1);
                     }
