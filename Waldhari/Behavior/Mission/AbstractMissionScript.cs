@@ -8,7 +8,6 @@ using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
-using Waldhari.Common.Mission;
 using Waldhari.Common.UI;
 
 namespace Waldhari.Behavior.Mission
@@ -197,7 +196,7 @@ namespace Waldhari.Behavior.Mission
             
             try
             {
-                TickComplement();
+                OnTickComplement();
 
                 if (Game.Player.IsDead)
                 {
@@ -273,7 +272,7 @@ namespace Waldhari.Behavior.Mission
         /// This is where to add fail conditions
         /// during tick script of the mission.
         /// </summary>
-        protected abstract void TickComplement();
+        protected abstract void OnTickComplement();
 
         /// <summary>
         /// Ends the mission successfully and cleans up properties.

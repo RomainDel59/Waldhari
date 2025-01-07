@@ -109,6 +109,41 @@
             <Key>methlab_intro</Key>
             <Value>Salut patron !~n~Je sens qu'on va se faire un max d'oseille avec ce labo. Je m'occupe du secrétariat, je te laisse gérer les affaires sur le terrain.</Value>
         </LocaleKey>
+
+
+        <!-- Deal mission -->
+        <LocaleKey>
+            <Key>methlab_deal_no_product</Key>
+            <Value>Il n'y a pas de ~r~méth en stock~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_not_close_enough</Key>
+            <Value>Vous devez vous rendre au ~r~labo~s~ pour récupérer un sac de ~r~méth~s~ à vendre.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_client</Key>
+            <Value>Client</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_started_ron</Key>
+            <Value>Salut patron, un client demande ~r~{0} g~s~ de méth pour ~g~{1} $~s~, va lui apporter aux coordonnées que je t'ai envoyées.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_rendezvous</Key>
+            <Value>Rends-toi au rendez-vous avec le ~y~client~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_payment</Key>
+            <Value>Conclus la vente avec le ~y~client~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_success</Key>
+            <Value>La vente a rapporté ~g~{0} $~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_fail_client_dead</Key>
+            <Value>Le ~r~client~s~ a été tué.</Value>
+        </LocaleKey>
         
         
         <!-- Bulk mission -->
@@ -152,6 +187,7 @@
             <Key>methlab_bulk_success</Key>
             <Value>Le stock a été vendu pour ~g~{0} $~s~.</Value>
         </LocaleKey>
+        
         
 
     </Locales>

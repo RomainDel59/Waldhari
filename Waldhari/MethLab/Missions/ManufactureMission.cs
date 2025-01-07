@@ -6,6 +6,7 @@ using GTA.UI;
 
 namespace Waldhari.MethLab.Missions
 {
+    [ScriptAttributes(NoDefaultInstance = true)]
     public class ManufactureMission : AbstractMission
     {
         private const int SecondsToReachDestination = 20;

@@ -1,50 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
 using GTA;
+using Waldhari.Behavior.Mission;
+using Waldhari.Behavior.Ped;
+using Waldhari.Common.Entities;
+using Waldhari.Common.Entities.Helpers;
+using Waldhari.Common.Exceptions;
+using Waldhari.Common.Misc;
+using Waldhari.Common.UI;
 
 namespace Waldhari.MethLab.Missions
 {
-    public class DealMission : AbstractMission
+    [ScriptAttributes(NoDefaultInstance = true)]
+    public class DealMission : AbstractMissionScript
     {
         // Scene
-        private WPed _client;
+        private PedActingScript _clientScript;
 
         private int _amountToDeal;
         private int _priceToDeal;
 
-        public DealMission() : base("DealMission", true, "deal_success")
+        public DealMission() : base("MethLabDealMission", true, "methlab_deal_success")
         {
         }
 
         protected override bool StartComplement(string arg)
         {
-            if (ModSave.Instance.Product <= 0)
+            if (MethLabSave.Instance.Product <= 0)
             {
-                NotificationHelper.ShowFail("deal_no_product");
+                NotificationHelper.ShowFailure("methlab_deal_no_product");
                 return false;
             }
 
-            if (Game.Player.Character.Position.DistanceTo(ManufactureMission.AnimationPosition) > 5)
+            if (WPositionHelper.IsNear(Game.Player.Character.Position,ManufactureMission.AnimationPosition,5))
             {
-                NotificationHelper.ShowFail("deal_not_close_enough");
+                NotificationHelper.ShowFailure("methlab_deal_not_close_enough");
                 return false;
             }
 
-            _amountToDeal = Math.Min(ModOptions.Instance.DealMaxGramsPerPack, ModSave.Instance.Product);
+            _amountToDeal = RandomHelper.Next(1, MethLabOptions.Instance.DealMaxGramsPerPack + 1);
+            _amountToDeal = Math.Min(_amountToDeal, MethLabSave.Instance.Product);
             _priceToDeal = _amountToDeal * GetPricePerGram();
 
-            NotificationHelper.ShowFromRon("deal_started_ron",
+            NotificationHelper.ShowFromRon("methlab_deal_started_ron",
                 new List<string> { _amountToDeal.ToString(), _priceToDeal.ToString() });
 
-            ModSave.Instance.Product -= _amountToDeal;
-            ModSave.Instance.Save();
+            MethLabSave.Instance.Product -= _amountToDeal;
+            MethLabSave.Instance.Save();
 
             return true;
         }
 
-        protected override void UpdateComplement()
+        protected override void OnTickComplement()
         {
-            if (_client == null || _client.GtaPed.IsDead) throw new MissionException("deal_fail_client_dead");
+            if (_clientScript == null || _clientScript.WPed == null || _clientScript.WPed.Ped.IsDead) throw new MissionException("methlab_deal_fail_client_dead");
         }
 
         protected override List<string> EndComplement()
@@ -73,10 +82,10 @@ namespace Waldhari.MethLab.Missions
             return new Step
             {
                 Name = "Rendezvous",
-                MessageKey = "deal_rendezvous",
-                Action = () => { _client.AttachMissionBlip("deal_client"); },
+                MessageKey = "methlab_deal_rendezvous",
+                Action = () => { _clientScript.WPed.MakeMissionDestination("methlab_deal_client"); },
                 CompletionCondition = () =>
-                    Game.Player.Character.Position.DistanceTo(_client.GtaPed.Position) <= 25
+                    WPositionHelper.IsNear(Game.Player.Character.Position,_clientScript.WPed.Ped.Position,25)
             };
         }
 
@@ -85,46 +94,45 @@ namespace Waldhari.MethLab.Missions
             return new Step
             {
                 Name = "Payment",
-                MessageKey = "deal_payment",
+                MessageKey = "methlab_deal_payment",
                 Action = () =>
                 {
-                    _client.AttachMissionBlip("supply_supplier");
-                    _client.AttachMissionMarker();
+                    _clientScript.WPed.MakeMissionDestination("supply_supplier");
                 },
                 CompletionCondition = () =>
-                    !_client.GtaPed.IsInCombat &&
-                    Game.Player.Character.IsInRange(_client.GtaPed.Position, 2.0f)
+                    !_clientScript.WPed.Ped.IsInCombat &&
+                    WPositionHelper.IsNear(Game.Player.Character.Position,_clientScript.WPed.Ped.Position, 2)
             };
         }
 
         private static int GetPricePerGram()
         {
             return
-                RandomHelper.Next(ModOptions.Instance.DealMinPrice, ModOptions.Instance.DealMaxPrice + 1) *
-                (1 + (ModSave.Instance.Blue ? ModOptions.Instance.BluePercent / 100 : 0));
+                RandomHelper.Next(MethLabOptions.Instance.DealMinPrice, MethLabOptions.Instance.DealMaxPrice + 1);
         }
 
         protected override void CreateScene()
         {
-            _client = new WPed(
-                PedHash.Rurmeth01AMM,
-                MethLabPositions.GetRandom()
-            );
-            _client.GiveWeapons();
-            _client.PlayScenario("WORLD_HUMAN_SMOKING");
+            var client = new WPed
+            {
+                PedHash = PedHash.Rurmeth01AMM,
+                InitialPosition = new WPosition
+                {
+                    Position = MethLabPositions.GetRandom()
+                    //todo: make MethLabPositions returns WPosition
+                },
+                Scenario = "WORLD_HUMAN_SMOKING"
+            };
+            client.Create();
+            client.AddWeapon(WeaponsHelper.GetRandomGangWeapon());
+            
+            _clientScript = InstantiateScript<PedActingScript>();
+            _clientScript.WPed = client;
         }
 
         protected override void CleanScene()
         {
-            if (_client != null)
-            {
-                _client.RemoveBlip();
-
-                if (_client.GtaPed != null)
-                {
-                    _client.GtaPed.MarkAsNoLongerNeeded();
-                }
-            }
+            _clientScript?.Abort();
         }
     }
 }

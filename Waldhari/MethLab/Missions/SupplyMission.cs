@@ -6,6 +6,7 @@ namespace Waldhari.MethLab.Missions
 {
     public class SupplyMission : AbstractMission
     {
+        [ScriptAttributes(NoDefaultInstance = true)]
         // Scene
         private PedGroup _group;
         private WPed _seller;

@@ -7,11 +7,11 @@ using Waldhari.Common.Entities;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
 using Waldhari.Common.Misc;
-using Waldhari.Common.Mission;
 using Waldhari.Common.UI;
 
 namespace Waldhari.MethLab.Missions
 {
+    [ScriptAttributes(NoDefaultInstance = true)]
     public class BulkMission : AbstractMissionScript
     {
         // Scene
@@ -46,7 +46,7 @@ namespace Waldhari.MethLab.Missions
             return true;
         }
 
-        protected override void TickComplement()
+        protected override void OnTickComplement()
         {
             if (_wholesalerScript.WPed == null || _wholesalerScript.WPed.Ped.IsDead) throw new MissionException("methlab_bulk_fail_wholesaler_dead");
 
@@ -169,7 +169,7 @@ namespace Waldhari.MethLab.Missions
             wholesaler.Create();
             wholesaler.AddWeapon(WeaponsHelper.GetRandomGangWeapon());
             
-            _wholesalerScript = Script.InstantiateScript<PedActingScript>();
+            _wholesalerScript = InstantiateScript<PedActingScript>();
             _wholesalerScript.WPed = wholesaler;
 
             _deliveryWBlip = WBlipHelper.GetMission("methlab_bulk_delivery");
@@ -189,6 +189,7 @@ namespace Waldhari.MethLab.Missions
 
         protected override void CleanScene()
         {
+            _wholesalerScript?.WPed?.Ped?.MarkAsNoLongerNeeded();
             _wholesalerScript?.Abort();
 
             if (_van != null)

@@ -4,6 +4,7 @@ using GTA;
 
 namespace Waldhari.MethLab.Missions
 {
+    [ScriptAttributes(NoDefaultInstance = true)]
     public class DefenseMission : AbstractMission
     {
         private DateTime _nextAttackTry;

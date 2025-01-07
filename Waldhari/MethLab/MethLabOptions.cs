@@ -11,6 +11,11 @@ namespace Waldhari.MethLab
         #region options
 
         public int Price;
+        
+        public int DealMaxGramsPerPack;
+        public int DealMinPrice;
+        public int DealMaxPrice;
+        
         public int BulkMinPrice;
         public int BulkMaxPrice;
         
@@ -21,6 +26,11 @@ namespace Waldhari.MethLab
         protected override void SetDefaults()
         {
             Price = 1000000;
+            
+            DealMaxGramsPerPack = 500;
+            DealMinPrice = 50;
+            DealMaxPrice = 100;
+            
             BulkMinPrice = 25;
             BulkMaxPrice = 50;
         }

@@ -89,6 +89,7 @@
         <Compile Include="MethLab\MethLab.cs" />
         <Compile Include="MethLab\MethLabHelper.cs" />
         <Compile Include="MethLab\MethLabOptions.cs" />
+        <Compile Include="MethLab\MethLabPositions.cs" />
         <Compile Include="MethLab\MethLabSave.cs" />
         <Compile Include="MethLab\Missions\BulkMission.cs" />
         <Compile Include="MethLab\Missions\DealMission.cs" />
