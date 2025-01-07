@@ -26,6 +26,7 @@ namespace Waldhari.MethLab.Missions
             _nextAttackTry = Game.GameTime + MethLabOptions.Instance.DefenseCooldown * 60 * 1000;
         }
 
+        //todo: move this to methlab main script
         public void TryToStart(bool hasAnotherMissionActive)
         {
             // If another mission is active
