@@ -308,11 +308,6 @@ namespace Waldhari.Behavior.Mission
         private void Fail(string messageKey)
         {
             Logger.Debug($"Mission {_name} fail");
-
-            if (IsFightingRival())
-            {
-                _rivalScript.Remove();
-            }
             
             ClearProperties();
 
@@ -532,8 +527,8 @@ namespace Waldhari.Behavior.Mission
                 Logger.Info($"Trying WantedStep chance={RivalChance}");
                 if (RandomHelper.Try(RivalChance))
                 {
-                    _rivalScript =
-                        new EnemyGroupScript(WGroupHelper.CreateRivalMembers(RivalMembers));
+                    _rivalScript = InstantiateScript<EnemyGroupScript>();
+                    _rivalScript.DefineGroup(WGroupHelper.CreateRivalMembers(RivalMembers));
                     // no other random event will be processed during this mission
                     _randomEventAlreadyLaunchedOnce = true;
                 }

@@ -18,9 +18,9 @@ namespace Waldhari.Behavior.Ped
         public static int DisappearanceDistance = -1;
         
         /// <summary>
-        /// Group has to be defined on contructor.
+        /// Group has to be defined on DefineGroup method.
         /// </summary>
-        public readonly WGroup WGroup;
+        public WGroup WGroup;
 
         /// <summary>
         /// Create a script that will be executed until disinstantiation.
@@ -31,18 +31,20 @@ namespace Waldhari.Behavior.Ped
         /// At the end, before disinstantiation of the script,
         /// developer has to call methods MarkAsNoLongerNeeded or Remove to clean up.
         /// </summary>
-        /// <param name="wGroup">Group to manage</param>
         /// <exception cref="TechnicalException">If distance parameters are empty</exception>
-        public EnemyGroupScript(WGroup wGroup)
+        public EnemyGroupScript()
         {
             if(AppearanceDistance == -1) throw new TechnicalException("AppearanceDistance cannot be empty.");
             if(DisappearanceDistance == -1) throw new TechnicalException("DisappearanceDistance cannot be empty.");
-            
-            WGroup = wGroup;
-            CreateVehicles();
-            CreatePeds();
 
             Tick += OnTick;
+        }
+
+        public void DefineGroup(WGroup wGroup)
+        {
+            CreateVehicles(wGroup);
+            CreatePeds(wGroup);
+            WGroup = wGroup;
         }
 
         /// <summary>
@@ -51,6 +53,8 @@ namespace Waldhari.Behavior.Ped
         /// </summary>
         public void MarkAsNoLongerNeeded()
         {
+            //todo: make ped not fight the player anymore
+            
             foreach (var wPed in WGroup.WPeds)
             {
                 if (wPed == null) continue;
@@ -96,11 +100,11 @@ namespace Waldhari.Behavior.Ped
         /// Creates vehicles according group definition.
         /// If there is no vehicle, does nothing.
         /// </summary>
-        private void CreateVehicles()
+        private void CreateVehicles(WGroup wGroup)
         {
-            if (!WGroup.HasVehicles()) return;
+            if (!wGroup.HasVehicles()) return;
             
-            foreach (var wVehicle in WGroup.WVehicles)
+            foreach (var wVehicle in wGroup.WVehicles)
             {
                 wVehicle.InitialPosition = WPositionHelper.GetBehindPosition(AppearanceDistance, true);
                 wVehicle.Create();
@@ -110,11 +114,11 @@ namespace Waldhari.Behavior.Ped
         /// <summary>
         /// Creates peds according group definition.
         /// </summary>
-        private void CreatePeds()
+        private void CreatePeds(WGroup wGroup)
         {
-            var hasVehicles = WGroup.HasVehicles();
+            var hasVehicles = wGroup.HasVehicles();
             
-            foreach (var wPed in WGroup.WPeds)
+            foreach (var wPed in wGroup.WPeds)
             {
                 // Not on the street to avoid being hit by a car on highway ! x')
                 wPed.InitialPosition = WPositionHelper.GetBehindPosition(AppearanceDistance, false);
@@ -141,6 +145,9 @@ namespace Waldhari.Behavior.Ped
         /// <param name="e"></param>
         private void OnTick(object sender, EventArgs e)
         {
+            // Wait for parameter
+            if (WGroup == null) return; 
+            
             // To lower material usage :
             // runs this script every 1/2 second only
             if (_nextExecution > Game.GameTime) return;
