@@ -199,7 +199,12 @@ namespace Waldhari.Behavior.Mission
             {
                 TickComplement();
 
-                if (Game.Player.IsDead) throw new MissionException("player_dead");
+                if (Game.Player.IsDead)
+                {
+                    // If player dead : make enemies disappear if exist
+                    _rivalScript?.Remove();
+                    throw new MissionException("player_dead");
+                }
 
                 // No police when fighting rival gang
                 if (IsFightingRival()) Game.Player.WantedLevel = 0;
