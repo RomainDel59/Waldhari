@@ -1,5 +1,6 @@
 ﻿using System;
 using GTA;
+using Waldhari.Behavior.Mission;
 using Waldhari.Behavior.Property;
 using Waldhari.Common;
 using Waldhari.Common.Files;
@@ -89,7 +90,7 @@ namespace Waldhari.MethLab
             NotificationHelper.ShowFromRon("methlab_intro");
         }
 
-        private void DefineMissionOptions(AbstractMission mission)
+        private void DefineMissionOptions(AbstractMissionScript mission)
         {
             mission.WantedChance = GlobalOptions.Instance.WantedChance;
             mission.RivalChance = GlobalOptions.Instance.RivalChance;

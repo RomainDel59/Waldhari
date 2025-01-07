@@ -1,38 +1,38 @@
 ﻿using System.Collections.Generic;
 using GTA;
 using GTA.Math;
+using Waldhari.Behavior.Mission;
+using Waldhari.Behavior.Ped;
+using Waldhari.Common.Entities;
+using Waldhari.Common.Entities.Helpers;
+using Waldhari.Common.Exceptions;
+using Waldhari.Common.UI;
 
 namespace Waldhari.MethLab.Missions
 {
-    public class SupplyMission : AbstractMission
-    {
         [ScriptAttributes(NoDefaultInstance = true)]
+    public class SupplyMission : AbstractMissionScript
+    {
         // Scene
-        private PedGroup _group;
-        private WPed _seller;
-        private List<WPed> _guards;
+        private WBlip _deliveryWBlip;
+        private PedActingScript _sellerScript;
         private WVehicle _van;
-        private readonly WBlip _deliveryWBlip;
 
         private int _amountToSupply;
         private int _costToSupply;
 
         public SupplyMission() : base("SupplyMission", true, "supply_success")
         {
-            _deliveryWBlip = new WBlip("supply_destination")
-            {
-                Position = MethLabPositions.LabParking
-            };
         }
 
         protected override bool StartComplement(string arg)
         {
             _amountToSupply = int.Parse(arg);
-            _costToSupply = (int)(_amountToSupply * ModOptions.Instance.SupplyCost * GetNegotiation());
+            _costToSupply = _amountToSupply * MethLabOptions.Instance.SupplyCost;
 
             if (Game.Player.Money < _costToSupply)
             {
-                NotificationHelper.ShowFail("supply_not_enough_money");
+                NotificationHelper.ShowFailure("supply_not_enough_money");
                 return false;
             }
 
@@ -41,17 +41,17 @@ namespace Waldhari.MethLab.Missions
             return true;
         }
 
-        protected override void UpdateComplement()
+        protected override void OnTickComplement()
         {
-            if (_seller == null || _seller.GtaPed.IsDead) throw new MissionException("supply_fail_supplier_dead");
+            if (_sellerScript == null || _sellerScript.WPed.Ped.IsDead) throw new MissionException("supply_fail_supplier_dead");
 
-            if (_van == null || _van.IsDestroyed()) throw new MissionException("supply_fail_vehicle_destroyed");
+            if (_van == null || _van.Vehicle.IsConsideredDestroyed) throw new MissionException("supply_fail_vehicle_destroyed");
         }
 
         protected override List<string> EndComplement()
         {
-            ModSave.Instance.Supply += _amountToSupply;
-            ModSave.Instance.Save();
+            MethLabSave.Instance.Supply += _amountToSupply;
+            MethLabSave.Instance.Save();
 
             return new List<string> { _amountToSupply.ToString() };
         }
@@ -77,9 +77,12 @@ namespace Waldhari.MethLab.Missions
             {
                 Name = "Rendezvous",
                 MessageKey = "supply_rendezvous",
-                Action = () => { _seller.AttachMissionBlip("supply_supplier"); },
+                Action = () =>
+                {
+                    _sellerScript.WPed.MakeMissionDestination("supply_supplier");
+                },
                 CompletionCondition =
-                    () => Game.Player.Character.Position.DistanceTo(_seller.GtaPed.Position) <= 25
+                    () => WPositionHelper.IsNear(Game.Player.Character.Position,_sellerScript.WPed.Ped.Position,25)
             };
         }
 
@@ -91,12 +94,11 @@ namespace Waldhari.MethLab.Missions
                 MessageKey = "supply_payment",
                 Action = () =>
                 {
-                    _seller.AttachMissionBlip("supply_supplier");
-                    _seller.AttachMissionMarker();
+                    _sellerScript.WPed.MakeMissionDestination("supply_supplier");
                 },
                 CompletionCondition =
-                    () => !_seller.GtaPed.IsInCombat &&
-                          Game.Player.Character.IsInRange(_seller.GtaPed.Position, 2.0f),
+                    () => !_sellerScript.WPed.Ped.IsInCombat &&
+                          WPositionHelper.IsNear(Game.Player.Character.Position,_sellerScript.WPed.Ped.Position, 2),
                 // Pay seller when completed
                 CompletionAction = () =>
                 {
@@ -115,24 +117,25 @@ namespace Waldhari.MethLab.Missions
                 MessageKey = "supply_drive_lab",
                 Action = () =>
                 {
-                    _seller.RemoveBlip();
+                    _sellerScript.WPed.RemoveMissionDestination();
+                    
                     // if player go back from vehicle : show vehicle as mission objective
-                    if (!Game.Player.Character.IsInVehicle(_van.GtaVehicle))
+                    if (!Game.Player.Character.IsInVehicle(_van.Vehicle))
                     {
+                        //todo: make a step to go inside vehicle
                         _deliveryWBlip.Remove();
-                        _van.AttachMissionBlip("van_vehicle");
-                        _van.AttachMissionMarker();
+                        _van.MakeMissionDestination("van_vehicle");
                     }
                     // if player is in vehicle : show destination as mission objective
                     else
                     {
-                        _van.RemoveBlip();
+                        _van.RemoveMissionDestination();
                         _deliveryWBlip.Create();
-                        _deliveryWBlip.AttachMissionMarkerToPositionBlip();
+                        MarkerHelper.DrawGroundMarkerOnBlip(_deliveryWBlip);
                     }
                 },
                 CompletionCondition =
-                    () => Game.Player.Character.Position.DistanceTo(_deliveryWBlip.Position) <= 10
+                    () => WPositionHelper.IsNear(Game.Player.Character.Position,_deliveryWBlip.Position, 10)
             };
         }
 
@@ -144,103 +147,61 @@ namespace Waldhari.MethLab.Missions
                 MessageKey = "supply_out",
                 Action = () =>
                 {
-                    _van.RemoveBlip();
                     _deliveryWBlip.Remove();
                 },
                 CompletionCondition =
-                    () => !Game.Player.Character.IsInVehicle(_van.GtaVehicle)
+                    () => !Game.Player.Character.IsInVehicle(_van.Vehicle)
             };
-        }
-
-        private static float GetNegotiation()
-        {
-            if (!ModSave.Instance.Negotiation) return 1;
-            return 1 + ModOptions.Instance.NegotiationPercent / 100f;
         }
 
         protected override void CreateScene()
         {
-            _group = new PedGroup();
-            _group.Formation = Formation.Loose;
-
-            _seller = new WPed(
-                PedHash.CartelGuards01GMM,
-                new Vector3(1448.546f, 6548.113f, 15.21889f),
-                new Vector3(0, 0, 142.5344f)
-            );
-            _seller.GiveWeapons();
-            _seller.PlayScenario("WORLD_HUMAN_SMOKING");
-            _group.Add(_seller.GtaPed, true);
-
-            _guards = new List<WPed>
+            //todo: there is a position for a ped (wholesaler) and a position for a vehicle (for the van that has to be driven there)
+            // make a new object for that, like "scene" object ?
+            // this object can have multiple ped positions, and one vehicle position,
+            // so the script can create multiple peds
+            
+            var seller = new WPed
             {
-                new WPed(
-                    PedHash.CartelGuards01GMM,
-                    new Vector3(1450.007f, 6546.529f, 15.24918f),
-                    new Vector3(0f, 0f, 109.082f)
-                ),
-                new WPed(
-                    PedHash.CartelGuards02GMM,
-                    new Vector3(1446.683f, 6548.604f, 15.23975f),
-                    new Vector3(0f, 0f, -166.3122f)
-                )
+                PedHash = PedHash.CartelGuards01GMM,
+                InitialPosition = new WPosition
+                {
+                    Position = new Vector3(1448.546f, 6548.113f, 15.21889f),
+                    Rotation = new Vector3(0, 0, 142.5344f)
+                    //todo: Add heading
+                },
+                Scenario = "WORLD_HUMAN_SMOKING"
             };
-            foreach (var guard in _guards)
-            {
-                guard.GiveWeapons();
-                guard.PlayScenario("WORLD_HUMAN_GUARD_STAND");
-                _group.Add(guard.GtaPed, false);
-            }
+            seller.Create();
+            seller.AddWeapon(WeaponsHelper.GetRandomGangWeapon());
 
-            _van = new WVehicle(
-                VehicleHash.Burrito,
-                new Vector3(1444.564f, 6552.647f, 15.07594f),
-                new Vector3(0f, 0f, 135.7104f)
-            );
+            _van = new WVehicle
+            {
+                VehicleHash = VehicleHash.Burrito,
+                InitialPosition = new WPosition
+                {
+                    Position = World.GetNextPositionOnStreet(new Vector3(1444.564f, 6552.647f, 15.07594f), true),
+                    Rotation = new Vector3(0f, 0f, 135.7104f)
+                    //todo: Add heading
+                }
+            };
+            
+            _deliveryWBlip = WBlipHelper.GetMission("supply_destination");
+            _deliveryWBlip.Position =  MethLabHelper.LabParking;
         }
 
         protected override void CleanScene()
         {
-            if (_seller != null)
-            {
-                _seller.RemoveBlip();
-                if (_seller.GtaPed != null)
-                {
-                    _seller.GtaPed.MarkAsNoLongerNeeded();
-                }
-            }
-
-            if (_guards != null)
-            {
-                foreach (var guard in _guards)
-                {
-                    if (guard != null && guard.GtaPed != null)
-                    {
-                        guard.GtaPed.MarkAsNoLongerNeeded();
-                    }
-                }
-            }
+            _sellerScript?.WPed?.Ped?.MarkAsNoLongerNeeded();
+            _sellerScript?.Abort();
 
             if (_van != null)
             {
-                _van.RemoveBlip();
-                if (_van.GtaVehicle != null)
-                {
-                    _van.GtaVehicle.IsConsideredDestroyed = true;
-                    _van.GtaVehicle.PreviouslyOwnedByPlayer = false;
-                    _van.GtaVehicle.MarkAsNoLongerNeeded();
-                }
+                _van.WBlip?.Remove();
+                _van.Vehicle?.MarkAsNoLongerNeeded();
             }
 
-            if (_deliveryWBlip != null)
-            {
-                _deliveryWBlip.Remove();
-            }
-
-            if (_group != null)
-            {
-                _group.Delete();
-            }
+            _deliveryWBlip?.Remove();
         }
     }
 }

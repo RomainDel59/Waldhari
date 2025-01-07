@@ -92,5 +92,9 @@ namespace Waldhari.Common.Entities
             MarkerHelper.DrawEntityMarkerOnBlip(WBlip);
         }
 
+        public void RemoveMissionDestination()
+        {
+            WBlip?.Remove();
+        }
     }
 }

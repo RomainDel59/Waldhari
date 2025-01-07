@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using GTA;
 using GTA.Math;
 using GTA.UI;
+using Waldhari.Behavior.Mission;
+using Waldhari.Behavior.Ped;
+using Waldhari.Common.Entities;
+using Waldhari.Common.Entities.Helpers;
+using Waldhari.Common.Files;
+using Waldhari.Common.Misc;
+using Waldhari.Common.UI;
+using Waldhari.MethLab.Helpers;
 
 namespace Waldhari.MethLab.Missions
 {
     [ScriptAttributes(NoDefaultInstance = true)]
-    public class ManufactureMission : AbstractMission
+    public class ManufactureMission : AbstractMissionScript
     {
         private const int SecondsToReachDestination = 20;
 
@@ -19,7 +27,7 @@ namespace Waldhari.MethLab.Missions
         private int _amountToManufacture;
         private DateTime _waitUntil;
         private Camera _playerCamera;
-        private WPed _chemist;
+        private PedActingScript _chemistScript;
 
         public ManufactureMission() : base("ManufactureMission", false,
             null)
@@ -30,30 +38,30 @@ namespace Waldhari.MethLab.Missions
         {
             _amountToManufacture = int.Parse(arg);
 
-            if (ModSave.Instance.Supply < _amountToManufacture)
+            if (MethLabSave.Instance.Supply < _amountToManufacture)
             {
-                NotificationHelper.ShowFail("manufacture_not_enough_supply");
+                NotificationHelper.ShowFailure("manufacture_not_enough_supply");
                 return false;
             }
 
             // Without bucket : only small, medium and large are authorized
-            if (!ModSave.Instance.Bucket && _amountToManufacture > 50)
+            if (!MethLabSave.Instance.Bucket && _amountToManufacture > 50)
             {
-                NotificationHelper.ShowFail("manufacture_bucket_not_purchased");
+                NotificationHelper.ShowFailure("manufacture_bucket_not_purchased");
                 return false;
             }
 
-            // Without chef, can cook near lab table only
-            if (!ModSave.Instance.Chemist && Game.Player.Character.Position.DistanceTo(AnimationPosition) > 5)
+            // Without chemist, can cook near lab table only
+            if (!MethLabSave.Instance.Chemist && WPositionHelper.IsNear(Game.Player.Character.Position,AnimationPosition,5))
             {
-                NotificationHelper.ShowFail("manufacture_not_close_enough");
+                NotificationHelper.ShowFailure("manufacture_not_close_enough");
                 return false;
             }
 
             return true;
         }
 
-        protected override void UpdateComplement()
+        protected override void OnTickComplement()
         {
             // Nothing
         }
@@ -62,14 +70,14 @@ namespace Waldhari.MethLab.Missions
         {
             var product = CalculateProduct();
 
-            ModSave.Instance.Supply -= _amountToManufacture;
-            ModSave.Instance.Product += product;
-            ModSave.Instance.Save();
+            MethLabSave.Instance.Supply -= _amountToManufacture;
+            MethLabSave.Instance.Product += product;
+            MethLabSave.Instance.Save();
 
             var values = new List<string> { product.ToString() };
-            if (ModSave.Instance.Chemist)
+            if (MethLabSave.Instance.Chemist)
             {
-                NotificationHelper.ShowFromChemist("manufacture_finished_chemist", values);
+                MethLabHelper.ShowFromChemist("manufacture_finished_chemist", values);
             }
             else
             {
@@ -86,10 +94,10 @@ namespace Waldhari.MethLab.Missions
 
         private int CalculateProduct()
         {
-            var multiplier = RandomHelper.Next(ModOptions.Instance.ManufactureMinGramsPerSupply,
-                ModOptions.Instance.ManufactureMaxGramsPerSupply + 1);
-            var substracter = RandomHelper.Next(ModOptions.Instance.ManufactureMinGramsPerSupply,
-                ModOptions.Instance.ManufactureMaxGramsPerSupply + 1);
+            var multiplier = RandomHelper.Next(MethLabOptions.Instance.ManufactureMinGramsPerSupply,
+                MethLabOptions.Instance.ManufactureMaxGramsPerSupply + 1);
+            var substracter = RandomHelper.Next(MethLabOptions.Instance.ManufactureMinGramsPerSupply,
+                MethLabOptions.Instance.ManufactureMaxGramsPerSupply + 1);
 
             var product = _amountToManufacture * multiplier - substracter;
 
@@ -124,9 +132,9 @@ namespace Waldhari.MethLab.Missions
                 CompletionAction = () =>
                 {
                     WPed wPed;
-                    if (ModSave.Instance.Chemist)
+                    if (MethLabSave.Instance.Chemist)
                     {
-                        NotificationHelper.ShowFromChemist("manufacture_started_chemist");
+                        MethLabHelper.ShowFromChemist("manufacture_started_chemist");
                         wPed = _chemist;
                         // it will wait for chef to go to position
                         _waitUntil = DateTime.Now.AddSeconds(SecondsToReachDestination);
@@ -140,6 +148,7 @@ namespace Waldhari.MethLab.Missions
                         _waitUntil = DateTime.Now.AddSeconds(1);
                     }
 
+                    
                     wPed.Says("GENERIC_YES");
                     wPed.GtaPed.Task.GoTo(AnimationPosition);
                 }
@@ -155,11 +164,11 @@ namespace Waldhari.MethLab.Missions
                 // Nothing to do during this step
                 Action = () => { },
                 CompletionCondition = () =>
-                    DateTime.Now > _waitUntil || ModSave.Instance.Chemist &&
+                    DateTime.Now > _waitUntil || MethLabSave.Instance.Chemist &&
                     _chemist.GtaPed.Position.DistanceTo(AnimationPosition) < 0.5f,
                 CompletionAction = () =>
                 {
-                    var ped = ModSave.Instance.Chemist
+                    var ped = MethLabSave.Instance.Chemist
                         ? _chemist
                         : new WPed(Game.Player.Character);
 
@@ -169,7 +178,7 @@ namespace Waldhari.MethLab.Missions
                     ped.PlayAnimation("anim@amb@business@meth@meth_monitoring_cooking@cooking@",
                         "chemical_pour_short_cooker");
 
-                    if (ModSave.Instance.Chemist)
+                    if (MethLabSave.Instance.Chemist)
                     {
                         // For chef, it will take amount*1/2 seconds to cook, but minimum 10 seconds and maximum 5 minutes
                         _waitUntil = DateTime.Now.AddSeconds(Math.Min(Math.Max(10, _amountToManufacture / 2), 5 * 60));
@@ -197,20 +206,20 @@ namespace Waldhari.MethLab.Missions
             return new Step
             {
                 Name = "Cooking",
-                MessageKey = ModSave.Instance.Chemist ? null : "manufacture_cooking",
+                MessageKey = MethLabSave.Instance.Chemist ? null : "manufacture_cooking",
                 // Nothing to do during this step
                 Action = () => { },
                 CompletionCondition = () => DateTime.Now > _waitUntil,
                 CompletionAction = () =>
                 {
-                    var ped = ModSave.Instance.Chemist
+                    var ped = MethLabSave.Instance.Chemist
                         ? _chemist
                         : new WPed(Game.Player.Character);
 
                     ped.Says("GENERIC_THANKS");
                     ped.GtaPed.IsPositionFrozen = false;
 
-                    if (ModSave.Instance.Chemist)
+                    if (MethLabSave.Instance.Chemist)
                     {
                         ped.GtaPed.Task.ClearAllImmediately();
                         ped.GtaPed.Task.GoTo(IdlePosition);
@@ -237,11 +246,11 @@ namespace Waldhari.MethLab.Missions
                 Action = () => { },
                 CompletionCondition = () =>
                     DateTime.Now > _waitUntil ||
-                    ModSave.Instance.Chemist && _chemist.GtaPed.Position.DistanceTo(IdlePosition) < 0.5f,
+                    MethLabSave.Instance.Chemist && _chemist.GtaPed.Position.DistanceTo(IdlePosition) < 0.5f,
                 CompletionAction = () =>
                 {
-                    var ped = ModSave.Instance.Chemist ? _chemist : new WPed(Game.Player.Character);
-                    if (ModSave.Instance.Chemist)
+                    var ped = MethLabSave.Instance.Chemist ? _chemist : new WPed(Game.Player.Character);
+                    if (MethLabSave.Instance.Chemist)
                     {
                         ped.GtaPed.PositionNoOffset = IdlePosition;
                         ped.GtaPed.Rotation = IdleRotation;
@@ -261,7 +270,7 @@ namespace Waldhari.MethLab.Missions
 
         protected override void CreateScene()
         {
-            if (!ModSave.Instance.Chemist) return;
+            if (!MethLabSave.Instance.Chemist) return;
 
             if (_chemist != null && _chemist.GtaPed != null && _chemist.GtaPed.IsDead)
             {
@@ -281,7 +290,7 @@ namespace Waldhari.MethLab.Missions
 
         protected override void CleanScene()
         {
-            if (!ModSave.Instance.Chemist) return;
+            if (!MethLabSave.Instance.Chemist) return;
             if (_chemist == null) return;
             if (_chemist.GtaPed == null) return;
             _chemist.GtaPed.BlockPermanentEvents = false;

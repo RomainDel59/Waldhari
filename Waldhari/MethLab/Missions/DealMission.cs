@@ -118,7 +118,7 @@ namespace Waldhari.MethLab.Missions
                 PedHash = PedHash.Rurmeth01AMM,
                 InitialPosition = new WPosition
                 {
-                    Position = MethLabPositions.GetRandom()
+                    Position = MethLabHelper.GetRandomPosition()
                     //todo: make MethLabPositions returns WPosition
                 },
                 Scenario = "WORLD_HUMAN_SMOKING"

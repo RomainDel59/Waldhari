@@ -12,6 +12,8 @@ namespace Waldhari.MethLab
 
         public int Price;
         
+        public int SupplyCost;
+        
         public int DealMaxGramsPerPack;
         public int DealMinPrice;
         public int DealMaxPrice;
@@ -26,6 +28,8 @@ namespace Waldhari.MethLab
         protected override void SetDefaults()
         {
             Price = 1000000;
+
+            SupplyCost = 30;
             
             DealMaxGramsPerPack = 500;
             DealMinPrice = 50;
