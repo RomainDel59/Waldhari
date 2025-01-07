@@ -53,7 +53,7 @@ namespace Waldhari.Behavior.Ped
         /// </summary>
         public void MarkAsNoLongerNeeded()
         {
-            //todo: make ped not fight the player anymore
+            //todo: may be => make ped not fight the player anymore
             
             foreach (var wPed in WGroup.WPeds)
             {
