@@ -8,18 +8,22 @@ using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
+using Waldhari.Common.Mission;
 using Waldhari.Common.UI;
 
-namespace Waldhari.Common.Mission
+namespace Waldhari.Behavior.Mission
 {
-    public abstract class AbstractMission
+    [ScriptAttributes(NoDefaultInstance = true)]
+    public abstract class AbstractMissionScript : Script
     {
-        // Static objects are to set as parameters : mandatory !
+        private int _nextExecution = Game.GameTime;
+        
+        // Parameters MenuPool, WantedChance, RivalChance and RivalMembers are mandatory
         
         /// <summary>
         /// Pool for managing menus.
         /// </summary>
-        public static ObjectPool MenuPool;
+        public ObjectPool MenuPool;
         
         /// <summary>
         /// Chance of triggering a "wanted" random event.
@@ -54,52 +58,45 @@ namespace Waldhari.Common.Mission
         /// <summary>
         /// List of steps defining the mission flow.
         /// </summary>
-        private readonly List<Step> _steps;
-
-        /// <summary>
-        /// Indicates whether the mission is currently active.
-        /// </summary>
-        public bool IsActive;
+        private readonly List<Step> _steps = new List<Step>();
 
         /// <summary>
         /// Index of the current active step.
         /// </summary>
         private int _currentStep;
-
+        
+        /// <summary>
+        /// Indicates whether the mission is currently active.
+        /// </summary>
+        public bool IsActive;
+        
         /// <summary>
         /// Index of the "wanted" step, if applicable. -1 means it is not defined.
         /// </summary>
         private int _wantedStepIndex = -1;
-
-        /// <summary>
-        /// Checks if a "wanted" step is defined.
-        /// </summary>
         private bool HasWantedStep() => _wantedStepIndex > -1;
-
+        
         /// <summary>
         /// Index of the "rival" step, if applicable. -1 means it is not defined.
         /// </summary>
-
         private int _rivalStepIndex = -1;
-
-        /// <summary>
-        /// Checks if a "rival gang" step is defined.
-        /// </summary>
         private bool HasRivalStep() => _rivalStepIndex > -1;
-
-        // /// <summary>
-        // /// Group representing the rival gang.
-        // /// </summary>
-        // private WGroup _rivalWGroup;
-
-        private EnemyGroupScript _enemyGroupScript;
-
+        
+        /// <summary>
+        /// Permit to manage rival behavior.
+        /// </summary>
+        private EnemyGroupScript _rivalScript;
+        
         /// <summary>
         /// Ensures random events (e.g., rival gang or police chase) are triggered only once during a mission.
         /// </summary>
-
         private bool _randomEventAlreadyLaunchedOnce;
 
+        /// <summary>
+        /// Determines the time when next random event trigger is tried.
+        /// </summary>
+        private int _nextRandomEventTry = Game.GameTime + 60 * 1000;
+        
         /// <summary>
         /// Determines the index of the first "real" step, excluding optional random events like wanted or rival steps.
         /// </summary>
@@ -122,21 +119,23 @@ namespace Waldhari.Common.Mission
         /// <param name="name">Name of the mission (used for logs).</param>
         /// <param name="finishWithAnimation">True if the mission ends with an animation.</param>
         /// <param name="successMessageKey">Key for the success message.</param>
-        protected AbstractMission(string name, bool finishWithAnimation, string successMessageKey)
+        protected AbstractMissionScript(string name, bool finishWithAnimation, string successMessageKey)
         {
+            Logger.Debug($"Instantiate mission {name}");
+            
             _name = name;
             _finishWithAnimation = finishWithAnimation;
             _successMessageKey = successMessageKey;
-
-            _steps = new List<Step>();
+            
+            Tick += OnTick;
         }
-
+        
         /// <summary>
         /// Uses to start a mission, made to be attached to a menu
         /// so it is launched when player select it.
         /// Do not override this method and use StartComplement to add
         /// start conditions and/or processes before mission is launched.
-        /// At the end of Start method, the first step (after Wanted step, if applicable)
+        /// At the end of Start method, the first step (after Wanted/Rival step, if applicable)
         /// is automatically launched.
         /// </summary>
         /// <param name="arg">Arg from menu</param>
@@ -149,10 +148,10 @@ namespace Waldhari.Common.Mission
                 if (IsActive || Game.IsMissionActive || Game.IsRandomEventActive)
                 {
                     NotificationHelper.ShowFailure("already_in_mission");
-                    return;
+                    Abort();
                 }
 
-                if (!StartComplement(arg)) return;
+                if (!StartComplement(arg)) Abort();;
 
                 CreateScene();
 
@@ -163,16 +162,14 @@ namespace Waldhari.Common.Mission
 
                 SetStep(GetFirstStep());
             }
-            catch (MissionException e)
-            {
-                ManageMissionException(e);
-            }
             catch (TechnicalException e)
             {
-                ManageTechnicalException(e);
+                Logger.Error($"TechnicalException for {_name} : {e.Message}");
+                NotificationHelper.ShowFailure(e.Message);
+                Abort();
             }
         }
-
+        
         /// <summary>
         /// Uses as a complement of starting method.
         /// This is where to add start conditions
@@ -183,20 +180,24 @@ namespace Waldhari.Common.Mission
         protected abstract bool StartComplement(string arg);
 
         /// <summary>
-        /// Every Tick, this method has to be launched.
         /// If mission isn't launched : do nothing.
         /// Do not override this method and
-        /// use UpdateComplement to add fail conditions.
+        /// use OnTickComplement to add fail conditions.
         /// Fail conditions must throw MissionException.
         /// </summary>
-        /// <exception cref="MissionException">Mission exception to fail the mission.</exception>
-        public void Update()
+        private void OnTick(object sender, EventArgs e)
         {
+            // Wait for mission to be activated
             if (!IsActive) return;
-
+            
+            // To lower material usage :
+            // runs this script every 1/2 second only
+            if (_nextExecution > Game.GameTime) return;
+            _nextExecution = Game.GameTime + 500;
+            
             try
             {
-                UpdateComplement();
+                TickComplement();
 
                 if (Game.Player.IsDead) throw new MissionException("player_dead");
 
@@ -241,28 +242,33 @@ namespace Waldhari.Common.Mission
                         SetStep(nextIndex);
                         break;
                     case Step.ExecutionResult.Continue:
-                        // Nothing to do
+                        if (!_randomEventAlreadyLaunchedOnce && _nextRandomEventTry < Game.GameTime)
+                        {
+                            _nextRandomEventTry = Game.GameTime + 60*1000;
+                            TryLaunchRandomEvent();
+                        }
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
-            catch (MissionException e)
+            catch (MissionException exception)
             {
-                ManageMissionException(e);
+                ManageMissionException(exception);
             }
-            catch (TechnicalException e)
+            catch (TechnicalException exception)
             {
-                ManageTechnicalException(e);
+                ManageTechnicalException(exception);
             }
+            
         }
-
+        
         /// <summary>
-        /// Uses as a complement of updating method.
+        /// Uses as a complement of OnTick method.
         /// This is where to add fail conditions
-        /// during update.
+        /// during tick script of the mission.
         /// </summary>
-        protected abstract void UpdateComplement();
+        protected abstract void TickComplement();
 
         /// <summary>
         /// Ends the mission successfully and cleans up properties.
@@ -285,6 +291,8 @@ namespace Waldhari.Common.Mission
             {
                 NotificationHelper.ShowSuccess(_successMessageKey, values);
             }
+            
+            Abort();
         }
 
         /// <summary>
@@ -303,7 +311,7 @@ namespace Waldhari.Common.Mission
 
             if (IsFightingRival())
             {
-                _enemyGroupScript.Remove();
+                _rivalScript.Remove();
             }
             
             ClearProperties();
@@ -318,6 +326,8 @@ namespace Waldhari.Common.Mission
             {
                 NotificationHelper.ShowFailure(messageKey);
             }
+            
+            Abort();
         }
 
         /// <summary>
@@ -335,8 +345,8 @@ namespace Waldhari.Common.Mission
             _steps.Clear();
             IsActive = false;
             _randomEventAlreadyLaunchedOnce = false;
-            _enemyGroupScript.MarkAsNoLongerNeeded();
-            _enemyGroupScript = null;
+            _rivalScript.MarkAsNoLongerNeeded();
+            _rivalScript.Abort();
             _wantedStepIndex = -1;
         }
 
@@ -417,7 +427,7 @@ namespace Waldhari.Common.Mission
                 // Previous step is always itself by default until it's define manually
                 PreviousIndex = 0,
                 // Can return to previous step if kill all rival gang members
-                AccessCondition = () => !_enemyGroupScript.WGroup.AreDead(),
+                AccessCondition = () => !IsFightingRival(),
                 // Can't go to a next step
                 CompletionCondition = () => false
             };
@@ -477,9 +487,6 @@ namespace Waldhari.Common.Mission
             Logger.Info($"{_name} step is set to {step} '{_steps[step].Name}'.");
             _currentStep = step;
             _steps[_currentStep].ShowMessage();
-
-            //todo: try random events with timer in update method, not when step is changing!
-            TryLaunchRandomEvent();
         }
 
         /// <summary>
@@ -525,7 +532,7 @@ namespace Waldhari.Common.Mission
                 Logger.Info($"Trying WantedStep chance={RivalChance}");
                 if (RandomHelper.Try(RivalChance))
                 {
-                    _enemyGroupScript =
+                    _rivalScript =
                         new EnemyGroupScript(WGroupHelper.CreateRivalMembers(RivalMembers));
                     // no other random event will be processed during this mission
                     _randomEventAlreadyLaunchedOnce = true;
@@ -548,7 +555,7 @@ namespace Waldhari.Common.Mission
         /// <returns>The rival group exists and has at least one member still alive</returns>
         private bool IsFightingRival()
         {
-            return _enemyGroupScript != null && !_enemyGroupScript.WGroup.AreDead();
+            return _rivalScript != null && !_rivalScript.WGroup.AreDead();
         }
 
         /// <summary>
@@ -564,7 +571,7 @@ namespace Waldhari.Common.Mission
         /// Hides the menu if it exists, otherwise throws an exception.
         /// </summary>
         /// <exception cref="TechnicalException">The menu is not defined</exception>
-        private static void HideMenu()
+        private void HideMenu()
         {
             if (MenuPool == null)
             {
@@ -596,5 +603,9 @@ namespace Waldhari.Common.Mission
             Logger.Error($"TechnicalException for {_name} : {e.Message}");
             Fail(e.Message);
         }
+        
+        
+        
+        
     }
 }

@@ -11,6 +11,8 @@ namespace Waldhari.Behavior.Ped
     [ScriptAttributes(NoDefaultInstance = true)]
     public class EnemyGroupScript : Script
     {
+        private int _nextExecution = Game.GameTime;
+        
         // Parameters should be defined when game is launched
         public static int AppearanceDistance = -1;
         public static int DisappearanceDistance = -1;
@@ -19,8 +21,6 @@ namespace Waldhari.Behavior.Ped
         /// Group has to be defined on contructor.
         /// </summary>
         public readonly WGroup WGroup;
-
-        private int _nextExecution;
 
         /// <summary>
         /// Create a script that will be executed until disinstantiation.
@@ -43,8 +43,6 @@ namespace Waldhari.Behavior.Ped
             CreatePeds();
 
             Tick += OnTick;
-
-            _nextExecution = Game.GameTime;
         }
 
         /// <summary>

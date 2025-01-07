@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GTA;
 using GTA.Math;
+using Waldhari.Behavior.Mission;
 using Waldhari.Behavior.Ped;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Entities.Helpers;
@@ -11,7 +12,7 @@ using Waldhari.Common.UI;
 
 namespace Waldhari.MethLab.Missions
 {
-    public class BulkMission : AbstractMission
+    public class BulkMission : AbstractMissionScript
     {
         // Scene
         private WBlip _deliveryWBlip;
@@ -45,7 +46,7 @@ namespace Waldhari.MethLab.Missions
             return true;
         }
 
-        protected override void UpdateComplement()
+        protected override void TickComplement()
         {
             if (_wholesalerScript.WPed == null || _wholesalerScript.WPed.Ped.IsDead) throw new MissionException("methlab_bulk_fail_wholesaler_dead");
 
