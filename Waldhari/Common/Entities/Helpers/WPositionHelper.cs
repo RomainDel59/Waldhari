@@ -45,14 +45,14 @@ namespace Waldhari.Common.Entities.Helpers
             return position1.DistanceTo(position2) <= distance;
         }
 
-        private static List<WPosition> MissionWithVehiclePossiblePositions = new List<WPosition>();
+        private static List<WPosition> MissionWithVehiclePossiblePositions = new List<WPosition>
         {
             // Near Procopio Beach
-                new WPosition
-                {
-                    Position = new Vector3(1448.546f, 6548.113f, 15.21889f),
-                    Rotation = new Vector3(0, 0, 142.5344f)
-                }
-        });
+            new WPosition
+            {
+                Position = new Vector3(1448.546f, 6548.113f, 15.21889f),
+                Rotation = new Vector3(0, 0, 142.5344f)
+            }
+        };
     }
 }
