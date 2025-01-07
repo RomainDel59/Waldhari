@@ -12,7 +12,7 @@ using Waldhari.Common.UI;
 namespace Waldhari.MethLab.Missions
 {
     [ScriptAttributes(NoDefaultInstance = true)]
-    public class DealMission : AbstractMissionScript
+    public class DealMissionScript : AbstractMissionScript
     {
         // Scene
         private PedActingScript _clientScript;
@@ -20,7 +20,7 @@ namespace Waldhari.MethLab.Missions
         private int _amountToDeal;
         private int _priceToDeal;
 
-        public DealMission() : base("MethLabDealMission", true, "methlab_deal_success")
+        public DealMissionScript() : base("MethLabDealMission", true, "methlab_deal_success")
         {
         }
 
@@ -32,7 +32,7 @@ namespace Waldhari.MethLab.Missions
                 return false;
             }
 
-            if (WPositionHelper.IsNear(Game.Player.Character.Position,ManufactureMission.AnimationPosition,5))
+            if (WPositionHelper.IsNear(Game.Player.Character.Position,ManufactureMissionScript.AnimationPosition,5))
             {
                 NotificationHelper.ShowFailure("methlab_deal_not_close_enough");
                 return false;

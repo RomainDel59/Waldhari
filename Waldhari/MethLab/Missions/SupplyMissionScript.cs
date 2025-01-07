@@ -11,7 +11,7 @@ using Waldhari.Common.UI;
 namespace Waldhari.MethLab.Missions
 {
         [ScriptAttributes(NoDefaultInstance = true)]
-    public class SupplyMission : AbstractMissionScript
+    public class SupplyMissionScript : AbstractMissionScript
     {
         // Scene
         private WBlip _deliveryWBlip;
@@ -21,7 +21,7 @@ namespace Waldhari.MethLab.Missions
         private int _amountToSupply;
         private int _costToSupply;
 
-        public SupplyMission() : base("SupplyMission", true, "supply_success")
+        public SupplyMissionScript() : base("SupplyMission", true, "supply_success")
         {
         }
 

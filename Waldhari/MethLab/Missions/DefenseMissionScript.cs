@@ -5,12 +5,12 @@ using GTA;
 namespace Waldhari.MethLab.Missions
 {
     [ScriptAttributes(NoDefaultInstance = true)]
-    public class DefenseMission : AbstractMissionScript
+    public class DefenseMissionScript : AbstractMissionScript
     {
         private DateTime _nextAttackTry;
         private GroupHelper.Group _attackingGroup;
         
-        public DefenseMission() : base("DefenseMission", true, "defense_success")
+        public DefenseMissionScript() : base("DefenseMission", true, "defense_success")
         {
             AddCooldown();
         }
@@ -37,7 +37,7 @@ namespace Waldhari.MethLab.Missions
             }
             
             // Is too far
-            if (!(Game.Player.Character.Position.DistanceTo(ManufactureMission.AnimationPosition) < 50))
+            if (!(Game.Player.Character.Position.DistanceTo(ManufactureMissionScript.AnimationPosition) < 50))
             {
                 AddCooldown();
                 return;

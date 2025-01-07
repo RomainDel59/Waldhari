@@ -12,7 +12,7 @@ using Waldhari.Common.UI;
 namespace Waldhari.MethLab.Missions
 {
     [ScriptAttributes(NoDefaultInstance = true)]
-    public class BulkMission : AbstractMissionScript
+    public class BulkMissionScript : AbstractMissionScript
     {
         // Scene
         private WBlip _deliveryWBlip;
@@ -22,7 +22,7 @@ namespace Waldhari.MethLab.Missions
         private int _amountToDeal;
         private int _priceToDeal;
 
-        public BulkMission() : base("MethLabBulkMission", true, "methlab_bulk_success")
+        public BulkMissionScript() : base("MethLabBulkMission", true, "methlab_bulk_success")
         {
         }
 

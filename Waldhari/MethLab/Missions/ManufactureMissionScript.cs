@@ -15,7 +15,7 @@ using Waldhari.MethLab.Helpers;
 namespace Waldhari.MethLab.Missions
 {
     [ScriptAttributes(NoDefaultInstance = true)]
-    public class ManufactureMission : AbstractMissionScript
+    public class ManufactureMissionScript : AbstractMissionScript
     {
         private const int SecondsToReachDestination = 20;
 
@@ -29,7 +29,7 @@ namespace Waldhari.MethLab.Missions
         private Camera _playerCamera;
         private PedActingScript _chemistScript;
 
-        public ManufactureMission() : base("ManufactureMission", false,
+        public ManufactureMissionScript() : base("ManufactureMission", false,
             null)
         {
         }
