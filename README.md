@@ -14,6 +14,9 @@ Added from NuGet :
 - ScriptHookVDotNet 3.6.0 (https://github.com/scripthookvdotnet/scripthookvdotnet)
 - LemonUI 2.1.2 (https://github.com/LemonUIbyLemon/LemonUI)
 
+Manually added :
+- iFruitAddon2 3.0.0 (https://github.com/Bob74/iFruitAddon2)
+
 # External resources
 Useful external resources :
 - https://gta.fandom.com/wiki/

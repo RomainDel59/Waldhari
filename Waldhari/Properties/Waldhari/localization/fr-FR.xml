@@ -107,7 +107,7 @@
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_intro</Key>
-            <Value>Salut patron !~n~Je sens qu'on va se faire un max d'oseille avec ce labo. Je m'occupe du secrétariat, je te laisse gérer les affaires sur le terrain.</Value>
+            <Value>Salut patron !~n~Je sens qu'on va se faire un max d'oseille avec ce labo. Appelle-moi quand tu voudras commencer.</Value>
         </LocaleKey>
 
         
@@ -123,6 +123,53 @@
         <LocaleKey>
             <Key>methlab_defense_defending</Key>
             <Value>Défends le labo contre les ~r~membres du gang rival~s~ !</Value>
+        </LocaleKey>
+        
+        
+        <!-- Supply mission -->
+        <LocaleKey>
+            <Key>methlab_supply_supplier</Key>
+            <Value>Fournisseur</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_destination</Key>
+            <Value>Parking du labo</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_not_enough_money</Key>
+            <Value>Il faut plus d'~r~argent~s~ pour un réapprovisionnement.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_started</Key>
+            <Value>Salut patron ! J'ai commandé ~g~{0} kg~s~ de matières premières, va les chercher aux coordonnées que je t'ai envoyées.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_rendezvous</Key>
+            <Value>Rends-toi au rendez-vous avec le ~y~fournisseur~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_payment</Key>
+            <Value>Paye le ~y~fournisseur~s~ pour les matières premières.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_drive_lab</Key>
+            <Value>Conduis le ~y~fourgon~s~ au labo.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_out</Key>
+            <Value>Sors du ~y~fourgon~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_fail_supplier_dead</Key>
+            <Value>Le ~r~fournisseur~s~ a été tué.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_fail_vehicle_destroyed</Key>
+            <Value>Le fourgon a été ~r~détruit~s~ avec tout ce qu'il contenait.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_success</Key>
+            <Value>~g~{0} kg~s~ de matières premières ont été ajoutés au stock.</Value>
         </LocaleKey>
         
         

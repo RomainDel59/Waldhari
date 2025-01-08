@@ -5,8 +5,6 @@ namespace Waldhari.MethLab
     public class MethLabOptions : File<MethLabOptions>
     {
         public static MethLabOptions Instance;
-        public int ManufactureMinGramsPerSupply { get; set; }
-        public int ManufactureMaxGramsPerSupply { get; set; }
 
         protected override void SetInstance(MethLabOptions instance) => Instance = instance;
         
@@ -15,16 +13,24 @@ namespace Waldhari.MethLab
         // Price to buy meth lab
         public int Price;
         
-        // Minimum and maximum supply use per manufacture action
+        // Minimum and maximum supply used per manufacture action
         public int ManufactureMin;
         public int ManufactureMax;
+        
+        // Minimum and maximum meth gram cooked by supply
+        public int ManufactureMinGramsPerSupply;
+        public int ManufactureMaxGramsPerSupply;
         
         // In minutes
         public int DefenseCooldown;
         
+        // Minimum and maximum amount of supply to get when supplying
+        public int SupplyMin;
+        public int SupplyMax;
+        
         // Price for one supply
-        //todo: change supply method
-        public int SupplyCost;
+        public int SupplyMinCost;
+        public int SupplyMaxCost;
         
         // Minimum and maximum grams to sell when dealing
         public int DealMinGramsPerPack;
@@ -48,10 +54,14 @@ namespace Waldhari.MethLab
             
             DefenseCooldown = 15;
 
-            SupplyCost = 30;
+            SupplyMinCost = 20;
+            SupplyMaxCost = 40;
             
             ManufactureMin = 50;
             ManufactureMax = 100;
+
+            ManufactureMinGramsPerSupply = 1;
+            ManufactureMaxGramsPerSupply = 5;
 
             DealMinGramsPerPack = 10;
             DealMaxGramsPerPack = 500;
