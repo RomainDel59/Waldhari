@@ -22,7 +22,7 @@ namespace Waldhari.MethLab.Missions
         {
             if (MethLabSave.Instance.Supply == 0)
             {
-                NotificationHelper.ShowFailure("manufacture_no_supply");
+                NotificationHelper.ShowFailure("methlab_manufacture_no_supply");
                 return false;
             }
 
@@ -49,7 +49,7 @@ namespace Waldhari.MethLab.Missions
             MethLabSave.Instance.Save();
 
             var values = new List<string> { product.ToString() };
-            NotificationHelper.ShowFromRon("manufacture_finished", values);
+            NotificationHelper.ShowFromRon("methlab_manufacture_finished", values);
 
             return null;
         }
@@ -96,7 +96,7 @@ namespace Waldhari.MethLab.Missions
                 CompletionCondition = () => true,
                 CompletionAction = () =>
                 {
-                    NotificationHelper.ShowFromRon("manufacture_started");
+                    NotificationHelper.ShowFromRon("methlab_manufacture_started");
                     _waitUntil = Game.GameTime + RandomHelper.Next(1,5) * 60 * 1000;
                 }
             };
