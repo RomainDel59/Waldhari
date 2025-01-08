@@ -19,7 +19,7 @@ namespace Waldhari.MethLab
         public int ManufactureMin;
         public int ManufactureMax;
         
-        // In game minutes
+        // In minutes
         public int DefenseCooldown;
         
         // Price for one supply
@@ -46,10 +46,9 @@ namespace Waldhari.MethLab
         {
             Price = 1000000;
             
-            DefenseCooldown = 60;
+            DefenseCooldown = 15;
 
             SupplyCost = 30;
-            
             
             ManufactureMin = 50;
             ManufactureMax = 100;
