@@ -41,11 +41,13 @@ namespace Waldhari.MethLab.Missions
             return true;
         }
 
-        protected override void OnTickComplement()
+        protected override bool OnTickComplement()
         {
             if (_sellerScript == null || _sellerScript.WPed.Ped.IsDead) throw new MissionException("supply_fail_supplier_dead");
 
             if (_van == null || _van.Vehicle.IsConsideredDestroyed) throw new MissionException("supply_fail_vehicle_destroyed");
+
+            return true;
         }
 
         protected override List<string> EndComplement()

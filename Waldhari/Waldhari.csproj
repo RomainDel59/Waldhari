@@ -34,6 +34,9 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="iFruitAddon2">
+          <HintPath>..\packages\iFruitAddon2.3.0.0\iFruitAddon2.dll</HintPath>
+        </Reference>
         <Reference Include="LemonUI.SHVDN3, Version=2.1.2.0, Culture=neutral, processorArchitecture=Amd64">
           <HintPath>..\packages\LemonUI.SHVDN3.2.1.2\lib\net48\LemonUI.SHVDN3.dll</HintPath>
         </Reference>

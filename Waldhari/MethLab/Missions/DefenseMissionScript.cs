@@ -44,7 +44,7 @@ namespace Waldhari.MethLab.Missions
             }
 
             // Is too far
-            if (!WPositionHelper.IsNear(Game.Player.Character.Position, ManufactureMissionScript.AnimationPosition, 50))
+            if (!WPositionHelper.IsNear(Game.Player.Character.Position, MethLabHelper.LaboratoryPosition.Position, 50))
             {
                 AddCooldown();
                 return;
@@ -71,10 +71,12 @@ namespace Waldhari.MethLab.Missions
             return true;
         }
 
-        protected override void OnTickComplement()
+        protected override bool OnTickComplement()
         {
             // Override dead condition in OnTick to show special message
             if (Game.Player.IsDead) throw new MissionException("methlab_defense_fail_dead");
+
+            return true;
         }
 
         protected override List<string> EndComplement()

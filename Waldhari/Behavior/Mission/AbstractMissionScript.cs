@@ -208,7 +208,7 @@ namespace Waldhari.Behavior.Mission
             
             try
             {
-                OnTickComplement();
+                if (!OnTickComplement()) return;
 
                 if (Game.Player.IsDead)
                 {
@@ -284,7 +284,8 @@ namespace Waldhari.Behavior.Mission
         /// This is where to add fail conditions
         /// during tick script of the mission.
         /// </summary>
-        protected abstract void OnTickComplement();
+        /// <returns>False if OnTick event has to be abandoned</returns>
+        protected abstract bool OnTickComplement();
 
         /// <summary>
         /// Ends the mission successfully and cleans up properties.

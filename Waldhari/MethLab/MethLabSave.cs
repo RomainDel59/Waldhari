@@ -15,12 +15,6 @@ namespace Waldhari.MethLab
         public int Supply;
         public int Product;
         
-        public bool Material;
-        public bool Chemist;
-        
-        //Options
-        
-        
         #endregion
         
         protected override void SetDefaults()

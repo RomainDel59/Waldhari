@@ -46,11 +46,13 @@ namespace Waldhari.MethLab.Missions
             return true;
         }
 
-        protected override void OnTickComplement()
+        protected override bool OnTickComplement()
         {
             if (_wholesalerScript.WPed == null || _wholesalerScript.WPed.Ped.IsDead) throw new MissionException("methlab_bulk_fail_wholesaler_dead");
 
             if (_van == null || _van.Vehicle == null || _van.Vehicle.IsConsideredDestroyed) throw new MissionException("methlab_bulk_fail_vehicle_destroyed");
+
+            return true;
         }
 
         protected override List<string> EndComplement()

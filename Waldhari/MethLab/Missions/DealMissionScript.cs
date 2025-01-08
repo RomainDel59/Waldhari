@@ -32,7 +32,7 @@ namespace Waldhari.MethLab.Missions
                 return false;
             }
 
-            if (WPositionHelper.IsNear(Game.Player.Character.Position,ManufactureMissionScript.AnimationPosition,5))
+            if (WPositionHelper.IsNear(Game.Player.Character.Position,MethLabHelper.LaboratoryPosition.Position,5))
             {
                 NotificationHelper.ShowFailure("methlab_deal_not_close_enough");
                 return false;
@@ -51,9 +51,11 @@ namespace Waldhari.MethLab.Missions
             return true;
         }
 
-        protected override void OnTickComplement()
+        protected override bool OnTickComplement()
         {
             if (_clientScript == null || _clientScript.WPed == null || _clientScript.WPed.Ped.IsDead) throw new MissionException("methlab_deal_fail_client_dead");
+
+            return true;
         }
 
         protected override List<string> EndComplement()

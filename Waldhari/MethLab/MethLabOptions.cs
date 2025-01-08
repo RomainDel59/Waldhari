@@ -15,10 +15,15 @@ namespace Waldhari.MethLab
         // Price to buy meth lab
         public int Price;
         
+        // Minimum and maximum supply use per manufacture action
+        public int ManufactureMin;
+        public int ManufactureMax;
+        
         // In game minutes
         public int DefenseCooldown;
         
         // Price for one supply
+        //todo: change supply method
         public int SupplyCost;
         
         // Minimum and maximum grams to sell when dealing
@@ -44,6 +49,10 @@ namespace Waldhari.MethLab
             DefenseCooldown = 60;
 
             SupplyCost = 30;
+            
+            
+            ManufactureMin = 50;
+            ManufactureMax = 100;
 
             DealMinGramsPerPack = 10;
             DealMaxGramsPerPack = 500;
