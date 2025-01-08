@@ -18,8 +18,8 @@ namespace Waldhari.MethLab
             //todo: add rotation and heading
         };
         
+        // no need at the moment
         public static PedHash Chemist = (PedHash)3988008767;
-        
         public static void ShowFromChemist(string messageKey, List<string> messageValues = null)
         {
             NotificationHelper.ShowFromDefault(messageKey, "chemist_sender", messageValues);
@@ -27,7 +27,7 @@ namespace Waldhari.MethLab
         
         public static Vector3 LabParking = new Vector3(1381.139f, 3597.028f, 34.87445f);
 
-        //todo: make MethLabPositions returns WPosition
+        //todo: make GetRandomPosition returns WPosition
         private static readonly List<Vector3> Positions = new List<Vector3>
         {
             new Vector3(-10.379f, 6479.785f, 31.450f),
@@ -80,7 +80,7 @@ namespace Waldhari.MethLab
 
         public static Vector3 GetRandomPosition()
         {
-            //todo: make MethLabPositions returns WPosition
+            //todo: make GetRandomPosition returns WPosition
             return Positions[RandomHelper.Next(0, Positions.Count)];
         }
     }

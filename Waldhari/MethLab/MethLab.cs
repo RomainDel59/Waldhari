@@ -1,5 +1,6 @@
 ﻿using System;
 using GTA;
+using iFruitAddon2;
 using Waldhari.Behavior.Mission;
 using Waldhari.Behavior.Property;
 using Waldhari.Common;
@@ -18,6 +19,7 @@ namespace Waldhari.MethLab
         private BuyablePropertyScript _scriptToBuy;
         private bool _isWaitingForBuyer;
         
+        private readonly CustomiFruit _iFruit;
         
         
         
@@ -37,11 +39,30 @@ namespace Waldhari.MethLab
             
             Property.ShowBlip();
             
+            _iFruit = new CustomiFruit();
+            var contactName = Localization.GetTextByKey("ron_sender") + " (" + Localization.GetTextByKey("methlab") + ")";
+            var contact = new iFruitContact(contactName)
+            {
+                DialTimeout = 2000,            // Delay before answering
+                Active = true,                 // true = the contact is available and will answer the phone
+                Icon = ContactIcon.Ron       // Contact's icon
+            };
+            contact.Answered += ShowMenu;   // Linking the Answered event with our function
+            _iFruit.Contacts.Add(contact);         // Add the contact to the phone
+            
             Tick += OnTick;
+        }
+
+        private void ShowMenu(iFruitContact contact)
+        {
+            //todo: show menu
+            _iFruit.Close(1000);
         }
 
         private void OnTick(object sender, EventArgs e)
         {
+            _iFruit.Update();
+            
             // if not bought and not waiting for buyer, make it wait for a buyer
             if (!Property.IsOwned() && !_isWaitingForBuyer)
             {
