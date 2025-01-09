@@ -22,6 +22,11 @@ namespace Waldhari.Common.Entities.Helpers
                     PedHash = PedHash.Lost01GMY,
                     WBlip = WBlipHelper.GetEnemy("rival_enemy")
                 };
+                
+                //todo: add ped to list,
+                // then, in script,
+                // when ped is created,
+                // add it to the group
                 group.AddWPed(wPed, i == 0);
                 
                 Logger.Info("Rival member created "+i);
