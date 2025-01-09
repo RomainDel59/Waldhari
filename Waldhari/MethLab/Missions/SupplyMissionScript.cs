@@ -128,7 +128,7 @@ namespace Waldhari.MethLab.Missions
                     {
                         //todo: make a step to go inside vehicle
                         _deliveryWBlip.Remove();
-                        _van.MakeMissionDestination("van_vehicle");
+                        _van.MakeMissionDestination("vehicle_van");
                     }
                     // if player is in vehicle : show destination as mission objective
                     else
@@ -205,6 +205,14 @@ namespace Waldhari.MethLab.Missions
             {
                 _van.WBlip?.Remove();
                 _van.Vehicle?.MarkAsNoLongerNeeded();
+                if(_van.Vehicle != null)
+                {
+                    if (Game.Player.Character.IsInVehicle(_van.Vehicle))
+                    {
+                        Game.Player.Character.Task.LeaveVehicle();
+                    }
+                    _van.Vehicle.IsConsideredDestroyed = true;
+                }
             }
 
             _deliveryWBlip?.Remove();

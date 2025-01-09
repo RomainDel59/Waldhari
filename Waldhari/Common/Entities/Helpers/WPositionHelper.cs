@@ -40,7 +40,7 @@ namespace Waldhari.Common.Entities.Helpers
             return wPosition;
         }
         
-        public static bool IsNear(Vector3 position1, Vector3 position2, int distance)
+        public static bool IsNear(Vector3 position1, Vector3 position2, float distance)
         {
             return position1.DistanceTo(position2) <= distance;
         }

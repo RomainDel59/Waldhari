@@ -54,6 +54,9 @@ namespace Waldhari.MethLab
             
             DefenseCooldown = 15;
 
+            SupplyMin = 100;
+            SupplyMax = 1000;
+            
             SupplyMinCost = 20;
             SupplyMaxCost = 40;
             

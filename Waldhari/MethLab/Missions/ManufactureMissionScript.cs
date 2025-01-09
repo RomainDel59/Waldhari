@@ -97,6 +97,7 @@ namespace Waldhari.MethLab.Missions
                 CompletionAction = () =>
                 {
                     NotificationHelper.ShowFromRon("methlab_manufacture_started");
+                    // between 1 and 5 minutes (60 secondes)
                     _waitUntil = Game.GameTime + RandomHelper.Next(1,5) * 60 * 1000;
                 }
             };

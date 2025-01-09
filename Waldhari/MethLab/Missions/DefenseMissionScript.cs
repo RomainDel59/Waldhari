@@ -23,7 +23,7 @@ namespace Waldhari.MethLab.Missions
         private void AddCooldown()
         {
             // DefenseCooldown => in game minutes
-            _nextAttackTry = Game.GameTime + MethLabOptions.Instance.DefenseCooldown * 60 * 1000;
+            _nextAttackTry = Game.GameTime + MethLabOptions.Instance.DefenseCooldown * 1000;
         }
 
         //todo: move this to methlab main script

@@ -184,6 +184,7 @@ namespace Waldhari.MethLab
             _contact.Answered += contact =>
             {
                 PhoneHelper.GetIFruit().Close(1000);
+                Script.Wait(1000);
                 GetMenu().Visible = true;
             };
             

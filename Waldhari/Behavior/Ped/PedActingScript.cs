@@ -48,7 +48,7 @@ namespace Waldhari.Behavior.Ped
             if(WPed == null) return;
             
             if (!HasAnimationToDo() && !HasScenarioToDo()) 
-                throw new TechnicalException("Ped should have at least scenario or animation to play");
+                throw new TechnicalException("Ped should have a scenario or an animation to play");
             
             // To lower material usage :
             // runs this script every 2 seconds only
@@ -59,7 +59,7 @@ namespace Waldhari.Behavior.Ped
             if (IsInCombat()) return;
             
             // If ped is away from initial position, let it goes back to position
-            if (WPositionHelper.IsNear(WPed.Ped.Position,WPed.InitialPosition.Position,0))
+            if (!WPositionHelper.IsNear(WPed.Ped.Position,WPed.InitialPosition.Position,0.5f))
             {
                 
                 // If ped is already going back, wait it to proceed
@@ -84,6 +84,7 @@ namespace Waldhari.Behavior.Ped
                 if (HasAnimationToDo()) return;
 
                 // Scenario is playing
+                //todo: correct this that doesn't work
                 if (IsPlayingScenario()) return;
 
                 // Replay scenario

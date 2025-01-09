@@ -88,7 +88,7 @@ namespace Waldhari.MethLab.Missions
                     () =>
                     {
                         _deliveryWBlip.Remove();
-                        _van.MakeMissionDestination("van_vehicle");
+                        _van.MakeMissionDestination("vehicle_van");
                     },
                 CompletionCondition =
                     () => Game.Player.Character.IsInVehicle(_van.Vehicle)
