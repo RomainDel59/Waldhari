@@ -25,8 +25,8 @@ namespace Waldhari.Common.Entities.Helpers
                 
                 //todo: add ped to list,
                 // then, in script,
-                // when ped is created,
-                // add it to the group
+                // when ped are created,
+                // add there to the group
                 group.AddWPed(wPed, i == 0);
                 
                 Logger.Info("Rival member created "+i);
