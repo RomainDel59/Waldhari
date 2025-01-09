@@ -1,6 +1,7 @@
 ﻿using GTA;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
+using Waldhari.Common.Files;
 using Waldhari.Common.UI;
 
 namespace Waldhari.Common.Entities
@@ -32,11 +33,29 @@ namespace Waldhari.Common.Entities
         {
             if(InitialPosition == null) throw new TechnicalException("InitialPosition cannot be empty");
             if(PedHash == default) throw new TechnicalException("PedHash cannot be empty");
-
+            
+            //InitialPosition.Position = Game.Player.Character.Position + new Vector3(50,50,0);
+            
+            Logger.Debug($"GTAPedHash: {PedHash}");
+            Logger.Debug($"InitialPosition.Position: X={InitialPosition.Position.X}, Y={InitialPosition.Position.Y}, Z={InitialPosition.Position.Z}");
+            
             Model model = PedHash;
-            model.Request(1000);
-            Ped = World.CreatePed(model, InitialPosition.Position);
+            Logger.Debug($"model: {model}");
+
+            if (!model.Request(2000))
+            {
+                // model = PedHash.OldMan2;
+                // Logger.Debug($"model: {model}");
+                if(!model.Request(2000)) throw new TechnicalException("Request PedHash failed");
+            }
+
+            Logger.Debug($"World.PedCount '{World.PedCount}' >= World.PedCapacity '{World.PedCapacity}' ('{World.PedCount >= World.PedCapacity}') || !model.IsPed '{!model.IsPed}' || !model.Request(1000) '{!model.Request(1000)}'");
+            
+            Ped = World.CreatePed(PedHash, InitialPosition.Position);
+            
             model.MarkAsNoLongerNeeded();
+            
+            Logger.Debug($"Created Ped: {Ped}");
 
             MoveInPosition();
         }

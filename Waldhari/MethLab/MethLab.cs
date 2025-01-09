@@ -1,7 +1,5 @@
 ﻿using System;
 using GTA;
-using iFruitAddon2;
-using Waldhari.Behavior.Mission;
 using Waldhari.Behavior.Property;
 using Waldhari.Common;
 using Waldhari.Common.Files;
@@ -19,7 +17,6 @@ namespace Waldhari.MethLab
         private BuyablePropertyScript _scriptToBuy;
         private bool _isWaitingForBuyer;
         
-        private readonly CustomiFruit _iFruit;
         
         
         
@@ -39,48 +36,18 @@ namespace Waldhari.MethLab
             
             Property.ShowBlip();
             
-            _iFruit = new CustomiFruit();
-            var contactName = Localization.GetTextByKey("ron_sender") + " (" + Localization.GetTextByKey("methlab") + ")";
-            var contact = new iFruitContact(contactName)
-            {
-                DialTimeout = 2000,            // Delay before answering
-                Active = true,                 // true = the contact is available and will answer the phone
-                Icon = ContactIcon.Ron       // Contact's icon
-            };
-            contact.Answered += ShowMenu;   // Linking the Answered event with our function
-            _iFruit.Contacts.Add(contact);         // Add the contact to the phone
-            
             Tick += OnTick;
         }
-
-        private void ShowMenu(iFruitContact contact)
-        {
-            //todo: show menu
-            _iFruit.Close(1000);
-        }
-
+        
         private void OnTick(object sender, EventArgs e)
         {
-            _iFruit.Update();
+            MethLabHelper.ProcessMenu();
+            PhoneHelper.ManageContact(MethLabHelper.GetContact(), Property.Holder);
             
             // if not bought and not waiting for buyer, make it wait for a buyer
             if (!Property.IsOwned() && !_isWaitingForBuyer)
             {
-                Logger.Info("Not bought and not waiting for buyer, making it wait for a buyer");
-
-                var buyableProperty = new BuyableProperty(Property)
-                {
-                    HelpKey = "methlab_help",
-                    BuySuccessKey = "methlab_buy_success",
-                    BuyFailureKey = "methlab_buy_failure"
-                };
-
-                _scriptToBuy = InstantiateScript<BuyablePropertyScript>();
-                _scriptToBuy.ChangeOwner = ChangeOwner;
-                _scriptToBuy.DoAtEnd = ShowIntroMessage;
-                _scriptToBuy.BuyableProperty = buyableProperty;
-                
-                _isWaitingForBuyer = true;
+                MakeWaitForBuyer();
                 return;
             }
 
@@ -97,6 +64,25 @@ namespace Waldhari.MethLab
             
         }
 
+        private void MakeWaitForBuyer()
+        {
+            Logger.Info("Not bought and not waiting for buyer, making it wait for a buyer");
+
+            var buyableProperty = new BuyableProperty(Property)
+            {
+                HelpKey = "methlab_help",
+                BuySuccessKey = "methlab_buy_success",
+                BuyFailureKey = "methlab_buy_failure"
+            };
+
+            _scriptToBuy = InstantiateScript<BuyablePropertyScript>();
+            _scriptToBuy.ChangeOwner = ChangeOwner;
+            _scriptToBuy.DoAtEnd = ShowIntroMessage;
+            _scriptToBuy.BuyableProperty = buyableProperty;
+            
+            _isWaitingForBuyer = true;
+        }
+
         private void ChangeOwner()
         {
             Logger.Info("Changing owner");
@@ -109,13 +95,7 @@ namespace Waldhari.MethLab
         {
             Logger.Info("Showing intro message");
             NotificationHelper.ShowFromRon("methlab_intro");
-        }
-
-        private void DefineMissionOptions(AbstractMissionScript mission)
-        {
-            mission.WantedChance = GlobalOptions.Instance.WantedChance;
-            mission.RivalChance = GlobalOptions.Instance.RivalChance;
-            mission.RivalMembers = GlobalOptions.Instance.RivalMembers;
+            
         }
 
         private void Load()

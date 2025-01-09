@@ -37,13 +37,14 @@ namespace Waldhari.MethLab.Missions
                 return false;
             }
 
-            NotificationHelper.ShowFromRon("methlab_supply_started", new List<string> { arg });
+            NotificationHelper.ShowFromRon("methlab_supply_started", new List<string> { _amountToSupply.ToString() });
 
             return true;
         }
 
         protected override bool OnTickComplement()
         {
+            
             if (_sellerScript == null || _sellerScript.WPed.Ped.IsDead) throw new MissionException("methlab_supply_fail_supplier_dead");
 
             if (_van == null || _van.Vehicle.IsConsideredDestroyed) throw new MissionException("methlab_supply_fail_vehicle_destroyed");
@@ -167,11 +168,10 @@ namespace Waldhari.MethLab.Missions
             var seller = new WPed
             {
                 PedHash = PedHash.CartelGuards01GMM,
-                InitialPosition = new WPosition
-                {
-                    Position = new Vector3(1448.546f, 6548.113f, 15.21889f),
-                    Rotation = new Vector3(0, 0, 142.5344f)
-                    //todo: Add heading
+                InitialPosition = new WPosition{
+                    Position = new Vector3(1450.669f, 6543.706f, 15.30578f),
+                    Rotation = new Vector3(0f, 0f, 127.8216f),
+                    Heading = 127.8216f
                 },
                 Scenario = "WORLD_HUMAN_SMOKING"
             };
@@ -184,13 +184,13 @@ namespace Waldhari.MethLab.Missions
             _van = new WVehicle
             {
                 VehicleHash = VehicleHash.Burrito,
-                InitialPosition = new WPosition
-                {
-                    Position = World.GetNextPositionOnStreet(new Vector3(1444.564f, 6552.647f, 15.07594f), true),
-                    Rotation = new Vector3(0f, 0f, 135.7104f)
-                    //todo: Add heading
+                InitialPosition = new WPosition{
+                    Position = new Vector3(1444.813f, 6553.167f, 15.05603f),
+                    Rotation = new Vector3(0f, 0f, 138.7879f),
+                    Heading = 138.7879f
                 }
             };
+            _van.Create();
             
             _deliveryWBlip = WBlipHelper.GetMission("methlab_supply_destination");
             _deliveryWBlip.Position =  MethLabHelper.LabParking;

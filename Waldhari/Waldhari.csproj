@@ -86,7 +86,9 @@
         <Compile Include="Common\GlobalOptions.cs" />
         <Compile Include="Common\OptionsHelper.cs" />
         <Compile Include="Common\UI\MarkerHelper.cs" />
+        <Compile Include="Common\UI\MenuHelper.cs" />
         <Compile Include="Common\UI\NotificationHelper.cs" />
+        <Compile Include="Common\UI\PhoneHelper.cs" />
         <Compile Include="Common\UI\SoundHelper.cs" />
         <Compile Include="MethLab\MethLab.cs" />
         <Compile Include="MethLab\MethLabHelper.cs" />

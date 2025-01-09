@@ -1,6 +1,7 @@
 ﻿using GTA;
 using GTA.Math;
 using Waldhari.Common.Entities;
+using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 
 namespace Waldhari.Common.UI
@@ -33,8 +34,10 @@ namespace Waldhari.Common.UI
         /// <param name="wBlip">WBlip to use</param>
         public static void DrawEntityMarkerOnBlip(WBlip wBlip)
         {
-            var position = wBlip.Position;
+            var position = wBlip.GetPosition();
             position.Z += 2.5f;
+            
+            Logger.Debug($"Show blip {position.X}, {position.Y}, {position.Z}");
             
             const float radius = 0.5f;
             const float height = 0.5f;
@@ -44,7 +47,8 @@ namespace Waldhari.Common.UI
                 Vector3.Zero,
                 Vector3.Zero,
                 new Vector3(radius, radius, height),
-                ColorHelper.GetSystemColor(wBlip.BColor));
+                ColorHelper.GetSystemColor(wBlip.BColor),
+                true);
         }
         
     }

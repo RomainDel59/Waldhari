@@ -16,8 +16,6 @@ namespace Waldhari.Behavior.Mission
     [ScriptAttributes(NoDefaultInstance = true)]
     public abstract class AbstractMissionScript : Script
     {
-        private int _nextExecution = Game.GameTime;
-        
         // Parameters WantedChance, RivalChance and RivalMembers are mandatory (defined in constructor)
         
         /// <summary>
@@ -176,7 +174,7 @@ namespace Waldhari.Behavior.Mission
             catch (TechnicalException e)
             {
                 Logger.Error($"TechnicalException for {_name} : {e.Message}");
-                NotificationHelper.ShowFailure(e.Message);
+                NotificationHelper.ShowFailure("error");
                 Abort();
             }
         }
@@ -200,11 +198,6 @@ namespace Waldhari.Behavior.Mission
         {
             // Wait for mission to be activated
             if (!IsActive) return;
-            
-            // To lower material usage :
-            // runs this script every 1/2 second only
-            if (_nextExecution > Game.GameTime) return;
-            _nextExecution = Game.GameTime + 500;
             
             try
             {
@@ -354,11 +347,11 @@ namespace Waldhari.Behavior.Mission
         {
             NotificationHelper.HideSubtitle();
             CleanScene();
-            _steps.Clear();
+            _steps?.Clear();
             IsActive = false;
             _randomEventAlreadyLaunchedOnce = false;
-            _rivalScript.MarkAsNoLongerNeeded();
-            _rivalScript.Abort();
+            _rivalScript?.MarkAsNoLongerNeeded();
+            _rivalScript?.Abort();
             _wantedStepIndex = -1;
         }
 
@@ -604,8 +597,8 @@ namespace Waldhari.Behavior.Mission
         /// <param name="e"></param>
         private void ManageTechnicalException(TechnicalException e)
         {
-            Logger.Error($"TechnicalException for {_name} : {e.Message}");
-            Fail(e.Message);
+            Logger.Exception($"TechnicalException for {_name} : {e.Message}");
+            Fail("error");
         }
         
         

@@ -160,7 +160,7 @@ namespace Waldhari.Common.Files
                 return entry.Value;
             }
 
-            Logger.Warning($"Locale file {LanguageCode}: key {localeKey} not found.");
+            Logger.Warning($"Locale file '{LanguageCode}': key '{localeKey}' not found.");
             return Localization.LocaleNotFoundTxt;
         }
 

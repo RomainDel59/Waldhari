@@ -2,6 +2,7 @@
 using System.Globalization;
 using GTA;
 using Waldhari.Common.Files;
+using Waldhari.Common.UI;
 
 namespace Waldhari
 {
@@ -14,6 +15,8 @@ namespace Waldhari
 
         private void OnTick(object sender, EventArgs e)
         {
+            PhoneHelper.GetIFruit().Update();
+            
             if (Game.IsControlJustPressed(Control.ContextSecondary))
             {
                 var position = Environment.NewLine+"= new WPosition{"+Environment.NewLine +

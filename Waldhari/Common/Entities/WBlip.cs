@@ -127,6 +127,16 @@ namespace Waldhari.Common.Entities
             
             DefineProperties();
         }
+
+        public Vector3 GetPosition()
+        {
+            if(Vehicle != null) return Vehicle.Position;
+            
+            if(Ped != null) return Ped.Position;
+
+            return Position;
+            
+        }
         
     }
 }

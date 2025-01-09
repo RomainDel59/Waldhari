@@ -18,7 +18,7 @@
             <Value>{0} : {1} $</Value>
         </LocaleKey>
         
-        <!-- Noms -->
+        <!-- Names -->
         <LocaleKey>
             <Key>ron_sender</Key>
             <Value>Ron Jakowski</Value>
@@ -32,13 +32,13 @@
             <Value>Membre de gang rival</Value>
         </LocaleKey>
 
-        <!-- Véhicules -->
+        <!-- Vehicles -->
         <LocaleKey>
             <Key>vehicle_van</Key>
             <Value>Fourgon</Value>
         </LocaleKey>
 
-        <!-- Messages de missions -->
+        <!-- Missions -->
         <LocaleKey>
             <Key>already_in_mission</Key>
             <Value>Une mission est déjà ~r~en cours~s~.</Value>
@@ -70,7 +70,7 @@
             <Value>Propriété achetée</Value>
         </LocaleKey>
 
-        <!-- Aide du menu -->
+        <!-- Menu help -->
         <LocaleKey>
             <Key>menu_select</Key>
             <Value>Choisir</Value>
@@ -108,6 +108,64 @@
         <LocaleKey>
             <Key>methlab_intro</Key>
             <Value>Salut patron !~n~Je sens qu'on va se faire un max d'oseille avec ce labo. Appelle-moi quand tu voudras commencer.</Value>
+        </LocaleKey>
+        
+        <!-- Menu -->
+        <LocaleKey>
+            <Key>methlab_menu_supply_title</Key>
+            <Value>Approvisionnement</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_supply_description</Key>
+            <Value>Lance une mission pour récupérer des matières premières.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_manufacture_title</Key>
+            <Value>Fabrication</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_manufacture_description</Key>
+            <Value>Lance la fabrication de méth au labo.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_deal_title</Key>
+            <Value>Vente au détail</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_deal_description</Key>
+            <Value>Lance une mission de vente de méth à un particulier.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_bulk_title</Key>
+            <Value>Vente en gros</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_bulk_description</Key>
+            <Value>Lance une mission de vente de méth à un grossiste.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_check_supply_title</Key>
+            <Value>Stock de matières premières</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_check_supply_description</Key>
+            <Value>Vérifie le volume de matières premières en stock.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_amount</Key>
+            <Value>Il y a ~g~{0} kg~s~ de matières premières en stock actuellement.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_check_product_title</Key>
+            <Value>Stock de méth</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_check_product_description</Key>
+            <Value>Vérifie le volume de méth en stock.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_product_amount</Key>
+            <Value>Il y a ~g~{0} g~s~ de méth en stock actuellement.</Value>
         </LocaleKey>
 
         
