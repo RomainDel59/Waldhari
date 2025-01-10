@@ -97,13 +97,13 @@ namespace Waldhari.Common.Entities
         }
 
         /// <summary>
-        /// Adds a ped to the group.
+        /// Adds a ped in the relationship group.
+        /// The ped should have been already added to the list WPeds!
         /// </summary>
         /// <param name="wPed">Ped to add</param>
         /// <param name="leader">The ped is the leader</param>
-        public void AddWPed(WPed wPed, bool leader = false)
+        public void AddInGroup(WPed wPed, bool leader = false)
         {
-            WPeds.Add(wPed);
             _pedGroup.Add(wPed.Ped, leader);
             wPed.Ped.RelationshipGroup = _relationshipGroup;
             wPed.Ped.NeverLeavesGroup = true;

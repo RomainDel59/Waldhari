@@ -24,19 +24,13 @@ namespace Waldhari.MethLab.Missions
         {
         }
 
-        protected override bool StartComplement(string arg)
+        protected override void StartComplement()
         {
-            if (MethLabSave.Instance.Product <= 0)
-            {
-                NotificationHelper.ShowFailure("methlab_deal_no_product");
-                return false;
-            }
+            if (MethLabSave.Instance.Product <= 0) 
+                throw new MissionException("methlab_deal_no_product");
 
-            if (WPositionHelper.IsNear(Game.Player.Character.Position,MethLabHelper.LaboratoryPosition.Position,5))
-            {
-                NotificationHelper.ShowFailure("methlab_deal_not_close_enough");
-                return false;
-            }
+            if (WPositionHelper.IsNear(Game.Player.Character.Position,MethLabHelper.LaboratoryPosition.Position,5)) 
+                throw new MissionException("methlab_deal_not_close_enough");
 
             _amountToDeal = RandomHelper.Next(MethLabOptions.Instance.DealMinGramsPerPack, MethLabOptions.Instance.DealMaxGramsPerPack + 1);
             _amountToDeal = Math.Min(_amountToDeal, MethLabSave.Instance.Product);
@@ -47,8 +41,6 @@ namespace Waldhari.MethLab.Missions
 
             MethLabSave.Instance.Product -= _amountToDeal;
             MethLabSave.Instance.Save();
-
-            return true;
         }
 
         protected override bool OnTickComplement()

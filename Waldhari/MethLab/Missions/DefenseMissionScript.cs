@@ -59,16 +59,15 @@ namespace Waldhari.MethLab.Missions
             {
                 _attackingScript = InstantiateScript<EnemyGroupScript>();
                 _attackingScript.DefineGroup(WGroupHelper.CreateRivalMembers(RivalMembers * 5, false));
-                Start(string.Empty);
+                Start();
             }
 
             AddCooldown();
         }
 
-        protected override bool StartComplement(string arg)
+        protected override void StartComplement()
         {
             // Nothing
-            return true;
         }
 
         protected override bool OnTickComplement()

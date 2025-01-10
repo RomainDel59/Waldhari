@@ -26,20 +26,15 @@ namespace Waldhari.MethLab.Missions
         {
         }
 
-        protected override bool StartComplement(string arg)
+        protected override void StartComplement()
         {
             _amountToSupply = RandomHelper.Next(MethLabOptions.Instance.SupplyMin, MethLabOptions.Instance.SupplyMax+1);
             _costToSupply = _amountToSupply * RandomHelper.Next(MethLabOptions.Instance.SupplyMinCost, MethLabOptions.Instance.SupplyMaxCost+1);
 
-            if (Game.Player.Money < _costToSupply)
-            {
-                NotificationHelper.ShowFailure("methlab_supply_not_enough_money");
-                return false;
-            }
+            if (Game.Player.Money < _costToSupply) 
+                throw new MissionException("methlab_supply_not_enough_money");
 
             NotificationHelper.ShowFromRon("methlab_supply_started", new List<string> { _amountToSupply.ToString() });
-
-            return true;
         }
 
         protected override bool OnTickComplement()

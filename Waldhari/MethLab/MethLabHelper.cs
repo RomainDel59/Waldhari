@@ -173,7 +173,7 @@ namespace Waldhari.MethLab
         public static iFruitContact GetContact()
         {
             if (_contact != null) return _contact;
-            _contact = new iFruitContact(Localization.GetTextByKey("ron_sender") + " (" + Localization.GetTextByKey("methlab") + ")")
+            _contact = new iFruitContact(Localization.GetTextByKey("methlab"))
             {
                 DialTimeout = 1000,            // Delay before answering
                 Active = true,                 // true = the contact is available and will answer the phone
@@ -184,7 +184,7 @@ namespace Waldhari.MethLab
             _contact.Answered += contact =>
             {
                 PhoneHelper.GetIFruit().Close(1000);
-                Script.Wait(1000);
+                //todo: make a pause of 1 sec before show menu
                 GetMenu().Visible = true;
             };
             

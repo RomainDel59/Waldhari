@@ -117,7 +117,8 @@ namespace Waldhari.Behavior.Ped
         private void CreatePeds(WGroup wGroup)
         {
             var hasVehicles = wGroup.HasVehicles();
-            
+
+            var i = 0;
             foreach (var wPed in wGroup.WPeds)
             {
                 // Not on the street to avoid being hit by a car on highway ! x')
@@ -134,7 +135,9 @@ namespace Waldhari.Behavior.Ped
                     wPed.Ped.Task.VehicleChase(Game.Player.Character);
                 else
                     wPed.Ped.Task.FightAgainst(Game.Player.Character);
-                
+
+                wGroup.AddInGroup(wPed, i == 0);
+                i++;
             }
         }
 

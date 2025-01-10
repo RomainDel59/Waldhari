@@ -29,7 +29,7 @@ namespace Waldhari.Common.UI
             {
                 var script = Script.InstantiateScript<T>();
                 script.MenuPool = pool;
-                script.Start(null);
+                script.Start();
             };
             menu.Add(item);
         }

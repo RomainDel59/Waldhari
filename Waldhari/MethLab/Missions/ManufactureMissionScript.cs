@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GTA;
 using Waldhari.Behavior.Mission;
+using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
@@ -18,20 +19,15 @@ namespace Waldhari.MethLab.Missions
         {
         }
 
-        protected override bool StartComplement(string arg)
+        protected override void StartComplement()
         {
-            if (MethLabSave.Instance.Supply == 0)
-            {
-                NotificationHelper.ShowFailure("methlab_manufacture_no_supply");
-                return false;
-            }
+            if (MethLabSave.Instance.Supply == 0) 
+                throw new MissionException("methlab_manufacture_no_supply");
 
             _amountToManufacture = RandomHelper.Next(MethLabOptions.Instance.ManufactureMin,
                 MethLabOptions.Instance.ManufactureMax);
 
             if (_amountToManufacture > MethLabSave.Instance.Supply) _amountToManufacture = MethLabSave.Instance.Supply;
-
-            return true;
         }
 
         protected override bool OnTickComplement()

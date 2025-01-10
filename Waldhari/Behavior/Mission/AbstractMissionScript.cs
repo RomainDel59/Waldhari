@@ -147,20 +147,16 @@ namespace Waldhari.Behavior.Mission
         /// At the end of Start method, the first step (after Wanted/Rival step, if applicable)
         /// is automatically launched.
         /// </summary>
-        /// <param name="arg">Arg from menu</param>
-        public void Start(string arg)
+        public void Start()
         {
             Logger.Debug($"Starting mission {_name}");
 
             try
             {
-                if (IsActive || Game.IsMissionActive || Game.IsRandomEventActive)
-                {
-                    NotificationHelper.ShowFailure("already_in_mission");
-                    Abort();
-                }
+                if (IsActive || Game.IsMissionActive || Game.IsRandomEventActive) 
+                    throw new MissionException("already_in_mission");
 
-                if (!StartComplement(arg)) Abort();;
+                StartComplement();
 
                 CreateScene();
 
@@ -170,6 +166,12 @@ namespace Waldhari.Behavior.Mission
                 SetupSteps();
 
                 SetStep(GetFirstStep());
+            }
+            catch (MissionException e)
+            {
+                Logger.Info($"MissionException for {_name} : {e.Message}");
+                NotificationHelper.ShowFailure(e.Message);
+                Abort();
             }
             catch (TechnicalException e)
             {
@@ -183,10 +185,10 @@ namespace Waldhari.Behavior.Mission
         /// Uses as a complement of starting method.
         /// This is where to add start conditions
         /// and/or processes before mission is launched.
+        /// If mission can not start : should throw "error key" :
+        /// reason why it can not start to show to the player.
         /// </summary>
-        /// <param name="arg">Arg from menu</param>
-        /// <returns>If mission can start.</returns>
-        protected abstract bool StartComplement(string arg);
+        protected abstract void StartComplement();
 
         /// <summary>
         /// If mission isn't launched : do nothing.

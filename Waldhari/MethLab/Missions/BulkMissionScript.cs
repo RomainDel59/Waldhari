@@ -26,13 +26,10 @@ namespace Waldhari.MethLab.Missions
         {
         }
 
-        protected override bool StartComplement(string arg)
+        protected override void StartComplement()
         {
-            if (MethLabSave.Instance.Product <= 0)
-            {
-                NotificationHelper.ShowFailure("deal_no_product");
-                return false;
-            }
+            if (MethLabSave.Instance.Product <= 0) 
+                throw new MissionException("methlab_deal_no_product");
 
             _amountToDeal = MethLabSave.Instance.Product;
             _priceToDeal = _amountToDeal * GetPricePerGram();
@@ -42,8 +39,6 @@ namespace Waldhari.MethLab.Missions
 
             MethLabSave.Instance.Product -= _amountToDeal;
             MethLabSave.Instance.Save();
-
-            return true;
         }
 
         protected override bool OnTickComplement()
