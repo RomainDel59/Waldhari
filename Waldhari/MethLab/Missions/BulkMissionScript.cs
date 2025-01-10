@@ -139,20 +139,12 @@ namespace Waldhari.MethLab.Missions
 
         protected override void CreateScene()
         {
-            //todo: there is a position for a ped (wholesaler) and a position for a vehicle (for the van that has to be driven there)
-            // make a new object for that, like "scene" object ?
-            // this object can have multiple ped positions, and one vehicle position,
-            // so the script can create multiple peds
+            var randomPosition = WPositionHelper.GetRandomMissionWithVehiclePosition();
             
             var wholesaler = new WPed
             {
                 PedHash = PedHash.CartelGuards01GMM,
-                InitialPosition = new WPosition
-                {
-                    Position = new Vector3(1448.546f, 6548.113f, 15.21889f),
-                    Rotation = new Vector3(0, 0, 142.5344f)
-                    //todo: Add heading
-                },
+                InitialPosition = randomPosition.PedPositions[0],
                 Scenario = "WORLD_HUMAN_SMOKING"
             };
             wholesaler.Create();
@@ -162,7 +154,7 @@ namespace Waldhari.MethLab.Missions
             _wholesalerScript.WPed = wholesaler;
 
             _deliveryWBlip = WBlipHelper.GetMission("methlab_bulk_delivery");
-            _deliveryWBlip.Position = new Vector3(1444.564f, 6552.647f, 15.07594f);
+            _deliveryWBlip.Position = randomPosition.VehiclePosition.Position;
 
 
             _van = new WVehicle

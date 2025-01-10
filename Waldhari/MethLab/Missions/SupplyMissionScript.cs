@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GTA;
-using GTA.Math;
 using Waldhari.Behavior.Mission;
 using Waldhari.Behavior.Ped;
 using Waldhari.Common.Entities;
@@ -155,19 +154,12 @@ namespace Waldhari.MethLab.Missions
 
         protected override void CreateScene()
         {
-            //todo: there is a position for a ped (wholesaler) and a position for a vehicle (for the van that has to be driven there)
-            // make a new object for that, like "scene" object ?
-            // this object can have multiple ped positions, and one vehicle position,
-            // so the script can create multiple peds
+            var randomPosition = WPositionHelper.GetRandomMissionWithVehiclePosition();
             
             var seller = new WPed
             {
                 PedHash = PedHash.CartelGuards01GMM,
-                InitialPosition = new WPosition{
-                    Position = new Vector3(1450.669f, 6543.706f, 15.30578f),
-                    Rotation = new Vector3(0f, 0f, 127.8216f),
-                    Heading = 127.8216f
-                },
+                InitialPosition = randomPosition.PedPositions[0],
                 Scenario = "WORLD_HUMAN_SMOKING"
             };
             seller.Create();
@@ -179,11 +171,7 @@ namespace Waldhari.MethLab.Missions
             _van = new WVehicle
             {
                 VehicleHash = VehicleHash.Burrito,
-                InitialPosition = new WPosition{
-                    Position = new Vector3(1444.813f, 6553.167f, 15.05603f),
-                    Rotation = new Vector3(0f, 0f, 138.7879f),
-                    Heading = 138.7879f
-                }
+                InitialPosition = randomPosition.VehiclePosition
             };
             _van.Create();
             
