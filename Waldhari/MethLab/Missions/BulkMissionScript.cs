@@ -117,15 +117,7 @@ namespace Waldhari.MethLab.Missions
                 Action =
                     () => { _deliveryWBlip.Remove(); },
                 CompletionCondition =
-                    () => !Game.Player.Character.IsInVehicle(_van.Vehicle),
-                CompletionAction =
-                    () =>
-                    {
-                        _van.Vehicle.IsPersistent = false;
-                        _van.Vehicle.IsConsideredDestroyed = true;
-                        _van.Vehicle.PreviouslyOwnedByPlayer = false;
-                        _van.Vehicle.MarkAsNoLongerNeeded();
-                    }
+                    () => !Game.Player.Character.IsInVehicle(_van.Vehicle)
             };
         }
 
@@ -176,12 +168,13 @@ namespace Waldhari.MethLab.Missions
             _van = new WVehicle
             {
                 VehicleHash = VehicleHash.Burrito,
-                InitialPosition = new WPosition
-                {
-                    Position = World.GetNextPositionOnStreet(MethLabHelper.PropertyPosition, true)
-                    //todo: Add rotation & heading
+                InitialPosition = new WPosition{
+                    Position = new Vector3(1376.08f, 3619.386f, 34.89184f),
+                    Rotation = new Vector3(0, 0, 173.9757f),
+                    Heading = 173.9757f
                 }
             };
+            _van.Create();
         }
 
         protected override void CleanScene()
@@ -193,6 +186,7 @@ namespace Waldhari.MethLab.Missions
             {
                 _van.WBlip?.Remove();
                 _van.Vehicle?.MarkAsNoLongerNeeded();
+                if(_van.Vehicle != null) _van.Vehicle.IsConsideredDestroyed = true;
             }
 
             _deliveryWBlip?.Remove();
