@@ -37,6 +37,11 @@ namespace Waldhari
                                "Heading = " + Game.Player.Character.Heading.ToString(CultureInfo.CurrentCulture).Replace(",", ".") + "f"+Environment.NewLine +
                                "};";
                 Logger.Info(position);
+                
+                //test
+                // var test = InstantiateScript<EnemyGroupScript>();
+                // test.DefineGroup(WGroupHelper.CreateRivalMembers(3));
+                
             }
         }
     }

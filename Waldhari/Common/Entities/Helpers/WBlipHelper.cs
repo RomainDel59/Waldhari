@@ -37,7 +37,8 @@ namespace Waldhari.Common.Entities.Helpers
             {
                 NameKey = nameKey,
                 Sprite = BlipSprite.Enemy,
-                IsVisible = true
+                IsVisible = true,
+                BColor = BlipColor.Red
             };
             
             return wBlip;

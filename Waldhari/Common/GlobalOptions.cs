@@ -46,7 +46,7 @@ namespace Waldhari.Common
             RivalChance = 20;
             RivalMembers = 3;
             
-            EnemiesAppearanceDistance = 200;
+            EnemiesAppearanceDistance = 50;
             EnemiesDisappearanceDistance = 1000;
             
         }

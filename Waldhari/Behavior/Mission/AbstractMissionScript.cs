@@ -237,31 +237,7 @@ namespace Waldhari.Behavior.Mission
                     return;
                 }
 
-                switch (_steps[_currentStep].Execute())
-                {
-                    case Step.ExecutionResult.GoPrevious:
-                        SetStep(_steps[_currentStep].PreviousIndex);
-                        break;
-                    case Step.ExecutionResult.GoNext:
-                        var nextIndex = _currentStep + 1;
-                        if (nextIndex >= _steps.Count)
-                        {
-                            End();
-                            return;
-                        }
-
-                        SetStep(nextIndex);
-                        break;
-                    case Step.ExecutionResult.Continue:
-                        if (!_randomEventAlreadyLaunchedOnce && _nextRandomEventTry < Game.GameTime)
-                        {
-                            TryLaunchRandomEvent();
-                            AddCooldown();
-                        }
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                ExecuteStep();
             }
             catch (MissionException exception)
             {
@@ -273,7 +249,36 @@ namespace Waldhari.Behavior.Mission
             }
             
         }
-        
+
+        protected void ExecuteStep()
+        {
+            switch (_steps[_currentStep].Execute())
+            {
+                case Step.ExecutionResult.GoPrevious:
+                    SetStep(_steps[_currentStep].PreviousIndex);
+                    break;
+                case Step.ExecutionResult.GoNext:
+                    var nextIndex = _currentStep + 1;
+                    if (nextIndex >= _steps.Count)
+                    {
+                        End();
+                        return;
+                    }
+
+                    SetStep(nextIndex);
+                    break;
+                case Step.ExecutionResult.Continue:
+                    if (!_randomEventAlreadyLaunchedOnce && _nextRandomEventTry < Game.GameTime)
+                    {
+                        TryLaunchRandomEvent();
+                        AddCooldown();
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         /// <summary>
         /// Uses as a complement of OnTick method.
         /// This is where to add fail conditions
@@ -434,7 +439,7 @@ namespace Waldhari.Behavior.Mission
                 // Previous step is always itself by default until it's define manually
                 PreviousIndex = 0,
                 // Can return to previous step if kill all rival gang members
-                AccessCondition = () => !IsFightingRival(),
+                AccessCondition = IsFightingRival,
                 // Can't go to a next step
                 CompletionCondition = () => false
             };

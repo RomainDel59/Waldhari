@@ -25,10 +25,27 @@ namespace Waldhari.Common.Entities.Helpers
             WeaponHash.Machete
         };
 
+        private static readonly WeaponHash[] GangVehicleWeapons =
+        {
+            WeaponHash.Pistol,
+            WeaponHash.CombatPistol,
+            WeaponHash.HeavyPistol,
+            WeaponHash.SNSPistol,
+            WeaponHash.MicroSMG,
+            WeaponHash.MachinePistol
+        };
+
         public static WeaponHash GetRandomGangWeapon()
         {
             var index = RandomHelper.Next(0, GangWeapons.Length);
             return GangWeapons[index];
         }
+        
+        public static WeaponHash GetRandomGangVehicleWeapon()
+        {
+            var index = RandomHelper.Next(0, GangVehicleWeapons.Length);
+            return GangVehicleWeapons[index];
+        }
+
     }
 }

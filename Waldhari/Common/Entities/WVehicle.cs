@@ -1,6 +1,7 @@
 ﻿using GTA;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
+using Waldhari.Common.Files;
 using Waldhari.Common.UI;
 
 namespace Waldhari.Common.Entities
@@ -29,10 +30,23 @@ namespace Waldhari.Common.Entities
             if(InitialPosition == null) throw new TechnicalException("InitialPosition cannot be empty");
             if(VehicleHash == default) throw new TechnicalException("VehicleHash cannot be empty");
 
+            Logger.Debug($"VehicleHash: {VehicleHash}");
+            Logger.Debug($"InitialPosition.Position: X={InitialPosition.Position.X}, Y={InitialPosition.Position.Y}, Z={InitialPosition.Position.Z}");
+            
             Model model = VehicleHash;
-            model.Request(1000);
+            Logger.Debug($"model: {model}");
+            
+            if (!model.Request(2000))
+            {
+                if(!model.Request(2000)) throw new TechnicalException("Request PedHash failed");
+            }
+            
+            Logger.Debug($"World.VehicleCount '{World.VehicleCount}' >= World.VehicleCapacity '{World.VehicleCapacity}' ('{World.VehicleCount >= World.VehicleCapacity}') || !model.IsVehicle '{!model.IsVehicle}' || !model.Request(1000) '{!model.Request(1000)}'");
+            
             Vehicle = World.CreateVehicle(model, InitialPosition.Position, InitialPosition.Heading);
             model.MarkAsNoLongerNeeded();
+            
+            Logger.Debug($"Created Vehicle: {Vehicle}");
 
             MoveInPosition();
         }

@@ -18,8 +18,8 @@ namespace Waldhari.Common.Entities.Helpers
             wPed.Ped.Task.EnterVehicle(wVehicle.Vehicle, VehicleSeat.Any, -1, 2, EnterVehicleFlags.WarpIn);
             
             // Script waits 2 seconds that ped enters vehicle
-            var startTime = Game.GameTime;
-            while (!wPed.Ped.IsInVehicle(wVehicle.Vehicle) && Game.GameTime - startTime < 2000)
+            var timeOut = Game.GameTime + 2000;
+            while (!wPed.Ped.IsInVehicle(wVehicle.Vehicle) && timeOut > Game.GameTime)
             {
                 Script.Wait(1);
             }

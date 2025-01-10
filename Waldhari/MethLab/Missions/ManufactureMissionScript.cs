@@ -32,7 +32,11 @@ namespace Waldhari.MethLab.Missions
 
         protected override bool OnTickComplement()
         {
-            // No need of OnTick for this mission, whatever happens
+            // Never need to test if player is dead,
+            // or if police is running on the player : 
+            // so it executes step directly and passes
+            // the rest of OnTick method
+            ExecuteStep();
             return false;
         }
 
@@ -94,7 +98,9 @@ namespace Waldhari.MethLab.Missions
                 {
                     NotificationHelper.ShowFromRon("methlab_manufacture_started");
                     // between 1 and 5 minutes (60 secondes)
-                    _waitUntil = Game.GameTime + RandomHelper.Next(1,5) * 60 * 1000;
+                    var minutes = RandomHelper.Next(1, 5);
+                    _waitUntil = Game.GameTime + minutes * 60 * 1000;
+                    Logger.Debug($"Will wait for {minutes} minutes");
                 }
             };
         }

@@ -36,7 +36,7 @@ namespace Waldhari.Common.Entities
             
             //InitialPosition.Position = Game.Player.Character.Position + new Vector3(50,50,0);
             
-            Logger.Debug($"GTAPedHash: {PedHash}");
+            Logger.Debug($"PedHash: {PedHash}");
             Logger.Debug($"InitialPosition.Position: X={InitialPosition.Position.X}, Y={InitialPosition.Position.Y}, Z={InitialPosition.Position.Z}");
             
             Model model = PedHash;
@@ -44,8 +44,6 @@ namespace Waldhari.Common.Entities
 
             if (!model.Request(2000))
             {
-                // model = PedHash.OldMan2;
-                // Logger.Debug($"model: {model}");
                 if(!model.Request(2000)) throw new TechnicalException("Request PedHash failed");
             }
 

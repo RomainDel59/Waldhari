@@ -3,7 +3,7 @@ using GTA;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
-using Waldhari.Common.Misc;
+using Waldhari.Common.Files;
 using Waldhari.Common.UI;
 
 namespace Waldhari.Behavior.Ped
@@ -118,26 +118,31 @@ namespace Waldhari.Behavior.Ped
         {
             var hasVehicles = wGroup.HasVehicles();
 
-            var i = 0;
-            foreach (var wPed in wGroup.WPeds)
+            Logger.Debug($"wGroup.WPeds.Count= {wGroup.WPeds.Count}");
+            
+            for (var i = 0 ; i < wGroup.WPeds.Count; i++)
             {
+                Logger.Debug($"create wGroup.WPeds[i] i= {i}");
+                var wPed = wGroup.WPeds[i];
+                
                 // Not on the street to avoid being hit by a car on highway ! x')
                 wPed.InitialPosition = WPositionHelper.GetBehindPosition(AppearanceDistance, false);
                 wPed.Create();
+                wPed.WBlip.Ped = wPed.Ped;
                 wPed.WBlip?.Create();
-                wPed.AddWeapon(WeaponsHelper.GetRandomGangWeapon());
-                wPed.AddWeapon(WeaponsHelper.GetRandomGangWeapon());
+                wPed.AddWeapon(WeaponsHelper.GetRandomGangVehicleWeapon());
+                wPed.AddWeapon(WeaponsHelper.GetRandomGangVehicleWeapon());
 
-                var isOnVehicle = false;
-                if(hasVehicles) isOnVehicle = GetOnVehicle(wPed);
-                
-                if(isOnVehicle)
+                if(hasVehicles)
+                {
+                    Logger.Debug($"get on vehicle wGroup.WPeds[i] i= {i}");
+                    GetOnVehicle(wPed, wGroup.WVehicles[i]);
                     wPed.Ped.Task.VehicleChase(Game.Player.Character);
-                else
-                    wPed.Ped.Task.FightAgainst(Game.Player.Character);
+                }
+                
+                wPed.Ped.Task.FightAgainst(Game.Player.Character);
 
                 wGroup.AddInGroup(wPed, i == 0);
-                i++;
             }
         }
 
@@ -149,12 +154,7 @@ namespace Waldhari.Behavior.Ped
         private void OnTick(object sender, EventArgs e)
         {
             // Wait for parameter
-            if (WGroup == null) return; 
-            
-            // To lower material usage :
-            // runs this script every 1/2 second only
-            if (_nextExecution > Game.GameTime) return;
-            _nextExecution = Game.GameTime + 500;
+            if (WGroup == null) return;
             
             ManagePeds();
             ManageVehicles();
@@ -215,6 +215,7 @@ namespace Waldhari.Behavior.Ped
                 // Enemy dead : no longer needed
                 wPed.WBlip?.Remove();
                 wPed.Ped.MarkAsNoLongerNeeded();
+                wPed.Ped = null;
             }
         }
 
@@ -224,19 +225,20 @@ namespace Waldhari.Behavior.Ped
         /// </summary>
         /// <param name="wPed">Ped that has to enter vehicle</param>
         /// <returns>True if ped succeed to enter vehicle</returns>
-        private bool GetOnVehicle(WPed wPed)
+        private bool GetOnVehicle(WPed wPed, WVehicle wVehicle)
         {
-            var startTime = Game.GameTime;
+            var timeOut = Game.GameTime + 2000;
             
-            // While ped is not in a vehicle and startTime under 2 seconds
-            while (!wPed.Ped.IsInVehicle() && startTime < Game.GameTime + 2000)
+            Logger.Debug($"wPed.Ped = {wPed.Ped}");
+            
+            // While ped is not in a vehicle and timeOut not reach
+            while (!wPed.Ped.IsInVehicle() && timeOut > Game.GameTime)
             {
-                // Get a random vehicle in the list
-                var vehicleIndex = RandomHelper.Next(0, WGroup.WVehicles.Count);
-                var wVehicle = WGroup.WVehicles[vehicleIndex];
+                Logger.Debug($"wVehicle = {wVehicle}");
+                Logger.Debug($"wVehicle.Vehicle = {wVehicle.Vehicle}");
                 
                 // If vehicle has no free seat
-                if(!wVehicle.Vehicle.IsSeatFree(VehicleSeat.Any)) continue;
+                //if(!wVehicle.Vehicle.IsSeatFree(VehicleSeat.Any)) continue;
                 
                 WVehicleHelper.MakePedWarpInVehicle(wPed, wVehicle);
             }
