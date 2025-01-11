@@ -24,6 +24,8 @@ Useful external resources :
 - https://github.com/DurtyFree/gta-v-data-dumps
 - https://wiki.rage.mp/
   - https://wiki.rage.mp/index.php?title=Sounds
+  - https://wiki.rage.mp/index.php?title=Peds
+  - https://wiki.rage.mp/index.php?title=Vehicles
 - https://forge.plebmasters.de/
 - https://docs.fivem.net/docs/
   - https://docs.fivem.net/docs/game-references/blips/
