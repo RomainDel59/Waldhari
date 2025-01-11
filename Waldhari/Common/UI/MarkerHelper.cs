@@ -11,14 +11,13 @@ namespace Waldhari.Common.UI
         /// Draw a marker on the ground in the world accordingly a WBlip position and color.
         /// </summary>
         /// <param name="wBlip">WBlip to use</param>
-        public static void DrawGroundMarkerOnBlip(WBlip wBlip)
+        public static void DrawGroundMarkerOnBlip(WBlip wBlip, float radius = 5.0f)
         {
             if(wBlip == null) return;
             
             var position = wBlip.Position;
             position.Z = World.GetGroundHeight(position);
             
-            const float radius = 5.0f;
             const float height = 0.5f;
             World.DrawMarker(
                 MarkerType.VerticalCylinder,

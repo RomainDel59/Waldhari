@@ -16,6 +16,8 @@ namespace Waldhari.MethLab.Missions
     {
         // Scene
         private PedActingScript _clientScript;
+        
+        private WBlip _wProductBlip;
 
         private int _amountToDeal;
         private int _priceToDeal;
@@ -28,10 +30,6 @@ namespace Waldhari.MethLab.Missions
         {
             if (MethLabSave.Instance.Product <= 0) 
                 throw new MissionException("methlab_deal_no_product");
-
-            //todo: add a step to get the product in lab
-            if (!WPositionHelper.IsNear(Game.Player.Character.Position,MethLabHelper.Positions.Storage.Position,2)) 
-                throw new MissionException("methlab_deal_not_close_enough");
 
             _amountToDeal = RandomHelper.Next(MethLabOptions.Instance.DealMinGramsPerPack, MethLabOptions.Instance.DealMaxGramsPerPack + 1);
             _amountToDeal = Math.Min(_amountToDeal, MethLabSave.Instance.Product);
@@ -68,8 +66,26 @@ namespace Waldhari.MethLab.Missions
         {
             AddWantedStep();
             AddRivalStep();
+            AddStep(GetStepProduct(), false);
             AddStep(GetStepRendezvous(), false);
             AddStep(GetStepPayment(), false);
+        }
+
+        private Step GetStepProduct()
+        {
+            return new Step
+            {
+                Name = "Product",
+                MessageKey = "methlab_deal_get_product",
+                Action = () =>
+                {
+                    _wProductBlip.Create();
+                    MarkerHelper.DrawGroundMarkerOnBlip(_wProductBlip, 2);
+                },
+                CompletionCondition = () =>
+                    WPositionHelper.IsNear(Game.Player.Character.Position,_wProductBlip.Position,2),
+                CompletionAction = SoundHelper.PlayTake
+            };
         }
 
         private Step GetStepRendezvous()
@@ -78,7 +94,11 @@ namespace Waldhari.MethLab.Missions
             {
                 Name = "Rendezvous",
                 MessageKey = "methlab_deal_rendezvous",
-                Action = () => { _clientScript.WPed.MakeMissionDestination("methlab_deal_client"); },
+                Action = () =>
+                {
+                    _wProductBlip.Remove();
+                    _clientScript.WPed.MakeMissionDestination("methlab_deal_client");
+                },
                 CompletionCondition = () =>
                     WPositionHelper.IsNear(Game.Player.Character.Position,_clientScript.WPed.Ped.Position,25)
             };
@@ -108,6 +128,9 @@ namespace Waldhari.MethLab.Missions
 
         protected override void CreateScene()
         {
+            _wProductBlip = WBlipHelper.GetMission("methlab_deal_product");
+            _wProductBlip.Position = MethLabHelper.Positions.Storage.Position;
+            
             var client = new WPed
             {
                 PedHash = PedHash.Rurmeth01AMM,

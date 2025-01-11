@@ -31,6 +31,11 @@ namespace Waldhari.Common.UI
             Function.Call(Hash.PLAY_SOUND_FRONTEND, -1, "PURCHASE", "HUD_LIQUOR_STORE_SOUNDSET");
         }
 
+        public static void PlayTake()
+        {
+            Function.Call(Hash.PLAY_SOUND_FRONTEND, -1, "PURCHASE", "HUD_LIQUOR_STORE_SOUNDSET");
+        }
+
         public static void PlayFailure()
         {
             //todo: find the good sound for failure in game

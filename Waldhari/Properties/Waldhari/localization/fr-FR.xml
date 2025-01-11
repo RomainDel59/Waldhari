@@ -252,8 +252,8 @@
             <Value>Il n'y a pas de ~r~méth en stock~s~.</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>methlab_deal_not_close_enough</Key>
-            <Value>Vous devez vous rendre au ~r~labo~s~ pour récupérer un sac de ~r~méth~s~ à vendre.</Value>
+            <Key>methlab_deal_product</Key>
+            <Value>Armoire de stockage</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_deal_client</Key>
@@ -262,6 +262,10 @@
         <LocaleKey>
             <Key>methlab_deal_started</Key>
             <Value>Salut patron, un client demande ~r~{0} g~s~ de méth pour ~g~{1} $~s~, va lui apporter aux coordonnées que je t'ai envoyées.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_get_product</Key>
+            <Value>Va récupérer de la méth au ~y~labo~s~.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_deal_rendezvous</Key>
