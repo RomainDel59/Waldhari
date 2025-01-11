@@ -17,6 +17,7 @@ namespace Waldhari
         private void OnTick(object sender, EventArgs e)
         {
             PhoneHelper.GetIFruit().Update();
+            //Logger.Debug($"iFuit num contacts={PhoneHelper.GetIFruit().Contacts.Count}");
             
             if (Game.IsControlJustPressed(Control.ContextSecondary))
             {

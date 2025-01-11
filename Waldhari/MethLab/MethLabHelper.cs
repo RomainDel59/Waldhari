@@ -143,6 +143,8 @@ namespace Waldhari.MethLab
                 () => MethLabSave.Instance.Product
             );
             
+            Logger.Debug($"Menu='{_menu.Name}' created");
+            
             return _menu;
         }
 
@@ -168,6 +170,8 @@ namespace Waldhari.MethLab
                 Script.Wait(1000);
                 GetMenu().Visible = true;
             };
+            
+            Logger.Debug($"Contact='{_contact.Name}' created");
             
             return _contact;
         }

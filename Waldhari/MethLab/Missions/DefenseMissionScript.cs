@@ -45,6 +45,9 @@ namespace Waldhari.MethLab.Missions
 
             // Has not to try
             if (_nextAttackTry > Game.GameTime) return;
+            
+            // If no product : no attack
+            if (MethLabSave.Instance.Product == 0) return;
 
             // Try to attack
             Logger.Info("Trying MethLabDefenseMission");

@@ -14,6 +14,9 @@ namespace Waldhari.Common.UI
             if(_iFruit != null) return _iFruit;
             
             _iFruit = new CustomiFruit();
+            
+            Logger.Debug($"iFuit created num contacts={_iFruit.Contacts.Count}");
+            
             return _iFruit;
         }
 
@@ -23,7 +26,7 @@ namespace Waldhari.Common.UI
             {
                 if (!ContactExists(contact))
                 {
-                    Logger.Debug("Contact does not exist but player is owner : adding contact.");
+                    Logger.Debug($"Current player ='{PlayerHelper.GetCharacterId()}', Contact='{contact.Name}' does not exist but player is owner='{owner}' : adding contact.");
                     GetIFruit().Contacts.Add(contact);
                 }
             }
@@ -31,7 +34,7 @@ namespace Waldhari.Common.UI
             {
                 if (ContactExists(contact))
                 {
-                    Logger.Debug("Contact exists but player is not owner : removing contact.");
+                    Logger.Debug($"Current player ='{PlayerHelper.GetCharacterId()}', Contact='{contact.Name}' exists but player is not owner='{owner}' : removing contact.");
                     GetIFruit().Contacts.Remove(contact);
                 }
             }

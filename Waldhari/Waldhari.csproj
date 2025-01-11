@@ -51,16 +51,16 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Behavior\Animation\Animation.cs" />
-        <Compile Include="Behavior\Animation\AnimationHelper.cs" />
-        <Compile Include="Behavior\Animation\AnimationScript.cs" />
-        <Compile Include="Behavior\Mission\AbstractMissionScript.cs" />
-        <Compile Include="Behavior\Mission\Step.cs" />
-        <Compile Include="Behavior\Ped\EnemyGroupScript.cs" />
-        <Compile Include="Behavior\Ped\PedActingScript.cs" />
-        <Compile Include="Behavior\Property\BuyableProperty.cs" />
-        <Compile Include="Behavior\Property\BuyablePropertyScript.cs" />
-        <Compile Include="Behavior\Property\Property.cs" />
+        <Compile Include="Common\Behavior\Animation\Animation.cs" />
+        <Compile Include="Common\Behavior\Animation\AnimationHelper.cs" />
+        <Compile Include="Common\Behavior\Animation\AnimationScript.cs" />
+        <Compile Include="Common\Behavior\Mission\AbstractMissionScript.cs" />
+        <Compile Include="Common\Behavior\Mission\Step.cs" />
+        <Compile Include="Common\Behavior\Ped\EnemyGroupScript.cs" />
+        <Compile Include="Common\Behavior\Ped\PedActingScript.cs" />
+        <Compile Include="Common\Behavior\Property\BuyableProperty.cs" />
+        <Compile Include="Common\Behavior\Property\BuyablePropertyScript.cs" />
+        <Compile Include="Common\Behavior\Property\Property.cs" />
         <Compile Include="Common\Entities\Helpers\WGroupHelper.cs" />
         <Compile Include="Common\Entities\Helpers\WBlipHelper.cs" />
         <Compile Include="Common\Entities\Helpers\WeaponsHelper.cs" />
