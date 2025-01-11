@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GTA;
-using GTA.Math;
 using Waldhari.Common.Behavior.Mission;
 using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities;
@@ -160,11 +159,7 @@ namespace Waldhari.MethLab.Missions
             _van = new WVehicle
             {
                 VehicleHash = VehicleHash.Burrito,
-                InitialPosition = new WPosition{
-                    Position = new Vector3(1376.08f, 3619.386f, 34.89184f),
-                    Rotation = new Vector3(0, 0, 173.9757f),
-                    Heading = 173.9757f
-                }
+                InitialPosition = MethLabHelper.Positions.Parking
             };
             _van.Create();
         }

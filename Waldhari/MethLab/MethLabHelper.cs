@@ -32,9 +32,9 @@ namespace Waldhari.MethLab
             
             public static readonly WPosition Parking = new WPosition
             {
-                Position = new Vector3(1381.139f, 3597.028f, 34.87445f),
-                Rotation = new Vector3(0.0005374776f, -0.0007078056f, 15.72955f),
-                Heading = 15.72955f
+                Position = new Vector3(1380.113f, 3599f, 34.88007f),
+                Rotation = new Vector3(0f, 0f, -162.9709f),
+                Heading = 197.0291f
             };
 
             // TODO: (immersive feature) Make a chemist work at this position
