@@ -6,7 +6,7 @@ using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
 using Waldhari.Common.UI;
 
-namespace Waldhari.Behavior.Ped
+namespace Waldhari.Common.Behavior.Ped
 {
     [ScriptAttributes(NoDefaultInstance = true)]
     public class EnemyGroupScript : Script

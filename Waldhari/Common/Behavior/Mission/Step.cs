@@ -3,7 +3,7 @@ using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
 using Waldhari.Common.UI;
 
-namespace Waldhari.Behavior.Mission
+namespace Waldhari.Common.Behavior.Mission
 {
     public class Step
     {

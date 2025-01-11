@@ -1,7 +1,7 @@
 ﻿using System;
 using GTA;
-using Waldhari.Behavior.Property;
 using Waldhari.Common;
+using Waldhari.Common.Behavior.Property;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;

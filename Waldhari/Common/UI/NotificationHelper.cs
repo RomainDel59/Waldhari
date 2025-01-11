@@ -33,7 +33,7 @@ namespace Waldhari.Common.UI
 
         public static void ShowFromRon(string messageKey, List<string> messageValues = null)
         {
-            ShowWithIcon(NotificationIcon.Ron, "ron_sender", messageKey, messageValues);
+            ShowWithIcon(NotificationIcon.Ron, "ron", messageKey, messageValues);
         }
         
         public static void ShowFromDefault(string messageKey, string senderKey, List<string> messageValues = null)

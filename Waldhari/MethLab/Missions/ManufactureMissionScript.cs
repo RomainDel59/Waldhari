@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using GTA;
-using Waldhari.Behavior.Mission;
+using Waldhari.Common.Behavior.Mission;
 using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;

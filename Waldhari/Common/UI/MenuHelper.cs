@@ -4,7 +4,7 @@ using GTA;
 using LemonUI;
 using LemonUI.Menus;
 using LemonUI.Scaleform;
-using Waldhari.Behavior.Mission;
+using Waldhari.Common.Behavior.Mission;
 using Waldhari.Common.Files;
 using Control = GTA.Control;
 

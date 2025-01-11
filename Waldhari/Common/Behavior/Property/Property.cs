@@ -1,11 +1,10 @@
 ﻿using GTA;
 using GTA.Math;
-using Waldhari.Common;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Misc;
 
-namespace Waldhari.Behavior.Property
+namespace Waldhari.Common.Behavior.Property
 {
     public class Property
     {

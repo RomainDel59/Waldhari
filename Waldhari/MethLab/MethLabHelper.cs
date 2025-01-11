@@ -29,6 +29,13 @@ namespace Waldhari.MethLab
                 Rotation = new Vector3(0.0005374776f, -0.0007078056f, 15.72955f),
                 Heading = 15.72955f
             };
+            
+            public static readonly WPosition Parking = new WPosition
+            {
+                Position = new Vector3(1381.139f, 3597.028f, 34.87445f),
+                Rotation = new Vector3(0.0005374776f, -0.0007078056f, 15.72955f),
+                Heading = 15.72955f
+            };
 
             // TODO: (immersive feature) Make a chemist work at this position
             public static WPosition GetWorkstation()
@@ -64,10 +71,8 @@ namespace Waldhari.MethLab
         public static PedHash Chemist = (PedHash)3988008767;
         public static void ShowFromChemist(string messageKey, List<string> messageValues = null)
         {
-            NotificationHelper.ShowFromDefault(messageKey, "chemist_sender", messageValues);
+            NotificationHelper.ShowFromDefault(messageKey, "chemist", messageValues);
         }
-        
-        public static Vector3 LabParking = new Vector3(1381.139f, 3597.028f, 34.87445f);
 
         #region menu
 
@@ -91,9 +96,9 @@ namespace Waldhari.MethLab
             _pool.Add(_menu);
 
             // Create supply mission item
-            MenuHelper.CreateMissionItem<SupplyMissionScript>(
-                "methlab_menu_supply_title",
-                "methlab_menu_supply_description",
+            MenuHelper.CreateMissionItem<MethLabSupplyScript>(
+                "supply_menu_title",
+                "supply_menu_description",
                 _pool,
                 _menu
             );

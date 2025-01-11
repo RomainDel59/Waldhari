@@ -1,6 +1,6 @@
 ﻿using GTA;
 using GTA.Native;
-using Waldhari.Behavior.Property;
+using Waldhari.Common.Behavior.Property;
 using Waldhari.Common.Exceptions;
 
 namespace Waldhari.Common.Misc

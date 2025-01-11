@@ -4,7 +4,7 @@ using GTA.Native;
 using Waldhari.Common.Files;
 using Waldhari.Common.UI;
 
-namespace Waldhari.Behavior.Animation
+namespace Waldhari.Common.Behavior.Animation
 {
     public class Animation
     {

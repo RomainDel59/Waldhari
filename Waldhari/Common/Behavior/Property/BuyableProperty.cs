@@ -4,7 +4,7 @@ using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
 
-namespace Waldhari.Behavior.Property
+namespace Waldhari.Common.Behavior.Property
 {
     public class BuyableProperty
     {

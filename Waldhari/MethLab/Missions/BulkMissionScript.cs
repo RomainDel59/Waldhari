@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using GTA;
 using GTA.Math;
-using Waldhari.Behavior.Mission;
-using Waldhari.Behavior.Ped;
+using Waldhari.Common.Behavior.Mission;
+using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;

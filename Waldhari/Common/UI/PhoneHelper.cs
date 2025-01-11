@@ -1,5 +1,5 @@
 ﻿using iFruitAddon2;
-using Waldhari.Behavior.Property;
+using Waldhari.Common.Behavior.Property;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 

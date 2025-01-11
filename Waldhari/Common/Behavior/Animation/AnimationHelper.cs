@@ -2,7 +2,7 @@
 using GTA;
 using Waldhari.Common.UI;
 
-namespace Waldhari.Behavior.Animation
+namespace Waldhari.Common.Behavior.Animation
 {
     public static class AnimationHelper
     {

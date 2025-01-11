@@ -20,16 +20,20 @@
 
         <!-- Names -->
         <LocaleKey>
-            <Key>ron_sender</Key>
+            <Key>ron</Key>
             <Value>Ron Jakowski</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>chemist_sender</Key>
+            <Key>chemist</Key>
             <Value>Chemist</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>rival_enemy</Key>
             <Value>Rival gang member</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supplier</Key>
+            <Value>Supplier</Value>
         </LocaleKey>
 
         <!-- Vehicles -->
@@ -83,9 +87,51 @@
             <Key>menu_back</Key>
             <Value>Back</Value>
         </LocaleKey>
+        
+        <!-- Supply mission -->
+        <LocaleKey>
+            <Key>supply_menu_title</Key>
+            <Value>Supplies</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_menu_description</Key>
+            <Value>Start a mission to collect supplies.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_no_money</Key>
+            <Value>You need more ~r~money~s~ for a resupply.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_success</Key>
+            <Value>~g~{0} kg~s~ of supplies have been added to the stock.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_started</Key>
+            <Value>Hey boss! I’ve ordered some ~g~supplies~s~, go pick them up from the ~y~supplier~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_fail_supplier_dead</Key>
+            <Value>The ~r~supplier~s~ has been killed.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_fail_vehicle_destroyed</Key>
+            <Value>The van has been ~r~destroyed~s~ with everything inside.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_step_rendezvous</Key>
+            <Value>Head to the rendezvous with the ~y~supplier~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_step_payment</Key>
+            <Value>Pay the ~y~supplier~s~ for the supplies.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_step_out</Key>
+            <Value>Get out of the ~y~van~s~.</Value>
+        </LocaleKey>
 
-
-
+        
+        
         <!-- 
         ***************
         *** MethLab *** 
@@ -115,14 +161,6 @@
         </LocaleKey>
 
         <!-- Menu -->
-        <LocaleKey>
-            <Key>methlab_menu_supply_title</Key>
-            <Value>Supplies</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_menu_supply_description</Key>
-            <Value>Start a mission to collect raw materials.</Value>
-        </LocaleKey>
         <LocaleKey>
             <Key>methlab_menu_manufacture_title</Key>
             <Value>Manufacturing</Value>
@@ -172,6 +210,15 @@
             <Value>There are currently ~g~{0} g~s~ of meth in stock.</Value>
         </LocaleKey>
 
+        <!-- Supply mission -->
+        <LocaleKey>
+            <Key>methlab_supply_step_drive</Key>
+            <Value>Drive the ~y~van~s~ to the lab.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_destination</Key>
+            <Value>Lab Parking</Value>
+        </LocaleKey>
 
         <!-- Defense mission -->
         <LocaleKey>
@@ -185,53 +232,6 @@
         <LocaleKey>
             <Key>methlab_defense_defending</Key>
             <Value>Defend the lab from the ~r~rival gang members~s~!</Value>
-        </LocaleKey>
-
-
-        <!-- Supply mission -->
-        <LocaleKey>
-            <Key>methlab_supply_supplier</Key>
-            <Value>Supplier</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_destination</Key>
-            <Value>Lab Parking</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_not_enough_money</Key>
-            <Value>You need more ~r~money~s~ for a resupply.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_started</Key>
-            <Value>Hey boss! I’ve ordered ~g~{0} kg~s~ of raw materials, go pick them up at the coordinates I sent you.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_rendezvous</Key>
-            <Value>Head to the rendezvous with the ~y~supplier~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_payment</Key>
-            <Value>Pay the ~y~supplier~s~ for the raw materials.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_drive_lab</Key>
-            <Value>Drive the ~y~van~s~ to the lab.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_out</Key>
-            <Value>Get out of the ~y~van~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_fail_supplier_dead</Key>
-            <Value>The ~r~supplier~s~ has been killed.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_fail_vehicle_destroyed</Key>
-            <Value>The van was ~r~destroyed~s~ with everything inside.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_success</Key>
-            <Value>~g~{0} kg~s~ of raw materials have been added to the stock.</Value>
         </LocaleKey>
 
 

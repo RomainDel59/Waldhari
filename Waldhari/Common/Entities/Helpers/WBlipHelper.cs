@@ -2,7 +2,7 @@
 using GTA;
 using GTA.Math;
 using GTA.Native;
-using Waldhari.Behavior.Property;
+using Waldhari.Common.Behavior.Property;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 

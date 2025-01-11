@@ -1,4 +1,4 @@
-﻿using Waldhari.Behavior.Ped;
+﻿using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Files;
 
 namespace Waldhari.Common

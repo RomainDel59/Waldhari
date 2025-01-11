@@ -20,16 +20,20 @@
         
         <!-- Names -->
         <LocaleKey>
-            <Key>ron_sender</Key>
+            <Key>ron</Key>
             <Value>Ron Jakowski</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>chemist_sender</Key>
+            <Key>chemist</Key>
             <Value>Chimiste</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>rival_enemy</Key>
             <Value>Membre de gang rival</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supplier</Key>
+            <Value>Fournisseur</Value>
         </LocaleKey>
 
         <!-- Vehicles -->
@@ -84,7 +88,49 @@
             <Value>Retour</Value>
         </LocaleKey>
         
+        <!-- Supply mission -->
+        <LocaleKey>
+            <Key>supply_menu_title</Key>
+            <Value>Approvisionnement</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_menu_description</Key>
+            <Value>Lance une mission pour récupérer des matières premières.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_no_money</Key>
+            <Value>Il faut plus d'~r~argent~s~ pour un réapprovisionnement.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_success</Key>
+            <Value>~g~{0} kg~s~ de matières premières ont été ajoutés au stock.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_started</Key>
+            <Value>Salut patron ! J'ai commandé des ~g~matières premières~s~, va les chercher auprès du ~y~fournisseur~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_fail_supplier_dead</Key>
+            <Value>Le ~r~fournisseur~s~ a été tué.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_fail_vehicle_destroyed</Key>
+            <Value>Le fourgon a été ~r~détruit~s~ avec tout ce qu'il contenait.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_step_rendezvous</Key>
+            <Value>Rends-toi au rendez-vous avec le ~y~fournisseur~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_step_payment</Key>
+            <Value>Paye le ~y~fournisseur~s~ pour les matières premières.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_step_out</Key>
+            <Value>Sors du ~y~fourgon~s~.</Value>
+        </LocaleKey>
 
+        
         
         <!-- 
         ***************
@@ -115,14 +161,6 @@
         </LocaleKey>
         
         <!-- Menu -->
-        <LocaleKey>
-            <Key>methlab_menu_supply_title</Key>
-            <Value>Approvisionnement</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_menu_supply_description</Key>
-            <Value>Lance une mission pour récupérer des matières premières.</Value>
-        </LocaleKey>
         <LocaleKey>
             <Key>methlab_menu_manufacture_title</Key>
             <Value>Fabrication</Value>
@@ -172,6 +210,15 @@
             <Value>Il y a ~g~{0} g~s~ de méth en stock actuellement.</Value>
         </LocaleKey>
 
+        <!-- Supply mission -->
+        <LocaleKey>
+            <Key>methlab_supply_step_drive</Key>
+            <Value>Ramène le ~y~fourgon~s~ au labo.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_destination</Key>
+            <Value>Parking du labo</Value>
+        </LocaleKey>
         
         <!-- Defense mission -->
         <LocaleKey>
@@ -185,53 +232,6 @@
         <LocaleKey>
             <Key>methlab_defense_defending</Key>
             <Value>Défends le labo contre les ~r~membres du gang rival~s~ !</Value>
-        </LocaleKey>
-        
-        
-        <!-- Supply mission -->
-        <LocaleKey>
-            <Key>methlab_supply_supplier</Key>
-            <Value>Fournisseur</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_destination</Key>
-            <Value>Parking du labo</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_not_enough_money</Key>
-            <Value>Il faut plus d'~r~argent~s~ pour un réapprovisionnement.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_started</Key>
-            <Value>Salut patron ! J'ai commandé ~g~{0} kg~s~ de matières premières, va les chercher aux coordonnées que je t'ai envoyées.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_rendezvous</Key>
-            <Value>Rends-toi au rendez-vous avec le ~y~fournisseur~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_payment</Key>
-            <Value>Paye le ~y~fournisseur~s~ pour les matières premières.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_drive_lab</Key>
-            <Value>Conduis le ~y~fourgon~s~ au labo.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_out</Key>
-            <Value>Sors du ~y~fourgon~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_fail_supplier_dead</Key>
-            <Value>Le ~r~fournisseur~s~ a été tué.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_fail_vehicle_destroyed</Key>
-            <Value>Le fourgon a été ~r~détruit~s~ avec tout ce qu'il contenait.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_success</Key>
-            <Value>~g~{0} kg~s~ de matières premières ont été ajoutés au stock.</Value>
         </LocaleKey>
         
         

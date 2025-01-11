@@ -1,10 +1,10 @@
 ﻿using System;
 using GTA;
-using Waldhari.Behavior.Animation;
+using Waldhari.Common.Behavior.Animation;
 using Waldhari.Common.UI;
 using Control = GTA.Control;
 
-namespace Waldhari.Behavior.Property
+namespace Waldhari.Common.Behavior.Property
 {
     [ScriptAttributes(NoDefaultInstance = true)]
     public class BuyablePropertyScript : Script

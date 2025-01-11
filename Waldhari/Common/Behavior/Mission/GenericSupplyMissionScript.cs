@@ -1,17 +1,15 @@
 ﻿using System.Collections.Generic;
 using GTA;
-using Waldhari.Behavior.Mission;
-using Waldhari.Behavior.Ped;
+using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
-using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
 
-namespace Waldhari.MethLab.Missions
+namespace Waldhari.Common.Behavior.Mission
 {
-        [ScriptAttributes(NoDefaultInstance = true)]
-    public class SupplyMissionScript : AbstractMissionScript
+    [ScriptAttributes(NoDefaultInstance = true)]
+    public abstract class GenericSupplyMissionScript : AbstractMissionScript
     {
         // Scene
         private WBlip _deliveryWBlip;
@@ -20,43 +18,50 @@ namespace Waldhari.MethLab.Missions
 
         private int _amountToSupply;
         private int _costToSupply;
+        
+        protected abstract int SupplyAmount { get; }
+        protected abstract int SupplyCost { get; }
+        protected abstract string StepDriveMessageKey { get; }
+        protected abstract string DestinationMessageKey { get; }
+        protected abstract WPosition Parking { get; }
+        protected abstract void AddSupply(int amount);
+        protected abstract void ShowStartedMessage();
 
-        public SupplyMissionScript() : base("MethLabSupplyMission", true, "methlab_supply_success")
-        {
-        }
+        protected GenericSupplyMissionScript(string name) : 
+            base(name, true, "supply_success") {}
 
         protected override void StartComplement()
         {
-            _amountToSupply = RandomHelper.Next(MethLabOptions.Instance.SupplyMin, MethLabOptions.Instance.SupplyMax+1);
-            _costToSupply = _amountToSupply * RandomHelper.Next(MethLabOptions.Instance.SupplyMinCost, MethLabOptions.Instance.SupplyMaxCost+1);
+            _amountToSupply = SupplyAmount;
+            _costToSupply = _amountToSupply * SupplyCost;
 
-            if (Game.Player.Money < _costToSupply) 
-                throw new MissionException("methlab_supply_not_enough_money");
+            if (Game.Player.Money < _costToSupply)
+                throw new MissionException("supply_no_money");
 
-            NotificationHelper.ShowFromRon("methlab_supply_started", new List<string> { _amountToSupply.ToString() });
+            ShowStartedMessage();
         }
 
         protected override bool OnTickComplement()
         {
-            
-            if (_sellerScript == null || _sellerScript.WPed.Ped.IsDead) throw new MissionException("methlab_supply_fail_supplier_dead");
+            if (_sellerScript?.WPed?.Ped == null || _sellerScript.WPed.Ped.IsDead)
+                throw new MissionException("supply_fail_supplier_dead");
 
-            if (_van == null || _van.Vehicle.IsConsideredDestroyed) throw new MissionException("methlab_supply_fail_vehicle_destroyed");
+            if (_van?.Vehicle == null || _van.Vehicle.IsConsideredDestroyed)
+                throw new MissionException("supply_fail_vehicle_destroyed");
 
             return true;
         }
 
         protected override List<string> EndComplement()
         {
-            MethLabSave.Instance.Supply += _amountToSupply;
-            MethLabSave.Instance.Save();
-
+            AddSupply(_amountToSupply);
+            
             return new List<string> { _amountToSupply.ToString() };
         }
 
         protected override void FailComplement()
         {
-            // Nothing
+            // Nothing specific to handle
         }
 
         protected override void SetupSteps()
@@ -74,13 +79,13 @@ namespace Waldhari.MethLab.Missions
             return new Step
             {
                 Name = "Rendezvous",
-                MessageKey = "methlab_supply_rendezvous",
+                MessageKey = "supply_step_rendezvous",
                 Action = () =>
                 {
-                    _sellerScript.WPed.MakeMissionDestination("methlab_supply_supplier");
+                    _sellerScript.WPed.MakeMissionDestination("supplier");
                 },
                 CompletionCondition =
-                    () => WPositionHelper.IsNear(Game.Player.Character.Position,_sellerScript.WPed.Ped.Position,25)
+                    () => WPositionHelper.IsNear(Game.Player.Character.Position, _sellerScript.WPed.Ped.Position, 25)
             };
         }
 
@@ -89,15 +94,14 @@ namespace Waldhari.MethLab.Missions
             return new Step
             {
                 Name = "Payment",
-                MessageKey = "methlab_supply_payment",
+                MessageKey = "supply_step_payment",
                 Action = () =>
                 {
-                    _sellerScript.WPed.MakeMissionDestination("methlab_supply_supplier");
+                    _sellerScript.WPed.MakeMissionDestination("supplier");
                 },
                 CompletionCondition =
                     () => !_sellerScript.WPed.Ped.IsInCombat &&
-                          WPositionHelper.IsNear(Game.Player.Character.Position,_sellerScript.WPed.Ped.Position, 2),
-                // Pay seller when completed
+                          WPositionHelper.IsNear(Game.Player.Character.Position, _sellerScript.WPed.Ped.Position, 2),
                 CompletionAction = () =>
                 {
                     SoundHelper.PlayPayment();
@@ -112,19 +116,16 @@ namespace Waldhari.MethLab.Missions
             return new Step
             {
                 Name = "Drive",
-                MessageKey = "methlab_supply_drive_lab",
+                MessageKey = StepDriveMessageKey,
                 Action = () =>
                 {
                     _sellerScript.WPed.RemoveMissionDestination();
-                    
-                    // if player go back from vehicle : show vehicle as mission objective
+
                     if (!Game.Player.Character.IsInVehicle(_van.Vehicle))
                     {
-                        //todo: make a step to go inside vehicle
                         _deliveryWBlip.Remove();
                         _van.MakeMissionDestination("vehicle_van");
                     }
-                    // if player is in vehicle : show destination as mission objective
                     else
                     {
                         _van.RemoveMissionDestination();
@@ -133,7 +134,7 @@ namespace Waldhari.MethLab.Missions
                     }
                 },
                 CompletionCondition =
-                    () => WPositionHelper.IsNear(Game.Player.Character.Position,_deliveryWBlip.Position, 10)
+                    () => WPositionHelper.IsNear(Game.Player.Character.Position, _deliveryWBlip.Position, 10)
             };
         }
 
@@ -142,7 +143,7 @@ namespace Waldhari.MethLab.Missions
             return new Step
             {
                 Name = "Out",
-                MessageKey = "methlab_supply_out",
+                MessageKey = "supply_step_out",
                 Action = () =>
                 {
                     _deliveryWBlip.Remove();
@@ -155,7 +156,8 @@ namespace Waldhari.MethLab.Missions
         protected override void CreateScene()
         {
             var randomPosition = WPositionHelper.GetRandomMissionWithVehiclePosition();
-            
+
+            // todo: random pedhash
             var seller = new WPed
             {
                 PedHash = PedHash.CartelGuards01GMM,
@@ -164,19 +166,20 @@ namespace Waldhari.MethLab.Missions
             };
             seller.Create();
             seller.AddWeapon(WeaponsHelper.GetRandomGangWeapon());
-            
+
             _sellerScript = InstantiateScript<PedActingScript>();
             _sellerScript.WPed = seller;
 
+            // todo: random vehiclehash
             _van = new WVehicle
             {
                 VehicleHash = VehicleHash.Burrito,
                 InitialPosition = randomPosition.VehiclePosition
             };
             _van.Create();
-            
-            _deliveryWBlip = WBlipHelper.GetMission("methlab_supply_destination");
-            _deliveryWBlip.Position =  MethLabHelper.LabParking;
+
+            _deliveryWBlip = WBlipHelper.GetMission(DestinationMessageKey);
+            _deliveryWBlip.Position = Parking.Position;
         }
 
         protected override void CleanScene()
@@ -188,7 +191,7 @@ namespace Waldhari.MethLab.Missions
             {
                 _van.WBlip?.Remove();
                 _van.Vehicle?.MarkAsNoLongerNeeded();
-                if(_van.Vehicle != null)
+                if (_van.Vehicle != null)
                 {
                     if (Game.Player.Character.IsInVehicle(_van.Vehicle))
                     {

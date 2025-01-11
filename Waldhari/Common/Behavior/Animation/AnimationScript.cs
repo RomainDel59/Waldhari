@@ -2,7 +2,7 @@
 using GTA;
 using Waldhari.Common.Exceptions;
 
-namespace Waldhari.Behavior.Animation
+namespace Waldhari.Common.Behavior.Animation
 {
     [ScriptAttributes(NoDefaultInstance = true)]
     public class AnimationScript : Script

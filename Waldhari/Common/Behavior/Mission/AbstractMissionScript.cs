@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using GTA;
 using LemonUI;
-using Waldhari.Behavior.Animation;
-using Waldhari.Behavior.Ped;
-using Waldhari.Common;
+using Waldhari.Common.Behavior.Animation;
+using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
 
-namespace Waldhari.Behavior.Mission
+namespace Waldhari.Common.Behavior.Mission
 {
     [ScriptAttributes(NoDefaultInstance = true)]
     public abstract class AbstractMissionScript : Script

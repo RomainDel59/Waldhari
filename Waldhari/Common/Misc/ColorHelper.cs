@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using GTA;
-using Waldhari.Behavior.Property;
+using Waldhari.Common.Behavior.Property;
 using Waldhari.Common.Exceptions;
 
 namespace Waldhari.Common.Misc
