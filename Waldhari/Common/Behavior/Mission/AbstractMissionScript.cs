@@ -43,6 +43,8 @@ namespace Waldhari.Common.Behavior.Mission
         /// </summary>
         private readonly string _name;
 
+        private PedHash _player;
+
         /// <summary>
         /// Determines if the mission ends with an animation or a simple notification.
         /// </summary>
@@ -172,6 +174,7 @@ namespace Waldhari.Common.Behavior.Mission
                 CreateScene();
 
                 IsActive = true;
+                _player = (PedHash)Game.Player.Character.Model.Hash;
                 HideMenu();
 
                 SetupSteps();
@@ -229,9 +232,14 @@ namespace Waldhari.Common.Behavior.Mission
                     _rivalScript?.Remove();
                     throw new MissionException("player_arrested");
                 }
-                
-                
 
+                if ((PedHash)Game.Player.Character.Model.Hash != _player)
+                {
+                    // If player change character : make enemies disappear if exist
+                    _rivalScript?.Remove();
+                    throw new MissionException("character_abandoned");
+                }
+                
                 // No police when fighting rival gang
                 if (IsFightingRival()) Game.Player.WantedLevel = 0;
 

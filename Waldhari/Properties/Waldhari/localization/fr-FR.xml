@@ -66,6 +66,10 @@
             <Value>Vous avez été ~r~arrêté~s~ !</Value>
         </LocaleKey>
         <LocaleKey>
+            <Key>character_abandoned</Key>
+            <Value>Vous avez ~r~abandonné~s~ la mission !</Value>
+        </LocaleKey>
+        <LocaleKey>
             <Key>mission_succeed</Key>
             <Value>Mission réussie</Value>
         </LocaleKey>

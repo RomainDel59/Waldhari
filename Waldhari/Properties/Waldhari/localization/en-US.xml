@@ -66,6 +66,10 @@
             <Value>You got ~r~caught~s~!</Value>
         </LocaleKey>
         <LocaleKey>
+            <Key>character_abandoned</Key>
+            <Value>You have ~r~abandoned~s~ the mission!</Value>
+        </LocaleKey>
+        <LocaleKey>
             <Key>mission_succeed</Key>
             <Value>Mission succeeded</Value>
         </LocaleKey>
