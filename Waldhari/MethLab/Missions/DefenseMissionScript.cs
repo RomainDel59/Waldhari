@@ -16,6 +16,8 @@ namespace Waldhari.MethLab.Missions
         // first time try : wait 1 minute
         private static int _nextAttackTry = Game.GameTime + 60 * 1000;
 
+        private static int _nextAutorizedAttack = -1;
+
         public DefenseMissionScript() : base("MethLabDefenseMission", true, "methlab_defense_success")
         {
         }
@@ -48,6 +50,9 @@ namespace Waldhari.MethLab.Missions
             
             // If no product : no attack
             if (MethLabSave.Instance.Product == 0) return;
+            
+            // Has been attacked in the last minutes : no new attack
+            if(_nextAutorizedAttack > Game.GameTime) return;
 
             // Try to attack
             Logger.Info("Trying MethLabDefenseMission");
@@ -55,6 +60,9 @@ namespace Waldhari.MethLab.Missions
             {
                 var script = InstantiateScript<DefenseMissionScript>();
                 script.Start();
+                
+                // since an attack has been launched, the next will be at least 10 minutes later
+                _nextAutorizedAttack = Game.GameTime + 10 * 60 * 1000;
             }
 
             AddCooldown();
@@ -113,7 +121,7 @@ namespace Waldhari.MethLab.Missions
         protected override void CreateScene()
         {
             _rivalScript = InstantiateScript<EnemyGroupScript>();
-            _rivalScript.DefineGroup(WGroupHelper.CreateRivalMembers(RivalMembers * 2, false));
+            _rivalScript.DefineGroup(WGroupHelper.CreateRivalMembers(RivalMembers * 2));
         }
 
         protected override void CleanScene()

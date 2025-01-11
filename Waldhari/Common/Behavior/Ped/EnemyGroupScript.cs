@@ -44,6 +44,8 @@ namespace Waldhari.Behavior.Ped
         {
             CreateVehicles(wGroup);
             CreatePeds(wGroup);
+            WarpInVehicle(wGroup);
+            FightAgainstPlayer(wGroup);
             WGroup = wGroup;
         }
 
@@ -100,33 +102,62 @@ namespace Waldhari.Behavior.Ped
         /// </summary>
         private void CreatePeds(WGroup wGroup)
         {
+            if (wGroup.WPeds == null || wGroup.WPeds.Count == 0) return;
+
             var hasVehicles = wGroup.HasVehicles();
 
-            Logger.Debug($"wGroup.WPeds.Count= {wGroup.WPeds.Count}");
-            
-            for (var i = 0 ; i < wGroup.WPeds.Count; i++)
+            var pedIndex = 0;
+            foreach (var wPed in wGroup.WPeds)
             {
-                Logger.Debug($"create wGroup.WPeds[i] i= {i}");
-                var wPed = wGroup.WPeds[i];
+                if (wPed == null) continue;
                 
-                // Not on the street to avoid being hit by a car on highway ! x')
                 wPed.InitialPosition = WPositionHelper.GetBehindPosition(AppearanceDistance, false);
                 wPed.Create();
                 wPed.WBlip.Ped = wPed.Ped;
-                wPed.WBlip?.Create();
-                wPed.AddWeapon(WeaponsHelper.GetRandomGangVehicleWeapon());
-                wPed.AddWeapon(WeaponsHelper.GetRandomGangVehicleWeapon());
+                wPed.WBlip.Create();
 
-                if(hasVehicles)
+                // give 2 weapons
+                for(var i = 0; i < 2; i++)
                 {
-                    Logger.Debug($"get on vehicle wGroup.WPeds[i] i= {i}");
-                    GetOnVehicle(wPed, wGroup.WVehicles[i]);
-                    wPed.Ped.Task.VehicleChase(Game.Player.Character);
+                    var weapon = hasVehicles
+                        ? WeaponsHelper.GetRandomGangVehicleWeapon()
+                        : WeaponsHelper.GetRandomGangWeapon();
+                    wPed.AddWeapon(weapon);
                 }
                 
-                wPed.Ped.Task.FightAgainst(Game.Player.Character);
+                wGroup.AddInGroup(wPed, pedIndex == 0);
 
-                wGroup.AddInGroup(wPed, i == 0);
+                pedIndex++;
+            }
+            
+        }
+
+        private void WarpInVehicle(WGroup wGroup)
+        {
+            if (!wGroup.HasVehicles()) return;
+
+            var vehicleNumber = wGroup.WVehicles.Count;
+            var vehicleIndex = 0;
+            foreach (var wPed in wGroup.WPeds)
+            {
+                if(vehicleIndex >= vehicleNumber) vehicleIndex = 0;
+                
+                var vehicle = wGroup.WVehicles[vehicleIndex];
+                GetOnVehicle(wPed, vehicle);
+                
+                vehicleIndex++;
+            }
+
+        }
+
+        private void FightAgainstPlayer(WGroup wGroup)
+        {
+            var hasVehicles = wGroup.HasVehicles();
+
+            foreach (var wPed in wGroup.WPeds)
+            {
+                wPed.Ped.Task.FightAgainst(Game.Player.Character);
+                if(hasVehicles) wPed.Ped.Task.VehicleChase(Game.Player.Character);
             }
         }
 
@@ -221,9 +252,6 @@ namespace Waldhari.Behavior.Ped
             {
                 Logger.Debug($"wVehicle = {wVehicle}");
                 Logger.Debug($"wVehicle.Vehicle = {wVehicle.Vehicle}");
-                
-                // If vehicle has no free seat
-                //if(!wVehicle.Vehicle.IsSeatFree(VehicleSeat.Any)) continue;
                 
                 WVehicleHelper.MakePedWarpInVehicle(wPed, wVehicle);
             }

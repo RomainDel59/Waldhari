@@ -10,6 +10,7 @@ namespace Waldhari.Common.Entities
 {
     public class WGroup
     {
+        
         public string Name = null;
 
         public List<WPed> WPeds = null;
