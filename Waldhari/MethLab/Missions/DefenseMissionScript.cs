@@ -27,10 +27,10 @@ namespace Waldhari.MethLab.Missions
         }
 
         //todo: move this to methlab main script
-        public void TryToStart(bool hasAnotherMissionActive)
+        public void TryToStart()
         {
             // If another mission is active
-            if (hasAnotherMissionActive || Game.IsMissionActive || Game.IsRandomEventActive)
+            if (IsAnyMissionActive() || Game.IsMissionActive || Game.IsRandomEventActive)
             {
                 AddCooldown();
                 return;
@@ -58,7 +58,7 @@ namespace Waldhari.MethLab.Missions
             if (RandomHelper.Try(RivalChance))
             {
                 _attackingScript = InstantiateScript<EnemyGroupScript>();
-                _attackingScript.DefineGroup(WGroupHelper.CreateRivalMembers(RivalMembers * 5, false));
+                _attackingScript.DefineGroup(WGroupHelper.CreateRivalMembers(RivalMembers * 2, false));
                 Start();
             }
 

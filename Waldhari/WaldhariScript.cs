@@ -13,13 +13,15 @@ namespace Waldhari
             Tick += OnTick;
         }
 
+        
         private void OnTick(object sender, EventArgs e)
         {
             PhoneHelper.GetIFruit().Update();
             
             if (Game.IsControlJustPressed(Control.ContextSecondary))
             {
-                var position = Environment.NewLine+"= new WPosition{"+Environment.NewLine +
+                var position = Environment.NewLine+"= new WPosition"+Environment.NewLine +
+                               "{"+Environment.NewLine +
                                "Position = new Vector3(" +
                                Game.Player.Character.Position.X.ToString(CultureInfo.CurrentCulture).Replace(",", ".") +
                                "f, " +
@@ -36,13 +38,41 @@ namespace Waldhari
                                "f),"+Environment.NewLine +
                                "Heading = " + Game.Player.Character.Heading.ToString(CultureInfo.CurrentCulture).Replace(",", ".") + "f"+Environment.NewLine +
                                "};";
-                Logger.Info(position);
+                Logger.Debug(position);
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 
                 //test
-                // var test = InstantiateScript<EnemyGroupScript>();
-                // test.DefineGroup(WGroupHelper.CreateRivalMembers(3));
-                
+                 // _test = InstantiateScript<EnemyGroupScript>();
+                 // _test?.DefineGroup(WGroupHelper.CreateRivalMembers(10));
+            }
+
+            if (Game.IsControlJustPressed(Control.Context))
+            {
+                //test
+                // _test?.MarkAsNoLongerNeeded();
+                // _test?.Abort();
+                // _test = null;
             }
         }
+        // private EnemyGroupScript _test;
     }
 }

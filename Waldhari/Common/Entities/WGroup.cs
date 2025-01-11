@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GTA;
 using GTA.Native;
 using Waldhari.Common.Exceptions;
+using Waldhari.Common.Files;
 
 namespace Waldhari.Common.Entities
 {
     public class WGroup
     {
         public string Name = null;
-
-        // If not ally : enemy
-        public bool IsAlly = false;
 
         public List<WPed> WPeds = null;
         public List<WVehicle> WVehicles = null;
@@ -28,10 +27,30 @@ namespace Waldhari.Common.Entities
         /// otherwise there will be enemies.
         /// </summary>
         /// <exception cref="TechnicalException">If the name is empty</exception>
-        public void Create()
+        public void Create(Relationship relationship)
         {
             if(Name == null) throw new TechnicalException("Name cannot be empty");
 
+            CreateRelationship(relationship);
+            
+            _pedGroup = new PedGroup();
+            _pedGroup.Formation = Formation.Loose;
+            
+            WPeds = new List<WPed>();
+            
+            WVehicles = new List<WVehicle>();
+        }
+
+        private void CreateRelationship(Relationship relationship)
+        {
+            if (_relationshipGroup != null)
+            {
+                Logger.Debug($"Before create relationship, as group {Name} has already been created, it will remove relationship");
+                RemoveRelationship();
+            }
+            
+            if(Name == null) Name = Guid.NewGuid().ToString();
+            
             int num;
             unsafe
             {
@@ -41,24 +60,57 @@ namespace Waldhari.Common.Entities
             
             // All peds in this group will be allies to each other
             _relationshipGroup.SetRelationshipBetweenGroups(_relationshipGroup, Relationship.Companion);
-
-            if (IsAlly)
-            {
-                // All peds in this group will be allies with the player
-                _relationshipGroup.SetRelationshipBetweenGroups(Game.Player.Character.RelationshipGroup, Relationship.Companion, true);
-            }
-            else
-            {
-                // All peds in this group will be enemies with the player
-                _relationshipGroup.SetRelationshipBetweenGroups(Game.Player.Character.RelationshipGroup, Relationship.Hate, true);
-            }
-
-            _pedGroup = new PedGroup();
-            _pedGroup.Formation = Formation.Loose;
             
-            WPeds = new List<WPed>();
+            // All peds in this group will be in relationship with the player
+            _relationshipGroup.SetRelationshipBetweenGroups(Game.Player.Character.RelationshipGroup, relationship, true);
+
+            Logger.Debug($"After create relationship : " +
+                         $"group internal relationship={_relationshipGroup.GetRelationshipBetweenGroups(_relationshipGroup)}, " +
+                         $"relationship with player={_relationshipGroup.GetRelationshipBetweenGroups(Game.Player.Character.RelationshipGroup)}");
             
-            WVehicles = new List<WVehicle>();
+            if (WPeds != null && WPeds.Count > 0)
+            {
+                foreach (var wPed in WPeds)
+                {
+                    if(wPed?.Ped == null) continue;
+                    
+                    wPed.Ped.RelationshipGroup = _relationshipGroup;
+                }
+            }
+            
+        }
+
+        private void RemoveRelationship()
+        {
+            Logger.Debug($"Before delete relationship : " +
+                         $"group internal relationship={_relationshipGroup.GetRelationshipBetweenGroups(_relationshipGroup)}, " +
+                         $"relationship with player={_relationshipGroup.GetRelationshipBetweenGroups(Game.Player.Character.RelationshipGroup)}");
+                
+            _relationshipGroup.ClearRelationshipBetweenGroups(_relationshipGroup, _relationshipGroup.GetRelationshipBetweenGroups(_relationshipGroup));
+            _relationshipGroup.ClearRelationshipBetweenGroups(Game.Player.Character.RelationshipGroup, _relationshipGroup.GetRelationshipBetweenGroups(Game.Player.Character.RelationshipGroup), true);
+            _relationshipGroup.Remove();
+            _relationshipGroup = null;
+            
+            Logger.Debug($"After delete relationship : " +
+                         $"group internal relationship={_relationshipGroup.GetRelationshipBetweenGroups(_relationshipGroup)}, " +
+                         $"relationship with player={_relationshipGroup.GetRelationshipBetweenGroups(Game.Player.Character.RelationshipGroup)}");
+        }
+
+        public void MakeNeutral()
+        {
+            // All peds in this group will be neutral with the player
+            CreateRelationship(Relationship.Pedestrians);
+            //see Relationship class : Pedestrians=The correct relationship name for this enum would be None.
+
+            if (WPeds != null && WPeds.Count > 0)
+            {
+                foreach (var wPed in WPeds)
+                {
+                    if(wPed?.Ped == null) continue;
+                    
+                    wPed.Ped.Task.ClearAll();
+                }
+            }
         }
 
         /// <summary>
@@ -118,36 +170,34 @@ namespace Waldhari.Common.Entities
             WVehicles.Add(wVehicle);
         }
 
+        public void MarkAsNoLongerNeeded()
+        {
+            MakeNeutral();
+            
+            if (WPeds != null)
+            {
+                foreach (var wPed in WPeds)
+                {
+                    if (wPed == null) continue;
 
+                    wPed.WBlip?.Remove();
+                    wPed.WBlip = null;
+                    wPed.Ped?.MarkAsNoLongerNeeded();
+                    wPed.Ped = null;
+                }
+            }
 
+            if (WVehicles != null)
+            {
+                foreach (var wVehicle in WVehicles)
+                {
+                    if (wVehicle == null) continue;
 
-
-
-
-
-
-        // public void Update(bool forceDelete = false)
-        // {
-        //     foreach (var wPed in WPedList)
-        //     {
-        //         if (wPed == null) continue;
-        //         if (wPed.GtaPed == null) continue;
-        //
-        //         wPed.AttachEnemyMarker();
-        //         
-        //         if(DisappearanceDistance == -1) throw new TechnicalException("DisappearanceDistance is not defined.");
-        //
-        //         if (forceDelete || wPed.GtaPed.Position.DistanceTo(Game.Player.Character.Position) > DisappearanceDistance)
-        //         {
-        //             wPed.Remove();
-        //             continue;
-        //         }
-        //
-        //         if (!wPed.GtaPed.IsDead) continue;
-        //
-        //         wPed.RemoveBlip();
-        //         wPed.MarkAsNoLongerNeeded();
-        //     }
-        // }
+                    wVehicle.Vehicle?.MarkAsNoLongerNeeded();
+                    wVehicle.Vehicle = null;
+                }
+            }
+        }
+        
     }
 }

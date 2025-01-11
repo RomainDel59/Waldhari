@@ -13,6 +13,8 @@ namespace Waldhari.Common.UI
         /// <param name="wBlip">WBlip to use</param>
         public static void DrawGroundMarkerOnBlip(WBlip wBlip)
         {
+            if(wBlip == null) return;
+            
             var position = wBlip.Position;
             position.Z = World.GetGroundHeight(position);
             
@@ -33,6 +35,8 @@ namespace Waldhari.Common.UI
         /// <param name="wBlip">WBlip to use</param>
         public static void DrawEntityMarkerOnBlip(WBlip wBlip)
         {
+            if(wBlip == null) return;
+            
             var position = wBlip.GetPosition();
             position.Z += 2.5f;
             

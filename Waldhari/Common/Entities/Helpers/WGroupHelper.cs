@@ -10,7 +10,7 @@ namespace Waldhari.Common.Entities.Helpers
         {
             var group = new WGroup();
             group.Name = "RivalMembers";
-            group.Create();
+            group.Create(Relationship.Hate);
 
             for (var i = 0; i < number; i++)
             {

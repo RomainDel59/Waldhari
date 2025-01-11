@@ -53,24 +53,7 @@ namespace Waldhari.Behavior.Ped
         /// </summary>
         public void MarkAsNoLongerNeeded()
         {
-            //todo: may be => make ped not fight the player anymore
-            
-            foreach (var wPed in WGroup.WPeds)
-            {
-                if (wPed == null) continue;
-                
-                wPed.WBlip?.Remove();
-                wPed.Ped?.MarkAsNoLongerNeeded();
-            }
-            
-            if (!WGroup.HasVehicles()) return;
-            
-            foreach (var wVehicle in WGroup.WVehicles)
-            {
-                if (wVehicle == null) continue;
-                
-                wVehicle.Vehicle?.MarkAsNoLongerNeeded();
-            }
+            WGroup?.MarkAsNoLongerNeeded();
         }
 
         /// <summary>
@@ -214,6 +197,7 @@ namespace Waldhari.Behavior.Ped
                 
                 // Enemy dead : no longer needed
                 wPed.WBlip?.Remove();
+                wPed.WBlip = null;
                 wPed.Ped.MarkAsNoLongerNeeded();
                 wPed.Ped = null;
             }

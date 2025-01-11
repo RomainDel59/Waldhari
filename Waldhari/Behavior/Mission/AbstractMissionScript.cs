@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GTA;
 using LemonUI;
 using Waldhari.Behavior.Animation;
@@ -67,6 +68,11 @@ namespace Waldhari.Behavior.Mission
         /// Indicates whether the mission is currently active.
         /// </summary>
         public bool IsActive;
+        private static readonly List<AbstractMissionScript> Instances = new List<AbstractMissionScript>();
+        public static bool IsAnyMissionActive()
+        {
+            return Instances.Any(instance => instance.IsActive);
+        }
         
         /// <summary>
         /// Index of the "wanted" step, if applicable. -1 means it is not defined.
@@ -125,6 +131,7 @@ namespace Waldhari.Behavior.Mission
         protected AbstractMissionScript(string name, bool finishWithAnimation, string successMessageKey)
         {
             Logger.Debug($"Instantiate mission {name}");
+            Instances.Add(this);
             
             _name = name;
             _finishWithAnimation = finishWithAnimation;
@@ -137,6 +144,11 @@ namespace Waldhari.Behavior.Mission
             AddCooldown();
             
             Tick += OnTick;
+        }
+
+        ~AbstractMissionScript()
+        {
+            Instances.Remove(this);
         }
         
         /// <summary>
