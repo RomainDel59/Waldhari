@@ -1,4 +1,5 @@
 ﻿using GTA;
+using GTA.Native;
 using Waldhari.Behavior.Property;
 using Waldhari.Common.Exceptions;
 
@@ -28,6 +29,12 @@ namespace Waldhari.Common.Misc
                 default: throw new TechnicalException("Unknown character");
             }
             
+        }
+
+        public static bool IsBeingArrested()
+        {
+            // see https://docs.fivem.net/natives/?_0x388A47C51ABDAC8E
+            return Function.Call<bool>(Hash.IS_PLAYER_BEING_ARRESTED, Game.Player, 0);
         }
     }
 }

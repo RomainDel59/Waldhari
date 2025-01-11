@@ -223,6 +223,15 @@ namespace Waldhari.Behavior.Mission
                     _rivalScript?.Remove();
                     throw new MissionException("player_dead");
                 }
+                
+                if (PlayerHelper.IsBeingArrested())
+                {
+                    // If player arrested : make enemies disappear if exist
+                    _rivalScript?.Remove();
+                    throw new MissionException("player_arrested");
+                }
+                
+                
 
                 // No police when fighting rival gang
                 if (IsFightingRival()) Game.Player.WantedLevel = 0;

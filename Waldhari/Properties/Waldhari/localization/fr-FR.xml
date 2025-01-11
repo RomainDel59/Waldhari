@@ -58,6 +58,10 @@
             <Value>Vous êtes ~r~mort~s~ !</Value>
         </LocaleKey>
         <LocaleKey>
+            <Key>player_arrested</Key>
+            <Value>Vous avez été ~r~arrêté~s~ !</Value>
+        </LocaleKey>
+        <LocaleKey>
             <Key>mission_succeed</Key>
             <Value>Mission réussie</Value>
         </LocaleKey>
