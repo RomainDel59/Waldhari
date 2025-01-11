@@ -33,6 +33,7 @@ namespace Waldhari.Common.UI
 
         public static void PlayTake()
         {
+            //todo: find the good sound for take something in game
             Function.Call(Hash.PLAY_SOUND_FRONTEND, -1, "PURCHASE", "HUD_LIQUOR_STORE_SOUNDSET");
         }
 

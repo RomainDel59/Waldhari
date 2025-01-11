@@ -165,7 +165,7 @@ namespace Waldhari.MethLab
             _contact.Answered += contact =>
             {
                 PhoneHelper.GetIFruit().Close(1000);
-                //todo: make a pause of 1 sec before show menu
+                Script.Wait(1000);
                 GetMenu().Visible = true;
             };
             

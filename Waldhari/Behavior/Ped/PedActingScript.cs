@@ -84,7 +84,6 @@ namespace Waldhari.Behavior.Ped
                 if (HasAnimationToDo()) return;
 
                 // Scenario is playing
-                //todo: correct this that doesn't work
                 if (IsPlayingScenario()) return;
 
                 // Replay scenario
