@@ -34,7 +34,7 @@ namespace Waldhari.MethLab.Missions
             _amountToDeal = MethLabSave.Instance.Product;
             _priceToDeal = _amountToDeal * GetPricePerGram();
 
-            NotificationHelper.ShowFromRon("methlab_bulk_started_ron",
+            NotificationHelper.ShowFromRon("methlab_bulk_started",
                 new List<string> { _priceToDeal.ToString() });
 
             MethLabSave.Instance.Product -= _amountToDeal;

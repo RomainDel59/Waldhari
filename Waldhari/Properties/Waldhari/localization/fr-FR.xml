@@ -4,9 +4,9 @@
     <Locales>
         
         <!-- 
-        ***************************
-        *** Ressources globales *** 
-        ***************************
+        ************************
+        *** Global Resources *** 
+        ************************
         -->
         
         <LocaleKey>
@@ -156,16 +156,16 @@
             <Value>Vérifie le volume de matières premières en stock.</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>methlab_supply_amount</Key>
-            <Value>Il y a ~g~{0} kg~s~ de matières premières en stock actuellement.</Value>
-        </LocaleKey>
-        <LocaleKey>
             <Key>methlab_menu_check_product_title</Key>
             <Value>Stock de méth</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_menu_check_product_description</Key>
             <Value>Vérifie le volume de méth en stock actuellement.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_amount</Key>
+            <Value>Il y a ~g~{0} kg~s~ de matières premières en stock actuellement.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_product_amount</Key>
@@ -299,7 +299,7 @@
             <Value>Grossiste</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>methlab_bulk_started_ron</Key>
+            <Key>methlab_bulk_started</Key>
             <Value>Salut patron, un grossiste a accepté de prendre toute la marchandise pour ~g~{0} $~s~, prend le fourgon en bas du labo, et va lui apporter aux coordonnées que je t'ai envoyées.</Value>
         </LocaleKey>
         <LocaleKey>
@@ -332,6 +332,5 @@
         </LocaleKey>
         
         
-
     </Locales>
 </LocalizationFile>

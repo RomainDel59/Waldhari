@@ -4,15 +4,333 @@
     <Locales>
 
         <!-- 
-        ***************************
-        *** Ressources globales *** 
-        ***************************
+        ************************
+        *** Global Resources *** 
+        ************************
         -->
 
         <LocaleKey>
             <Key>error</Key>
-            <Value>~r~Une erreur est survenue, veuillez envoyer les logs du mod sur https://github.com/RomainDel59/Waldhari/issues svp.~s~</Value>
+            <Value>~r~An error occurred, please send the mod logs to https://github.com/RomainDel59/Waldhari/issues.~s~</Value>
         </LocaleKey>
-        
+        <LocaleKey>
+            <Key>property_with_price</Key>
+            <Value>{0}: ${1}</Value>
+        </LocaleKey>
+
+        <!-- Names -->
+        <LocaleKey>
+            <Key>ron_sender</Key>
+            <Value>Ron Jakowski</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>chemist_sender</Key>
+            <Value>Chemist</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>rival_enemy</Key>
+            <Value>Rival gang member</Value>
+        </LocaleKey>
+
+        <!-- Vehicles -->
+        <LocaleKey>
+            <Key>vehicle_van</Key>
+            <Value>Van</Value>
+        </LocaleKey>
+
+        <!-- Missions -->
+        <LocaleKey>
+            <Key>already_in_mission</Key>
+            <Value>A mission is already ~r~in progress~s~.</Value>
+        </LocaleKey>
+
+        <LocaleKey>
+            <Key>wanted_during_mission</Key>
+            <Value>Lose the ~r~cops~s~!</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>rival_during_mission</Key>
+            <Value>Get rid of the ~r~rival gang members~s~!</Value>
+        </LocaleKey>
+
+        <LocaleKey>
+            <Key>player_dead</Key>
+            <Value>You are ~r~dead~s~!</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>player_arrested</Key>
+            <Value>You got ~r~caught~s~!</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>mission_succeed</Key>
+            <Value>Mission succeeded</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>mission_failed</Key>
+            <Value>Mission failed</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>property_bought</Key>
+            <Value>Property bought</Value>
+        </LocaleKey>
+
+        <!-- Menu help -->
+        <LocaleKey>
+            <Key>menu_select</Key>
+            <Value>Select</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>menu_back</Key>
+            <Value>Back</Value>
+        </LocaleKey>
+
+
+
+        <!-- 
+        ***************
+        *** MethLab *** 
+        ***************
+        -->
+
+        <!-- General -->
+        <LocaleKey>
+            <Key>methlab</Key>
+            <Value>Meth Lab</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_help</Key>
+            <Value>{0}~n~Price: {1} $~n~Provides access to ~y~lab missions~s~~n~Press {2} to buy.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_buy_failure</Key>
+            <Value>You don't have ~r~enough money~s~ to pay.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_buy_success</Key>
+            <Value>You bought the ~y~meth lab~s~.~n~This workshop allows you to produce and sell methamphetamine to earn money.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_intro</Key>
+            <Value>Hi boss!~n~I feel we're going to make a lot of cash with this lab. Call me when you want to start.</Value>
+        </LocaleKey>
+
+        <!-- Menu -->
+        <LocaleKey>
+            <Key>methlab_menu_supply_title</Key>
+            <Value>Supplies</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_supply_description</Key>
+            <Value>Start a mission to collect raw materials.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_manufacture_title</Key>
+            <Value>Manufacturing</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_manufacture_description</Key>
+            <Value>Start meth manufacturing in the lab.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_deal_title</Key>
+            <Value>Retail Sale</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_deal_description</Key>
+            <Value>Start a mission to sell meth to an individual.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_bulk_title</Key>
+            <Value>Wholesale</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_bulk_description</Key>
+            <Value>Start a mission to sell all the meth to a wholesaler.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_check_supply_title</Key>
+            <Value>Raw Materials Stock</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_check_supply_description</Key>
+            <Value>Check the current stock of raw materials.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_check_product_title</Key>
+            <Value>Meth Stock</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_check_product_description</Key>
+            <Value>Check the current stock of meth.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_amount</Key>
+            <Value>There are currently ~g~{0} kg~s~ of raw materials in stock.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_product_amount</Key>
+            <Value>There are currently ~g~{0} g~s~ of meth in stock.</Value>
+        </LocaleKey>
+
+
+        <!-- Defense mission -->
+        <LocaleKey>
+            <Key>methlab_defense_success</Key>
+            <Value>The lab remains ~g~safe for now~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_defense_fail_dead</Key>
+            <Value>The rival gang stole all the ~r~products~s~ and ~r~raw materials~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_defense_defending</Key>
+            <Value>Defend the lab from the ~r~rival gang members~s~!</Value>
+        </LocaleKey>
+
+
+        <!-- Supply mission -->
+        <LocaleKey>
+            <Key>methlab_supply_supplier</Key>
+            <Value>Supplier</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_destination</Key>
+            <Value>Lab Parking</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_not_enough_money</Key>
+            <Value>You need more ~r~money~s~ for a resupply.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_started</Key>
+            <Value>Hey boss! I’ve ordered ~g~{0} kg~s~ of raw materials, go pick them up at the coordinates I sent you.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_rendezvous</Key>
+            <Value>Head to the rendezvous with the ~y~supplier~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_payment</Key>
+            <Value>Pay the ~y~supplier~s~ for the raw materials.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_drive_lab</Key>
+            <Value>Drive the ~y~van~s~ to the lab.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_out</Key>
+            <Value>Get out of the ~y~van~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_fail_supplier_dead</Key>
+            <Value>The ~r~supplier~s~ has been killed.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_fail_vehicle_destroyed</Key>
+            <Value>The van was ~r~destroyed~s~ with everything inside.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_success</Key>
+            <Value>~g~{0} kg~s~ of raw materials have been added to the stock.</Value>
+        </LocaleKey>
+
+
+        <!-- Manufacture mission -->
+        <LocaleKey>
+            <Key>methlab_manufacture_no_supply</Key>
+            <Value>There is no ~r~raw material~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_manufacture_started</Key>
+            <Value>Hey boss, I’m starting the preparation and will contact you when it’s ready.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_manufacture_finished</Key>
+            <Value>I’ve finished the preparation, boss, I’ve produced ~g~{0} g~s~ of meth. Call me when you want.</Value>
+        </LocaleKey>
+
+
+        <!-- Deal mission -->
+        <LocaleKey>
+            <Key>methlab_deal_no_product</Key>
+            <Value>There is no ~r~meth in stock~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_product</Key>
+            <Value>Storage Cabinet</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_client</Key>
+            <Value>Client</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_started</Key>
+            <Value>Hi boss, a client is asking for ~r~{0} g~s~ of meth for ~g~{1} $~s~, deliver it to the coordinates I sent you.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_get_product</Key>
+            <Value>Go get some meth at the ~y~lab~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_rendezvous</Key>
+            <Value>Head to the rendezvous point with the ~y~client~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_payment</Key>
+            <Value>Complete the deal with the ~y~client~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_success</Key>
+            <Value>The deal earned ~g~{0} $~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_fail_client_dead</Key>
+            <Value>The ~r~client~s~ has been killed.</Value>
+        </LocaleKey>
+
+
+        <!-- Bulk mission -->
+        <LocaleKey>
+            <Key>methlab_bulk_delivery</Key>
+            <Value>Delivery</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_wholesaler</Key>
+            <Value>Wholesaler</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_started</Key>
+            <Value>Hi boss, a wholesaler agreed to take all the goods for ~g~{0} $~s~, take the van below the lab and deliver it to the coordinates I sent you.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_in</Key>
+            <Value>Get into the ~y~van~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_rendezvous</Key>
+            <Value>Drive the van to the ~y~delivery point~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_out</Key>
+            <Value>Exit the ~y~van~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_payment</Key>
+            <Value>Collect the payment from the ~y~wholesaler~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_fail_vehicle_destroyed</Key>
+            <Value>The van has been ~r~destroyed~s~ with all its contents.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_fail_wholesaler_dead</Key>
+            <Value>The ~r~wholesaler~s~ has been killed.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_success</Key>
+            <Value>The stock has been sold for ~g~{0} $~s~.</Value>
+        </LocaleKey>
+
+
     </Locales>
 </LocalizationFile>
