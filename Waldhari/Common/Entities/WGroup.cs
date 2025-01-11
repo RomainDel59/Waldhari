@@ -101,16 +101,6 @@ namespace Waldhari.Common.Entities
             // All peds in this group will be neutral with the player
             CreateRelationship(Relationship.Pedestrians);
             //see Relationship class : Pedestrians=The correct relationship name for this enum would be None.
-
-            if (WPeds != null && WPeds.Count > 0)
-            {
-                foreach (var wPed in WPeds)
-                {
-                    if(wPed?.Ped == null) continue;
-                    
-                    wPed.Ped.Task.ClearAll();
-                }
-            }
         }
 
         /// <summary>
@@ -198,6 +188,18 @@ namespace Waldhari.Common.Entities
                 }
             }
         }
-        
+
+        public void ClearTask()
+        {
+            if (WPeds != null && WPeds.Count > 0)
+            {
+                foreach (var wPed in WPeds)
+                {
+                    if(wPed?.Ped == null) continue;
+                    
+                    wPed.Ped.Task.ClearAll();
+                }
+            }
+        }
     }
 }

@@ -80,8 +80,8 @@ namespace Waldhari.MethLab.Missions
 
         protected override List<string> EndComplement()
         {
-            _attackingScript.MarkAsNoLongerNeeded();
-            _attackingScript.Abort();
+            _attackingScript?.MarkAsNoLongerNeeded();
+            _attackingScript?.Abort();
             
             AddCooldown();
             
@@ -90,8 +90,8 @@ namespace Waldhari.MethLab.Missions
 
         protected override void FailComplement()
         {
-            _attackingScript.MarkAsNoLongerNeeded();
-            _attackingScript.Abort();
+            _attackingScript?.MarkAsNoLongerNeeded();
+            _attackingScript?.Abort();
             
             MethLabSave.Instance.Supply = 0;
             MethLabSave.Instance.Product = 0;

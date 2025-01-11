@@ -54,6 +54,7 @@ namespace Waldhari.Behavior.Ped
         public void MarkAsNoLongerNeeded()
         {
             WGroup?.MarkAsNoLongerNeeded();
+            WGroup?.ClearTask();
         }
 
         /// <summary>
