@@ -30,7 +30,7 @@ namespace Waldhari.MethLab
                 NameKey = "methlab",
                 Holder = (Property.Owner)MethLabSave.Instance.Owner,
                 Price = MethLabOptions.Instance.Price,
-                Position = MethLabHelper.PropertyPosition,
+                Position = MethLabHelper.Positions.Property.Position,
                 Sprite = BlipSprite.Meth
             };
             

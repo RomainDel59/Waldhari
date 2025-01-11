@@ -44,7 +44,7 @@ namespace Waldhari.MethLab.Missions
             }
 
             // Is too far
-            if (!WPositionHelper.IsNear(Game.Player.Character.Position, MethLabHelper.LaboratoryPosition.Position, 50))
+            if (!WPositionHelper.IsNear(Game.Player.Character.Position, MethLabHelper.Positions.Property.Position, 50))
             {
                 AddCooldown();
                 return;

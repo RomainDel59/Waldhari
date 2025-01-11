@@ -372,7 +372,7 @@ namespace Waldhari.Common.Entities.Helpers
                 .SelectMany(mission => mission.PedPositions)
                 .ToList();
             
-            var index = new Random().Next(0, pedPositions.Count);
+            var index = RandomHelper.Next(0, pedPositions.Count);
             while (_lastGivenAlonePedPosition == index)
             {
                 index = new Random().Next(0, pedPositions.Count);

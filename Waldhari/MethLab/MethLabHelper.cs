@@ -6,6 +6,7 @@ using LemonUI;
 using LemonUI.Menus;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Files;
+using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
 using Waldhari.MethLab.Missions;
 
@@ -13,13 +14,51 @@ namespace Waldhari.MethLab
 {
     public static class MethLabHelper
     {
-        
-        public static Vector3 PropertyPosition = new Vector3(1394.793f, 3598.564f, 34.98966f);
-        public static WPosition LaboratoryPosition = new WPosition
+        public static class Positions
         {
-            Position = new Vector3(1389.134f, 3605.236f, 38.94193f),
-            //todo: add rotation and heading
-        };
+            public static readonly WPosition Property = new WPosition
+            {
+                Position = new Vector3(1394.511f, 3598.316f, 34.98711f),
+                Rotation = new Vector3(0.000529588f, -0.0006858803f, -167.1918f),
+                Heading = 192.8082f
+            };
+            
+            public static readonly WPosition Storage = new WPosition
+            {
+                Position = new Vector3(1394.949f, 3613.84f, 34.98093f),
+                Rotation = new Vector3(0.0005374776f, -0.0007078056f, 15.72955f),
+                Heading = 15.72955f
+            };
+
+            // TODO: (immersive feature) Make a chemist work at this position
+            public static WPosition GetWorkstation()
+            {
+                var index = RandomHelper.Next(0, Workstations.Count);
+                return Workstations[index]; 
+            }
+            private static readonly List<WPosition> Workstations = new List<WPosition>
+            {
+                new WPosition
+                {
+                    Position = new Vector3(1388.98f, 3604.892f, 38.94193f),
+                    Rotation = new Vector3(0.0005379676f, -0.0006872303f, -69.14804f),
+                    Heading = 290.852f
+                },
+                new WPosition
+                {
+                    Position = new Vector3(1390.096f, 3608.829f, 38.94193f),
+                    Rotation = new Vector3(0.0005379398f, -0.0006871976f, 23.74725f),
+                    Heading = 23.74725f
+                },
+                new WPosition
+                {
+                    Position = new Vector3(1394.383f, 3601.791f, 38.94189f),
+                    Rotation = new Vector3(0.0005868266f, -0.0006681096f, -161.9645f),
+                    Heading = 198.0355f
+                }
+            };
+            
+        }
         
         // no need at the moment
         public static PedHash Chemist = (PedHash)3988008767;

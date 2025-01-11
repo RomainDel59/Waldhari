@@ -29,7 +29,8 @@ namespace Waldhari.MethLab.Missions
             if (MethLabSave.Instance.Product <= 0) 
                 throw new MissionException("methlab_deal_no_product");
 
-            if (WPositionHelper.IsNear(Game.Player.Character.Position,MethLabHelper.LaboratoryPosition.Position,5)) 
+            //todo: add a step to get the product in lab
+            if (!WPositionHelper.IsNear(Game.Player.Character.Position,MethLabHelper.Positions.Storage.Position,2)) 
                 throw new MissionException("methlab_deal_not_close_enough");
 
             _amountToDeal = RandomHelper.Next(MethLabOptions.Instance.DealMinGramsPerPack, MethLabOptions.Instance.DealMaxGramsPerPack + 1);
