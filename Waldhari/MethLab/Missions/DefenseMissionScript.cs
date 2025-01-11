@@ -13,7 +13,8 @@ namespace Waldhari.MethLab.Missions
     [ScriptAttributes(NoDefaultInstance = true)]
     public class DefenseMissionScript : AbstractMissionScript
     {
-        private static int _nextAttackTry = Game.GameTime + MethLabOptions.Instance.DefenseCooldown * 1000;
+        // first time try : wait 1 minute
+        private static int _nextAttackTry = Game.GameTime + 60 * 1000;
 
         public DefenseMissionScript() : base("MethLabDefenseMission", true, "methlab_defense_success")
         {
