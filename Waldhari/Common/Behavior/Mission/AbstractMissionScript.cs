@@ -66,7 +66,7 @@ namespace Waldhari.Common.Behavior.Mission
         /// <summary>
         /// Indicates whether the mission is currently active.
         /// </summary>
-        public bool IsActive;
+        private bool IsActive;
         private static readonly List<AbstractMissionScript> Instances = new List<AbstractMissionScript>();
         public static bool IsAnyMissionActive()
         {
@@ -164,7 +164,7 @@ namespace Waldhari.Common.Behavior.Mission
 
             try
             {
-                if (IsActive || Game.IsMissionActive || Game.IsRandomEventActive) 
+                if (IsAnyMissionActive() || Game.IsMissionActive || Game.IsRandomEventActive) 
                     throw new MissionException("already_in_mission");
 
                 StartComplement();
