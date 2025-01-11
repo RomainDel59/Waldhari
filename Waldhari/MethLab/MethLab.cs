@@ -5,6 +5,7 @@ using Waldhari.Common;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
+using Waldhari.MethLab.Missions;
 
 namespace Waldhari.MethLab
 {
@@ -60,7 +61,7 @@ namespace Waldhari.MethLab
             if (_nextExecution > Game.GameTime) return;
             _nextExecution = Game.GameTime + 500;
             
-            
+            DefenseMissionScript.TryToStart();
             
         }
 

@@ -2,6 +2,7 @@
 using GTA;
 using Waldhari.Behavior.Mission;
 using Waldhari.Behavior.Ped;
+using Waldhari.Common;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
@@ -12,39 +13,30 @@ namespace Waldhari.MethLab.Missions
     [ScriptAttributes(NoDefaultInstance = true)]
     public class DefenseMissionScript : AbstractMissionScript
     {
-        private int _nextAttackTry;
-        private EnemyGroupScript _attackingScript;
+        private static int _nextAttackTry = Game.GameTime + MethLabOptions.Instance.DefenseCooldown * 1000;
 
         public DefenseMissionScript() : base("MethLabDefenseMission", true, "methlab_defense_success")
         {
-            AddCooldown();
         }
 
-        private void AddCooldown()
+        private static void AddCooldown()
         {
             // DefenseCooldown => in game minutes
             _nextAttackTry = Game.GameTime + MethLabOptions.Instance.DefenseCooldown * 1000;
         }
 
         //todo: move this to methlab main script
-        public void TryToStart()
+        public static void TryToStart()
         {
-            // If another mission is active
+            // If a mission is active (including defense)
             if (IsAnyMissionActive() || Game.IsMissionActive || Game.IsRandomEventActive)
             {
                 AddCooldown();
                 return;
             }
 
-            // Is already defending
-            if (_attackingScript != null && !_attackingScript.WGroup.AreDead())
-            {
-                AddCooldown();
-                return;
-            }
-
-            // Is too far
-            if (!WPositionHelper.IsNear(Game.Player.Character.Position, MethLabHelper.Positions.Property.Position, 50))
+            // Is too far : 100 meters
+            if (!WPositionHelper.IsNear(Game.Player.Character.Position, MethLabHelper.Positions.Property.Position, 100))
             {
                 AddCooldown();
                 return;
@@ -55,11 +47,10 @@ namespace Waldhari.MethLab.Missions
 
             // Try to attack
             Logger.Info("Trying MethLabDefenseMission");
-            if (RandomHelper.Try(RivalChance))
+            if (RandomHelper.Try(GlobalOptions.Instance.RivalChance))
             {
-                _attackingScript = InstantiateScript<EnemyGroupScript>();
-                _attackingScript.DefineGroup(WGroupHelper.CreateRivalMembers(RivalMembers * 2, false));
-                Start();
+                var script = InstantiateScript<DefenseMissionScript>();
+                script.Start();
             }
 
             AddCooldown();
@@ -80,9 +71,6 @@ namespace Waldhari.MethLab.Missions
 
         protected override List<string> EndComplement()
         {
-            _attackingScript?.MarkAsNoLongerNeeded();
-            _attackingScript?.Abort();
-            
             AddCooldown();
             
             return null;
@@ -90,9 +78,6 @@ namespace Waldhari.MethLab.Missions
 
         protected override void FailComplement()
         {
-            _attackingScript?.MarkAsNoLongerNeeded();
-            _attackingScript?.Abort();
-            
             MethLabSave.Instance.Supply = 0;
             MethLabSave.Instance.Product = 0;
             MethLabSave.Instance.Save();
@@ -102,7 +87,7 @@ namespace Waldhari.MethLab.Missions
 
         protected override void SetupSteps()
         {
-            AddStep(GetStepDefending());
+            AddStep(GetStepDefending(), false);
         }
 
         private Step GetStepDefending()
@@ -117,18 +102,19 @@ namespace Waldhari.MethLab.Missions
                     Game.Player.WantedLevel = 0;
                 },
                 CompletionCondition = () =>
-                    _attackingScript.WGroup.AreDead()
+                    _rivalScript?.WGroup == null || _rivalScript.WGroup.AreDead()
             };
         }
 
         protected override void CreateScene()
         {
-            //No scene
+            _rivalScript = InstantiateScript<EnemyGroupScript>();
+            _rivalScript.DefineGroup(WGroupHelper.CreateRivalMembers(RivalMembers * 2, false));
         }
 
         protected override void CleanScene()
         {
-            //No scene
+            // nothing
         }
     }
 }

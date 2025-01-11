@@ -22,17 +22,17 @@ namespace Waldhari.Behavior.Mission
         /// <summary>
         /// Chance of triggering a "wanted" random event.
         /// </summary>
-        public int WantedChance;
+        protected int WantedChance;
         
         /// <summary>
         /// Chance of triggering a "rival gang" random event.
         /// </summary>
-        public int RivalChance;
+        protected int RivalChance;
         
         /// <summary>
         /// Number of rival gang members to spawn.
         /// </summary>
-        public int RivalMembers;
+        protected int RivalMembers;
         
         /// <summary>
         /// Pool for managing menus.
@@ -89,7 +89,7 @@ namespace Waldhari.Behavior.Mission
         /// <summary>
         /// Permit to manage rival behavior.
         /// </summary>
-        private EnemyGroupScript _rivalScript;
+        protected EnemyGroupScript _rivalScript;
         
         /// <summary>
         /// Ensures random events (e.g., rival gang or police chase) are triggered only once during a mission.
