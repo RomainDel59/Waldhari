@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GTA;
 using GTA.Math;
 using Waldhari.Common.Misc;
@@ -359,6 +360,27 @@ namespace Waldhari.Common.Entities.Helpers
                     }
                 }
             };
+
+        #endregion
+
+        #region AlonePedPossiblePositions
+
+        private static int _lastGivenAlonePedPosition = -1;
+        public static WPosition GetRandomAlonePedPosition()
+        {
+            var pedPositions = MissionWithVehiclePositions
+                .SelectMany(mission => mission.PedPositions)
+                .ToList();
+            
+            var index = new Random().Next(0, pedPositions.Count);
+            while (_lastGivenAlonePedPosition == index)
+            {
+                index = new Random().Next(0, pedPositions.Count);
+            }
+            
+            _lastGivenAlonePedPosition = index;
+            return pedPositions[index]; 
+        }
 
         #endregion
     }

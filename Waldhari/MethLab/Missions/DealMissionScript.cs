@@ -36,7 +36,7 @@ namespace Waldhari.MethLab.Missions
             _amountToDeal = Math.Min(_amountToDeal, MethLabSave.Instance.Product);
             _priceToDeal = _amountToDeal * GetPricePerGram();
 
-            NotificationHelper.ShowFromRon("methlab_deal_started_ron",
+            NotificationHelper.ShowFromRon("methlab_deal_started",
                 new List<string> { _amountToDeal.ToString(), _priceToDeal.ToString() });
 
             MethLabSave.Instance.Product -= _amountToDeal;
@@ -110,11 +110,7 @@ namespace Waldhari.MethLab.Missions
             var client = new WPed
             {
                 PedHash = PedHash.Rurmeth01AMM,
-                InitialPosition = new WPosition
-                {
-                    Position = MethLabHelper.GetRandomPosition()
-                    //todo: make MethLabPositions returns WPosition
-                },
+                InitialPosition = WPositionHelper.GetRandomAlonePedPosition(),
                 Scenario = "WORLD_HUMAN_SMOKING"
             };
             client.Create();

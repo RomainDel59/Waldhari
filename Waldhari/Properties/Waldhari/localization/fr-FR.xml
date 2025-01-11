@@ -260,7 +260,7 @@
             <Value>Client</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>methlab_deal_started_ron</Key>
+            <Key>methlab_deal_started</Key>
             <Value>Salut patron, un client demande ~r~{0} g~s~ de méth pour ~g~{1} $~s~, va lui apporter aux coordonnées que je t'ai envoyées.</Value>
         </LocaleKey>
         <LocaleKey>
