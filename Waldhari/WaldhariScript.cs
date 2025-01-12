@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using GTA;
-using Waldhari.Common.Behavior.Ped;
-using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Files;
 using Waldhari.Common.UI;
 
@@ -64,18 +62,18 @@ namespace Waldhari
                 
                 
                 //test
-                 _test = InstantiateScript<EnemyGroupScript>();
-                 _test?.DefineGroup(WGroupHelper.CreateRivalMembers(10));
+                 // _test = InstantiateScript<EnemyGroupScript>();
+                 // _test?.DefineGroup(WGroupHelper.CreateRivalMembers(10));
             }
 
             if (Game.IsControlJustPressed(Control.Context))
             {
                 //test
-                _test?.MarkAsNoLongerNeeded();
-                _test?.Abort();
-                _test = null;
+                // _test?.MarkAsNoLongerNeeded();
+                // _test?.Abort();
+                // _test = null;
             }
         }
-        private EnemyGroupScript _test;
+        // private EnemyGroupScript _test;
     }
 }
