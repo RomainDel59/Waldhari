@@ -55,6 +55,7 @@
         <Compile Include="Common\Behavior\Animation\AnimationHelper.cs" />
         <Compile Include="Common\Behavior\Animation\AnimationScript.cs" />
         <Compile Include="Common\Behavior\Mission\AbstractMissionScript.cs" />
+        <Compile Include="Common\Behavior\Mission\GenericBulkMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\GenericSupplyMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\Step.cs" />
         <Compile Include="Common\Behavior\Ped\EnemyGroupScript.cs" />

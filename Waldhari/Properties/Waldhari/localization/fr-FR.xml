@@ -47,6 +47,14 @@
             <Key>already_in_mission</Key>
             <Value>Une mission est déjà ~r~en cours~s~.</Value>
         </LocaleKey>
+        <LocaleKey>
+            <Key>no_product</Key>
+            <Value>Il n'y a aucun ~r~produit en stock~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>fail_vehicle_destroyed</Key>
+            <Value>Le véhicule a été ~r~détruit~s~ avec tout ce qu'il contenait.</Value>
+        </LocaleKey>
         
         <LocaleKey>
             <Key>wanted_during_mission</Key>
@@ -118,10 +126,6 @@
             <Value>Le ~r~fournisseur~s~ a été tué.</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>supply_fail_vehicle_destroyed</Key>
-            <Value>Le fourgon a été ~r~détruit~s~ avec tout ce qu'il contenait.</Value>
-        </LocaleKey>
-        <LocaleKey>
             <Key>supply_step_rendezvous</Key>
             <Value>Rends-toi au rendez-vous avec le ~y~fournisseur~s~.</Value>
         </LocaleKey>
@@ -132,6 +136,12 @@
         <LocaleKey>
             <Key>supply_step_out</Key>
             <Value>Sors du ~y~fourgon~s~.</Value>
+        </LocaleKey>
+        
+        <!-- Bulk mission -->
+        <LocaleKey>
+            <Key>bulk_success</Key>
+            <Value>Le stock a été vendu pour ~g~{0} $~s~.</Value>
         </LocaleKey>
 
         
@@ -256,10 +266,6 @@
         
         <!-- Deal mission -->
         <LocaleKey>
-            <Key>methlab_deal_no_product</Key>
-            <Value>Il n'y a pas de ~r~méth en stock~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
             <Key>methlab_deal_product</Key>
             <Value>Armoire de stockage</Value>
         </LocaleKey>
@@ -323,16 +329,8 @@
             <Value>Récupère le paiement auprès du ~y~grossiste~s~.</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>methlab_bulk_fail_vehicle_destroyed</Key>
-            <Value>Le fourgon a été ~r~détruit~s~ avec tout ce qu'il contenait.</Value>
-        </LocaleKey>
-        <LocaleKey>
             <Key>methlab_bulk_fail_wholesaler_dead</Key>
             <Value>Le ~r~grossiste~s~ a été tué.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_success</Key>
-            <Value>Le stock a été vendu pour ~g~{0} $~s~.</Value>
         </LocaleKey>
         
         
