@@ -3,8 +3,8 @@ using GTA;
 using GTA.Native;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Entities.Helpers;
-using Waldhari.Common.Enums;
 using Waldhari.Common.Exceptions;
+using Waldhari.Common.Files;
 
 namespace Waldhari.Common.Behavior.Ped
 {
@@ -32,6 +32,7 @@ namespace Waldhari.Common.Behavior.Ped
         {
             Tick += OnTick;
             Aborted += OnAborted;
+            _hasMoved = true; //make it play animation or scenario the first time
         }
 
         private void OnAborted(object sender, EventArgs e)
@@ -46,99 +47,59 @@ namespace Waldhari.Common.Behavior.Ped
         {
             // Wait for parameter
             if(WPed == null) return;
-            
-            if (!HasAnimationToDo() && !HasScenarioToDo()) 
+
+            if (!HasAnimationToDo() && !HasScenarioToDo())
                 throw new TechnicalException("Ped should have a scenario or an animation to play");
-            
-            // To lower material usage :
-            // runs this script every 2 seconds only
-            if (_nextExecution > Game.GameTime) return;
-            _nextExecution = Game.GameTime + 2000;
             
             // If ped is in combat, let the ped fight
             if (IsInCombat()) return;
             
-            // If ped is away from initial position, let it goes back to position
             if (!WPositionHelper.IsNear(WPed.Ped.Position,WPed.InitialPosition.Position,0.5f))
             {
-                
-                // If ped is already going back, wait it to proceed
-                if (_isGoingBackPosition) return;
-            
-                // Makes ped run to position
-                RunTo();
-                
+                if (_isGoingBackPosition)
+                {
+                    //Logger.Debug($"Ped is going back to initial position (scenario={WPed.Scenario}, animationName={WPed.AnimationName})");
+                    return;
+                }
+
+                Logger.Debug($"Ped moved from initial position (scenario={WPed.Scenario}, animationName={WPed.AnimationName}) : make it run back");
                 _hasMoved = true;
+                WPed.Ped.Task.RunTo(WPed.InitialPosition.Position, true);
                 _isGoingBackPosition = true;
-                
-                return;
             }
-            
-            // Ped is at destination
-            _isGoingBackPosition = false;
-
-            // Ped hasn't moved : let's check if scenario has to be replayed
-            if (!_hasMoved)
+            else
             {
-                // Animation is looping with native function
-                if (HasAnimationToDo()) return;
+                _isGoingBackPosition = false;
 
-                // Scenario is playing
-                if (IsPlayingScenario()) return;
-
-                // Replay scenario
-                PlayScenario();
-
+                if (_hasMoved)
+                {
+                    Logger.Debug($"Ped is at initial position (scenario={WPed.Scenario}, animationName={WPed.AnimationName}) : make it do acting");
+                    WPed.MoveInPosition();
+                    if (HasScenarioToDo()) PlayScenario();
+                    else if (HasAnimationToDo()) PlayAnimation();
+                    _hasMoved = false;
+                }
+                else
+                {
+                    // TODO: (immersive feature) If scenario ends, should do it again
+                }
             }
-
-            // If ped has to play a scenario
-            if (HasScenarioToDo())
-            {
-                // Play scenario
-                PlayScenario();
-                return;
-            }
-            
-            // Otherwise play animation
-            PlayAnimation();
             
         }
 
         private void PlayAnimation()
         {
+            Logger.Debug($"Playing animation={WPed.AnimationName}");
+            WPed.Ped.Task.GuardCurrentPosition();
             WPed.Ped.Task.PlayAnimation(WPed.AnimationDictionnary, WPed.AnimationName, 8f,-8f,-1,AnimationFlags.Loop,0f);
         }
 
         private void PlayScenario()
         {
-            WPed.Ped.Task.StartScenario(WPed.Scenario, WPed.InitialPosition.Position, WPed.InitialPosition.Heading);
+            Logger.Debug($"Playing scenario={WPed.Scenario}");
+            WPed.Ped.Task.GuardCurrentPosition();
+            WPed.Ped.Task.StartScenario(WPed.Scenario, WPed.InitialPosition.Heading);
         }
-
-        private void RunTo()
-        {
-            // See https://docs.fivem.net/natives/?_0x15D3A79D4E44B913 for documentation
-            
-            // No timeout
-            const float timeout = -1f;
-            
-            // No difference
-            const float distanceToDestination = 0.0f;
-            
-            Function.Call(
-                Hash.TASK_FOLLOW_NAV_MESH_TO_COORD, 
-                WPed.Ped.Handle, 
-                WPed.InitialPosition.Position.X, 
-                WPed.InitialPosition.Position.Y,
-                WPed.InitialPosition.Position.Z,
-                EMovementRatio.Run, 
-                timeout, 
-                distanceToDestination, 
-                ENavigation.Default, 
-                WPed.InitialPosition.Heading);
-            
-        }
-        
-        
         
     }
 }

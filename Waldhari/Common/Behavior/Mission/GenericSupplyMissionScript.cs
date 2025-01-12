@@ -4,6 +4,7 @@ using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
+using Waldhari.Common.Files;
 using Waldhari.Common.UI;
 
 namespace Waldhari.Common.Behavior.Mission
@@ -13,7 +14,7 @@ namespace Waldhari.Common.Behavior.Mission
     {
         // Scene
         private WBlip _deliveryWBlip;
-        private PedActingScript _sellerScript;
+        private List<PedActingScript> _supplierActingScripts;
         private WVehicle _van;
 
         private int _amountToSupply;
@@ -43,7 +44,7 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override bool OnTickComplement()
         {
-            if (_sellerScript?.WPed?.Ped == null || _sellerScript.WPed.Ped.IsDead)
+            if (_supplierActingScripts[0]?.WPed?.Ped == null || _supplierActingScripts[0].WPed.Ped.IsDead)
                 throw new MissionException("supply_fail_supplier_dead");
 
             if (_van?.Vehicle == null || _van.Vehicle.IsConsideredDestroyed)
@@ -82,10 +83,10 @@ namespace Waldhari.Common.Behavior.Mission
                 MessageKey = "supply_step_rendezvous",
                 Action = () =>
                 {
-                    _sellerScript.WPed.MakeMissionDestination("supplier");
+                    _supplierActingScripts[0].WPed.MakeMissionDestination("supplier");
                 },
                 CompletionCondition =
-                    () => WPositionHelper.IsNear(Game.Player.Character.Position, _sellerScript.WPed.Ped.Position, 25)
+                    () => WPositionHelper.IsNear(Game.Player.Character.Position, _supplierActingScripts[0].WPed.Ped.Position, 25)
             };
         }
 
@@ -97,16 +98,19 @@ namespace Waldhari.Common.Behavior.Mission
                 MessageKey = "supply_step_payment",
                 Action = () =>
                 {
-                    _sellerScript.WPed.MakeMissionDestination("supplier");
+                    _supplierActingScripts[0].WPed.MakeMissionDestination("supplier");
                 },
                 CompletionCondition =
-                    () => !_sellerScript.WPed.Ped.IsInCombat &&
-                          WPositionHelper.IsNear(Game.Player.Character.Position, _sellerScript.WPed.Ped.Position, 2),
+                    () => !_supplierActingScripts[0].WPed.Ped.IsInCombat &&
+                          WPositionHelper.IsNear(Game.Player.Character.Position, _supplierActingScripts[0].WPed.Ped.Position, 2),
                 CompletionAction = () =>
                 {
                     SoundHelper.PlayPayment();
                     Game.Player.Money -= _costToSupply;
                     Game.DoAutoSave();
+                    
+                    _supplierActingScripts[0].WPed.RemoveMissionDestination();
+                    // TODO: (immersive feature) make peds go away
                 }
             };
         }
@@ -119,8 +123,8 @@ namespace Waldhari.Common.Behavior.Mission
                 MessageKey = StepDriveMessageKey,
                 Action = () =>
                 {
-                    _sellerScript.WPed.RemoveMissionDestination();
 
+                    // todo: add step "in"
                     if (!Game.Player.Character.IsInVehicle(_van.Vehicle))
                     {
                         _deliveryWBlip.Remove();
@@ -156,20 +160,21 @@ namespace Waldhari.Common.Behavior.Mission
         protected override void CreateScene()
         {
             var randomPosition = WPositionHelper.GetRandomMissionWithVehiclePosition();
+            var gang = WGroupHelper.GetRandomGang();
 
-            // todo: random pedhash
-            var seller = new WPed
+            _supplierActingScripts = WSceneHelper.CreateTransactionScene(randomPosition,gang);
+
+            foreach (var pedScript in _supplierActingScripts)
             {
-                PedHash = PedHash.CartelGuards01GMM,
-                InitialPosition = randomPosition.PedPositions[0],
-                Scenario = "WORLD_HUMAN_SMOKING"
-            };
-            seller.Create();
-            seller.AddWeapon(WeaponsHelper.GetRandomGangWeapon());
-
-            _sellerScript = InstantiateScript<PedActingScript>();
-            _sellerScript.WPed = seller;
-
+                if (pedScript?.WPed?.Ped == null)
+                {
+                    Logger.Warning($"Ped is not present at CreateScene in {Name}");
+                    continue;
+                }
+                pedScript.WPed.Ped.RelationshipGroup = Game.Player.Character.RelationshipGroup;
+                Logger.Debug("Ped added to player relationship group");
+            }
+            
             // todo: random vehiclehash
             _van = new WVehicle
             {
@@ -184,8 +189,14 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void CleanScene()
         {
-            _sellerScript?.WPed?.Ped?.MarkAsNoLongerNeeded();
-            _sellerScript?.Abort();
+            if (_supplierActingScripts?.Count > 0)
+            {
+                foreach (var script in _supplierActingScripts)
+                {
+                    script?.WPed?.Ped?.MarkAsNoLongerNeeded();
+                    script?.Abort();
+                }
+            }
 
             if (_van != null)
             {

@@ -47,9 +47,7 @@ namespace Waldhari.Common.Entities.Helpers
                     PedHash.Lost01GMY,
                     PedHash.Lost02GMY,
                     PedHash.Lost03GMY,
-                    PedHash.Lost01GFY,
-                    PedHash.GenBiker01AMM,
-                    PedHash.GenBiker01AFM,
+                    PedHash.GenBiker01AMM
                 },
                 VehicleHashes = new List<VehicleHash>
                 {
@@ -76,7 +74,6 @@ namespace Waldhari.Common.Entities.Helpers
                     PedHash.Hillbilly02AMM,
                     PedHash.Taphillbilly,
                     PedHash.Rurmeth01AMM,
-                    PedHash.Rurmeth01AFY,
                     PedHash.Acult02AMO,
                     PedHash.Trucker01SMM,
                     PedHash.ExArmy01,
@@ -106,8 +103,7 @@ namespace Waldhari.Common.Entities.Helpers
                     PedHash.BallasLeader,
                     PedHash.BallaEast01GMY,
                     PedHash.BallaOrig01GMY,
-                    PedHash.BallaSout01GMY,
-                    PedHash.Ballas01GFY
+                    PedHash.BallaSout01GMY
                 },
                 VehicleHashes = new List<VehicleHash>
                 {
@@ -138,8 +134,7 @@ namespace Waldhari.Common.Entities.Helpers
                 {
                     PedHash.VagosLeader,
                     PedHash.VagosSpeak,
-                    PedHash.VagosFun01,
-                    PedHash.Vagos01GFY
+                    PedHash.VagosFun01
                 },
                 VehicleHashes = new List<VehicleHash>
                 {

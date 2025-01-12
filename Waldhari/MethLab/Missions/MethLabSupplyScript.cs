@@ -17,7 +17,7 @@ namespace Waldhari.MethLab.Missions
         }
         
         protected override int SupplyAmount 
-            => RandomHelper.Next(MethLabOptions.Instance.SupplyMin, MethLabOptions.Instance.SupplyMax+1);
+            => RandomHelper.Next(MethLabOptions.Instance.SupplyMin, MethLabOptions.Instance.SupplyMax + 1);
         
         protected override int SupplyCost
             => RandomHelper.Next(MethLabOptions.Instance.SupplyMinCost, MethLabOptions.Instance.SupplyMaxCost + 1);

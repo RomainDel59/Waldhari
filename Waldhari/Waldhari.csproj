@@ -66,6 +66,7 @@
         <Compile Include="Common\Entities\Helpers\WBlipHelper.cs" />
         <Compile Include="Common\Entities\Helpers\WeaponsHelper.cs" />
         <Compile Include="Common\Entities\Helpers\WPositionHelper.cs" />
+        <Compile Include="Common\Entities\Helpers\WSceneHelper.cs" />
         <Compile Include="Common\Entities\Helpers\WVehicleHelper.cs" />
         <Compile Include="Common\Entities\WBlip.cs" />
         <Compile Include="Common\Entities\WGroup.cs" />

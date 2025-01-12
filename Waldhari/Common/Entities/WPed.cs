@@ -8,6 +8,12 @@ namespace Waldhari.Common.Entities
 {
     public class WPed
     {
+        public static class PedScenario
+        {
+            public const string Smoking = "WORLD_HUMAN_SMOKING";
+            public const string Guard = "WORLD_HUMAN_GUARD_STAND";
+        }
+        
         public Ped Ped;
 
         public WPosition InitialPosition = null;
@@ -113,5 +119,6 @@ namespace Waldhari.Common.Entities
         {
             WBlip?.Remove();
         }
+        
     }
 }
