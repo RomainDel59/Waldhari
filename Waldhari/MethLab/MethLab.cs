@@ -1,6 +1,7 @@
 ﻿using System;
 using GTA;
 using Waldhari.Common;
+using Waldhari.Common.Behavior.Mission.Helper;
 using Waldhari.Common.Behavior.Property;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
@@ -61,7 +62,7 @@ namespace Waldhari.MethLab
             if (_nextExecution > Game.GameTime) return;
             _nextExecution = Game.GameTime + 500;
             
-            DefenseMissionScript.TryToStart();
+            DefenseMissionHelper.TryToStart<MethLabDefenseScript>(MethLabHelper.Positions.Property, MethLabSave.Instance.Product);
             
         }
 

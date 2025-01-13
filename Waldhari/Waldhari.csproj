@@ -57,7 +57,9 @@
         <Compile Include="Common\Behavior\Mission\AbstractMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\GenericBulkMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\GenericDealMissionScript.cs" />
+        <Compile Include="Common\Behavior\Mission\GenericDefenseMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\GenericSupplyMissionScript.cs" />
+        <Compile Include="Common\Behavior\Mission\Helper\DefenseMissionHelper.cs" />
         <Compile Include="Common\Behavior\Mission\Step.cs" />
         <Compile Include="Common\Behavior\Ped\EnemyGroupScript.cs" />
         <Compile Include="Common\Behavior\Ped\PedActingScript.cs" />
@@ -98,10 +100,10 @@
         <Compile Include="MethLab\MethLabHelper.cs" />
         <Compile Include="MethLab\MethLabOptions.cs" />
         <Compile Include="MethLab\MethLabSave.cs" />
-        <Compile Include="MethLab\Missions\DefenseMissionScript.cs" />
         <Compile Include="MethLab\Missions\ManufactureMissionScript.cs" />
         <Compile Include="MethLab\Missions\MethLabBulkScript.cs" />
         <Compile Include="MethLab\Missions\MethLabDealScript.cs" />
+        <Compile Include="MethLab\Missions\MethLabDefenseScript.cs" />
         <Compile Include="MethLab\Missions\MethLabSupplyScript.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="WaldhariScript.cs" />

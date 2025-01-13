@@ -210,6 +210,11 @@
             <Value>The ~r~wholesaler~s~ has been killed.</Value>
         </LocaleKey>
         
+        <!-- Defense mission -->
+        <LocaleKey>
+            <Key>defense_fail_dead</Key>
+            <Value>The rival gang stole all the ~r~products~s~ and ~r~supplies~s~.</Value>
+        </LocaleKey>
         
         
         <!-- 
@@ -288,10 +293,6 @@
         <LocaleKey>
             <Key>methlab_defense_success</Key>
             <Value>The lab remains ~g~safe for now~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_defense_fail_dead</Key>
-            <Value>The rival gang stole all the ~r~products~s~ and ~r~raw materials~s~.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_defense_defending</Key>

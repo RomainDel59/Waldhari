@@ -23,6 +23,9 @@ namespace Waldhari.Common
         public int RivalChance;
         public int RivalMembers;
         
+        // In minutes
+        public int DefenseCooldown;
+        
         public int EnemiesAppearanceDistance;
         public int EnemiesDisappearanceDistance;
         
@@ -45,6 +48,8 @@ namespace Waldhari.Common
             
             RivalChance = 20;
             RivalMembers = 3;
+            
+            DefenseCooldown = 5;
             
             EnemiesAppearanceDistance = 50;
             EnemiesDisappearanceDistance = 1000;

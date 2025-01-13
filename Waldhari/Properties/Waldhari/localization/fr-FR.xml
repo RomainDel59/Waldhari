@@ -209,6 +209,12 @@
             <Key>bulk_fail_wholesaler_dead</Key>
             <Value>Le ~r~grossiste~s~ a été tué.</Value>
         </LocaleKey>
+        
+        <!-- Defense mission -->
+        <LocaleKey>
+            <Key>defense_fail_dead</Key>
+            <Value>Le gang rival a volé tous les ~r~produits~s~ et ~r~matières premières~s~.</Value>
+        </LocaleKey>
 
         
         
@@ -288,10 +294,6 @@
         <LocaleKey>
             <Key>methlab_defense_success</Key>
             <Value>Le labo reste à ~g~l'abri pour l'instant~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_defense_fail_dead</Key>
-            <Value>Le gang rival a volé tous les ~r~produits~s~ et ~r~matières premières~s~.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_defense_defending</Key>

@@ -21,9 +21,6 @@ namespace Waldhari.MethLab
         public int ManufactureMinGramsPerSupply;
         public int ManufactureMaxGramsPerSupply;
         
-        // In minutes
-        public int DefenseCooldown;
-        
         // Minimum and maximum amount of supply to get when supplying
         public int SupplyMin;
         public int SupplyMax;
@@ -51,8 +48,6 @@ namespace Waldhari.MethLab
         protected override void SetDefaults()
         {
             Price = 1000000;
-            
-            DefenseCooldown = 15;
 
             SupplyMin = 100;
             SupplyMax = 1000;
