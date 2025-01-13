@@ -120,9 +120,9 @@ namespace Waldhari.MethLab
             );
             
             // Create bulk mission item
-            MenuHelper.CreateMissionItem<BulkMissionScript>(
-                "methlab_menu_bulk_title",
-                "methlab_menu_bulk_description",
+            MenuHelper.CreateMissionItem<MethLabBulkScript>(
+                "bulk_menu_title",
+                "bulk_menu_description",
                 _pool,
                 _menu
             );

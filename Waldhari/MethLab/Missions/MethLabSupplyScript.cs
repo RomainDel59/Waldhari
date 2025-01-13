@@ -16,10 +16,10 @@ namespace Waldhari.MethLab.Missions
             NotificationHelper.ShowFromRon("supply_started");
         }
         
-        protected override int SupplyAmount 
+        protected override int Amount 
             => RandomHelper.Next(MethLabOptions.Instance.SupplyMin, MethLabOptions.Instance.SupplyMax + 1);
         
-        protected override int SupplyCost
+        protected override int CostByUnit
             => RandomHelper.Next(MethLabOptions.Instance.SupplyMinCost, MethLabOptions.Instance.SupplyMaxCost + 1);
         
         protected override string StepDriveMessageKey => "methlab_supply_step_drive";

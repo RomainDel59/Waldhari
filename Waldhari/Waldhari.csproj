@@ -97,10 +97,10 @@
         <Compile Include="MethLab\MethLabHelper.cs" />
         <Compile Include="MethLab\MethLabOptions.cs" />
         <Compile Include="MethLab\MethLabSave.cs" />
-        <Compile Include="MethLab\Missions\BulkMissionScript.cs" />
         <Compile Include="MethLab\Missions\DealMissionScript.cs" />
         <Compile Include="MethLab\Missions\DefenseMissionScript.cs" />
         <Compile Include="MethLab\Missions\ManufactureMissionScript.cs" />
+        <Compile Include="MethLab\Missions\MethLabBulkScript.cs" />
         <Compile Include="MethLab\Missions\MethLabSupplyScript.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="WaldhariScript.cs" />

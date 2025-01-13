@@ -4,7 +4,9 @@ using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
+using Waldhari.Common.Files;
 using Waldhari.Common.UI;
+using Waldhari.MethLab;
 
 namespace Waldhari.Common.Behavior.Mission
 {
@@ -19,10 +21,10 @@ namespace Waldhari.Common.Behavior.Mission
         private int _amountToDeliver;
         private int _priceToDeliver;
 
-        protected abstract int DeliverAmount { get; }
-        protected abstract int DeliverPrice { get; }
+        protected abstract int Amount { get; }
+        protected abstract int PriceByUnit { get; }
         protected abstract void DeductAmount(int amount);
-        protected abstract WPosition DeliveryPosition { get; }
+        protected abstract WPosition Parking { get; }
         protected abstract void ShowStartedMessage();
 
         protected GenericBulkMissionScript(string name) 
@@ -30,11 +32,11 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void StartComplement()
         {
-            _amountToDeliver = DeliverAmount;
+            _amountToDeliver = Amount;
             if (_amountToDeliver <= 0)
                 throw new MissionException("no_product");
 
-            _priceToDeliver = _amountToDeliver * DeliverPrice;
+            _priceToDeliver = _amountToDeliver * PriceByUnit;
             DeductAmount(_amountToDeliver);
             
             ShowStartedMessage();
@@ -53,6 +55,7 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override List<string> EndComplement()
         {
+            SoundHelper.PlayPayment();
             Game.Player.Money += _priceToDeliver;
             Game.DoAutoSave();
 
@@ -71,7 +74,7 @@ namespace Waldhari.Common.Behavior.Mission
             AddStep(GetStepEnterVehicle(), false);
             AddStep(GetStepRendezvous());
             AddStep(GetStepGetOutVehicle());
-            AddStep(GetStepDelivery(), false);
+            AddStep(GetStepPayment(), false);
         }
 
         private Step GetStepEnterVehicle()
@@ -79,7 +82,7 @@ namespace Waldhari.Common.Behavior.Mission
             return new Step
             {
                 Name = "EnterVehicle",
-                MessageKey = "bulk_step_enter",
+                MessageKey = "step_enter_vehicle",
                 Action = () =>
                 {
                     _deliveryWBlip.Remove();
@@ -111,55 +114,88 @@ namespace Waldhari.Common.Behavior.Mission
         {
             return new Step
             {
-                Name = "ExitVehicle",
-                MessageKey = "delivery_step_exit_vehicle",
+                Name = "GetOutVehicle",
+                MessageKey = "step_getout_vehicle",
                 Action = () => _deliveryWBlip.Remove(),
                 CompletionCondition = 
-                    () => !Game.Player.Character.IsInVehicle(_deliveryVehicle.Vehicle)
+                    () => !Game.Player.Character.IsInVehicle(_van.Vehicle)
             };
         }
 
-        private Step GetStepDelivery()
+        private Step GetStepPayment()
         {
             return new Step
             {
-                Name = "Delivery",
-                MessageKey = "delivery_step_complete",
+                Name = "Payment",
+                MessageKey = "bulk_step_payment",
                 Action = () =>
                 {
-                    _deliveryAgentScript.WPed.MakeMissionDestination("delivery_agent");
+                    _wholesalerActingScripts[0].WPed.MakeMissionDestination("wholesaler");
                 },
                 CompletionCondition = 
-                    () => !_deliveryAgentScript.IsInCombat() &&
-                          WPositionHelper.IsNear(Game.Player.Character.Position, _deliveryAgentScript.WPed.Ped.Position, 2)
+                    () => !_wholesalerActingScripts[0].WPed.Ped.IsInCombat &&
+                          WPositionHelper.IsNear(Game.Player.Character.Position, _wholesalerActingScripts[0].WPed.Ped.Position, 2),
+                CompletionAction = 
+                    () => _wholesalerActingScripts[0].WPed.RemoveMissionDestination()
             };
         }
 
         protected override void CreateScene()
         {
-            _deliveryAgentScript = CreateDeliveryAgent();
-            _deliveryWBlip = CreateDeliveryBlip();
-            _deliveryVehicle = CreateDeliveryVehicle();
+            var randomPosition = WPositionHelper.GetRandomMissionWithVehiclePosition();
+            var gang = WGroupHelper.GetRandomGang();
+
+            _wholesalerActingScripts = WSceneHelper.CreateTransactionScene(randomPosition, gang);
+
+            foreach (var pedScript in _wholesalerActingScripts)
+            {
+                if (pedScript?.WPed?.Ped == null)
+                {
+                    Logger.Warning($"Ped is not present at CreateScene in {Name}");
+                    continue;
+                }
+                pedScript.WPed.Ped.RelationshipGroup = Game.Player.Character.RelationshipGroup;
+                Logger.Debug("Ped added to player relationship group");
+            }
+            
+            // todo: random vehiclehash
+            _van = new WVehicle
+            {
+                VehicleHash = VehicleHash.Burrito,
+                InitialPosition = Parking
+            };
+            _van.Create();
+
+            _deliveryWBlip = WBlipHelper.GetMission("delivery");
+            _deliveryWBlip.Position = randomPosition.VehiclePosition.Position;
         }
 
         protected override void CleanScene()
         {
-            _deliveryAgentScript?.WPed?.Ped?.MarkAsNoLongerNeeded();
-            _deliveryAgentScript?.Abort();
-
-            if (_deliveryVehicle != null)
+            if (_wholesalerActingScripts?.Count > 0)
             {
-                _deliveryVehicle.WBlip?.Remove();
-                _deliveryVehicle.Vehicle?.MarkAsNoLongerNeeded();
-                if (_deliveryVehicle.Vehicle != null)
-                    _deliveryVehicle.Vehicle.IsConsideredDestroyed = true;
+                foreach (var pedScript in _wholesalerActingScripts)
+                {
+                    pedScript?.WPed?.Ped?.MarkAsNoLongerNeeded();
+                    pedScript?.Abort();
+                }
+            }
+
+            if (_van != null)
+            {
+                _van.WBlip?.Remove();
+                _van.Vehicle?.MarkAsNoLongerNeeded();
+                if (_van.Vehicle != null)
+                {
+                    if (Game.Player.Character.IsInVehicle(_van.Vehicle))
+                    {
+                        Game.Player.Character.Task.LeaveVehicle();
+                    }
+                    _van.Vehicle.IsConsideredDestroyed = true;
+                }
             }
 
             _deliveryWBlip?.Remove();
         }
-
-        protected abstract PedActingScript CreateDeliveryAgent();
-        protected abstract WBlip CreateDeliveryBlip();
-        protected abstract WVehicle CreateDeliveryVehicle();
     }
 }

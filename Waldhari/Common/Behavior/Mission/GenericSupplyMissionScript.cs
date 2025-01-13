@@ -20,8 +20,8 @@ namespace Waldhari.Common.Behavior.Mission
         private int _amountToSupply;
         private int _costToSupply;
         
-        protected abstract int SupplyAmount { get; }
-        protected abstract int SupplyCost { get; }
+        protected abstract int Amount { get; }
+        protected abstract int CostByUnit { get; }
         protected abstract string StepDriveMessageKey { get; }
         protected abstract string DestinationMessageKey { get; }
         protected abstract WPosition Parking { get; }
@@ -33,8 +33,8 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void StartComplement()
         {
-            _amountToSupply = SupplyAmount;
-            _costToSupply = _amountToSupply * SupplyCost;
+            _amountToSupply = Amount;
+            _costToSupply = _amountToSupply * CostByUnit;
 
             if (Game.Player.Money < _costToSupply)
                 throw new MissionException("supply_no_money");
@@ -147,7 +147,7 @@ namespace Waldhari.Common.Behavior.Mission
             return new Step
             {
                 Name = "Out",
-                MessageKey = "supply_step_out",
+                MessageKey = "step_getout_vehicle",
                 Action = () =>
                 {
                     _deliveryWBlip.Remove();
@@ -191,10 +191,10 @@ namespace Waldhari.Common.Behavior.Mission
         {
             if (_supplierActingScripts?.Count > 0)
             {
-                foreach (var script in _supplierActingScripts)
+                foreach (var pedScript in _supplierActingScripts)
                 {
-                    script?.WPed?.Ped?.MarkAsNoLongerNeeded();
-                    script?.Abort();
+                    pedScript?.WPed?.Ped?.MarkAsNoLongerNeeded();
+                    pedScript?.Abort();
                 }
             }
 

@@ -50,6 +50,16 @@
             <Value>Delivery</Value>
         </LocaleKey>
 
+        <!-- Menu help -->
+        <LocaleKey>
+            <Key>menu_select</Key>
+            <Value>Select</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>menu_back</Key>
+            <Value>Back</Value>
+        </LocaleKey>
+
         <!-- Missions -->
         <LocaleKey>
             <Key>already_in_mission</Key>
@@ -62,6 +72,14 @@
         <LocaleKey>
             <Key>fail_vehicle_destroyed</Key>
             <Value>The vehicle has been ~r~destroyed~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>step_enter_vehicle</Key>
+            <Value>Get the ~y~vehicle~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>step_getout_vehicle</Key>
+            <Value>Get out of the ~y~vehicle~s~.</Value>
         </LocaleKey>
 
         <LocaleKey>
@@ -97,16 +115,6 @@
             <Key>property_bought</Key>
             <Value>Property bought</Value>
         </LocaleKey>
-
-        <!-- Menu help -->
-        <LocaleKey>
-            <Key>menu_select</Key>
-            <Value>Select</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>menu_back</Key>
-            <Value>Back</Value>
-        </LocaleKey>
         
         <!-- Supply mission -->
         <LocaleKey>
@@ -141,34 +149,30 @@
             <Key>supply_step_payment</Key>
             <Value>Pay the ~y~supplier~s~ for the supplies.</Value>
         </LocaleKey>
-        <LocaleKey>
-            <Key>supply_step_out</Key>
-            <Value>Get out of the ~y~van~s~.</Value>
-        </LocaleKey>
 
         <!-- Bulk mission -->
+        <LocaleKey>
+            <Key>bulk_menu_title</Key>
+            <Value>Wholesale</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>bulk_menu_description</Key>
+            <Value>Start a mission to sell all the product to a wholesaler.</Value>
+        </LocaleKey>
         <LocaleKey>
             <Key>bulk_success</Key>
             <Value>The stock has been sold for ~g~${0}~s~.</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>bulk_step_enter</Key>
-            <Value>Get into the ~y~van~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_rendezvous</Key>
+            <Key>bulk_step_rendezvous</Key>
             <Value>Drive the van to the ~y~delivery point~s~.</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>methlab_bulk_out</Key>
-            <Value>Exit the ~y~van~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_payment</Key>
+            <Key>bulk_step_payment</Key>
             <Value>Collect the payment from the ~y~wholesaler~s~.</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>methlab_bulk_fail_wholesaler_dead</Key>
+            <Key>bulk_fail_wholesaler_dead</Key>
             <Value>The ~r~wholesaler~s~ has been killed.</Value>
         </LocaleKey>
         
@@ -218,14 +222,6 @@
         <LocaleKey>
             <Key>methlab_menu_deal_description</Key>
             <Value>Start a mission to sell meth to an individual.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_menu_bulk_title</Key>
-            <Value>Wholesale</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_menu_bulk_description</Key>
-            <Value>Start a mission to sell all the meth to a wholesaler.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_menu_check_supply_title</Key>
