@@ -39,6 +39,10 @@
             <Key>wholesaler</Key>
             <Value>Grossiste</Value>
         </LocaleKey>
+        <LocaleKey>
+            <Key>client</Key>
+            <Value>Client</Value>
+        </LocaleKey>
 
         <!-- Other -->
         <LocaleKey>
@@ -48,6 +52,10 @@
         <LocaleKey>
             <Key>delivery</Key>
             <Value>Livraison</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>storage_cabinet</Key>
+            <Value>Armoire de stockage</Value>
         </LocaleKey>
 
         <!-- Menu help -->
@@ -150,6 +158,32 @@
             <Value>Paye le ~y~fournisseur~s~ pour les matières premières.</Value>
         </LocaleKey>
         
+        <!-- Deal mission -->
+        <LocaleKey>
+            <Key>deal_menu_title</Key>
+            <Value>Vente au détail</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>deal_menu_description</Key>
+            <Value>Lance une mission pour vendre le produit à un particulier.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>deal_success</Key>
+            <Value>La vente a rapporté ~g~{0} $~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>deal_fail_client_dead</Key>
+            <Value>Le ~r~client~s~ a été tué.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>deal_step_rendezvous</Key>
+            <Value>Rends-toi au rendez-vous avec le ~y~client~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>deal_step_payment</Key>
+            <Value>Conclus la vente avec le ~y~client~s~.</Value>
+        </LocaleKey>
+        
         <!-- Bulk mission -->
         <LocaleKey>
             <Key>bulk_menu_title</Key>
@@ -214,14 +248,6 @@
         <LocaleKey>
             <Key>methlab_menu_manufacture_description</Key>
             <Value>Lance la fabrication de méth au labo.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_menu_deal_title</Key>
-            <Value>Vente au détail</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_menu_deal_description</Key>
-            <Value>Lance une mission pour vendre de la méth à un particulier.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_menu_check_supply_title</Key>
@@ -290,36 +316,12 @@
         
         <!-- Deal mission -->
         <LocaleKey>
-            <Key>methlab_deal_product</Key>
-            <Value>Armoire de stockage</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_deal_client</Key>
-            <Value>Client</Value>
-        </LocaleKey>
-        <LocaleKey>
             <Key>methlab_deal_started</Key>
             <Value>Salut patron, un client demande ~r~{0} g~s~ de méth pour ~g~{1} $~s~, va lui apporter aux coordonnées que je t'ai envoyées.</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>methlab_deal_get_product</Key>
+            <Key>methlab_deal_step_get_product</Key>
             <Value>Va récupérer de la méth au ~y~labo~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_deal_rendezvous</Key>
-            <Value>Rends-toi au rendez-vous avec le ~y~client~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_deal_payment</Key>
-            <Value>Conclus la vente avec le ~y~client~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_deal_success</Key>
-            <Value>La vente a rapporté ~g~{0} $~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_deal_fail_client_dead</Key>
-            <Value>Le ~r~client~s~ a été tué.</Value>
         </LocaleKey>
         
         

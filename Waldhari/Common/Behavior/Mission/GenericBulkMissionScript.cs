@@ -18,8 +18,8 @@ namespace Waldhari.Common.Behavior.Mission
         private List<PedActingScript> _wholesalerActingScripts;
         private WVehicle _van;
 
-        private int _amountToDeliver;
-        private int _priceToDeliver;
+        private int _amount;
+        private int _price;
 
         protected abstract int Amount { get; }
         protected abstract int PriceByUnit { get; }
@@ -32,12 +32,12 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void StartComplement()
         {
-            _amountToDeliver = Amount;
-            if (_amountToDeliver <= 0)
+            _amount = Amount;
+            if (_amount <= 0)
                 throw new MissionException("no_product");
+            DeductAmount(_amount);
 
-            _priceToDeliver = _amountToDeliver * PriceByUnit;
-            DeductAmount(_amountToDeliver);
+            _price = _amount * PriceByUnit;
             
             ShowStartedMessage();
         }
@@ -56,10 +56,10 @@ namespace Waldhari.Common.Behavior.Mission
         protected override List<string> EndComplement()
         {
             SoundHelper.PlayPayment();
-            Game.Player.Money += _priceToDeliver;
+            Game.Player.Money += _price;
             Game.DoAutoSave();
 
-            return new List<string> { _priceToDeliver.ToString() };
+            return new List<string> { _price.ToString() };
         }
 
         protected override void FailComplement()

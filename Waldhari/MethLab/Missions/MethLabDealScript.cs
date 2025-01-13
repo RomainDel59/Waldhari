@@ -7,26 +7,24 @@ using Waldhari.Common.UI;
 namespace Waldhari.MethLab.Missions
 {
     [ScriptAttributes(NoDefaultInstance = true)]
-    public class MethLabBulkScript : GenericBulkMissionScript
+    public class MethLabDealScript : GenericDealMissionScript
     {
-        public MethLabBulkScript() : base("MethLabBulkScript") {}
-
+        public MethLabDealScript() : base("MethLabDealScript") {}
+        
         protected override int Amount 
-            => MethLabSave.Instance.Product;
-
+            => RandomHelper.Next(MethLabOptions.Instance.DealMinGramsPerPack, MethLabOptions.Instance.DealMaxGramsPerPack+1);
         protected override int PriceByUnit 
-            => RandomHelper.Next(MethLabOptions.Instance.BulkMinPrice, MethLabOptions.Instance.BulkMaxPrice + 1);
+            => RandomHelper.Next(MethLabOptions.Instance.DealMinPrice, MethLabOptions.Instance.DealMaxPrice + 1);
         protected override void DeductAmount(int amount)
         {
             MethLabSave.Instance.Product -= amount;
             MethLabSave.Instance.Save();
         }
-
-        protected override WPosition Parking
-            => MethLabHelper.Positions.Parking;
+        protected override WPosition Cabinet
+            => MethLabHelper.Positions.Cabinet;
         protected override void ShowStartedMessage()
         {
-            NotificationHelper.ShowFromRon("methlab_bulk_started");
+            NotificationHelper.ShowFromRon("methlab_deal_started");
         }
     }
 }

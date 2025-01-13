@@ -17,8 +17,8 @@ namespace Waldhari.Common.Behavior.Mission
         private List<PedActingScript> _supplierActingScripts;
         private WVehicle _van;
 
-        private int _amountToSupply;
-        private int _costToSupply;
+        private int _amount;
+        private int _cost;
         
         protected abstract int Amount { get; }
         protected abstract int CostByUnit { get; }
@@ -33,10 +33,10 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void StartComplement()
         {
-            _amountToSupply = Amount;
-            _costToSupply = _amountToSupply * CostByUnit;
+            _amount = Amount;
+            _cost = _amount * CostByUnit;
 
-            if (Game.Player.Money < _costToSupply)
+            if (Game.Player.Money < _cost)
                 throw new MissionException("supply_no_money");
 
             ShowStartedMessage();
@@ -55,9 +55,9 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override List<string> EndComplement()
         {
-            AddSupply(_amountToSupply);
+            AddSupply(_amount);
             
-            return new List<string> { _amountToSupply.ToString() };
+            return new List<string> { _amount.ToString() };
         }
 
         protected override void FailComplement()
@@ -106,7 +106,7 @@ namespace Waldhari.Common.Behavior.Mission
                 CompletionAction = () =>
                 {
                     SoundHelper.PlayPayment();
-                    Game.Player.Money -= _costToSupply;
+                    Game.Player.Money -= _cost;
                     Game.DoAutoSave();
                     
                     _supplierActingScripts[0].WPed.RemoveMissionDestination();
