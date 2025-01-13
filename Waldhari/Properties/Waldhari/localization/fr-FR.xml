@@ -319,7 +319,7 @@
         <!-- Deal mission -->
         <LocaleKey>
             <Key>methlab_deal_started</Key>
-            <Value>Salut patron, un client demande ~r~{0} g~s~ de méth pour ~g~{1} $~s~, va lui apporter aux coordonnées que je t'ai envoyées.</Value>
+            <Value>Salut patron, un client a commandé ~r~{0} g~s~ de méth, va lui apporter aux coordonnées que je t'ai envoyées.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_deal_step_get_product</Key>

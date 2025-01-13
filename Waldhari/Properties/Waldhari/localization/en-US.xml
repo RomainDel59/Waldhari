@@ -318,7 +318,7 @@
         <!-- Deal mission -->
         <LocaleKey>
             <Key>methlab_deal_started</Key>
-            <Value>Hi boss, a client is asking for ~r~{0} g~s~ of meth for ~g~{1} $~s~, deliver it to the coordinates I sent you.</Value>
+            <Value>Hi boss, a client ordered for ~r~{0} g~s~ of meth, deliver it to the coordinates I sent you.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_deal_step_get_product</Key>
@@ -329,7 +329,7 @@
         <!-- Bulk mission -->
         <LocaleKey>
             <Key>methlab_bulk_started</Key>
-            <Value>Hi boss, a wholesaler agreed to take all the goods for ~g~{0} $~s~, take the van below the lab and deliver it to the coordinates I sent you.</Value>
+            <Value>Hi boss, a wholesaler agreed to take all the goods for ~g~${0}~s~, take the van below the lab and deliver it to the coordinates I sent you.</Value>
         </LocaleKey>
 
 

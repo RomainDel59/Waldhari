@@ -15,8 +15,8 @@ namespace Waldhari.Common.Behavior.Mission
         private PedActingScript _clientScript;
         private WBlip _cabinetBlip;
         
-        private int _amount;
-        private int _price;
+        protected int _amount;
+        protected int _price;
         
         protected abstract int Amount { get; }
         protected abstract int PriceByUnit { get; }

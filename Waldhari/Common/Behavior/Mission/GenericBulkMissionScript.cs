@@ -6,7 +6,6 @@ using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Exceptions;
 using Waldhari.Common.Files;
 using Waldhari.Common.UI;
-using Waldhari.MethLab;
 
 namespace Waldhari.Common.Behavior.Mission
 {
@@ -18,8 +17,8 @@ namespace Waldhari.Common.Behavior.Mission
         private List<PedActingScript> _wholesalerActingScripts;
         private WVehicle _van;
 
-        private int _amount;
-        private int _price;
+        protected int _amount;
+        protected int _price;
 
         protected abstract int Amount { get; }
         protected abstract int PriceByUnit { get; }

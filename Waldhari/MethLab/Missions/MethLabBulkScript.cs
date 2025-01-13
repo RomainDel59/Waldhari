@@ -1,4 +1,5 @@
-﻿using GTA;
+﻿using System.Collections.Generic;
+using GTA;
 using Waldhari.Common.Behavior.Mission;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Misc;
@@ -26,7 +27,7 @@ namespace Waldhari.MethLab.Missions
             => MethLabHelper.Positions.Parking;
         protected override void ShowStartedMessage()
         {
-            NotificationHelper.ShowFromRon("methlab_bulk_started");
+            NotificationHelper.ShowFromRon("methlab_bulk_started", new List<string>{ _price.ToString() });
         }
     }
 }
