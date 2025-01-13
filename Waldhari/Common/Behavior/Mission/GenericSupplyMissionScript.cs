@@ -48,7 +48,7 @@ namespace Waldhari.Common.Behavior.Mission
                 throw new MissionException("supply_fail_supplier_dead");
 
             if (_van?.Vehicle == null || _van.Vehicle.IsConsideredDestroyed)
-                throw new MissionException("supply_fail_vehicle_destroyed");
+                throw new MissionException("fail_vehicle_destroyed");
 
             return true;
         }
@@ -62,7 +62,7 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void FailComplement()
         {
-            // Nothing specific to handle
+            // Nothing
         }
 
         protected override void SetupSteps()

@@ -25,7 +25,8 @@ namespace Waldhari.Common.UI
                 Vector3.Zero,
                 Vector3.Zero,
                 new Vector3(radius, radius, height),
-                ColorHelper.GetSystemColor(wBlip.BColor));
+                ColorHelper.GetSystemColor(wBlip.BColor),
+                true);
         }
         
         /// <summary>

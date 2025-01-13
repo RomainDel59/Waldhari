@@ -35,11 +35,19 @@
             <Key>supplier</Key>
             <Value>Fournisseur</Value>
         </LocaleKey>
+        <LocaleKey>
+            <Key>wholesaler</Key>
+            <Value>Grossiste</Value>
+        </LocaleKey>
 
-        <!-- Vehicles -->
+        <!-- Other -->
         <LocaleKey>
             <Key>vehicle_van</Key>
             <Value>Fourgon</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>delivery</Key>
+            <Value>Livraison</Value>
         </LocaleKey>
 
         <!-- Missions -->
@@ -53,7 +61,7 @@
         </LocaleKey>
         <LocaleKey>
             <Key>fail_vehicle_destroyed</Key>
-            <Value>Le véhicule a été ~r~détruit~s~ avec tout ce qu'il contenait.</Value>
+            <Value>Le véhicule a été ~r~détruit~s~.</Value>
         </LocaleKey>
         
         <LocaleKey>
@@ -142,6 +150,26 @@
         <LocaleKey>
             <Key>bulk_success</Key>
             <Value>Le stock a été vendu pour ~g~{0} $~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>bulk_step_enter</Key>
+            <Value>Entre dans le ~y~fourgon~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_rendezvous</Key>
+            <Value>Amène le fourgon au point de ~y~livraison~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_out</Key>
+            <Value>Sors du ~y~fourgon~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_payment</Key>
+            <Value>Récupère le paiement auprès du ~y~grossiste~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_fail_wholesaler_dead</Key>
+            <Value>Le ~r~grossiste~s~ a été tué.</Value>
         </LocaleKey>
 
         
@@ -301,36 +329,8 @@
         
         <!-- Bulk mission -->
         <LocaleKey>
-            <Key>methlab_bulk_delivery</Key>
-            <Value>Livraison</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_wholesaler</Key>
-            <Value>Grossiste</Value>
-        </LocaleKey>
-        <LocaleKey>
             <Key>methlab_bulk_started</Key>
             <Value>Salut patron, un grossiste a accepté de prendre toute la marchandise pour ~g~{0} $~s~, prend le fourgon en bas du labo, et va lui apporter aux coordonnées que je t'ai envoyées.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_in</Key>
-            <Value>Entre dans le ~y~fourgon~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_rendezvous</Key>
-            <Value>Amène le fourgon au point de ~y~livraison~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_out</Key>
-            <Value>Sors du ~y~fourgon~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_payment</Key>
-            <Value>Récupère le paiement auprès du ~y~grossiste~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_fail_wholesaler_dead</Key>
-            <Value>Le ~r~grossiste~s~ a été tué.</Value>
         </LocaleKey>
         
         

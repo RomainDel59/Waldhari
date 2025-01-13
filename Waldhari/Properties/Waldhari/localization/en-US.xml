@@ -35,11 +35,19 @@
             <Key>supplier</Key>
             <Value>Supplier</Value>
         </LocaleKey>
+        <LocaleKey>
+            <Key>wholesaler</Key>
+            <Value>Wholesaler</Value>
+        </LocaleKey>
 
         <!-- Vehicles -->
         <LocaleKey>
             <Key>vehicle_van</Key>
             <Value>Van</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>delivery</Key>
+            <Value>Delivery</Value>
         </LocaleKey>
 
         <!-- Missions -->
@@ -53,7 +61,7 @@
         </LocaleKey>
         <LocaleKey>
             <Key>fail_vehicle_destroyed</Key>
-            <Value>The vehicle has been ~r~destroyed~s~ with all its content.</Value>
+            <Value>The vehicle has been ~r~destroyed~s~.</Value>
         </LocaleKey>
 
         <LocaleKey>
@@ -141,7 +149,27 @@
         <!-- Bulk mission -->
         <LocaleKey>
             <Key>bulk_success</Key>
-            <Value>The stock has been sold for ~g~{0} $~s~.</Value>
+            <Value>The stock has been sold for ~g~${0}~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>bulk_step_enter</Key>
+            <Value>Get into the ~y~van~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_rendezvous</Key>
+            <Value>Drive the van to the ~y~delivery point~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_out</Key>
+            <Value>Exit the ~y~van~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_payment</Key>
+            <Value>Collect the payment from the ~y~wholesaler~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_bulk_fail_wholesaler_dead</Key>
+            <Value>The ~r~wholesaler~s~ has been killed.</Value>
         </LocaleKey>
         
         
@@ -159,7 +187,7 @@
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_help</Key>
-            <Value>{0}~n~Price: {1} $~n~Provides access to ~y~lab missions~s~~n~Press {2} to buy.</Value>
+            <Value>{0}~n~Price: ${1}~n~Provides access to ~y~lab missions~s~~n~Press {2} to buy.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_buy_failure</Key>
@@ -301,36 +329,8 @@
 
         <!-- Bulk mission -->
         <LocaleKey>
-            <Key>methlab_bulk_delivery</Key>
-            <Value>Delivery</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_wholesaler</Key>
-            <Value>Wholesaler</Value>
-        </LocaleKey>
-        <LocaleKey>
             <Key>methlab_bulk_started</Key>
             <Value>Hi boss, a wholesaler agreed to take all the goods for ~g~{0} $~s~, take the van below the lab and deliver it to the coordinates I sent you.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_in</Key>
-            <Value>Get into the ~y~van~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_rendezvous</Key>
-            <Value>Drive the van to the ~y~delivery point~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_out</Key>
-            <Value>Exit the ~y~van~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_payment</Key>
-            <Value>Collect the payment from the ~y~wholesaler~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_bulk_fail_wholesaler_dead</Key>
-            <Value>The ~r~wholesaler~s~ has been killed.</Value>
         </LocaleKey>
 
 

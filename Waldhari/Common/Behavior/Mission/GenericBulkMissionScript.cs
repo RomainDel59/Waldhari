@@ -22,11 +22,7 @@ namespace Waldhari.Common.Behavior.Mission
         protected abstract int DeliverAmount { get; }
         protected abstract int DeliverPrice { get; }
         protected abstract void DeductAmount(int amount);
-        protected abstract string StartMessageKey { get; }
-        protected abstract string SuccessMessageKey { get; }
-        protected abstract string DeliveryMessageKey { get; }
         protected abstract WPosition DeliveryPosition { get; }
-        protected abstract void OnDeliverySuccess(int amount, int totalPrice);
         protected abstract void ShowStartedMessage();
 
         protected GenericBulkMissionScript(string name) 
@@ -50,58 +46,59 @@ namespace Waldhari.Common.Behavior.Mission
                 throw new MissionException("bulk_fail_wholesaler_dead");
 
             if (_van?.Vehicle == null || _van.Vehicle.IsConsideredDestroyed)
-                throw new MissionException("bulk_fail_vehicle_destroyed");
+                throw new MissionException("fail_vehicle_destroyed");
 
             return true;
         }
 
         protected override List<string> EndComplement()
         {
-            OnDeliverySuccess(_amountToDeliver, _priceToDeliver);
+            Game.Player.Money += _priceToDeliver;
+            Game.DoAutoSave();
 
             return new List<string> { _priceToDeliver.ToString() };
         }
 
         protected override void FailComplement()
         {
-            // Handle cleanup on failure if needed
+            // Nothing
         }
 
         protected override void SetupSteps()
         {
             AddWantedStep();
             AddRivalStep();
-            AddStep(CreateEnterVehicleStep(), false);
-            AddStep(CreateRendezvousStep());
-            AddStep(CreateExitVehicleStep());
-            AddStep(CreateDeliveryStep(), false);
+            AddStep(GetStepEnterVehicle(), false);
+            AddStep(GetStepRendezvous());
+            AddStep(GetStepGetOutVehicle());
+            AddStep(GetStepDelivery(), false);
         }
 
-        private Step CreateEnterVehicleStep()
+        private Step GetStepEnterVehicle()
         {
             return new Step
             {
                 Name = "EnterVehicle",
-                MessageKey = "delivery_step_enter_vehicle",
+                MessageKey = "bulk_step_enter",
                 Action = () =>
                 {
                     _deliveryWBlip.Remove();
-                    _deliveryVehicle.MakeMissionDestination("delivery_vehicle");
+                    _van.MakeMissionDestination("vehicle_van");
                 },
                 CompletionCondition = 
-                    () => Game.Player.Character.IsInVehicle(_deliveryVehicle.Vehicle)
+                    () => Game.Player.Character.IsInVehicle(_van.Vehicle)
             };
         }
 
-        private Step CreateRendezvousStep()
+        private Step GetStepRendezvous()
         {
             return new Step
             {
                 Name = "Rendezvous",
-                MessageKey = DeliveryMessageKey,
+                MessageKey = "bulk_step_rendezvous",
                 Action = () =>
                 {
-                    _deliveryVehicle.RemoveMissionDestination();
+                    _van.RemoveMissionDestination();
                     _deliveryWBlip.Create();
                     MarkerHelper.DrawGroundMarkerOnBlip(_deliveryWBlip);
                 },
@@ -110,7 +107,7 @@ namespace Waldhari.Common.Behavior.Mission
             };
         }
 
-        private Step CreateExitVehicleStep()
+        private Step GetStepGetOutVehicle()
         {
             return new Step
             {
@@ -122,7 +119,7 @@ namespace Waldhari.Common.Behavior.Mission
             };
         }
 
-        private Step CreateDeliveryStep()
+        private Step GetStepDelivery()
         {
             return new Step
             {
