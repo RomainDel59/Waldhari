@@ -7,7 +7,7 @@ using Waldhari.Common.Misc;
 
 namespace Waldhari.Common.Behavior.Mission.Helper
 {
-    public class DefenseMissionHelper
+    public static class DefenseMissionHelper
     {
         private static readonly Dictionary<string,int> NextAttackTry = new Dictionary<string, int>();
 
