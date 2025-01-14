@@ -11,6 +11,7 @@ namespace Waldhari.MethLab
         #region save
 
         public int Owner;
+        public bool Worker;
         
         public int Supply;
         public int Product;
@@ -20,6 +21,7 @@ namespace Waldhari.MethLab
         protected override void SetDefaults()
         {
             Owner = 0;
+            Worker = false;
             Supply = 0;
             Product = 0;
         }

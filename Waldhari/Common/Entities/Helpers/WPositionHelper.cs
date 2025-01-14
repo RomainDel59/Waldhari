@@ -47,7 +47,7 @@ namespace Waldhari.Common.Entities.Helpers
 
         public static bool IsNearPlayer(Vector3 position, float distance)
         {
-            return IsNearPlayer(position, distance);
+            return IsNear(Game.Player.Character.Position, position, distance);
         }
 
         #region MissionWithVehiclePossiblePositions

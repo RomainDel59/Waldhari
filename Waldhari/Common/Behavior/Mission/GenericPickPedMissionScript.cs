@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using GTA;
+﻿using GTA;
 using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Entities.Helpers;
@@ -15,6 +14,7 @@ namespace Waldhari.Common.Behavior.Mission
         private WBlip _destinationBlip;
         
         protected abstract WPosition Destination { get; }
+        protected abstract WPosition Workstation { get; }
         protected abstract void ShowStartedMessage();
         protected abstract string PedMessageKey { get; }
         protected abstract string FailPedDeadMessageKey { get; }
@@ -35,15 +35,10 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override bool OnTickComplement()
         {
-            if (_pedActingScript?.WPed?.Ped == null || !_pedActingScript.WPed.Ped.IsDead)
+            if (_pedActingScript?.WPed?.Ped == null || _pedActingScript.WPed.Ped.IsDead)
                 throw new MissionException(FailPedDeadMessageKey);
 
             return true;
-        }
-
-        protected override List<string> EndComplement()
-        {
-            return null;
         }
         
         protected override void FailComplement()
@@ -53,6 +48,7 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void SetupSteps()
         {
+            AddWantedStep();
             AddStep(GetStepRendezvous(), false);
             AddStep(GetStepVehicle());
             AddStep(GetStepWait());
@@ -67,7 +63,7 @@ namespace Waldhari.Common.Behavior.Mission
                 MessageKey = RendezvousMessageKey,
                 Action = () =>
                 {
-                    _pedActingScript.WPed.Ped.Task.LeaveVehicle();
+                    if(_pedActingScript.WPed.Ped.IsInVehicle()) _pedActingScript.WPed.Ped.Task.LeaveVehicle();
                     _pedActingScript.WPed.MakeMissionDestination(PedMessageKey);
                 },
                 CompletionCondition =
@@ -84,9 +80,13 @@ namespace Waldhari.Common.Behavior.Mission
                 Name = "Vehicle",
                 MessageKey = "pickupped_step_vehicle",
                 Action = () => { },
-                CompletionCondition = () => Game.Player.Character.IsInVehicle(),
-                CompletionAction = 
-                    () => _pedActingScript.WPed.Ped.Task.EnterVehicle(Game.Player.Character.CurrentVehicle)
+                CompletionCondition = 
+                    () => Game.Player.Character.IsInVehicle(),
+                CompletionAction = () =>
+                {
+                    _pedActingScript.StopActing();
+                    _pedActingScript.WPed.Ped.Task.EnterVehicle(Game.Player.Character.CurrentVehicle);
+                }
             };
         }
 
@@ -115,9 +115,17 @@ namespace Waldhari.Common.Behavior.Mission
                 },
                 CompletionCondition = 
                     () => WPositionHelper.IsNearPlayer(_destinationBlip.Position, 10) &&
-                          Game.Player.Character.CurrentVehicle.Acceleration == 0
+                          Game.Player.Character.CurrentVehicle.Speed == 0,
+                CompletionAction =
+                    () =>
+                    {
+                        _pedActingScript.WPed.Ped.Task.GoTo(Workstation.Position);
+                        _waitPedGoAway = Game.GameTime + 5 * 1000;
+                    }
             };
         }
+
+        private int _waitPedGoAway;
 
         protected override void CreateScene()
         {
@@ -143,6 +151,13 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void CleanScene()
         {
+            // Wait for ped to quit vehicle
+            while (_waitPedGoAway > Game.GameTime)
+            {
+                Wait(1);
+                Game.Player.Character.CurrentVehicle.Speed = 0;
+            }
+            
             _pedActingScript?.WPed?.Ped?.MarkAsNoLongerNeeded();
             _pedActingScript?.Abort();
             

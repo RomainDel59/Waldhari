@@ -68,7 +68,6 @@ namespace Waldhari.MethLab
         }
         
         // no need at the moment
-        public static PedHash Chemist = (PedHash)3988008767;
         public static void ShowFromChemist(string messageKey, List<string> messageValues = null)
         {
             NotificationHelper.ShowFromDefault(messageKey, "chemist", messageValues);
@@ -171,9 +170,19 @@ namespace Waldhari.MethLab
             // Linking the Answered event with our function
             _contact.Answered += contact =>
             {
-                PhoneHelper.GetIFruit().Close(1000);
-                Script.Wait(1000);
-                GetMenu().Visible = true;
+                if(MethLabSave.Instance.Worker)
+                {
+                    PhoneHelper.GetIFruit().Close(1000);
+                    Script.Wait(1000);
+                    GetMenu().Visible = true;
+                }
+                else
+                {
+                    PhoneHelper.GetIFruit().Close(1000);
+                    Script.Wait(1000);
+                    var script = Script.InstantiateScript<MethLabPickUpPedScript>();
+                    script.Start();
+                }
             };
             
             Logger.Debug($"Contact='{_contact.Name}' created");

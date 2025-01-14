@@ -18,6 +18,7 @@ namespace Waldhari.Common.Behavior.Ped
         private bool _hasMoved;
         
         private bool _isGoingBackPosition;
+        private bool _actingStopped;
         
         public bool IsInCombat() => WPed.Ped.IsInCombat;
         
@@ -50,6 +51,8 @@ namespace Waldhari.Common.Behavior.Ped
 
             if (!HasAnimationToDo() && !HasScenarioToDo())
                 throw new TechnicalException("Ped should have a scenario or an animation to play");
+            
+            if(_actingStopped) return;
             
             // If ped is in combat, let the ped fight
             if (IsInCombat()) return;
@@ -100,6 +103,16 @@ namespace Waldhari.Common.Behavior.Ped
             WPed.Ped.Task.GuardCurrentPosition();
             WPed.Ped.Task.StartScenario(WPed.Scenario, WPed.InitialPosition.Heading);
         }
-        
+
+        public void StopActing()
+        {
+            WPed.Ped.Task.ClearAll();
+            _actingStopped = true;
+        }
+
+        public void RestartActing()
+        {
+            _actingStopped = false;
+        }
     }
 }
