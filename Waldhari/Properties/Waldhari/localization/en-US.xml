@@ -123,6 +123,12 @@
             <Key>property_bought</Key>
             <Value>Property bought</Value>
         </LocaleKey>
+
+        <!-- Pick up ped mission -->
+        <LocaleKey>
+            <Key>pickupped_step_vehicle</Key>
+            <Value>You need a ~r~vehicle~s~!</Value>
+        </LocaleKey>
         
         <!-- Supply mission -->
         <LocaleKey>

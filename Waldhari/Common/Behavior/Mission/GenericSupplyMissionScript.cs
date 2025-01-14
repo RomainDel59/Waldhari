@@ -86,7 +86,7 @@ namespace Waldhari.Common.Behavior.Mission
                     _supplierActingScripts[0].WPed.MakeMissionDestination("supplier");
                 },
                 CompletionCondition =
-                    () => WPositionHelper.IsNear(Game.Player.Character.Position, _supplierActingScripts[0].WPed.Ped.Position, 25)
+                    () => WPositionHelper.IsNearPlayer(_supplierActingScripts[0].WPed.Ped.Position, 25)
             };
         }
 
@@ -102,7 +102,7 @@ namespace Waldhari.Common.Behavior.Mission
                 },
                 CompletionCondition =
                     () => !_supplierActingScripts[0].WPed.Ped.IsInCombat &&
-                          WPositionHelper.IsNear(Game.Player.Character.Position, _supplierActingScripts[0].WPed.Ped.Position, 2),
+                          WPositionHelper.IsNearPlayer(_supplierActingScripts[0].WPed.Ped.Position, 2),
                 CompletionAction = () =>
                 {
                     SoundHelper.PlayPayment();
@@ -138,7 +138,7 @@ namespace Waldhari.Common.Behavior.Mission
                     }
                 },
                 CompletionCondition =
-                    () => WPositionHelper.IsNear(Game.Player.Character.Position, _deliveryWBlip.Position, 10)
+                    () => WPositionHelper.IsNearPlayer(_deliveryWBlip.Position, 10)
             };
         }
 

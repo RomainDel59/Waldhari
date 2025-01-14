@@ -45,6 +45,11 @@ namespace Waldhari.Common.Entities.Helpers
             return position1.DistanceTo(position2) <= distance;
         }
 
+        public static bool IsNearPlayer(Vector3 position, float distance)
+        {
+            return IsNearPlayer(position, distance);
+        }
+
         #region MissionWithVehiclePossiblePositions
 
         public class MissionWithVehiclePosition

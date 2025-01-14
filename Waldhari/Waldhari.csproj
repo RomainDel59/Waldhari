@@ -58,6 +58,7 @@
         <Compile Include="Common\Behavior\Mission\GenericBulkMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\GenericDealMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\GenericDefenseMissionScript.cs" />
+        <Compile Include="Common\Behavior\Mission\GenericPickPedMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\GenericSupplyMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\Helper\DefenseMissionHelper.cs" />
         <Compile Include="Common\Behavior\Mission\Step.cs" />

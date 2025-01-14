@@ -124,6 +124,12 @@
             <Value>Propriété achetée</Value>
         </LocaleKey>
         
+        <!-- Pick up ped mission -->
+        <LocaleKey>
+            <Key>pickupped_step_vehicle</Key>
+            <Value>Il te faut un ~r~véhicule~s~ !</Value>
+        </LocaleKey>
+        
         <!-- Supply mission -->
         <LocaleKey>
             <Key>supply_menu_title</Key>

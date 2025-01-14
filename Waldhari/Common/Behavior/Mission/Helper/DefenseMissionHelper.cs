@@ -46,7 +46,7 @@ namespace Waldhari.Common.Behavior.Mission.Helper
             }
             
             // Is too far : 100 meters
-            if (!WPositionHelper.IsNear(Game.Player.Character.Position, property.Position, 100))
+            if (!WPositionHelper.IsNearPlayer(property.Position, 100))
             {
                 AddCooldown<T>();
                 return;

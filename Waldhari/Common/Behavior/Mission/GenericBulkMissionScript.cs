@@ -105,7 +105,7 @@ namespace Waldhari.Common.Behavior.Mission
                     MarkerHelper.DrawGroundMarkerOnBlip(_deliveryWBlip);
                 },
                 CompletionCondition = 
-                    () => WPositionHelper.IsNear(Game.Player.Character.Position, _deliveryWBlip.Position, 10)
+                    () => WPositionHelper.IsNearPlayer(_deliveryWBlip.Position, 10)
             };
         }
 
@@ -133,7 +133,7 @@ namespace Waldhari.Common.Behavior.Mission
                 },
                 CompletionCondition = 
                     () => !_wholesalerActingScripts[0].WPed.Ped.IsInCombat &&
-                          WPositionHelper.IsNear(Game.Player.Character.Position, _wholesalerActingScripts[0].WPed.Ped.Position, 2),
+                          WPositionHelper.IsNearPlayer(_wholesalerActingScripts[0].WPed.Ped.Position, 2),
                 CompletionAction = 
                     () => _wholesalerActingScripts[0].WPed.RemoveMissionDestination()
             };
