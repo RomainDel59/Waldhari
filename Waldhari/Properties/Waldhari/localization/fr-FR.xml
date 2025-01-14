@@ -251,6 +251,10 @@
             <Key>methlab_intro</Key>
             <Value>Salut patron !~n~Je sens qu'on va se faire un max d'oseille avec ce labo. Appelle-moi quand tu voudras commencer.</Value>
         </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_parking</Key>
+            <Value>Parking du labo</Value>
+        </LocaleKey>
         
         <!-- Menu -->
         <LocaleKey>
@@ -286,14 +290,36 @@
             <Value>Il y a ~g~{0} g~s~ de méth en stock actuellement.</Value>
         </LocaleKey>
 
+        <!-- Pick up ped mission -->
+        <LocaleKey>
+            <Key>methlab_pickupped_success</Key>
+            <Value>Le ~g~chimiste~s~ est arrivé au labo !</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_started</Key>
+            <Value>Patron ! Pour fabriquer de la méth, il te faut un chimiste. Justement, j'ai un contact. Va le chercher.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_fail_dead</Key>
+            <Value>Le ~r~chimiste~s~ est mort.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_step_rendezvous</Key>
+            <Value>Va chercher le ~y~chimiste~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_step_wait</Key>
+            <Value>Attends que le chimiste monte dans ton ~y~véhicule~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_step_drive</Key>
+            <Value>Amène le chimiste au ~y~labo~s~.</Value>
+        </LocaleKey>
+
         <!-- Supply mission -->
         <LocaleKey>
             <Key>methlab_supply_step_drive</Key>
             <Value>Ramène le ~y~fourgon~s~ au labo.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_destination</Key>
-            <Value>Parking du labo</Value>
         </LocaleKey>
         
         <!-- Defense mission -->

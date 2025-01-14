@@ -23,7 +23,7 @@ namespace Waldhari.MethLab.Missions
             => RandomHelper.Next(MethLabOptions.Instance.SupplyMinCost, MethLabOptions.Instance.SupplyMaxCost + 1);
         
         protected override string StepDriveMessageKey => "methlab_supply_step_drive";
-        protected override string DestinationMessageKey => "methlab_supply_destination";
+        protected override string DestinationMessageKey => "methlab_parking";
         
         protected override WPosition Parking => MethLabHelper.Positions.Parking;
         

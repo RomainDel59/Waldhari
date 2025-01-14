@@ -250,6 +250,10 @@
             <Key>methlab_intro</Key>
             <Value>Hi boss!~n~I feel we're going to make a lot of cash with this lab. Call me when you want to start.</Value>
         </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_parking</Key>
+            <Value>Lab Parking</Value>
+        </LocaleKey>
 
         <!-- Menu -->
         <LocaleKey>
@@ -278,21 +282,43 @@
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_supply_amount</Key>
-            <Value>There are currently ~g~{0} kg~s~ of raw materials in stock.</Value>
+            <Value>There are currently ~g~{0} kg~s~ of supplies in stock.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_product_amount</Key>
             <Value>There are currently ~g~{0} g~s~ of meth in stock.</Value>
         </LocaleKey>
 
+        <!-- Pick up ped mission -->
+        <LocaleKey>
+            <Key>methlab_pickupped_success</Key>
+            <Value>The ~g~chemist~s~ has arrived to the lab!</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_started</Key>
+            <Value>Boss! To make meth, you need a chemist. I have a contact. Go get him.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_fail_dead</Key>
+            <Value>The ~r~chemist~s~ is dead.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_step_rendezvous</Key>
+            <Value>Go get the ~y~chemist~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_step_wait</Key>
+            <Value>Wait for the chemist to get into your ~y~vehicle~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_step_drive</Key>
+            <Value>Bring the chemist to the ~y~lab~s~.</Value>
+        </LocaleKey>
+
         <!-- Supply mission -->
         <LocaleKey>
             <Key>methlab_supply_step_drive</Key>
             <Value>Drive the ~y~van~s~ to the lab.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_destination</Key>
-            <Value>Lab Parking</Value>
         </LocaleKey>
 
         <!-- Defense mission -->
