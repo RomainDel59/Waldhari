@@ -141,14 +141,6 @@ namespace Waldhari.MethLab
                 _menu
             );
 
-            // Create manufacture mission item
-            MenuHelper.CreateMissionItem<ManufactureMissionScript>(
-                "methlab_menu_manufacture_title",
-                "methlab_menu_manufacture_description",
-                _pool,
-                _menu
-            );
-
             // Create deal mission item
             MenuHelper.CreateMissionItem<MethLabDealScript>(
                 "deal_menu_title",

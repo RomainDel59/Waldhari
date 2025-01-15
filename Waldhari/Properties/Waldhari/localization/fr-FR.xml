@@ -258,14 +258,6 @@
         
         <!-- Menu -->
         <LocaleKey>
-            <Key>methlab_menu_manufacture_title</Key>
-            <Value>Fabrication</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_menu_manufacture_description</Key>
-            <Value>Lance la fabrication de méth au labo.</Value>
-        </LocaleKey>
-        <LocaleKey>
             <Key>methlab_menu_check_supply_title</Key>
             <Value>Stock de matières premières</Value>
         </LocaleKey>
@@ -274,16 +266,16 @@
             <Value>Vérifie le volume de matières premières en stock.</Value>
         </LocaleKey>
         <LocaleKey>
+            <Key>methlab_supply_amount</Key>
+            <Value>Il y a ~g~{0} kg~s~ de matières premières en stock actuellement.</Value>
+        </LocaleKey>
+        <LocaleKey>
             <Key>methlab_menu_check_product_title</Key>
             <Value>Stock de méth</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_menu_check_product_description</Key>
             <Value>Vérifie le volume de méth en stock actuellement.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_amount</Key>
-            <Value>Il y a ~g~{0} kg~s~ de matières premières en stock actuellement.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_product_amount</Key>

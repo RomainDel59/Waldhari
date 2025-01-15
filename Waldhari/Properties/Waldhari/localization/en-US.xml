@@ -257,20 +257,16 @@
 
         <!-- Menu -->
         <LocaleKey>
-            <Key>methlab_menu_manufacture_title</Key>
-            <Value>Manufacturing</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_menu_manufacture_description</Key>
-            <Value>Start meth manufacturing in the lab.</Value>
-        </LocaleKey>
-        <LocaleKey>
             <Key>methlab_menu_check_supply_title</Key>
-            <Value>Raw Materials Stock</Value>
+            <Value>Supply Stock</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_menu_check_supply_description</Key>
-            <Value>Check the current stock of raw materials.</Value>
+            <Value>Check the current stock of supplies.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_amount</Key>
+            <Value>There are currently ~g~{0} kg~s~ of supplies in stock.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_menu_check_product_title</Key>
@@ -279,10 +275,6 @@
         <LocaleKey>
             <Key>methlab_menu_check_product_description</Key>
             <Value>Check the current stock of meth.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_supply_amount</Key>
-            <Value>There are currently ~g~{0} kg~s~ of supplies in stock.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>methlab_product_amount</Key>
