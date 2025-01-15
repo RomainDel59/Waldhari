@@ -4,9 +4,7 @@ using GTA.Math;
 using iFruitAddon2;
 using LemonUI;
 using LemonUI.Menus;
-using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities;
-using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
@@ -71,37 +69,18 @@ namespace Waldhari.MethLab
 
         #region Chemist
 
-        public static PedActingScript ChemistScript;
+        public static MethLabManufactureScript ManufactureScript;
 
-        public static void InitChemist(bool force = false)
+        public static void StartManufacture(bool force = false)
         {
             if (!MethLabSave.Instance.Worker && !force) return;
-            
-            var position = Positions.GetWorkstation();
-            
-            if (ChemistScript == null)
+
+            if(ManufactureScript == null)
             {
-                Logger.Debug("Instantiating Chemist script...");
-                ChemistScript = Script.InstantiateScript<PedActingScript>();
-                ChemistScript.StopActing();
-                
-                ChemistScript.WPed = new WPed
-                {
-                    PedHash = PedHash.MethMale01,
-                    InitialPosition = position
-                };
-                ChemistScript.WPed.Create();
-                ChemistScript.WPed.AddWeapon(WeaponsHelper.GetRandomGangWeapon());
-                ChemistScript.WPed.AddWeapon(WeaponsHelper.GetRandomGangWeapon());
-                ChemistScript.WPed.Ped.Weapons.Select(WeaponHash.Unarmed);
-                ChemistScript.WPed.Ped.RelationshipGroup = Game.Player.Character.RelationshipGroup;
+                ManufactureScript = Script.InstantiateScript<MethLabManufactureScript>();
             }
             
-            ChemistScript.WPed.InitialPosition = position;
-            ChemistScript.WPed.Scenario = null;
-            ChemistScript.WPed.AnimationDictionnary = "anim@amb@business@meth@meth_monitoring_cooking@cooking@";
-            ChemistScript.WPed.AnimationName = "chemical_pour_short_cooker";
-            ChemistScript.RestartActing();
+            ManufactureScript.Start();
         }
 
         public static void ShowFromChemist(string messageKey, List<string> messageValues = null)

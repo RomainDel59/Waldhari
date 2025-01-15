@@ -58,6 +58,7 @@
         <Compile Include="Common\Behavior\Mission\GenericBulkMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\GenericDealMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\GenericDefenseMissionScript.cs" />
+        <Compile Include="Common\Behavior\Mission\GenericManufactureScript.cs" />
         <Compile Include="Common\Behavior\Mission\GenericPickPedMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\GenericSupplyMissionScript.cs" />
         <Compile Include="Common\Behavior\Mission\Helper\DefenseMissionHelper.cs" />
@@ -101,10 +102,10 @@
         <Compile Include="MethLab\MethLabHelper.cs" />
         <Compile Include="MethLab\MethLabOptions.cs" />
         <Compile Include="MethLab\MethLabSave.cs" />
-        <Compile Include="MethLab\Missions\ManufactureMissionScript.cs" />
         <Compile Include="MethLab\Missions\MethLabBulkScript.cs" />
         <Compile Include="MethLab\Missions\MethLabDealScript.cs" />
         <Compile Include="MethLab\Missions\MethLabDefenseScript.cs" />
+        <Compile Include="MethLab\Missions\MethLabManufactureScript.cs" />
         <Compile Include="MethLab\Missions\MethLabPickUpPedScript.cs" />
         <Compile Include="MethLab\Missions\MethLabSupplyScript.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

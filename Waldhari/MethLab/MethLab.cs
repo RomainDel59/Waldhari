@@ -62,17 +62,17 @@ namespace Waldhari.MethLab
             if (_nextExecution > Game.GameTime) return;
             _nextExecution = Game.GameTime + 500;
 
-            if(!_chemistHasBeenInit)
+            if(!_manufactureStarted)
             {
-                MethLabHelper.InitChemist();
-                _chemistHasBeenInit = true;
+                MethLabHelper.StartManufacture();
+                _manufactureStarted = true;
             }
             
             DefenseMissionHelper.TryToStart<MethLabDefenseScript>(MethLabHelper.Positions.Property, MethLabSave.Instance.Product);
             
         }
 
-        private static bool _chemistHasBeenInit;
+        private static bool _manufactureStarted;
 
         private void MakeWaitForBuyer()
         {

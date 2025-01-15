@@ -323,22 +323,7 @@
             <Key>methlab_defense_defending</Key>
             <Value>Défends le labo contre les ~r~membres du gang rival~s~ !</Value>
         </LocaleKey>
-        
-        
-        <!-- Manufacture mission -->
-        <LocaleKey>
-            <Key>methlab_manufacture_no_supply</Key>
-            <Value>Il n'y a pas de ~r~matière première~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_manufacture_started</Key>
-            <Value>Salut patron, je lance la préparation et je te recontacte quand c'est prêt.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_manufacture_finished</Key>
-            <Value>J'ai terminé la préparation, patron, j'ai produit ~g~{0} g~s~ de méth. Rappelle quand tu veux.</Value>
-        </LocaleKey>
-        
+                
         
         <!-- Deal mission -->
         <LocaleKey>

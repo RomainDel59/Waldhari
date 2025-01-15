@@ -63,7 +63,7 @@ namespace Waldhari.Common.Behavior.Mission
         /// <summary>
         /// Index of the current active step.
         /// </summary>
-        private int _currentStep;
+        protected int _currentStep;
         
         /// <summary>
         /// Indicates whether the mission is currently active.
@@ -110,7 +110,7 @@ namespace Waldhari.Common.Behavior.Mission
         /// <summary>
         /// Determines the index of the first "real" step, excluding optional random events like wanted or rival steps.
         /// </summary>
-        private int GetFirstStep()
+        protected int GetFirstStep()
         {
             if (HasWantedStep() && HasRivalStep())
             {
@@ -517,7 +517,7 @@ namespace Waldhari.Common.Behavior.Mission
         /// </summary>
         /// <param name="step"></param>
         /// <exception cref="TechnicalException"></exception>
-        private void SetStep(int step)
+        protected void SetStep(int step)
         {
             if (step > _steps.Count)
             {

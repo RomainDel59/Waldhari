@@ -37,8 +37,9 @@ namespace Waldhari.MethLab.Missions
 
         protected override void SendPed(PedActingScript script)
         {
-            MethLabHelper.ChemistScript = script;
-            MethLabHelper.InitChemist(true);
+            MethLabHelper.ManufactureScript = InstantiateScript<MethLabManufactureScript>();
+            MethLabHelper.ManufactureScript.WorkerScript = script;
+            MethLabHelper.StartManufacture(true);
         }
     }
 }

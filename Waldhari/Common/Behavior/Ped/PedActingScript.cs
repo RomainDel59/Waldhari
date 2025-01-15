@@ -12,6 +12,7 @@ namespace Waldhari.Common.Behavior.Ped
     public class PedActingScript : Script
     {
         public WPed WPed;
+        public bool ActWithoutWeapon;
         
         private bool _hasMoved;
         
@@ -51,7 +52,13 @@ namespace Waldhari.Common.Behavior.Ped
                 throw new TechnicalException("Ped should have a scenario or an animation to play");
             
             // If ped is in combat, let the ped fight
-            if (IsInCombat()) return;
+            // but trigger movement to make it back
+            // acting when fight is finished
+            if (IsInCombat())
+            {
+                _hasMoved = true;
+                return;
+            }
             
             if (!WPositionHelper.IsNear(WPed.Ped.Position,WPed.InitialPosition.Position,0.5f))
             {
@@ -90,6 +97,10 @@ namespace Waldhari.Common.Behavior.Ped
         {
             Logger.Debug($"Playing animation={WPed.AnimationName}");
             WPed.Ped.Task.GuardCurrentPosition();
+            
+            if(ActWithoutWeapon) 
+                WPed.Ped.Weapons.Select(WeaponHash.Unarmed);
+            
             WPed.Ped.Task.PlayAnimation(WPed.AnimationDictionnary, WPed.AnimationName, 8f,-8f,-1,AnimationFlags.Loop,0f);
         }
 
@@ -97,6 +108,10 @@ namespace Waldhari.Common.Behavior.Ped
         {
             Logger.Debug($"Playing scenario={WPed.Scenario}");
             WPed.Ped.Task.GuardCurrentPosition();
+            
+            if(ActWithoutWeapon) 
+                WPed.Ped.Weapons.Select(WeaponHash.Unarmed);
+            
             WPed.Ped.Task.StartScenario(WPed.Scenario, WPed.InitialPosition.Heading);
         }
 

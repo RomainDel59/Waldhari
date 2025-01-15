@@ -323,22 +323,7 @@
             <Value>Defend the lab from the ~r~rival gang members~s~!</Value>
         </LocaleKey>
 
-
-        <!-- Manufacture mission -->
-        <LocaleKey>
-            <Key>methlab_manufacture_no_supply</Key>
-            <Value>There is no ~r~raw material~s~.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_manufacture_started</Key>
-            <Value>Hey boss, I’m starting the preparation and will contact you when it’s ready.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>methlab_manufacture_finished</Key>
-            <Value>I’ve finished the preparation, boss, I’ve produced ~g~{0} g~s~ of meth. Call me when you want.</Value>
-        </LocaleKey>
-
-
+        
         <!-- Deal mission -->
         <LocaleKey>
             <Key>methlab_deal_started</Key>
