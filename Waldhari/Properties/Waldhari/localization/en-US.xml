@@ -24,8 +24,16 @@
             <Value>Ron Jakowski</Value>
         </LocaleKey>
         <LocaleKey>
+            <Key>barry</Key>
+            <Value>Barry Emery</Value>
+        </LocaleKey>
+        <LocaleKey>
             <Key>chemist</Key>
             <Value>Chemist</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>farmer</Key>
+            <Value>Farmer</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>rival_enemy</Key>
@@ -224,9 +232,9 @@
         
         
         <!-- 
-        ***************
-        *** MethLab *** 
-        ***************
+        ****************
+        *** Meth Lab *** 
+        ****************
         -->
 
         <!-- General -->
@@ -322,7 +330,6 @@
             <Key>methlab_defense_defending</Key>
             <Value>Defend the lab from the ~r~rival gang members~s~!</Value>
         </LocaleKey>
-
         
         <!-- Deal mission -->
         <LocaleKey>
@@ -333,8 +340,7 @@
             <Key>methlab_deal_step_get_product</Key>
             <Value>Go get some meth at the ~y~lab~s~.</Value>
         </LocaleKey>
-
-
+        
         <!-- Bulk mission -->
         <LocaleKey>
             <Key>methlab_bulk_started</Key>
@@ -342,5 +348,121 @@
         </LocaleKey>
 
 
+        <!-- 
+        *****************
+        *** Weed Farm *** 
+        *****************
+        -->
+
+        <!-- General -->
+        <LocaleKey>
+            <Key>weedfarm</Key>
+            <Value>Cannabis Farm</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_help</Key>
+            <Value>{0}~n~Price: {1} $~n~Grants access to ~y~farm missions~s~~n~Press {2} to buy.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_buy_failure</Key>
+            <Value>You ~r~don't have enough money~s~ to pay.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_buy_success</Key>
+            <Value>You purchased the ~y~cannabis farm~s~.~n~This property allows you to grow and sell cannabis to earn money.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_intro</Key>
+            <Value>Hello, Sir,~n~By flooding the market, the state will have no choice but to legalize cannabis. Otherwise, we’ll earn enough money to pressure the Senate.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_parking</Key>
+            <Value>Farm Parking</Value>
+        </LocaleKey>
+
+        <!-- Menu -->
+        <LocaleKey>
+            <Key>weedfarm_menu_check_supply_title</Key>
+            <Value>Raw Material Stock</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_menu_check_supply_description</Key>
+            <Value>Check the volume of raw materials in stock.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_supply_amount</Key>
+            <Value>There are currently ~g~{0} kg~s~ of raw materials in stock.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_menu_check_product_title</Key>
+            <Value>Cannabis Stock</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_menu_check_product_description</Key>
+            <Value>Check the volume of cannabis currently in stock.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_product_amount</Key>
+            <Value>There are currently ~g~{0} g~s~ of cannabis in stock.</Value>
+        </LocaleKey>
+
+        <!-- Pick up ped mission -->
+        <LocaleKey>
+            <Key>weedfarm_pickupped_success</Key>
+            <Value>The ~g~farmer~s~ has arrived at the farm!</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_pickupped_started</Key>
+            <Value>Sir! To grow cannabis, you need an expert in organic farming. I know a farmer interested in our activism; he’s waiting for you.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_pickupped_fail_dead</Key>
+            <Value>The ~r~farmer~s~ is dead.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_pickupped_step_rendezvous</Key>
+            <Value>Go pick up the ~y~farmer~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_pickupped_step_wait</Key>
+            <Value>Wait for the farmer to get into your ~y~vehicle~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_pickupped_step_drive</Key>
+            <Value>Take the farmer to the ~y~farm~s~.</Value>
+        </LocaleKey>
+        
+        <!-- Supply mission -->
+        <LocaleKey>
+            <Key>weedfarm_supply_step_drive</Key>
+            <Value>Bring the ~y~van~s~ back to the farm.</Value>
+        </LocaleKey>
+        
+        <!-- Defense mission -->
+        <LocaleKey>
+            <Key>weedfarm_defense_success</Key>
+            <Value>The farm is ~g~safe for now~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_defense_defending</Key>
+            <Value>Defend the farm from ~r~rival gang members~s~!</Value>
+        </LocaleKey>
+        
+        <!-- Deal mission -->
+        <LocaleKey>
+            <Key>weedfarm_deal_started</Key>
+            <Value>Hello, Sir, a client ordered ~r~{0} g~s~ of cannabis. I’ve sent you their location.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_deal_step_get_product</Key>
+            <Value>Go collect cannabis from the ~y~farm~s~.</Value>
+        </LocaleKey>
+        
+        <!-- Bulk mission -->
+        <LocaleKey>
+            <Key>weedfarm_bulk_started</Key>
+            <Value>Hello, Sir, a wholesaler agreed to take all the merchandise for ~g~{0} $~s~. I’ve prepared a vehicle at the farm. You can deliver it to them.</Value>
+        </LocaleKey>
+        
     </Locales>
 </LocalizationFile>

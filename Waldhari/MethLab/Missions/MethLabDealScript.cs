@@ -3,7 +3,6 @@ using GTA;
 using Waldhari.Common.Behavior.Mission;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Misc;
-using Waldhari.Common.UI;
 
 namespace Waldhari.MethLab.Missions
 {
@@ -25,7 +24,7 @@ namespace Waldhari.MethLab.Missions
             => MethLabHelper.Positions.Cabinet;
         protected override void ShowStartedMessage()
         {
-            NotificationHelper.ShowFromRon("methlab_deal_started", new List<string>{ _amount.ToString() });
+            MethLabHelper.ShowFromContact("methlab_deal_started", new List<string>{ _amount.ToString() });
         }
     }
 }

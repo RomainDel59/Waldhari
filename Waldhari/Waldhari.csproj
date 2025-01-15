@@ -110,6 +110,16 @@
         <Compile Include="MethLab\Missions\MethLabSupplyScript.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="WaldhariScript.cs" />
+        <Compile Include="WeedFarm\WeedFarm.cs" />
+        <Compile Include="WeedFarm\Missions\WeedFarmSupplyScript.cs" />
+        <Compile Include="WeedFarm\Missions\WeedFarmDealScript.cs" />
+        <Compile Include="WeedFarm\Missions\WeedFarmBulkScript.cs" />
+        <Compile Include="WeedFarm\Missions\WeedFarmDefenseScript.cs" />
+        <Compile Include="WeedFarm\Missions\WeedFarmManufactureScript.cs" />
+        <Compile Include="WeedFarm\Missions\WeedFarmPickUpPedScript.cs" />
+        <Compile Include="WeedFarm\WeedFarmOptions.cs" />
+        <Compile Include="WeedFarm\WeedFarmSave.cs" />
+        <Compile Include="WeedFarm\WeedFarmHelper.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />

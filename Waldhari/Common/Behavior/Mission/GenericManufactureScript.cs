@@ -20,16 +20,19 @@ namespace Waldhari.Common.Behavior.Mission
         protected abstract WPosition Position { get; }
         protected abstract string AnimationDictionary { get; }
         protected abstract string AnimationName { get; }
-        
 
-        protected GenericManufactureScript(string name) 
-            : base(name, false, null) {}
+
+        protected GenericManufactureScript(string name)
+            : base(name, false, null)
+        {
+            checkIfAnotherMissionIsActiveToLaunch = false;
+        }
 
         protected override void StartComplement()
         {
             if (!Instances.Remove(this))
             {
-                Logger.Warning("Cannot remove generic manufacture script");
+                Logger.Warning($"Cannot remove {Name} manufacture script");
             }
         }
 
@@ -93,7 +96,7 @@ namespace Waldhari.Common.Behavior.Mission
                 CompletionAction = () =>
                 {
                     DoManufacture();
-                    _currentStep = GetFirstStep()-1;
+                    CurrentStep = GetFirstStep()-1;
                 }
             };
         }

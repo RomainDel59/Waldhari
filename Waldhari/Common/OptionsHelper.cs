@@ -5,8 +5,12 @@ namespace Waldhari.Common
 {
     public static class OptionsHelper
     {
+        private static bool _loaded; 
         public static void GlobalLoad()
         {
+            if(_loaded) return;
+            _loaded = true;
+            
             PersistenceHandler.ModName = "Waldhari";
             
             new GlobalOptions().Load();

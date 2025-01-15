@@ -46,7 +46,8 @@ namespace Waldhari.Common.Behavior.Mission
         
         protected override void FailComplement()
         {
-            // Nothing
+            _pedActingScript?.WPed?.Ped?.MarkAsNoLongerNeeded();
+            _pedActingScript?.Abort();
         }
 
         protected override void SetupSteps()
@@ -123,7 +124,9 @@ namespace Waldhari.Common.Behavior.Mission
                 },
                 CompletionCondition = 
                     () => WPositionHelper.IsNearPlayer(_destinationBlip.Position, 10) &&
-                          Game.Player.Character.CurrentVehicle.Speed == 0
+                          Game.Player.Character.CurrentVehicle.Speed == 0,
+                CompletionAction = 
+                    () => SendPed(_pedActingScript)
             };
         }
 
@@ -151,8 +154,6 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void CleanScene()
         {
-            SendPed(_pedActingScript);
-            
             _destinationBlip?.Remove();
         }
         

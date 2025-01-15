@@ -3,7 +3,6 @@ using GTA;
 using Waldhari.Common.Behavior.Mission;
 using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities;
-using Waldhari.Common.UI;
 
 namespace Waldhari.MethLab.Missions
 {
@@ -18,7 +17,7 @@ namespace Waldhari.MethLab.Missions
         protected override WPosition Workstation => MethLabHelper.Positions.GetWorkstation();
         protected override void ShowStartedMessage()
         {
-            NotificationHelper.ShowFromRon("methlab_pickupped_started");
+            MethLabHelper.ShowFromContact("methlab_pickupped_started");
         }
         protected override string PedMessageKey => "chemist";
         protected override string FailPedDeadMessageKey => "methlab_pickupped_fail_dead";

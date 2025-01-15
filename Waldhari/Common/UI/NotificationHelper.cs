@@ -22,18 +22,13 @@ namespace Waldhari.Common.UI
             Notification.Show(message);
         }
 
-        private static void ShowWithIcon(NotificationIcon icon, string senderKey, string messageKey, List<string> messageValues = null)
+        public static void ShowWithIcon(NotificationIcon icon, string senderKey, string messageKey, List<string> messageValues = null)
         {
             var sender = Localization.GetTextByKey(senderKey);
             var message = Localization.GetTextByKey(messageKey, messageValues);
 
             SoundHelper.PlayEmail();
             Notification.Show(icon, sender, string.Empty, message, true);
-        }
-
-        public static void ShowFromRon(string messageKey, List<string> messageValues = null)
-        {
-            ShowWithIcon(NotificationIcon.Ron, "ron", messageKey, messageValues);
         }
         
         public static void ShowFromDefault(string messageKey, string senderKey, List<string> messageValues = null)

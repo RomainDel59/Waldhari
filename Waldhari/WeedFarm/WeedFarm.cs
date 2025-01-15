@@ -6,11 +6,11 @@ using Waldhari.Common.Behavior.Property;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
-using Waldhari.MethLab.Missions;
+using Waldhari.WeedFarm.Missions;
 
-namespace Waldhari.MethLab
+namespace Waldhari.WeedFarm
 {
-    public class MethLab : Script
+    public class WeedFarm : Script
     {
         private int _nextExecution = Game.GameTime;
 
@@ -23,17 +23,17 @@ namespace Waldhari.MethLab
         
         
 
-        public MethLab()
+        public WeedFarm()
         {
             Load();
 
             Property = new Property
             {
-                NameKey = "methlab",
-                Holder = (Property.Owner)MethLabSave.Instance.Owner,
-                Price = MethLabOptions.Instance.Price,
-                Position = MethLabHelper.Positions.Property.Position,
-                Sprite = BlipSprite.Meth
+                NameKey = "weedfarm",
+                Holder = (Property.Owner)WeedFarmSave.Instance.Owner,
+                Price = WeedFarmOptions.Instance.Price,
+                Position = WeedFarmHelper.Positions.Property.Position,
+                Sprite = BlipSprite.Weed,
             };
             
             Property.ShowBlip();
@@ -43,8 +43,8 @@ namespace Waldhari.MethLab
         
         private void OnTick(object sender, EventArgs e)
         {
-            MethLabHelper.ProcessMenu();
-            PhoneHelper.ManageContact(MethLabHelper.GetContact(), Property.Holder);
+            WeedFarmHelper.ProcessMenu();
+            PhoneHelper.ManageContact(WeedFarmHelper.GetContact(), Property.Holder);
             
             // if not bought and not waiting for buyer, make it wait for a buyer
             if (!Property.IsOwned() && !_isWaitingForBuyer)
@@ -64,11 +64,11 @@ namespace Waldhari.MethLab
 
             if(!_manufactureStarted)
             {
-                MethLabHelper.StartManufacture();
+                WeedFarmHelper.StartManufacture();
                 _manufactureStarted = true;
             }
             
-            DefenseMissionHelper.TryToStart<MethLabDefenseScript>(MethLabHelper.Positions.Property, MethLabSave.Instance.Product);
+            DefenseMissionHelper.TryToStart<WeedFarmDefenseScript>(WeedFarmHelper.Positions.Property, WeedFarmSave.Instance.Product);
             
         }
 
@@ -80,9 +80,9 @@ namespace Waldhari.MethLab
 
             var buyableProperty = new BuyableProperty(Property)
             {
-                HelpKey = "methlab_help",
-                BuySuccessKey = "methlab_buy_success",
-                BuyFailureKey = "methlab_buy_failure"
+                HelpKey = "weedfarm_help",
+                BuySuccessKey = "weedfarm_buy_success",
+                BuyFailureKey = "weedfarm_buy_failure"
             };
 
             _scriptToBuy = InstantiateScript<BuyablePropertyScript>();
@@ -97,22 +97,21 @@ namespace Waldhari.MethLab
         {
             Logger.Info("Changing owner");
             Property.Holder = PlayerHelper.GetCharacterId();
-            MethLabSave.Instance.Owner = (int)Property.Holder; 
-            MethLabSave.Instance.Save();
+            WeedFarmSave.Instance.Owner = (int)Property.Holder; 
+            WeedFarmSave.Instance.Save();
         }
 
         private void ShowIntroMessage()
         {
             Logger.Info("Showing intro message");
-            MethLabHelper.ShowFromContact("methlab_intro");
-            
+            WeedFarmHelper.ShowFromContact("weedfarm_intro");
         }
 
         private void Load()
         {
             OptionsHelper.GlobalLoad();
-            new MethLabOptions().Load();
-            new MethLabSave().Load();
+            new WeedFarmOptions().Load();
+            new WeedFarmSave().Load();
         }
         
     }

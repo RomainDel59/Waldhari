@@ -2,7 +2,6 @@
 using Waldhari.Common.Behavior.Mission;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Misc;
-using Waldhari.Common.UI;
 
 namespace Waldhari.MethLab.Missions
 {
@@ -13,7 +12,7 @@ namespace Waldhari.MethLab.Missions
         
         protected override void ShowStartedMessage()
         {
-            NotificationHelper.ShowFromRon("supply_started");
+            MethLabHelper.ShowFromContact("supply_started");
         }
         
         protected override int Amount 

@@ -1,12 +1,12 @@
 ﻿using Waldhari.Common.Files;
 
-namespace Waldhari.MethLab
+namespace Waldhari.WeedFarm
 {
-    public class MethLabOptions : File<MethLabOptions>
+    public class WeedFarmOptions : File<WeedFarmOptions>
     {
-        public static MethLabOptions Instance;
+        public static WeedFarmOptions Instance;
 
-        protected override void SetInstance(MethLabOptions instance) => Instance = instance;
+        protected override void SetInstance(WeedFarmOptions instance) => Instance = instance;
         
         #region options
 
@@ -53,29 +53,29 @@ namespace Waldhari.MethLab
         {
             Price = 1000000;
 
-            SupplyMinInKg = 100;
-            SupplyMaxInKg = 1000;
+            SupplyMinInKg = 1000;
+            SupplyMaxInKg = 2000;
             
-            SupplyMinCostPerKg = 1500;
-            SupplyMaxCostPerKg = 2000;
+            SupplyMinCostPerKg = 5;
+            SupplyMaxCostPerKg = 10;
 
-            ManufactureMinTimeInMinutes = 3;
-            ManufactureMaxTimeInMinutes = 7;
+            ManufactureMinTimeInMinutes = 15;
+            ManufactureMaxTimeInMinutes = 30;
             
-            ManufactureMinSupplyUsageInKg = 50;
-            ManufactureMaxSupplyUsageInKg = 100;
+            ManufactureMinSupplyUsageInKg = 500;
+            ManufactureMaxSupplyUsageInKg = 750;
 
-            ManufactureMinMadeGramsPerSupplyKg = 400;
-            ManufactureMaxMadeGramsPerSupplyKg = 600;
+            ManufactureMinMadeGramsPerSupplyKg = 500;
+            ManufactureMaxMadeGramsPerSupplyKg = 1000;
 
-            DealMinGramsPerSale = 10;
-            DealMaxGramsPerSale = 50;
+            DealMinGramsPerSale = 20;
+            DealMaxGramsPerSale = 100;
             
-            DealMinPriceByGram = 50;
-            DealMaxPriceByGram = 100;
+            DealMinPriceByGram = 20;
+            DealMaxPriceByGram = 50;
             
-            BulkMinPriceByGram = 10;
-            BulkMaxPriceByGram = 50;
+            BulkMinPriceByGram = 5;
+            BulkMaxPriceByGram = 20;
             
         }
         

@@ -63,16 +63,25 @@ namespace Waldhari.Common.Behavior.Mission
         /// <summary>
         /// Index of the current active step.
         /// </summary>
-        protected int _currentStep;
+        protected int CurrentStep;
+
+        protected bool checkIfAnotherMissionIsActiveToLaunch = true;
         
         /// <summary>
         /// Indicates whether the mission is currently active.
         /// </summary>
-        private bool IsActive;
+        private bool _isActive;
         protected static readonly List<AbstractMissionScript> Instances = new List<AbstractMissionScript>();
         public static bool IsAnyMissionActive()
         {
-            return Instances.Any(instance => instance.IsActive);
+            foreach (var instance in Instances.Where(instance => instance._isActive))
+            {
+                Logger.Debug($"Instance {instance.Name} is active");
+                return true;
+
+            }
+            
+            return false;
         }
         
         /// <summary>
@@ -166,14 +175,17 @@ namespace Waldhari.Common.Behavior.Mission
 
             try
             {
-                if (IsAnyMissionActive() || Game.IsMissionActive || Game.IsRandomEventActive) 
-                    throw new MissionException("already_in_mission");
+                if(checkIfAnotherMissionIsActiveToLaunch)
+                {
+                    if (IsAnyMissionActive() || Game.IsMissionActive || Game.IsRandomEventActive)
+                        throw new MissionException("already_in_mission");
+                }
 
                 StartComplement();
 
                 CreateScene();
 
-                IsActive = true;
+                _isActive = true;
                 _player = (PedHash)Game.Player.Character.Model.Hash;
                 HideMenu();
 
@@ -213,7 +225,7 @@ namespace Waldhari.Common.Behavior.Mission
         private void OnTick(object sender, EventArgs e)
         {
             // Wait for mission to be activated
-            if (!IsActive) return;
+            if (!_isActive) return;
             
             try
             {
@@ -244,22 +256,22 @@ namespace Waldhari.Common.Behavior.Mission
                 if (IsFightingRival()) Game.Player.WantedLevel = 0;
 
                 // Launch rival step if defined (launched one time)
-                if (HasRivalStep() && IsFightingRival() && _currentStep != _rivalStepIndex)
+                if (HasRivalStep() && IsFightingRival() && CurrentStep != _rivalStepIndex)
                 {
-                    Logger.Info($"CurrentStep = {_currentStep}, but is fighting rival so : rival step to be launched");
+                    Logger.Info($"CurrentStep = {CurrentStep}, but is fighting rival so : rival step to be launched");
 
-                    _steps[_rivalStepIndex].PreviousIndex = _currentStep;
+                    _steps[_rivalStepIndex].PreviousIndex = CurrentStep;
                     SetStep(_rivalStepIndex);
 
                     return;
                 }
 
                 // Launch wanted step if defined (launched one time)
-                if (HasWantedStep() && Game.Player.WantedLevel > 0 && _currentStep != _wantedStepIndex)
+                if (HasWantedStep() && Game.Player.WantedLevel > 0 && CurrentStep != _wantedStepIndex)
                 {
-                    Logger.Debug($"CurrentStep = {_currentStep}, but wanted level = {Game.Player.WantedLevel} so : wanted step to be launched");
+                    Logger.Debug($"CurrentStep = {CurrentStep}, but wanted level = {Game.Player.WantedLevel} so : wanted step to be launched");
 
-                    _steps[_wantedStepIndex].PreviousIndex = _currentStep;
+                    _steps[_wantedStepIndex].PreviousIndex = CurrentStep;
                     SetStep(_wantedStepIndex);
 
                     return;
@@ -280,13 +292,13 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected void ExecuteStep()
         {
-            switch (_steps[_currentStep].Execute())
+            switch (_steps[CurrentStep].Execute())
             {
                 case Step.ExecutionResult.GoPrevious:
-                    SetStep(_steps[_currentStep].PreviousIndex);
+                    SetStep(_steps[CurrentStep].PreviousIndex);
                     break;
                 case Step.ExecutionResult.GoNext:
-                    var nextIndex = _currentStep + 1;
+                    var nextIndex = CurrentStep + 1;
                     if (nextIndex >= _steps.Count)
                     {
                         End();
@@ -383,7 +395,7 @@ namespace Waldhari.Common.Behavior.Mission
             NotificationHelper.HideSubtitle();
             CleanScene();
             _steps?.Clear();
-            IsActive = false;
+            _isActive = false;
             _randomEventAlreadyLaunchedOnce = false;
             _rivalScript?.MarkAsNoLongerNeeded();
             _rivalScript?.Abort();
@@ -525,8 +537,8 @@ namespace Waldhari.Common.Behavior.Mission
             }
 
             Logger.Info($"{_name} step is set to {step} '{_steps[step].Name}'.");
-            _currentStep = step;
-            _steps[_currentStep].ShowMessage();
+            CurrentStep = step;
+            _steps[CurrentStep].ShowMessage();
         }
 
         /// <summary>
@@ -542,7 +554,7 @@ namespace Waldhari.Common.Behavior.Mission
             if (_randomEventAlreadyLaunchedOnce) return;
 
             // If it isn't the first step currently running only
-            if (_currentStep == GetFirstStep()) return;
+            if (CurrentStep == GetFirstStep()) return;
 
             // If not already wanted only
             if (IsWanted()) return;

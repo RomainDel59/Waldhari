@@ -9,35 +9,35 @@ using Waldhari.Common.Entities;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
-using Waldhari.MethLab.Missions;
+using Waldhari.WeedFarm.Missions;
 
-namespace Waldhari.MethLab
+namespace Waldhari.WeedFarm
 {
-    public static class MethLabHelper
+    public static class WeedFarmHelper
     {
         public static class Positions
         {
             public static readonly WPosition Property = new WPosition
             {
-                Position = new Vector3(1394.511f, 3598.316f, 34.98711f),
-                Rotation = new Vector3(0.000529588f, -0.0006858803f, -167.1918f),
-                Heading = 192.8082f
+                Position = new Vector3(2220.382f, 5614.367f, 54.72742f),
+                Rotation = new Vector3(-0.0003605913f, 4.733887E-08f, -81.828f),
+                Heading = 278.172f
             };
-
+            
             public static readonly WPosition Cabinet = new WPosition
             {
-                Position = new Vector3(1394.949f, 3613.84f, 34.98093f),
-                Rotation = new Vector3(0.0005374776f, -0.0007078056f, 15.72955f),
-                Heading = 15.72955f
+                Position = new Vector3(2194.004f, 5593.924f, 53.75492f),
+                Rotation = new Vector3(-0.000361025f, -7.503591E-05f, 164.5876f),
+                Heading = 164.5876f
             };
-
-            public static readonly WPosition Parking = new WPosition
+            
+            public static WPosition Parking = new WPosition
             {
-                Position = new Vector3(1380.113f, 3599f, 34.88007f),
-                Rotation = new Vector3(0f, 0f, -162.9709f),
-                Heading = 197.0291f
+                Position = new Vector3(2214.336f, 5600.055f, 54.02474f),
+                Rotation = new Vector3(-0.0003605108f, -6.488535E-09f, 1.376211f),
+                Heading = 1.376211f
             };
-
+            
             public static WPosition GetWorkstation()
             {
                 var index = RandomHelper.Next(0, Workstations.Count);
@@ -48,36 +48,42 @@ namespace Waldhari.MethLab
             {
                 new WPosition
                 {
-                    Position = new Vector3(1388.98f, 3604.892f, 38.94193f),
-                    Rotation = new Vector3(0.0005379676f, -0.0006872303f, -69.14804f),
-                    Heading = 290.852f
+                    Position = new Vector3(2222.764f, 5578.261f, 53.70979f),
+                    Rotation = new Vector3(-0.0003607887f, -7.461072E-05f, -179.0753f),
+                    Heading = 180.9247f
                 },
                 new WPosition
                 {
-                    Position = new Vector3(1390.096f, 3608.829f, 38.94193f),
-                    Rotation = new Vector3(0.0005379398f, -0.0006871976f, 23.74725f),
-                    Heading = 23.74725f
+                    Position = new Vector3(2227.685f, 5577.925f, 53.69601f),
+                    Rotation = new Vector3(-0.0003608046f, -7.461171E-05f, 173.252f),
+                    Heading = 173.252f
                 },
                 new WPosition
                 {
-                    Position = new Vector3(1394.383f, 3601.791f, 38.94189f),
-                    Rotation = new Vector3(0.0005868266f, -0.0006681096f, -161.9645f),
-                    Heading = 198.0355f
+                    Position = new Vector3(2222.681f, 5576.244f, 53.65268f),
+                    Rotation = new Vector3(-0.0003608477f, -7.445754E-05f, 167.5867f),
+                    Heading = 167.5867f
+                },
+                new WPosition
+                {
+                    Position = new Vector3(2216.26f, 5576.372f, 53.58198f),
+                    Rotation = new Vector3(-0.0003608917f, -7.454795E-05f, -2.24531f),
+                    Heading = 357.7547f
                 }
             };
         }
-
+        
         #region Worker
 
-        public static MethLabManufactureScript ManufactureScript;
+        public static WeedFarmManufactureScript ManufactureScript;
 
         public static void StartManufacture(bool force = false)
         {
-            if (!MethLabSave.Instance.Worker && !force) return;
+            if (!WeedFarmSave.Instance.Worker && !force) return;
 
             if(ManufactureScript == null)
             {
-                ManufactureScript = Script.InstantiateScript<MethLabManufactureScript>();
+                ManufactureScript = Script.InstantiateScript<WeedFarmManufactureScript>();
             }
             
             ManufactureScript.Start();
@@ -85,12 +91,11 @@ namespace Waldhari.MethLab
 
         public static void ShowFromWorker(string messageKey, List<string> messageValues = null)
         {
-            NotificationHelper.ShowFromDefault(messageKey, "chemist", messageValues);
+            NotificationHelper.ShowFromDefault(messageKey, "cultivator", messageValues);
         }
 
         #endregion
-
-
+        
         #region menu
 
         private static ObjectPool _pool;
@@ -108,12 +113,12 @@ namespace Waldhari.MethLab
 
             // Create main menu
             _pool = new ObjectPool();
-            _menu = new NativeMenu(Localization.GetTextByKey("methlab"));
+            _menu = new NativeMenu(Localization.GetTextByKey("weedfarm"));
             MenuHelper.SetButtons(_menu);
             _pool.Add(_menu);
 
             // Create supply mission item
-            MenuHelper.CreateMissionItem<MethLabSupplyScript>(
+            MenuHelper.CreateMissionItem<WeedFarmSupplyScript>(
                 "supply_menu_title",
                 "supply_menu_description",
                 _pool,
@@ -121,7 +126,7 @@ namespace Waldhari.MethLab
             );
 
             // Create deal mission item
-            MenuHelper.CreateMissionItem<MethLabDealScript>(
+            MenuHelper.CreateMissionItem<WeedFarmDealScript>(
                 "deal_menu_title",
                 "deal_menu_description",
                 _pool,
@@ -129,7 +134,7 @@ namespace Waldhari.MethLab
             );
 
             // Create bulk mission item
-            MenuHelper.CreateMissionItem<MethLabBulkScript>(
+            MenuHelper.CreateMissionItem<WeedFarmBulkScript>(
                 "bulk_menu_title",
                 "bulk_menu_description",
                 _pool,
@@ -141,20 +146,20 @@ namespace Waldhari.MethLab
 
             // Create check supply item
             MenuHelper.CreateCheckItem(
-                "methlab_menu_check_supply_title",
-                "methlab_menu_check_supply_description",
-                "methlab_supply_amount",
+                "weedfarm_menu_check_supply_title",
+                "weedfarm_menu_check_supply_description",
+                "weedfarm_supply_amount",
                 _menu,
-                () => MethLabSave.Instance.Supply
+                () => WeedFarmSave.Instance.Supply
             );
 
             // Create check product item
             MenuHelper.CreateCheckItem(
-                "methlab_menu_check_product_title",
-                "methlab_menu_check_product_description",
-                "methlab_product_amount",
+                "weedfarm_menu_check_product_title",
+                "weedfarm_menu_check_product_description",
+                "weedfarm_product_amount",
                 _menu,
-                () => MethLabSave.Instance.Product
+                () => WeedFarmSave.Instance.Product
             );
 
             Logger.Debug($"Menu='{_menu.Name}' created");
@@ -171,17 +176,17 @@ namespace Waldhari.MethLab
         public static iFruitContact GetContact()
         {
             if (_contact != null) return _contact;
-            _contact = new iFruitContact(Localization.GetTextByKey("methlab"))
+            _contact = new iFruitContact(Localization.GetTextByKey("weedfarm"))
             {
                 DialTimeout = 1000, // Delay before answering
                 Active = true, // true = the contact is available and will answer the phone
-                Icon = ContactIcon.Ron // Contact's icon
+                Icon = ContactIcon.Barry // Contact's icon
             };
 
             // Linking the Answered event with our function
             _contact.Answered += contact =>
             {
-                if (MethLabSave.Instance.Worker)
+                if (WeedFarmSave.Instance.Worker)
                 {
                     PhoneHelper.GetIFruit().Close(1000);
                     Script.Wait(1000);
@@ -191,7 +196,7 @@ namespace Waldhari.MethLab
                 {
                     PhoneHelper.GetIFruit().Close(1000);
                     Script.Wait(1000);
-                    var script = Script.InstantiateScript<MethLabPickUpPedScript>();
+                    var script = Script.InstantiateScript<WeedFarmPickUpPedScript>();
                     script.Start();
                 }
             };
@@ -203,7 +208,7 @@ namespace Waldhari.MethLab
 
         public static void ShowFromContact(string messageKey, List<string> messageValues = null)
         {
-            NotificationHelper.ShowWithIcon(NotificationIcon.Ron, "ron", messageKey, messageValues);
+            NotificationHelper.ShowWithIcon(NotificationIcon.Barry, "barry", messageKey, messageValues);
         }
 
         #endregion
