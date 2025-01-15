@@ -4,7 +4,6 @@ using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Files;
-using Waldhari.Common.Misc;
 
 namespace Waldhari.Common.Behavior.Mission
 {
@@ -15,6 +14,7 @@ namespace Waldhari.Common.Behavior.Mission
         public PedActingScript WorkerScript;
         
         protected abstract int SupplyAmount { get; }
+        protected abstract int ManufactureTime { get; }
         protected abstract void DoManufacture();
         protected abstract PedHash PedHash { get; }
         protected abstract WPosition Position { get; }
@@ -68,10 +68,9 @@ namespace Waldhari.Common.Behavior.Mission
                     () => SupplyAmount > 0,
                 CompletionAction = () =>
                 {
-                    // wait between 1 and 5 minutes
-                    var minutes = RandomHelper.Next(1, 5+1);
-                    _waitEndTime = Game.GameTime + minutes * 60 * 1000;
+                    var minutes = ManufactureTime;
                     Logger.Debug($"Will wait {minutes} minutes");
+                    _waitEndTime = Game.GameTime + minutes * 60 * 1000;
                 }
             };
         }

@@ -13,6 +13,10 @@ namespace Waldhari.MethLab
         // Price to buy meth lab
         public int Price;
         
+        //
+        public int ManufactureMinTimeInMinutes;
+        public int ManufactureMaxTimeInMinutes;
+        
         // Minimum and maximum supply used per manufacture action
         public int ManufactureMinSupplyUsageInKg;
         public int ManufactureMaxSupplyUsageInKg;
@@ -54,6 +58,9 @@ namespace Waldhari.MethLab
             
             SupplyMinCostPerKg = 1500;
             SupplyMaxCostPerKg = 2000;
+
+            ManufactureMinTimeInMinutes = 3;
+            ManufactureMaxTimeInMinutes = 7;
             
             ManufactureMinSupplyUsageInKg = 50;
             ManufactureMaxSupplyUsageInKg = 100;

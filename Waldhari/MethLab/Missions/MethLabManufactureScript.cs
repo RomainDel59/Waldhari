@@ -13,6 +13,12 @@ namespace Waldhari.MethLab.Missions
         public MethLabManufactureScript() : base("MethLabManufactureScript"){}
         
         protected override int SupplyAmount => MethLabSave.Instance.Supply;
+
+        protected override int ManufactureTime
+            => RandomHelper.Next(
+                MethLabOptions.Instance.ManufactureMinTimeInMinutes,
+                MethLabOptions.Instance.ManufactureMaxTimeInMinutes + 1);
+        
         protected override void DoManufacture()
         {
             var minYield = MethLabOptions.Instance.ManufactureMinMadeGramsPerSupplyKg;
