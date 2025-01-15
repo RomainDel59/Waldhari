@@ -11,8 +11,6 @@ namespace Waldhari.Common.Behavior.Ped
     [ScriptAttributes(NoDefaultInstance = true)]
     public class PedActingScript : Script
     {
-        private int _nextExecution = Game.GameTime;
-        
         public WPed WPed;
         
         private bool _hasMoved;
@@ -38,21 +36,19 @@ namespace Waldhari.Common.Behavior.Ped
 
         private void OnAborted(object sender, EventArgs e)
         {
-            if (WPed == null) return;
-            
-            WPed.Ped?.MarkAsNoLongerNeeded();
-            WPed.WBlip?.Remove();
+            WPed?.Ped?.MarkAsNoLongerNeeded();
+            WPed?.WBlip?.Remove();
         }
 
         private void OnTick(object sender, EventArgs e)
         {
             // Wait for parameter
             if(WPed == null) return;
+            
+            if(_actingStopped) return;
 
             if (!HasAnimationToDo() && !HasScenarioToDo())
                 throw new TechnicalException("Ped should have a scenario or an animation to play");
-            
-            if(_actingStopped) return;
             
             // If ped is in combat, let the ped fight
             if (IsInCombat()) return;
@@ -67,7 +63,7 @@ namespace Waldhari.Common.Behavior.Ped
 
                 Logger.Debug($"Ped moved from initial position (scenario={WPed.Scenario}, animationName={WPed.AnimationName}) : make it run back");
                 _hasMoved = true;
-                WPed.Ped.Task.RunTo(WPed.InitialPosition.Position, true);
+                WPed.Ped.Task.RunTo(WPed.InitialPosition.Position);
                 _isGoingBackPosition = true;
             }
             else
@@ -106,7 +102,7 @@ namespace Waldhari.Common.Behavior.Ped
 
         public void StopActing()
         {
-            WPed.Ped.Task.ClearAll();
+            WPed?.Ped?.Task?.ClearAll();
             _actingStopped = true;
         }
 

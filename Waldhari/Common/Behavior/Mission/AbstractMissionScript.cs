@@ -189,7 +189,7 @@ namespace Waldhari.Common.Behavior.Mission
             }
             catch (TechnicalException e)
             {
-                Logger.Error($"TechnicalException for {_name} : {e.Message}");
+                Logger.Exception($"TechnicalException for {_name} : {e.Message}");
                 NotificationHelper.ShowFailure("error");
                 Abort();
             }

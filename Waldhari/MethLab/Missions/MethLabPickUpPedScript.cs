@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using GTA;
 using Waldhari.Common.Behavior.Mission;
+using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities;
 using Waldhari.Common.UI;
 
 namespace Waldhari.MethLab.Missions
 {
+    [ScriptAttributes(NoDefaultInstance = true)]
     public class MethLabPickUpPedScript : GenericPickUpPedMissionScript
     {
         public MethLabPickUpPedScript() 
@@ -31,6 +33,12 @@ namespace Waldhari.MethLab.Missions
             MethLabSave.Instance.Save();
             
             return null;
+        }
+
+        protected override void SendPed(PedActingScript script)
+        {
+            MethLabHelper.ChemistScript = script;
+            MethLabHelper.InitChemist(true);
         }
     }
 }

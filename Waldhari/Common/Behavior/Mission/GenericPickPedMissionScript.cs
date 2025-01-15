@@ -7,6 +7,7 @@ using Waldhari.Common.UI;
 
 namespace Waldhari.Common.Behavior.Mission
 {
+    [ScriptAttributes(NoDefaultInstance = true)]
     public abstract class GenericPickUpPedMissionScript : AbstractMissionScript
     {
         // Scene
@@ -23,6 +24,8 @@ namespace Waldhari.Common.Behavior.Mission
         protected abstract string DriveMessageKey { get; }
         protected abstract PedHash PedHash { get; }
         protected abstract string DestinationMessageKey { get; }
+
+        protected abstract void SendPed(PedActingScript script);
         
         
         protected GenericPickUpPedMissionScript(string name, string successKey)
@@ -85,7 +88,12 @@ namespace Waldhari.Common.Behavior.Mission
                 CompletionAction = () =>
                 {
                     _pedActingScript.StopActing();
-                    _pedActingScript.WPed.Ped.Task.EnterVehicle(Game.Player.Character.CurrentVehicle);
+                    _pedActingScript.WPed.Ped.Task.EnterVehicle(
+                        Game.Player.Character.CurrentVehicle, 
+                        VehicleSeat.Passenger, 
+                        -1, 
+                        //speed 2 = run
+                        2);
                 }
             };
         }
@@ -115,17 +123,9 @@ namespace Waldhari.Common.Behavior.Mission
                 },
                 CompletionCondition = 
                     () => WPositionHelper.IsNearPlayer(_destinationBlip.Position, 10) &&
-                          Game.Player.Character.CurrentVehicle.Speed == 0,
-                CompletionAction =
-                    () =>
-                    {
-                        _pedActingScript.WPed.Ped.Task.GoTo(Workstation.Position);
-                        _waitPedGoAway = Game.GameTime + 5 * 1000;
-                    }
+                          Game.Player.Character.CurrentVehicle.Speed == 0
             };
         }
-
-        private int _waitPedGoAway;
 
         protected override void CreateScene()
         {
@@ -151,24 +151,10 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void CleanScene()
         {
-            // Wait for ped to quit vehicle
-            while (_waitPedGoAway > Game.GameTime)
-            {
-                Wait(1);
-                Game.Player.Character.CurrentVehicle.Speed = 0;
-            }
-            
-            _pedActingScript?.WPed?.Ped?.MarkAsNoLongerNeeded();
-            _pedActingScript?.Abort();
+            SendPed(_pedActingScript);
             
             _destinationBlip?.Remove();
         }
-        
-        
-        
-        
-        
-        
         
     }
 }

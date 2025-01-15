@@ -4,7 +4,9 @@ using GTA.Math;
 using iFruitAddon2;
 using LemonUI;
 using LemonUI.Menus;
+using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities;
+using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
@@ -22,14 +24,14 @@ namespace Waldhari.MethLab
                 Rotation = new Vector3(0.000529588f, -0.0006858803f, -167.1918f),
                 Heading = 192.8082f
             };
-            
+
             public static readonly WPosition Cabinet = new WPosition
             {
                 Position = new Vector3(1394.949f, 3613.84f, 34.98093f),
                 Rotation = new Vector3(0.0005374776f, -0.0007078056f, 15.72955f),
                 Heading = 15.72955f
             };
-            
+
             public static readonly WPosition Parking = new WPosition
             {
                 Position = new Vector3(1380.113f, 3599f, 34.88007f),
@@ -41,8 +43,9 @@ namespace Waldhari.MethLab
             public static WPosition GetWorkstation()
             {
                 var index = RandomHelper.Next(0, Workstations.Count);
-                return Workstations[index]; 
+                return Workstations[index];
             }
+
             private static readonly List<WPosition> Workstations = new List<WPosition>
             {
                 new WPosition
@@ -64,14 +67,50 @@ namespace Waldhari.MethLab
                     Heading = 198.0355f
                 }
             };
-            
         }
-        
-        // no need at the moment
+
+        #region Chemist
+
+        public static PedActingScript ChemistScript;
+
+        public static void InitChemist(bool force = false)
+        {
+            if (!MethLabSave.Instance.Worker && !force) return;
+            
+            var position = Positions.GetWorkstation();
+            
+            if (ChemistScript == null)
+            {
+                Logger.Debug("Instantiating Chemist script...");
+                ChemistScript = Script.InstantiateScript<PedActingScript>();
+                ChemistScript.StopActing();
+                
+                ChemistScript.WPed = new WPed
+                {
+                    PedHash = PedHash.MethMale01,
+                    InitialPosition = position
+                };
+                ChemistScript.WPed.Create();
+                ChemistScript.WPed.AddWeapon(WeaponsHelper.GetRandomGangWeapon());
+                ChemistScript.WPed.AddWeapon(WeaponsHelper.GetRandomGangWeapon());
+                ChemistScript.WPed.Ped.Weapons.Select(WeaponHash.Unarmed);
+                ChemistScript.WPed.Ped.RelationshipGroup = Game.Player.Character.RelationshipGroup;
+            }
+            
+            ChemistScript.WPed.InitialPosition = position;
+            ChemistScript.WPed.Scenario = null;
+            ChemistScript.WPed.AnimationDictionnary = "anim@amb@business@meth@meth_monitoring_cooking@cooking@";
+            ChemistScript.WPed.AnimationName = "chemical_pour_short_cooker";
+            ChemistScript.RestartActing();
+        }
+
         public static void ShowFromChemist(string messageKey, List<string> messageValues = null)
         {
             NotificationHelper.ShowFromDefault(messageKey, "chemist", messageValues);
         }
+
+        #endregion
+
 
         #region menu
 
@@ -87,7 +126,7 @@ namespace Waldhari.MethLab
         public static NativeMenu GetMenu()
         {
             if (_pool != null && _menu != null) return _menu;
-            
+
             // Create main menu
             _pool = new ObjectPool();
             _menu = new NativeMenu(Localization.GetTextByKey("methlab"));
@@ -109,7 +148,7 @@ namespace Waldhari.MethLab
                 _pool,
                 _menu
             );
-            
+
             // Create deal mission item
             MenuHelper.CreateMissionItem<MethLabDealScript>(
                 "deal_menu_title",
@@ -117,7 +156,7 @@ namespace Waldhari.MethLab
                 _pool,
                 _menu
             );
-            
+
             // Create bulk mission item
             MenuHelper.CreateMissionItem<MethLabBulkScript>(
                 "bulk_menu_title",
@@ -128,7 +167,7 @@ namespace Waldhari.MethLab
 
             // Separator
             MenuHelper.CreateSeparator(_menu);
-            
+
             // Create check supply item
             MenuHelper.CreateCheckItem(
                 "methlab_menu_check_supply_title",
@@ -137,7 +176,7 @@ namespace Waldhari.MethLab
                 _menu,
                 () => MethLabSave.Instance.Supply
             );
-            
+
             // Create check product item
             MenuHelper.CreateCheckItem(
                 "methlab_menu_check_product_title",
@@ -146,31 +185,32 @@ namespace Waldhari.MethLab
                 _menu,
                 () => MethLabSave.Instance.Product
             );
-            
+
             Logger.Debug($"Menu='{_menu.Name}' created");
-            
+
             return _menu;
         }
 
         #endregion
-        
+
         #region phone
-        
+
         private static iFruitContact _contact;
+
         public static iFruitContact GetContact()
         {
             if (_contact != null) return _contact;
             _contact = new iFruitContact(Localization.GetTextByKey("methlab"))
             {
-                DialTimeout = 1000,            // Delay before answering
-                Active = true,                 // true = the contact is available and will answer the phone
-                Icon = ContactIcon.Ron       // Contact's icon
+                DialTimeout = 1000, // Delay before answering
+                Active = true, // true = the contact is available and will answer the phone
+                Icon = ContactIcon.Ron // Contact's icon
             };
-            
+
             // Linking the Answered event with our function
             _contact.Answered += contact =>
             {
-                if(MethLabSave.Instance.Worker)
+                if (MethLabSave.Instance.Worker)
                 {
                     PhoneHelper.GetIFruit().Close(1000);
                     Script.Wait(1000);
@@ -184,13 +224,12 @@ namespace Waldhari.MethLab
                     script.Start();
                 }
             };
-            
+
             Logger.Debug($"Contact='{_contact.Name}' created");
-            
+
             return _contact;
         }
-        
+
         #endregion
-        
     }
 }

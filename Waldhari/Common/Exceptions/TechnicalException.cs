@@ -1,4 +1,5 @@
 ﻿using System;
+using Waldhari.Common.Files;
 
 namespace Waldhari.Common.Exceptions
 {
@@ -6,6 +7,7 @@ namespace Waldhari.Common.Exceptions
     {
         public TechnicalException(string message) : base(message)
         {
+            Logger.Exception(message);
         }
     }
 }

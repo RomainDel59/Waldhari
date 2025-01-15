@@ -61,10 +61,18 @@ namespace Waldhari.MethLab
             // runs this script every 1/2 second only
             if (_nextExecution > Game.GameTime) return;
             _nextExecution = Game.GameTime + 500;
+
+            if(!_chemistHasBeenInit)
+            {
+                MethLabHelper.InitChemist();
+                _chemistHasBeenInit = true;
+            }
             
             DefenseMissionHelper.TryToStart<MethLabDefenseScript>(MethLabHelper.Positions.Property, MethLabSave.Instance.Product);
             
         }
+
+        private static bool _chemistHasBeenInit;
 
         private void MakeWaitForBuyer()
         {
