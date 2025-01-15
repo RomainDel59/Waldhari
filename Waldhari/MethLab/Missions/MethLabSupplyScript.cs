@@ -17,10 +17,10 @@ namespace Waldhari.MethLab.Missions
         }
         
         protected override int Amount 
-            => RandomHelper.Next(MethLabOptions.Instance.SupplyMin, MethLabOptions.Instance.SupplyMax + 1);
+            => RandomHelper.Next(MethLabOptions.Instance.SupplyMinInKg, MethLabOptions.Instance.SupplyMaxInKg + 1);
         
         protected override int CostByUnit
-            => RandomHelper.Next(MethLabOptions.Instance.SupplyMinCost, MethLabOptions.Instance.SupplyMaxCost + 1);
+            => RandomHelper.Next(MethLabOptions.Instance.SupplyMinCostPerKg, MethLabOptions.Instance.SupplyMaxCostPerKg + 1);
         
         protected override string StepDriveMessageKey => "methlab_supply_step_drive";
         protected override string DestinationMessageKey => "methlab_parking";

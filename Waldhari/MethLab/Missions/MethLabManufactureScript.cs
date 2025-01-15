@@ -1,4 +1,5 @@
-﻿using GTA;
+﻿using System;
+using GTA;
 using Waldhari.Common.Behavior.Mission;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Files;
@@ -14,31 +15,38 @@ namespace Waldhari.MethLab.Missions
         protected override int SupplyAmount => MethLabSave.Instance.Supply;
         protected override void DoManufacture()
         {
-            var multiplier = RandomHelper.Next(
-                MethLabOptions.Instance.ManufactureMinGramsPerSupply,
-                MethLabOptions.Instance.ManufactureMaxGramsPerSupply + 1
-            );
-            var substracter = RandomHelper.Next(
-                MethLabOptions.Instance.ManufactureMinGramsPerSupply,
-                MethLabOptions.Instance.ManufactureMaxGramsPerSupply + 1
-            );
+            var minYield = MethLabOptions.Instance.ManufactureMinMadeGramsPerSupplyKg;
+            var maxYield = MethLabOptions.Instance.ManufactureMaxMadeGramsPerSupplyKg + 1;
+            var yieldPerKg = RandomHelper.Next(minYield, maxYield);
+
+            var minLoss = MethLabOptions.Instance.ManufactureMinMadeGramsPerSupplyKg/2;
+            var maxLoss = MethLabOptions.Instance.ManufactureMaxMadeGramsPerSupplyKg/2;
+            var loss = RandomHelper.Next(minLoss, maxLoss);
 
             var amount = RandomHelper.Next(
-                MethLabOptions.Instance.ManufactureMin,
-                MethLabOptions.Instance.ManufactureMax + 1
+                MethLabOptions.Instance.ManufactureMinSupplyUsageInKg,
+                MethLabOptions.Instance.ManufactureMaxSupplyUsageInKg + 1
             );
-            
-            var product = amount * multiplier - substracter;
 
-            if (amount > MethLabSave.Instance.Supply) 
+            if (amount > MethLabSave.Instance.Supply)
                 amount = MethLabSave.Instance.Supply;
-            
+
+            //at least one gram producted
+            var product = Math.Max(1, amount * yieldPerKg - loss);
+
             MethLabSave.Instance.Supply -= amount;
             MethLabSave.Instance.Product += product;
             MethLabSave.Instance.Save();
-            
-            Logger.Info($"{Name} -> Used amount: {amount}, made product: {product}");
+
+            Logger.Info(
+                $"{Name} -> " +
+                $"Initial supply: {MethLabSave.Instance.Supply + amount}, " +
+                $"Used amount: {amount}, " +
+                $"Made product: {product}, " +
+                $"Remaining supply: {MethLabSave.Instance.Supply}"
+            );
         }
+
         protected override PedHash PedHash => PedHash.MethMale01;
         protected override WPosition Position => MethLabHelper.Positions.GetWorkstation();
         protected override string AnimationDictionary => "anim@amb@business@meth@meth_monitoring_cooking@cooking@";

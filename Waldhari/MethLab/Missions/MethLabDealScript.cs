@@ -13,9 +13,9 @@ namespace Waldhari.MethLab.Missions
         public MethLabDealScript() : base("MethLabDealScript") {}
         
         protected override int Amount 
-            => RandomHelper.Next(MethLabOptions.Instance.DealMinGramsPerPack, MethLabOptions.Instance.DealMaxGramsPerPack+1);
+            => RandomHelper.Next(MethLabOptions.Instance.DealMinGramsPerSale, MethLabOptions.Instance.DealMaxGramsPerSale+1);
         protected override int PriceByUnit 
-            => RandomHelper.Next(MethLabOptions.Instance.DealMinPrice, MethLabOptions.Instance.DealMaxPrice + 1);
+            => RandomHelper.Next(MethLabOptions.Instance.DealMinPriceByGram, MethLabOptions.Instance.DealMaxPriceByGram + 1);
         protected override void DeductAmount(int amount)
         {
             MethLabSave.Instance.Product -= amount;

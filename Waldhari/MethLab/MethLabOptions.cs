@@ -14,32 +14,32 @@ namespace Waldhari.MethLab
         public int Price;
         
         // Minimum and maximum supply used per manufacture action
-        public int ManufactureMin;
-        public int ManufactureMax;
+        public int ManufactureMinSupplyUsageInKg;
+        public int ManufactureMaxSupplyUsageInKg;
         
         // Minimum and maximum meth gram cooked by supply
-        public int ManufactureMinGramsPerSupply;
-        public int ManufactureMaxGramsPerSupply;
+        public int ManufactureMinMadeGramsPerSupplyKg;
+        public int ManufactureMaxMadeGramsPerSupplyKg;
         
         // Minimum and maximum amount of supply to get when supplying
-        public int SupplyMin;
-        public int SupplyMax;
+        public int SupplyMinInKg;
+        public int SupplyMaxInKg;
         
         // Price for one supply
-        public int SupplyMinCost;
-        public int SupplyMaxCost;
+        public int SupplyMinCostPerKg;
+        public int SupplyMaxCostPerKg;
         
         // Minimum and maximum grams to sell when dealing
-        public int DealMinGramsPerPack;
-        public int DealMaxGramsPerPack;
+        public int DealMinGramsPerSale;
+        public int DealMaxGramsPerSale;
         
         // Minimum and maximum price by gram when dealing
-        public int DealMinPrice;
-        public int DealMaxPrice;
+        public int DealMinPriceByGram;
+        public int DealMaxPriceByGram;
         
         // Minimum and maximum price by gram when selling bulk stock
-        public int BulkMinPrice;
-        public int BulkMaxPrice;
+        public int BulkMinPriceByGram;
+        public int BulkMaxPriceByGram;
         
         
         
@@ -49,26 +49,26 @@ namespace Waldhari.MethLab
         {
             Price = 1000000;
 
-            SupplyMin = 100;
-            SupplyMax = 1000;
+            SupplyMinInKg = 100;
+            SupplyMaxInKg = 1000;
             
-            SupplyMinCost = 20;
-            SupplyMaxCost = 40;
+            SupplyMinCostPerKg = 1500;
+            SupplyMaxCostPerKg = 2000;
             
-            ManufactureMin = 50;
-            ManufactureMax = 100;
+            ManufactureMinSupplyUsageInKg = 50;
+            ManufactureMaxSupplyUsageInKg = 100;
 
-            ManufactureMinGramsPerSupply = 1;
-            ManufactureMaxGramsPerSupply = 5;
+            ManufactureMinMadeGramsPerSupplyKg = 400;
+            ManufactureMaxMadeGramsPerSupplyKg = 600;
 
-            DealMinGramsPerPack = 10;
-            DealMaxGramsPerPack = 500;
+            DealMinGramsPerSale = 10;
+            DealMaxGramsPerSale = 50;
             
-            DealMinPrice = 50;
-            DealMaxPrice = 100;
+            DealMinPriceByGram = 50;
+            DealMaxPriceByGram = 100;
             
-            BulkMinPrice = 25;
-            BulkMaxPrice = 50;
+            BulkMinPriceByGram = 10;
+            BulkMaxPriceByGram = 50;
             
         }
         

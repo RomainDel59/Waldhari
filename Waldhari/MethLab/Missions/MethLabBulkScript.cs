@@ -16,7 +16,7 @@ namespace Waldhari.MethLab.Missions
             => MethLabSave.Instance.Product;
 
         protected override int PriceByUnit 
-            => RandomHelper.Next(MethLabOptions.Instance.BulkMinPrice, MethLabOptions.Instance.BulkMaxPrice + 1);
+            => RandomHelper.Next(MethLabOptions.Instance.BulkMinPriceByGram, MethLabOptions.Instance.BulkMaxPriceByGram + 1);
         protected override void DeductAmount(int amount)
         {
             MethLabSave.Instance.Product -= amount;
