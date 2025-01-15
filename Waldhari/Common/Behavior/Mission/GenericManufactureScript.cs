@@ -24,8 +24,14 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected GenericManufactureScript(string name) 
             : base(name, false, null) {}
-        
-        protected override void StartComplement() {}
+
+        protected override void StartComplement()
+        {
+            if (!Instances.Remove(this))
+            {
+                Logger.Warning("Cannot remove generic manufacture script");
+            }
+        }
 
         private int _nextTick;
         protected override bool OnTickComplement()

@@ -69,7 +69,7 @@ namespace Waldhari.Common.Behavior.Mission
         /// Indicates whether the mission is currently active.
         /// </summary>
         private bool IsActive;
-        private static readonly List<AbstractMissionScript> Instances = new List<AbstractMissionScript>();
+        protected static readonly List<AbstractMissionScript> Instances = new List<AbstractMissionScript>();
         public static bool IsAnyMissionActive()
         {
             return Instances.Any(instance => instance.IsActive);
