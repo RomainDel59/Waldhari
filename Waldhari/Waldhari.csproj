@@ -88,6 +88,7 @@
         <Compile Include="Common\Files\Logger.cs" />
         <Compile Include="Common\Files\PersistenceHandler.cs" />
         <Compile Include="Common\Misc\ColorHelper.cs" />
+        <Compile Include="Common\Misc\DoorHelper.cs" />
         <Compile Include="Common\Misc\NumberHelper.cs" />
         <Compile Include="Common\Misc\PlayerHelper.cs" />
         <Compile Include="Common\Misc\RandomHelper.cs" />

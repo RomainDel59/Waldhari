@@ -3,6 +3,7 @@ using GTA;
 using Waldhari.Common;
 using Waldhari.Common.Behavior.Mission.Helper;
 using Waldhari.Common.Behavior.Property;
+using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
@@ -69,7 +70,50 @@ namespace Waldhari.MethLab
             }
             
             DefenseMissionHelper.TryToStart<MethLabDefenseScript>(MethLabHelper.Positions.Property, MethLabSave.Instance.Product);
+
+            TryOpenDoors();
+
+        }
+
+        private bool _doorsOpened;
+        private void TryOpenDoors()
+        {
+            //var position = new Vector3(1393.0f, 3599.5f, 35.0f);
+            var position = MethLabHelper.Positions.Property.Position;
+
+            // If player is within 300 meters near
+            if (WPositionHelper.IsNearPlayer(position, 300))
+            {
+                // If doors already opened
+                if (_doorsOpened) return;
+                
+                // Open doors
+                OpenDoors(true);
+            }
+            // If the player is more than 300 meters away
+            else
+            {
+                // If doors already closed
+                if (!_doorsOpened) return;
+
+                // Close doors
+                OpenDoors(false);
+            }
+
+
+        }
+
+        private void OpenDoors(bool open)
+        {
+            const int frontLeft = 212192855;
+            const int frontRight = -126474752;
+            const int rear = 1765671336;
+
+            DoorHelper.Open(frontLeft, open);
+            DoorHelper.Open(frontRight, open);
+            DoorHelper.Open(rear, open);
             
+            _doorsOpened = open;
         }
 
         private static bool _manufactureStarted;
