@@ -51,6 +51,16 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="CokeWork\CokeWork.cs" />
+        <Compile Include="CokeWork\CokeWorkHelper.cs" />
+        <Compile Include="CokeWork\CokeWorkSave.cs" />
+        <Compile Include="CokeWork\CokeWorkOptions.cs" />
+        <Compile Include="CokeWork\Missions\CokeWorkBulkScript.cs" />
+        <Compile Include="CokeWork\Missions\CokeWorkDealScript.cs" />
+        <Compile Include="CokeWork\Missions\CokeWorkDefenseScript.cs" />
+        <Compile Include="CokeWork\Missions\CokeWorkManufactureScript.cs" />
+        <Compile Include="CokeWork\Missions\CokeWorkPickUpPedScript.cs" />
+        <Compile Include="CokeWork\Missions\CokeWorkSupplyScript.cs" />
         <Compile Include="Common\Behavior\Animation\Animation.cs" />
         <Compile Include="Common\Behavior\Animation\AnimationHelper.cs" />
         <Compile Include="Common\Behavior\Animation\AnimationScript.cs" />

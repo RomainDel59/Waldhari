@@ -21,7 +21,7 @@ namespace Waldhari.Common.Behavior.Mission
         protected abstract int Amount { get; }
         protected abstract int PriceByUnit { get; }
         protected abstract void DeductAmount(int amount);
-        protected abstract WPosition Cabinet { get; }
+        protected abstract WPosition Storage { get; }
         protected abstract void ShowStartedMessage();
 
         protected GenericDealMissionScript(string name)
@@ -125,8 +125,8 @@ namespace Waldhari.Common.Behavior.Mission
         
         protected override void CreateScene()
         {
-            _cabinetBlip = WBlipHelper.GetMission("storage_cabinet");
-            _cabinetBlip.Position = Cabinet.Position;
+            _cabinetBlip = WBlipHelper.GetMission("storage");
+            _cabinetBlip.Position = Storage.Position;
             
             var client = new WPed
             {

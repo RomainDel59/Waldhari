@@ -24,7 +24,7 @@ namespace Waldhari.MethLab
                 Heading = 192.8082f
             };
 
-            public static readonly WPosition Cabinet = new WPosition
+            public static readonly WPosition Storage = new WPosition
             {
                 Position = new Vector3(1394.949f, 3613.84f, 34.98093f),
                 Rotation = new Vector3(0.0005374776f, -0.0007078056f, 15.72955f),

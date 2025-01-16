@@ -12,7 +12,7 @@ namespace Waldhari.MethLab.Missions
         
         protected override void ShowStartedMessage()
         {
-            MethLabHelper.ShowFromContact("supply_started");
+            MethLabHelper.ShowFromContact("methlab_supply_started");
         }
         
         protected override int Amount 

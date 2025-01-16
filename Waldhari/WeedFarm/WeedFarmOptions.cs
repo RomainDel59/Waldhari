@@ -10,8 +10,16 @@ namespace Waldhari.WeedFarm
         
         #region options
 
-        // Price to buy
+        // Price to buy property
         public int Price;
+        
+        // Minimum and maximum amount of supply to get when supplying
+        public int SupplyMinInKg;
+        public int SupplyMaxInKg;
+        
+        // Price for one kg of supply
+        public int SupplyMinCostPerKg;
+        public int SupplyMaxCostPerKg;
         
         // Minimum and maximum time to make
         public int ManufactureMinTimeInMinutes;
@@ -21,17 +29,9 @@ namespace Waldhari.WeedFarm
         public int ManufactureMinSupplyUsageInKg;
         public int ManufactureMaxSupplyUsageInKg;
         
-        // Minimum and maximum meth gram cooked by supply
+        // Minimum and maximum meth gram cooked by supply kg
         public int ManufactureMinMadeGramsPerSupplyKg;
         public int ManufactureMaxMadeGramsPerSupplyKg;
-        
-        // Minimum and maximum amount of supply to get when supplying
-        public int SupplyMinInKg;
-        public int SupplyMaxInKg;
-        
-        // Price for one supply
-        public int SupplyMinCostPerKg;
-        public int SupplyMaxCostPerKg;
         
         // Minimum and maximum grams to sell when dealing
         public int DealMinGramsPerSale;

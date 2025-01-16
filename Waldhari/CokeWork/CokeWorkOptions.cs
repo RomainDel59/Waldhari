@@ -1,12 +1,12 @@
 ﻿using Waldhari.Common.Files;
 
-namespace Waldhari.MethLab
+namespace Waldhari.CokeWork
 {
-    public class MethLabOptions : File<MethLabOptions>
+    public class CokeWorkOptions : File<CokeWorkOptions>
     {
-        public static MethLabOptions Instance;
+        public static CokeWorkOptions Instance;
 
-        protected override void SetInstance(MethLabOptions instance) => Instance = instance;
+        protected override void SetInstance(CokeWorkOptions instance) => Instance = instance;
         
         #region options
 
@@ -54,28 +54,28 @@ namespace Waldhari.MethLab
             Price = 1000000;
 
             SupplyMinInKg = 100;
-            SupplyMaxInKg = 1000;
+            SupplyMaxInKg = 500;
             
-            SupplyMinCostPerKg = 1500;
-            SupplyMaxCostPerKg = 2000;
+            SupplyMinCostPerKg = 800;
+            SupplyMaxCostPerKg = 1200;
 
             ManufactureMinTimeInMinutes = 1;
             ManufactureMaxTimeInMinutes = 2;
-            
-            ManufactureMinSupplyUsageInKg = 15;
-            ManufactureMaxSupplyUsageInKg = 30;
 
-            ManufactureMinMadeGramsPerSupplyKg = 400;
-            ManufactureMaxMadeGramsPerSupplyKg = 600;
+            ManufactureMinSupplyUsageInKg = 5;
+            ManufactureMaxSupplyUsageInKg = 10;
 
-            DealMinGramsPerSale = 10;
-            DealMaxGramsPerSale = 50;
-            
-            DealMinPriceByGram = 50;
-            DealMaxPriceByGram = 100;
-            
-            BulkMinPriceByGram = 10;
-            BulkMaxPriceByGram = 50;
+            ManufactureMinMadeGramsPerSupplyKg = 800;
+            ManufactureMaxMadeGramsPerSupplyKg = 1200;
+
+            DealMinGramsPerSale = 5;
+            DealMaxGramsPerSale = 30;
+
+            DealMinPriceByGram = 100;
+            DealMaxPriceByGram = 200;
+
+            BulkMinPriceByGram = 50;
+            BulkMaxPriceByGram = 100;
             
         }
         

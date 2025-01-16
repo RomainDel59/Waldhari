@@ -20,8 +20,8 @@ namespace Waldhari.MethLab.Missions
             MethLabSave.Instance.Product -= amount;
             MethLabSave.Instance.Save();
         }
-        protected override WPosition Cabinet
-            => MethLabHelper.Positions.Cabinet;
+        protected override WPosition Storage
+            => MethLabHelper.Positions.Storage;
         protected override void ShowStartedMessage()
         {
             MethLabHelper.ShowFromContact("methlab_deal_started", new List<string>{ _amount.ToString() });

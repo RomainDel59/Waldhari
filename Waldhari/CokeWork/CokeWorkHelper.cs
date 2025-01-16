@@ -5,37 +5,37 @@ using GTA.UI;
 using iFruitAddon2;
 using LemonUI;
 using LemonUI.Menus;
+using Waldhari.CokeWork.Missions;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
-using Waldhari.WeedFarm.Missions;
 
-namespace Waldhari.WeedFarm
+namespace Waldhari.CokeWork
 {
-    public static class WeedFarmHelper
+    public static class CokeWorkHelper
     {
         public static class Positions
         {
             public static readonly WPosition Property = new WPosition
             {
-                Position = new Vector3(2220.382f, 5614.367f, 54.72742f),
-                Rotation = new Vector3(-0.0003605913f, 4.733887E-08f, -81.828f),
-                Heading = 278.172f
+                Position = new Vector3(-51.17182f, 1911.078f, 195.3615f),
+                Rotation = new Vector3(0f, 0f, 80.97736f),
+                Heading = 80.97736f
             };
             
             public static readonly WPosition Storage = new WPosition
             {
-                Position = new Vector3(2194.004f, 5593.924f, 53.75492f),
-                Rotation = new Vector3(-0.000361025f, -7.503591E-05f, 164.5876f),
-                Heading = 164.5876f
+                Position = new Vector3(-52.77469f, 1887.465f, 195.3669f),
+                Rotation = new Vector3(0f, 0f, -178.372f),
+                Heading = 181.628f
             };
             
             public static WPosition Parking = new WPosition
             {
-                Position = new Vector3(2214.336f, 5600.055f, 54.02474f),
-                Rotation = new Vector3(-0.0003605108f, -6.488535E-09f, 1.376211f),
-                Heading = 1.376211f
+                Position = new Vector3(-44.75359f, 1878.744f, 196.2369f),
+                Rotation = new Vector3(0f, 0f, 118.0105f),
+                Heading = 118.0105f
             };
             
             public static WPosition GetWorkstation()
@@ -48,42 +48,36 @@ namespace Waldhari.WeedFarm
             {
                 new WPosition
                 {
-                    Position = new Vector3(2222.764f, 5578.261f, 53.70979f),
-                    Rotation = new Vector3(-0.0003607887f, -7.461072E-05f, -179.0753f),
-                    Heading = 180.9247f
+                    Position = new Vector3(-54.52531f, 1896.378f, 195.3613f),
+                    Rotation = new Vector3(0f, 0f, 83.15569f),
+                    Heading = 83.15569f
                 },
                 new WPosition
                 {
-                    Position = new Vector3(2227.685f, 5577.925f, 53.69601f),
-                    Rotation = new Vector3(-0.0003608046f, -7.461171E-05f, 173.252f),
-                    Heading = 173.252f
+                    Position = new Vector3(-55.13873f, 1906.508f, 195.3613f),
+                    Rotation = new Vector3(0f, 0f, 21.9702f),
+                    Heading = 21.9702f
                 },
                 new WPosition
                 {
-                    Position = new Vector3(2222.681f, 5576.244f, 53.65268f),
-                    Rotation = new Vector3(-0.0003608477f, -7.445754E-05f, 167.5867f),
-                    Heading = 167.5867f
-                },
-                new WPosition
-                {
-                    Position = new Vector3(2216.26f, 5576.372f, 53.58198f),
-                    Rotation = new Vector3(-0.0003608917f, -7.454795E-05f, -2.24531f),
-                    Heading = 357.7547f
+                    Position = new Vector3(-52.706f, 1916.138f, 195.3614f),
+                    Rotation = new Vector3(0f, 0f, 15.54415f),
+                    Heading = 15.54415f
                 }
             };
         }
         
         #region Worker
 
-        public static WeedFarmManufactureScript ManufactureScript;
+        public static CokeWorkManufactureScript ManufactureScript;
 
         public static void StartManufacture(bool force = false)
         {
-            if (!WeedFarmSave.Instance.Worker && !force) return;
+            if (!CokeWorkSave.Instance.Worker && !force) return;
 
             if(ManufactureScript == null)
             {
-                ManufactureScript = Script.InstantiateScript<WeedFarmManufactureScript>();
+                ManufactureScript = Script.InstantiateScript<CokeWorkManufactureScript>();
             }
             
             ManufactureScript.Start();
@@ -91,7 +85,7 @@ namespace Waldhari.WeedFarm
 
         public static void ShowFromWorker(string messageKey, List<string> messageValues = null)
         {
-            NotificationHelper.ShowFromDefault(messageKey, "farmer", messageValues);
+            NotificationHelper.ShowFromDefault(messageKey, "manager", messageValues);
         }
 
         #endregion
@@ -113,12 +107,12 @@ namespace Waldhari.WeedFarm
 
             // Create main menu
             _pool = new ObjectPool();
-            _menu = new NativeMenu(Localization.GetTextByKey("weedfarm"));
+            _menu = new NativeMenu(Localization.GetTextByKey("cokework"));
             MenuHelper.SetButtons(_menu);
             _pool.Add(_menu);
 
             // Create supply mission item
-            MenuHelper.CreateMissionItem<WeedFarmSupplyScript>(
+            MenuHelper.CreateMissionItem<CokeWorkSupplyScript>(
                 "supply_menu_title",
                 "supply_menu_description",
                 _pool,
@@ -126,7 +120,7 @@ namespace Waldhari.WeedFarm
             );
 
             // Create deal mission item
-            MenuHelper.CreateMissionItem<WeedFarmDealScript>(
+            MenuHelper.CreateMissionItem<CokeWorkDealScript>(
                 "deal_menu_title",
                 "deal_menu_description",
                 _pool,
@@ -134,7 +128,7 @@ namespace Waldhari.WeedFarm
             );
 
             // Create bulk mission item
-            MenuHelper.CreateMissionItem<WeedFarmBulkScript>(
+            MenuHelper.CreateMissionItem<CokeWorkBulkScript>(
                 "bulk_menu_title",
                 "bulk_menu_description",
                 _pool,
@@ -146,20 +140,20 @@ namespace Waldhari.WeedFarm
 
             // Create check supply item
             MenuHelper.CreateCheckItem(
-                "weedfarm_menu_check_supply_title",
-                "weedfarm_menu_check_supply_description",
-                "weedfarm_supply_amount",
+                "cokework_menu_check_supply_title",
+                "cokework_menu_check_supply_description",
+                "cokework_supply_amount",
                 _menu,
-                () => WeedFarmSave.Instance.Supply
+                () => CokeWorkSave.Instance.Supply
             );
 
             // Create check product item
             MenuHelper.CreateCheckItem(
-                "weedfarm_menu_check_product_title",
-                "weedfarm_menu_check_product_description",
-                "weedfarm_product_amount",
+                "cokework_menu_check_product_title",
+                "cokework_menu_check_product_description",
+                "cokework_product_amount",
                 _menu,
-                () => WeedFarmSave.Instance.Product
+                () => CokeWorkSave.Instance.Product
             );
 
             Logger.Debug($"Menu='{_menu.Name}' created");
@@ -176,17 +170,17 @@ namespace Waldhari.WeedFarm
         public static iFruitContact GetContact()
         {
             if (_contact != null) return _contact;
-            _contact = new iFruitContact(Localization.GetTextByKey("weedfarm"))
+            _contact = new iFruitContact(Localization.GetTextByKey("cokework"))
             {
                 DialTimeout = 1000, // Delay before answering
                 Active = true, // true = the contact is available and will answer the phone
-                Icon = ContactIcon.Barry // Contact's icon
+                Icon = ContactIcon.MP_MexLt // Contact's icon
             };
 
             // Linking the Answered event with our function
             _contact.Answered += contact =>
             {
-                if (WeedFarmSave.Instance.Worker)
+                if (CokeWorkSave.Instance.Worker)
                 {
                     PhoneHelper.GetIFruit().Close(1000);
                     Script.Wait(1000);
@@ -196,7 +190,7 @@ namespace Waldhari.WeedFarm
                 {
                     PhoneHelper.GetIFruit().Close(1000);
                     Script.Wait(1000);
-                    var script = Script.InstantiateScript<WeedFarmPickUpPedScript>();
+                    var script = Script.InstantiateScript<CokeWorkPickUpPedScript>();
                     script.Start();
                 }
             };
@@ -208,7 +202,7 @@ namespace Waldhari.WeedFarm
 
         public static void ShowFromContact(string messageKey, List<string> messageValues = null)
         {
-            NotificationHelper.ShowWithIcon(NotificationIcon.Barry, "barry", messageKey, messageValues);
+            NotificationHelper.ShowWithIcon(NotificationIcon.MpMexLt, "miguel", messageKey, messageValues);
         }
 
         #endregion

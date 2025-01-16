@@ -28,12 +28,20 @@
             <Value>Barry Emery</Value>
         </LocaleKey>
         <LocaleKey>
+            <Key>miguel</Key>
+            <Value>Miguel Hernández</Value>
+        </LocaleKey>
+        <LocaleKey>
             <Key>chemist</Key>
             <Value>Chimiste</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>farmer</Key>
             <Value>Fermier</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supervisor</Key>
+            <Value>Superviseur</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>rival_enemy</Key>
@@ -62,8 +70,8 @@
             <Value>Livraison</Value>
         </LocaleKey>
         <LocaleKey>
-            <Key>storage_cabinet</Key>
-            <Value>Armoire de stockage</Value>
+            <Key>storage</Key>
+            <Value>Stockage</Value>
         </LocaleKey>
 
         <!-- Menu help -->
@@ -154,10 +162,6 @@
         <LocaleKey>
             <Key>supply_success</Key>
             <Value>~g~{0} kg~s~ de matières premières ont été ajoutés au stock.</Value>
-        </LocaleKey>
-        <LocaleKey>
-            <Key>supply_started</Key>
-            <Value>Salut patron ! J'ai commandé des ~g~matières premières~s~, va les chercher auprès du ~y~fournisseur~s~.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>supply_fail_supplier_dead</Key>
@@ -317,6 +321,10 @@
 
         <!-- Supply mission -->
         <LocaleKey>
+            <Key>methlab_supply_started</Key>
+            <Value>Salut patron ! J'ai commandé des ~g~matières premières~s~, va les chercher auprès du ~y~fournisseur~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
             <Key>methlab_supply_step_drive</Key>
             <Value>Ramène le ~y~fourgon~s~ au labo.</Value>
         </LocaleKey>
@@ -434,6 +442,10 @@
         
         <!-- Supply mission -->
         <LocaleKey>
+            <Key>weedfarm_supply_started</Key>
+            <Value>Bonjour Monsieur ! J'ai commandé les ~g~matières premières~s~, vous pouvez aller les chercher chez le ~y~fournisseur~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
             <Key>weedfarm_supply_step_drive</Key>
             <Value>Ramène le ~y~fourgon~s~ à la ferme.</Value>
         </LocaleKey>
@@ -463,6 +475,128 @@
             <Key>weedfarm_bulk_started</Key>
             <Value>Bonjour Monsieur, un grossiste a accepté de prendre toute la marchandise pour ~g~{0} $~s~, j'ai préparé un véhicule à la ferme, vous pouvez aller lui apporter.</Value>
         </LocaleKey>
+
+
+        <!-- 
+        *****************
+        *** Coke Work *** 
+        *****************
+        -->
+
+        <!-- General -->
+        <LocaleKey>
+            <Key>cokework</Key>
+            <Value>Atelier de cocaïne</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_help</Key>
+            <Value>{0}~n~Prix : {1} $~n~Donne accès aux ~y~missions de l'atelier~s~~n~Appuyez sur {2} pour acheter.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_buy_failure</Key>
+            <Value>Vous n'avez ~r~pas assez d'argent~s~ pour payer.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_buy_success</Key>
+            <Value>Vous avez acheté l'~y~atelier de cocaïne~s~.~n~Cet atelier permet de transformer les feuilles de coca et de vendre la cocaïne pour faire de l'argent.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_intro</Key>
+            <Value>Hola jefe,~n~Tu as repris l'atelier ? Très bien, je suis à ton service pour faire tourner la boutique. Appelle-moi en cas de besoin.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_parking</Key>
+            <Value>Parking de l'atelier</Value>
+        </LocaleKey>
+
+        <!-- Menu -->
+        <LocaleKey>
+            <Key>cokework_menu_check_supply_title</Key>
+            <Value>Stock de matières premières</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_menu_check_supply_description</Key>
+            <Value>Vérifie le volume de matières premières en stock.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_supply_amount</Key>
+            <Value>Il y a ~g~{0} kg~s~ de matières premières en stock actuellement.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_menu_check_product_title</Key>
+            <Value>Stock de cocaïne</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_menu_check_product_description</Key>
+            <Value>Vérifie le volume de cocaïne en stock actuellement.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_product_amount</Key>
+            <Value>Il y a ~g~{0} g~s~ de cocaïne en stock actuellement.</Value>
+        </LocaleKey>
+
+        <!-- Pick up ped mission -->
+        <LocaleKey>
+            <Key>cokework_pickupped_success</Key>
+            <Value>Le ~g~superviseur~s~ est arrivé à l'atelier !</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_pickupped_started</Key>
+            <Value>Jefe ! Pour gérer l'atelier, il te faut un superviseur pour les employés. Je t'ai envoyé l'adresse d'un ami à moi, va le chercher.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_pickupped_fail_dead</Key>
+            <Value>Le ~r~superviseur~s~ est mort.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_pickupped_step_rendezvous</Key>
+            <Value>Va chercher le ~y~superviseur~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_pickupped_step_wait</Key>
+            <Value>Attends que le superviseur monte dans ton ~y~véhicule~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_pickupped_step_drive</Key>
+            <Value>Amène le superviseur à l'~y~atelier~s~.</Value>
+        </LocaleKey>
+
+        <!-- Supply mission -->
+        <LocaleKey>
+            <Key>cokework_supply_started</Key>
+            <Value>Hola jefe ! J'ai commandé les ~g~matières premières~s~, tu peux te rendre au rendez-vous avec le ~y~fournisseur~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_supply_step_drive</Key>
+            <Value>Ramène le ~y~fourgon~s~ à l'atelier.</Value>
+        </LocaleKey>
+
+        <!-- Defense mission -->
+        <LocaleKey>
+            <Key>cokework_defense_success</Key>
+            <Value>L'atelier reste à ~g~l'abri pour l'instant~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_defense_defending</Key>
+            <Value>Défends l'atelier contre les ~r~membres du gang rival~s~ !</Value>
+        </LocaleKey>
+
+        <!-- Deal mission -->
+        <LocaleKey>
+            <Key>cokework_deal_started</Key>
+            <Value>Hola jefe, un client a commandé ~r~{0} g~s~ de cocaïne, va lui apporter.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_deal_step_get_product</Key>
+            <Value>Va récupérer de la cocaïne à l'~y~atelier~s~.</Value>
+        </LocaleKey>
+
+        <!-- Bulk mission -->
+        <LocaleKey>
+            <Key>cokework_bulk_started</Key>
+            <Value>Hola jefe, un acheteur est intéressé par tout notre stock pour la somme de ~g~{0} $~s~, j'ai préparé la marchandise à l'atelier.</Value>
+        </LocaleKey>
+        
         
     </Locales>
 </LocalizationFile>

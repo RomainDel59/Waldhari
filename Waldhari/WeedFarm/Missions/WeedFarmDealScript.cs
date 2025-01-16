@@ -20,8 +20,8 @@ namespace Waldhari.WeedFarm.Missions
             WeedFarmSave.Instance.Product -= amount;
             WeedFarmSave.Instance.Save();
         }
-        protected override WPosition Cabinet
-            => WeedFarmHelper.Positions.Cabinet;
+        protected override WPosition Storage
+            => WeedFarmHelper.Positions.Storage;
         protected override void ShowStartedMessage()
         {
             WeedFarmHelper.ShowFromContact("weedfarm_deal_started", new List<string>{ _amount.ToString() });

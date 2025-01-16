@@ -12,7 +12,7 @@ namespace Waldhari.WeedFarm.Missions
         
         protected override void ShowStartedMessage()
         {
-            WeedFarmHelper.ShowFromContact("supply_started");
+            WeedFarmHelper.ShowFromContact("weedfarm_supply_started");
         }
         
         protected override int Amount 
