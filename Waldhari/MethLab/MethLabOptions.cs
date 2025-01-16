@@ -59,11 +59,11 @@ namespace Waldhari.MethLab
             SupplyMinCostPerKg = 1500;
             SupplyMaxCostPerKg = 2000;
 
-            ManufactureMinTimeInMinutes = 3;
-            ManufactureMaxTimeInMinutes = 7;
+            ManufactureMinTimeInMinutes = 1;
+            ManufactureMaxTimeInMinutes = 2;
             
-            ManufactureMinSupplyUsageInKg = 50;
-            ManufactureMaxSupplyUsageInKg = 100;
+            ManufactureMinSupplyUsageInKg = 15;
+            ManufactureMaxSupplyUsageInKg = 30;
 
             ManufactureMinMadeGramsPerSupplyKg = 400;
             ManufactureMaxMadeGramsPerSupplyKg = 600;

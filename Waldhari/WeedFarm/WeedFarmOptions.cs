@@ -59,11 +59,11 @@ namespace Waldhari.WeedFarm
             SupplyMinCostPerKg = 5;
             SupplyMaxCostPerKg = 10;
 
-            ManufactureMinTimeInMinutes = 15;
-            ManufactureMaxTimeInMinutes = 30;
+            ManufactureMinTimeInMinutes = 1;
+            ManufactureMaxTimeInMinutes = 2;
             
-            ManufactureMinSupplyUsageInKg = 500;
-            ManufactureMaxSupplyUsageInKg = 750;
+            ManufactureMinSupplyUsageInKg = 30;
+            ManufactureMaxSupplyUsageInKg = 50;
 
             ManufactureMinMadeGramsPerSupplyKg = 500;
             ManufactureMaxMadeGramsPerSupplyKg = 1000;

@@ -41,7 +41,7 @@ namespace Waldhari.Common
             LoggerLevel = 5;
             ShowBlips = true;
 
-            RandomEventCooldown = 60;
+            RandomEventCooldown = 2;
             
             WantedChance = 10;
             WantedStars = 2;

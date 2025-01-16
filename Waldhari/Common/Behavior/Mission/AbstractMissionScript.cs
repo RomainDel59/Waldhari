@@ -113,7 +113,7 @@ namespace Waldhari.Common.Behavior.Mission
         private void AddCooldown()
         {
             // DefenseCooldown => in game minutes
-            _nextRandomEventTry = Game.GameTime + GlobalOptions.Instance.RandomEventCooldown * 1000;
+            _nextRandomEventTry = Game.GameTime + GlobalOptions.Instance.RandomEventCooldown * 60 * 1000;
         }
         
         /// <summary>
