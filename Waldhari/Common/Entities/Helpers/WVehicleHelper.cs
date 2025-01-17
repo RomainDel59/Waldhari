@@ -14,14 +14,17 @@ namespace Waldhari.Common.Entities.Helpers
         /// <returns>Ped wrapped into the vehicle</returns>
         public static bool MakePedWarpInVehicle(WPed wPed, WVehicle wVehicle)
         {
-            //speed 1.0 = walk, 2.0 = run see https://docs.fivem.net/natives/?_0xC20E50AA46D09CA8
-            wPed.Ped.Task.EnterVehicle(wVehicle.Vehicle, VehicleSeat.Any, -1, 2, EnterVehicleFlags.WarpIn);
+            var seat = wVehicle.Vehicle.IsSeatFree(VehicleSeat.Driver) ? VehicleSeat.Driver : VehicleSeat.Any;
+
+            //speed : 1.0 = walk, 2.0 = run see https://docs.fivem.net/natives/?_0xC20E50AA46D09CA8
+            wPed.Ped.Task.EnterVehicle(wVehicle.Vehicle, seat, -1, 2, EnterVehicleFlags.WarpIn);
             
             // Script waits 2 seconds that ped enters vehicle
             var timeOut = Game.GameTime + 2000;
             while (!wPed.Ped.IsInVehicle(wVehicle.Vehicle) && timeOut > Game.GameTime)
             {
                 Script.Wait(1);
+                wPed.Ped.Task.EnterVehicle(wVehicle.Vehicle, seat, -1, 2, EnterVehicleFlags.WarpIn);
             }
 
             if (wPed.Ped.IsInVehicle(wVehicle.Vehicle)) return true;
