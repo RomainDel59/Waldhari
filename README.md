@@ -76,6 +76,12 @@ These mods are required to make it work.
 
 # External resources
 
+## Credits
+
+The Persistence class comes from https://github.com/lucasvinbr/GTA5GangMod (thanks to Lucas Vinícius who allowed me to use it in my mod).
+
+## Usefull
+
 Useful external resources:
 - https://gta.fandom.com/wiki/
 - https://gtahash.ru/
