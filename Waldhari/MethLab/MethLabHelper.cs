@@ -183,13 +183,13 @@ namespace Waldhari.MethLab
             {
                 if (MethLabSave.Instance.Worker)
                 {
-                    PhoneHelper.GetIFruit().Close(1000);
+                    PhoneHelper.GetCharacterPhone().Close(1000);
                     Script.Wait(1000);
                     GetMenu().Visible = true;
                 }
                 else
                 {
-                    PhoneHelper.GetIFruit().Close(1000);
+                    PhoneHelper.GetCharacterPhone().Close(1000);
                     Script.Wait(1000);
                     var script = Script.InstantiateScript<MethLabPickUpPedScript>();
                     script.Start();

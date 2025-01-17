@@ -1,4 +1,5 @@
-﻿using iFruitAddon2;
+﻿using System.Collections.Generic;
+using iFruitAddon2;
 using Waldhari.Common.Behavior.Property;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
@@ -7,42 +8,67 @@ namespace Waldhari.Common.UI
 {
     public static class PhoneHelper
     {
-        private static CustomiFruit _iFruit;
+        private static readonly Dictionary<Property.Owner, CustomiFruit> Phones = new Dictionary<Property.Owner, CustomiFruit>();
 
-        public static CustomiFruit GetIFruit()
+        public static CustomiFruit GetCharacterPhone()
         {
-            if(_iFruit != null) return _iFruit;
+            var character = PlayerHelper.GetCharacterId();
+            if(Phones.ContainsKey(character)) return Phones[character];
             
-            _iFruit = new CustomiFruit();
+            Phones.Add(character, new CustomiFruit());
             
-            Logger.Debug($"iFuit created num contacts={_iFruit.Contacts.Count}");
+            Logger.Debug($"iFuit created for {character}; number of contact={Phones[character].Contacts.Count}");
             
-            return _iFruit;
+            return Phones[character];
         }
 
         public static void ManageContact(iFruitContact contact, Property.Owner owner)
         {
-            if (PlayerHelper.GetCharacterId() == owner)
+            var character = PlayerHelper.GetCharacterId();
+            if (character != owner)
             {
-                if (!ContactExists(contact))
+                if (ContactExists(contact))
                 {
-                    Logger.Debug($"Current player ='{PlayerHelper.GetCharacterId()}', Contact='{contact.Name}' does not exist but player is owner='{owner}' : adding contact.");
-                    GetIFruit().Contacts.Add(contact);
+                    Logger.Debug(
+                        $"Current player ='{character}', " +
+                        $"Contact='{contact.Name}' exists but player is not owner='{owner}' : " +
+                        $"removing contact.");
+                    if (!GetCharacterPhone().Contacts.Remove(contact))
+                    {
+                        Logger.Warning(
+                            $"Current player ='{character}', " +
+                            $"Contact='{contact.Name}' exists but player is not owner='{owner}' : " +
+                            $"can not remove contact!");
+                    }
+                    Logger.Debug($"number of contact={Phones[character].Contacts.Count}");
                 }
             }
             else
             {
-                if (ContactExists(contact))
+                if (!ContactExists(contact))
                 {
-                    Logger.Debug($"Current player ='{PlayerHelper.GetCharacterId()}', Contact='{contact.Name}' exists but player is not owner='{owner}' : removing contact.");
-                    GetIFruit().Contacts.Remove(contact);
+                    Logger.Debug(
+                        $"Current player ='{character}', " +
+                        $"Contact='{contact.Name}' does not exist but player is owner='{owner}' : " +
+                        $"adding contact.");
+                    var total = GetCharacterPhone().Contacts.Count;
+                    GetCharacterPhone().Contacts.Add(contact);
+                    // should have +1
+                    if (total == GetCharacterPhone().Contacts.Count)
+                    {
+                        Logger.Warning(
+                            $"Current player ='{character}', " +
+                            $"Contact='{contact.Name}' does not exist but player is owner='{owner}' : " +
+                            $"can not add contact!");
+                    }
+                    Logger.Debug($"number of contact={Phones[character].Contacts.Count}");
                 }
             }
         }
 
         private static bool ContactExists(iFruitContact contact)
         {
-            return GetIFruit().Contacts.IndexOf(contact) >= 0;
+            return GetCharacterPhone().Contacts.IndexOf(contact) >= 0;
         }
         
     }
