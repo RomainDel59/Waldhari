@@ -14,7 +14,7 @@ namespace Waldhari.Common
         public int LoggerLevel;
         public bool ShowBlips;
         
-        // In game minutes
+        // In minutes
         public int RandomEventCooldown;
         
         public int WantedChance;
@@ -35,10 +35,9 @@ namespace Waldhari.Common
         
         protected override void SetDefaults()
         {
-            PreferredLanguage = "fr-FR";
+            PreferredLanguage = "en-US";
             
-            //todo: set to 3
-            LoggerLevel = 5;
+            LoggerLevel = 3;
             ShowBlips = true;
 
             RandomEventCooldown = 2;
