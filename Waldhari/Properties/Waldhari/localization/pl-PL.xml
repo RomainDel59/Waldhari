@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationFile>
+    <LanguageCode>pl-PL</LanguageCode>
+    <Locales>
+        
+        <!-- 
+        ************************
+        *** Global Resources *** 
+        ************************
+        -->
+        
+        <LocaleKey>
+            <Key>error</Key>
+            <Value>~r~Wystąpił błąd, proszę wysłać logi moda na https://github.com/RomainDel59/Waldhari/issues.~s~</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>property_with_price</Key>
+            <Value>{0}: {1} $</Value>
+        </LocaleKey>
+        
+        <!-- Names -->
+        <LocaleKey>
+            <Key>ron</Key>
+            <Value>Ron Jakowski</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>barry</Key>
+            <Value>Barry Emery</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>miguel</Key>
+            <Value>Miguel Hernández</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>chemist</Key>
+            <Value>Chemik</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>farmer</Key>
+            <Value>Rolnik</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supervisor</Key>
+            <Value>Nadzorca</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>rival_enemy</Key>
+            <Value>Członek wrogiego gangu</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supplier</Key>
+            <Value>Dostawca</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>wholesaler</Key>
+            <Value>Hurtownik</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>client</Key>
+            <Value>Klient</Value>
+        </LocaleKey>
+
+        <!-- Other -->
+        <LocaleKey>
+            <Key>vehicle_van</Key>
+            <Value>Furgonetka</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>delivery</Key>
+            <Value>Dostawa</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>storage</Key>
+            <Value>Magazyn</Value>
+        </LocaleKey>
+
+        <!-- Menu help -->
+        <LocaleKey>
+            <Key>menu_select</Key>
+            <Value>Wybierz</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>menu_back</Key>
+            <Value>Powrót</Value>
+        </LocaleKey>
+
+        <!-- Missions -->
+        <LocaleKey>
+            <Key>already_in_mission</Key>
+            <Value>Misja jest już ~r~w toku~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>no_product</Key>
+            <Value>Brak ~r~produktów w magazynie~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>fail_vehicle_destroyed</Key>
+            <Value>Pojazd został ~r~zniszczony~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>step_enter_vehicle</Key>
+            <Value>Wejdź do ~y~pojazdu~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>step_getout_vehicle</Key>
+            <Value>Wyjdź z ~y~pojazdu~s~.</Value>
+        </LocaleKey>
+        
+        <LocaleKey>
+            <Key>wanted_during_mission</Key>
+            <Value>Zgub ~r~gliniarzy~s~!</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>rival_during_mission</Key>
+            <Value>Pozbądź się członków ~r~wrogiego gangu~s~!</Value>
+        </LocaleKey>
+        
+        <LocaleKey>
+            <Key>player_dead</Key>
+            <Value>Zginąłeś!</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>player_arrested</Key>
+            <Value>Zostałeś ~r~aresztowany~s~!</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>character_abandoned</Key>
+            <Value>~r~Porzuciłeś~s~ misję!</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>mission_succeed</Key>
+            <Value>Misja zakończona sukcesem</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>mission_failed</Key>
+            <Value>Misja nieudana</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>property_bought</Key>
+            <Value>Nieruchomość zakupiona</Value>
+        </LocaleKey>
+        
+        <!-- Pick up ped mission -->
+        <LocaleKey>
+            <Key>pickupped_step_vehicle</Key>
+            <Value>Potrzebujesz ~r~pojazdu~s~!</Value>
+        </LocaleKey>
+        
+        <!-- Supply mission -->
+        <LocaleKey>
+            <Key>supply_menu_title</Key>
+            <Value>Zaopatrzenie</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_menu_description</Key>
+            <Value>Rozpocznij misję, aby zdobyć surowce.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_no_money</Key>
+            <Value>Potrzebujesz więcej ~r~pieniędzy~s~ na zaopatrzenie.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_success</Key>
+            <Value>Dodano ~g~{0} kg~s~ surowców do magazynu.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_fail_supplier_dead</Key>
+            <Value>~r~Dostawca~s~ został zabity.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_step_rendezvous</Key>
+            <Value>Udaj się na spotkanie z ~y~dostawcą~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>supply_step_payment</Key>
+            <Value>Zapłać ~y~dostawcy~s~ za surowce.</Value>
+        </LocaleKey>
+        
+        <!-- Deal mission -->
+        <LocaleKey>
+            <Key>deal_menu_title</Key>
+            <Value>Sprzedaż detaliczna</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>deal_menu_description</Key>
+            <Value>Rozpocznij misję sprzedaży produktu klientowi.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>deal_success</Key>
+            <Value>Sprzedaż przyniosła ~g~{0} $~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>deal_fail_client_dead</Key>
+            <Value>~r~Klient~s~ został zabity.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>deal_step_rendezvous</Key>
+            <Value>Udaj się na spotkanie z ~y~klientem~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>deal_step_payment</Key>
+            <Value>Sfinalizuj sprzedaż z ~y~klientem~s~.</Value>
+        </LocaleKey>
+        
+        <!-- Bulk mission -->
+        <LocaleKey>
+            <Key>bulk_menu_title</Key>
+            <Value>Sprzedaż hurtowa</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>bulk_menu_description</Key>
+            <Value>Rozpocznij misję sprzedaży wszystkich produktów hurtownikowi.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>bulk_success</Key>
+            <Value>Zapasy zostały sprzedane za ~g~{0} $~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>bulk_step_rendezvous</Key>
+            <Value>Dostarcz furgonetkę do punktu ~y~dostawy~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>bulk_step_payment</Key>
+            <Value>Odbierz zapłatę od ~y~hurtownika~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>bulk_fail_wholesaler_dead</Key>
+            <Value>~r~Hurtownik~s~ został zabity.</Value>
+        </LocaleKey>
+        
+        <!-- Defense mission -->
+        <LocaleKey>
+            <Key>defense_fail_dead</Key>
+            <Value>Wrogi gang ukradł wszystkie ~r~produkty~s~ i ~r~surowce~s~.</Value>
+        </LocaleKey>
+        
+        
+        <!-- 
+        ****************
+        *** Meth Lab *** 
+        ****************
+        -->
+        
+        <!-- General -->
+        <LocaleKey>
+            <Key>methlab</Key>
+            <Value>Laboratorium metamfetaminy</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_help</Key>
+            <Value>{0}~n~Cena: {1} $~n~Daje dostęp do ~y~misji laboratorium~s~~n~Naciśnij {2}, aby kupić.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_buy_failure</Key>
+            <Value>Nie masz ~r~wystarczająco pieniędzy~s~ na zakup.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_buy_success</Key>
+            <Value>Kupiłeś ~y~laboratorium metamfetaminy~s~.~n~To laboratorium pozwala na produkcję i sprzedaż metamfetaminy w celu zarabiania pieniędzy.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_intro</Key>
+            <Value>Cześć szefie!~n~Czuję, że zarobimy kupę kasy na tym laboratorium. Zadzwoń do mnie, gdy będziesz chciał zacząć.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_parking</Key>
+            <Value>Parking laboratorium</Value>
+        </LocaleKey>
+        
+        <!-- Menu -->
+        <LocaleKey>
+            <Key>methlab_menu_check_supply_title</Key>
+            <Value>Stan surowców</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_check_supply_description</Key>
+            <Value>Sprawdź ilość surowców w magazynie.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_amount</Key>
+            <Value>Obecnie w magazynie jest ~g~{0} kg~s~ surowców.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_check_product_title</Key>
+            <Value>Stan metamfetaminy</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_menu_check_product_description</Key>
+            <Value>Sprawdź ilość metamfetaminy w magazynie.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_product_amount</Key>
+            <Value>Obecnie w magazynie jest ~g~{0} g~s~ metamfetaminy.</Value>
+        </LocaleKey>
+
+        <!-- Pick up ped mission -->
+        <LocaleKey>
+            <Key>methlab_pickupped_success</Key>
+            <Value>~g~Chemik~s~ dotarł do laboratorium!</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_started</Key>
+            <Value>Szefie! Do produkcji metamfetaminy potrzebujesz chemika. Mam akurat kontakt. Jedź go odebrać.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_fail_dead</Key>
+            <Value>~r~Chemik~s~ nie żyje.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_step_rendezvous</Key>
+            <Value>Odbierz ~y~chemika~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_step_wait</Key>
+            <Value>Poczekaj, aż chemik wsiądzie do twojego ~y~pojazdu~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_pickupped_step_drive</Key>
+            <Value>Zawieź chemika do ~y~laboratorium~s~.</Value>
+        </LocaleKey>
+
+        <!-- Supply mission -->
+        <LocaleKey>
+            <Key>methlab_supply_started</Key>
+            <Value>Cześć szefie! Zamówiłem ~g~surowce~s~, odbierz je od ~y~dostawcy~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_supply_step_drive</Key>
+            <Value>Przywieź ~y~furgonetkę~s~ do laboratorium.</Value>
+        </LocaleKey>
+        
+        <!-- Defense mission -->
+        <LocaleKey>
+            <Key>methlab_defense_success</Key>
+            <Value>Laboratorium jest ~g~bezpieczne na razie~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_defense_defending</Key>
+            <Value>Broń laboratorium przed ~r~członkami wrogiego gangu~s~!</Value>
+        </LocaleKey>
+        
+        <!-- Deal mission -->
+        <LocaleKey>
+            <Key>methlab_deal_started</Key>
+            <Value>Cześć szefie, klient zamówił ~r~{0} g~s~ metamfetaminy, wysłałem ci współrzędne spotkania.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>methlab_deal_step_get_product</Key>
+            <Value>Odbierz metamfetaminę z ~y~laboratorium~s~.</Value>
+        </LocaleKey>
+        
+        <!-- Bulk mission -->
+        <LocaleKey>
+            <Key>methlab_bulk_started</Key>
+            <Value>Cześć szefie, hurtownik zgodził się kupić cały towar za ~g~{0} $~s~. Weź furgonetkę spod laboratorium i zawieź mu towar na wskazany adres.</Value>
+        </LocaleKey>
+
+        <!-- 
+        *****************
+        *** Weed Farm *** 
+        *****************
+        -->
+
+        <!-- General -->
+        <LocaleKey>
+            <Key>weedfarm</Key>
+            <Value>Uprawa marihuany</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_help</Key>
+            <Value>{0}~n~Cena: {1} $~n~Daje dostęp do ~y~misji uprawy~s~~n~Naciśnij {2}, aby kupić.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_buy_failure</Key>
+            <Value>Nie masz ~r~wystarczająco pieniędzy~s~ na zakup.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_buy_success</Key>
+            <Value>Kupiłeś ~y~uprawę marihuany~s~.~n~Ta nieruchomość pozwala na uprawę i sprzedaż marihuany w celu zarabiania pieniędzy.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_intro</Key>
+            <Value>Dzień dobry,~n~Zalewając rynek, państwo nie będzie miało wyboru i będzie musiało zalegalizować marihuanę, albo zarobimy wystarczająco dużo, żeby wywrzeć presję na Senat.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_parking</Key>
+            <Value>Parking uprawy</Value>
+        </LocaleKey>
+        
+        <!-- Menu -->
+        <LocaleKey>
+            <Key>weedfarm_menu_check_supply_title</Key>
+            <Value>Stan surowców</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_menu_check_supply_description</Key>
+            <Value>Sprawdź ilość surowców w magazynie.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_supply_amount</Key>
+            <Value>Obecnie w magazynie jest ~g~{0} kg~s~ surowców.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_menu_check_product_title</Key>
+            <Value>Stan marihuany</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_menu_check_product_description</Key>
+            <Value>Sprawdź ilość marihuany w magazynie.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_product_amount</Key>
+            <Value>Obecnie w magazynie jest ~g~{0} g~s~ marihuany.</Value>
+        </LocaleKey>
+        
+        <!-- Pick up ped mission -->
+        <LocaleKey>
+            <Key>weedfarm_pickupped_success</Key>
+            <Value>~g~Rolnik~s~ dotarł do uprawy!</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_pickupped_started</Key>
+            <Value>Proszę pana! Do uprawy marihuany potrzebny jest ekspert od rolnictwa ekologicznego. Znam rolnika zainteresowanego naszym aktywizmem, czeka na pana.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_pickupped_fail_dead</Key>
+            <Value>~r~Rolnik~s~ nie żyje.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_pickupped_step_rendezvous</Key>
+            <Value>Odbierz ~y~rolnika~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_pickupped_step_wait</Key>
+            <Value>Poczekaj, aż rolnik wsiądzie do twojego ~y~pojazdu~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_pickupped_step_drive</Key>
+            <Value>Zawieź rolnika do ~y~uprawy~s~.</Value>
+        </LocaleKey>
+        
+        <!-- Supply mission -->
+        <LocaleKey>
+            <Key>weedfarm_supply_started</Key>
+            <Value>Dzień dobry! Zamówiłem ~g~surowce~s~, może pan je odebrać od ~y~dostawcy~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_supply_step_drive</Key>
+            <Value>Przywieź ~y~furgonetkę~s~ do uprawy.</Value>
+        </LocaleKey>
+        
+        <!-- Defense mission -->
+        <LocaleKey>
+            <Key>weedfarm_defense_success</Key>
+            <Value>Uprawa jest ~g~bezpieczna na razie~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_defense_defending</Key>
+            <Value>Broń uprawy przed ~r~członkami wrogiego gangu~s~!</Value>
+        </LocaleKey>
+        
+        <!-- Deal mission -->
+        <LocaleKey>
+            <Key>weedfarm_deal_started</Key>
+            <Value>Dzień dobry, klient zamówił ~r~{0} g~s~ marihuany, wysłałem panu jego współrzędne.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>weedfarm_deal_step_get_product</Key>
+            <Value>Odbierz marihuanę z ~y~uprawy~s~.</Value>
+        </LocaleKey>
+        
+        <!-- Bulk mission -->
+        <LocaleKey>
+            <Key>weedfarm_bulk_started</Key>
+            <Value>Dzień dobry, hurtownik zgodził się kupić cały towar za ~g~{0} $~s~, przygotowałem pojazd przy uprawie, może pan go dostarczyć.</Value>
+        </LocaleKey>
+
+        <!-- 
+        *****************
+        *** Coke Work *** 
+        *****************
+        -->
+
+        <!-- General -->
+        <LocaleKey>
+            <Key>cokework</Key>
+            <Value>Wytwórnia kokainy</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_help</Key>
+            <Value>{0}~n~Cena: {1} $~n~Daje dostęp do ~y~misji wytwórni~s~~n~Naciśnij {2}, aby kupić.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_buy_failure</Key>
+            <Value>Nie masz ~r~wystarczająco pieniędzy~s~ na zakup.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_buy_success</Key>
+            <Value>Kupiłeś ~y~wytwórnię kokainy~s~.~n~Ta wytwórnia pozwala na przetwarzanie liści koki i sprzedaż kokainy w celu zarabiania pieniędzy.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_intro</Key>
+            <Value>¡Hola jefe!~n~Przejąłeś wytwórnię? Świetnie, jestem do twoich usług, żeby rozkręcić interes. Zadzwoń, jeśli będziesz czegoś potrzebować.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_parking</Key>
+            <Value>Parking wytwórni</Value>
+        </LocaleKey>
+
+        <!-- Menu -->
+        <LocaleKey>
+            <Key>cokework_menu_check_supply_title</Key>
+            <Value>Stan surowców</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_menu_check_supply_description</Key>
+            <Value>Sprawdź ilość surowców w magazynie.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_supply_amount</Key>
+            <Value>Obecnie w magazynie jest ~g~{0} kg~s~ surowców.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_menu_check_product_title</Key>
+            <Value>Stan kokainy</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_menu_check_product_description</Key>
+            <Value>Sprawdź ilość kokainy w magazynie.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_product_amount</Key>
+            <Value>Obecnie w magazynie jest ~g~{0} g~s~ kokainy.</Value>
+        </LocaleKey>
+        
+        <!-- Pick up ped mission -->
+        <LocaleKey>
+            <Key>cokework_pickupped_success</Key>
+            <Value>~g~Nadzorca~s~ dotarł do wytwórni!</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_pickupped_started</Key>
+            <Value>¡Jefe! Do zarządzania wytwórnią potrzebujesz nadzorcy pracowników. Wysłałem ci adres mojego przyjaciela, jedź go odebrać.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_pickupped_fail_dead</Key>
+            <Value>~r~Nadzorca~s~ nie żyje.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_pickupped_step_rendezvous</Key>
+            <Value>Odbierz ~y~nadzorcę~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_pickupped_step_wait</Key>
+            <Value>Poczekaj, aż nadzorca wsiądzie do twojego ~y~pojazdu~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_pickupped_step_drive</Key>
+            <Value>Zawieź nadzorcę do ~y~wytwórni~s~.</Value>
+        </LocaleKey>
+        
+        <!-- Supply mission -->
+        <LocaleKey>
+            <Key>cokework_supply_started</Key>
+            <Value>¡Hola jefe! Zamówiłem ~g~surowce~s~, możesz jechać na spotkanie z ~y~dostawcą~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_supply_step_drive</Key>
+            <Value>Przywieź ~y~furgonetkę~s~ do wytwórni.</Value>
+        </LocaleKey>
+        
+        <!-- Defense mission -->
+        <LocaleKey>
+            <Key>cokework_defense_success</Key>
+            <Value>Wytwórnia jest ~g~bezpieczna na razie~s~.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_defense_defending</Key>
+            <Value>Broń wytwórni przed ~r~członkami wrogiego gangu~s~!</Value>
+        </LocaleKey>
+        
+        <!-- Deal mission -->
+        <LocaleKey>
+            <Key>cokework_deal_started</Key>
+            <Value>¡Hola jefe! Klient zamówił ~r~{0} g~s~ kokainy, zawieź mu ją.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>cokework_deal_step_get_product</Key>
+            <Value>Odbierz kokainę z ~y~wytwórni~s~.</Value>
+        </LocaleKey>
+        
+        <!-- Bulk mission -->
+        <LocaleKey>
+            <Key>cokework_bulk_started</Key>
+            <Value>¡Hola jefe! Kupiec jest zainteresowany całym naszym towarem za ~g~{0} $~s~, przygotowałem towar w wytwórni.</Value>
+        </LocaleKey>
+        
+    </Locales>
+</LocalizationFile>
