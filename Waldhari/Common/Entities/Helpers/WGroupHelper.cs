@@ -39,7 +39,7 @@ namespace Waldhari.Common.Entities.Helpers
         
         public static readonly List<Gang> Gangs = new List<Gang>
         {
-            // LOST
+            // The LOST
             new Gang
             {
                 PedHashes = new List<PedHash>
@@ -65,7 +65,7 @@ namespace Waldhari.Common.Entities.Helpers
                 }
             },
             
-            // O'NEIL
+            // Hill Billies
             new Gang()
             {
                 PedHashes = new List<PedHash>
@@ -95,7 +95,7 @@ namespace Waldhari.Common.Entities.Helpers
                 }
             },
             
-            // BALLAS
+            // The BALLAS
             new Gang
             {
                 PedHashes = new List<PedHash>
@@ -127,14 +127,20 @@ namespace Waldhari.Common.Entities.Helpers
                 }
             },
             
-            // VAGOS
+            // Mexicans
             new Gang
             {
                 PedHashes = new List<PedHash>
                 {
-                    PedHash.VagosLeader,
-                    PedHash.VagosSpeak,
-                    PedHash.VagosFun01
+                    PedHash.MexBoss01GMM,
+                    PedHash.MexBoss02GMM,
+                    PedHash.MexCntry01AMM,
+                    PedHash.MexGang01GMY,
+                    PedHash.MexGoon01GMY,
+                    PedHash.MexGoon02GMY,
+                    PedHash.MexGoon03GMY,
+                    PedHash.MexThug01AMY,
+                    PedHash.MexLabor01AMM
                 },
                 VehicleHashes = new List<VehicleHash>
                 {

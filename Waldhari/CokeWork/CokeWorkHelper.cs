@@ -107,7 +107,9 @@ namespace Waldhari.CokeWork
 
             // Create main menu
             _pool = new ObjectPool();
-            _menu = new NativeMenu(Localization.GetTextByKey("cokework"));
+            var name = Localization.GetTextByKey("cokework");
+            _menu = new NativeMenu(name);
+            _menu.Name = name;
             MenuHelper.SetButtons(_menu);
             _pool.Add(_menu);
 
