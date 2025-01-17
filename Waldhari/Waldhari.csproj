@@ -136,8 +136,12 @@
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Properties\Waldhari\localization\de-DE.xml" />
       <Content Include="Properties\Waldhari\localization\en-US.xml" />
+      <Content Include="Properties\Waldhari\localization\es-ES.xml" />
       <Content Include="Properties\Waldhari\localization\fr-FR.xml" />
+      <Content Include="Properties\Waldhari\localization\pl-PL.xml" />
+      <Content Include="Properties\Waldhari\readme.htm" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
