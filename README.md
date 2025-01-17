@@ -1,4 +1,5 @@
 # BUSINESS OPPORTUNITY OF A LIFETIME!
+
 Looking to build your empire in Los Santos? Your lucky day has arrived! 
 Waldhari Corporation, the powerhouse behind some of the city's most lucrative operations, 
 is making the brilliant decision to relocate to Provence, France - 
@@ -24,21 +25,25 @@ Remember: Time is money, and this fire sale won't last forever. Strike while the
 # Features
 
 ## Cocaine Workshop
+
 Designed to be purchased by Michael, but you are free to purchase it with any character.
 
 Features: supply / deal / defend.
 
 ## Methamphetamine Lab
+
 Designed to be purchased by Trevor, but you are free to purchase it with any character.
 
 Features: supply / deal / defend.
 
 ## Weed Farm
+
 Designed to be purchased by Franklin, but you are free to purchase it with any character.
 
 Features: supply / deal / defend.
 
 # Futures plans
+
 - Greater diversity in missions (using other vehicles)
 - Other smuggling and receiving stolen goods businesses
 - Simeon's repo missions
@@ -46,8 +51,14 @@ Features: supply / deal / defend.
 
 (If you have any ideas, you are welcome to make suggestions in the issues section!)
 
+# Note
+
+My native language is French, so I translated the localization into other languages ​​with AI, but it may contain errors. Please help me fix it by submitting a merge request!
+
 # Requirements
+
 ## Dependencies
+
 Core: .NET v4.8
 
 Added references in IDE:
@@ -55,6 +66,7 @@ Added references in IDE:
 - System.Drawing
 
 ## Other mods
+
 These mods are required to make it work.
 - ScriptHookVDotNet 3.6.0 (https://github.com/scripthookvdotnet/scripthookvdotnet)
 - LemonUI 2.1.2 (https://github.com/LemonUIbyLemon/LemonUI)
@@ -63,6 +75,7 @@ These mods are required to make it work.
 (Added from NuGet in IDE)
 
 # External resources
+
 Useful external resources:
 - https://gta.fandom.com/wiki/
 - https://gtahash.ru/
