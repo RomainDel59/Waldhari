@@ -1,4 +1,5 @@
-﻿using Waldhari.Common.Files;
+﻿using System.Globalization;
+using Waldhari.Common.Files;
 
 namespace Waldhari.Common
 {
@@ -35,7 +36,7 @@ namespace Waldhari.Common
         
         protected override void SetDefaults()
         {
-            PreferredLanguage = "en-US";
+            PreferredLanguage = CultureInfo.CurrentCulture.Name;
             
             LoggerLevel = 3;
             ShowBlips = true;
