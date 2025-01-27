@@ -30,6 +30,9 @@ namespace Waldhari.Common
         public int EnemiesAppearanceDistance;
         public int EnemiesDisappearanceDistance;
         
+        // All businesses accessible by any character
+        public bool UniversalBusinesses;
+        
         
         
         #endregion
@@ -53,7 +56,9 @@ namespace Waldhari.Common
             
             EnemiesAppearanceDistance = 50;
             EnemiesDisappearanceDistance = 1000;
-            
+
+            UniversalBusinesses = false;
+
         }
     }
 }
