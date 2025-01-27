@@ -42,6 +42,13 @@ Designed to be purchased by Franklin, but you are free to purchase it with any c
 
 Features: supply / deal / defend.
 
+# Customization
+
+The mod offers a wide range of options to customize your gameplay experience. From adjusting production rates to tweaking pricing and supply settings, you have full control over the details.
+
+Explore all the available options in the [Wiki](https://github.com/RomainDel59/Waldhari/wiki).
+ 
+
 # Futures plans
 
 - Greater diversity in missions (using other vehicles)
