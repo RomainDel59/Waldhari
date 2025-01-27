@@ -25,7 +25,7 @@ namespace Waldhari.Common.UI
         public static void ManageContact(iFruitContact contact, Property.Owner owner)
         {
             var character = PlayerHelper.GetCharacterId();
-            if (character != owner)
+            if (character != owner && !GlobalOptions.Instance.UniversalBusinesses)
             {
                 if (ContactExists(contact))
                 {

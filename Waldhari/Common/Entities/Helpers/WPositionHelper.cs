@@ -363,7 +363,491 @@ namespace Waldhari.Common.Entities.Helpers
                             Heading = 184.2717f
                         }
                     }
-                }
+                },
+                
+                // Davis Quartz terraced mining site
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(2682.076f, 2805.158f, 40.36162f),
+                        Rotation = new Vector3(0f, 0f, 1.757499f),
+                        Heading = 1.757499f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(2681.902f, 2797.468f, 40.44386f),
+                            Rotation = new Vector3(0f, 0f, 10.85631f),
+                            Heading = 10.85631f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(2687.112f, 2797.593f, 40.36722f),
+                            Rotation = new Vector3(0f, 0f, 17.04746f),
+                            Heading = 17.04746f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(2677.491f, 2797.953f, 40.39575f),
+                            Rotation = new Vector3(0f, 0f, -11.99793f),
+                            Heading = 348.0021f
+                        }
+                    }
+                },
+                
+                // A trail in Mount Gordo
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(3334.438f, 5473.732f, 19.88513f),
+                        Rotation = new Vector3(0f, 0f, 157.6406f),
+                        Heading = 157.6406f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(3342.271f, 5461.542f, 20.73017f),
+                            Rotation = new Vector3(0f, 0f, 120.9349f),
+                            Heading = 120.9349f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(3344.042f, 5456.47f, 20.88776f),
+                            Rotation = new Vector3(0f, 0f, 128.992f),
+                            Heading = 128.992f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(3349.472f, 5464.07f, 21.39451f),
+                            Rotation = new Vector3(0f, 0f, 98.73433f),
+                            Heading = 98.73433f
+                        }
+                    }
+                },
+                
+                // Palomino Highlands
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(2718.432f, -779.784f, 24.17901f),
+                        Rotation = new Vector3(0f, 0f, 169.9973f),
+                        Heading = 169.9973f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(2711.501f, -771.4313f, 24.48149f),
+                            Rotation = new Vector3(0f, 0f, -165.049f),
+                            Heading = 194.951f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(2731.539f, -784.5287f, 24.41152f),
+                            Rotation = new Vector3(0f, 0f, 115.183f),
+                            Heading = 115.183f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(2733.696f, -776.1342f, 23.79521f),
+                            Rotation = new Vector3(0f, 0f, 113.2288f),
+                            Heading = 113.2288f
+                        }
+                    }
+                },
+                
+                // Buccaneer way
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(969.9266f, -3157.754f, 5.900806f),
+                        Rotation = new Vector3(0f, 0f, 178.676f),
+                        Heading = 178.676f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(963.4526f, -3152.228f, 5.900805f),
+                            Rotation = new Vector3(0f, 0f, 170.5244f),
+                            Heading = 170.5244f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(961.2641f, -3149.925f, 5.900805f),
+                            Rotation = new Vector3(0f, 0f, 168.7223f),
+                            Heading = 168.7223f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(965.5747f, -3150.236f, 5.900805f),
+                            Rotation = new Vector3(0f, 0f, 174.9723f),
+                            Heading = 174.9723f
+                        }
+                    }
+                },
+                
+                // Elysian Island
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(528.3453f, -3048.111f, 6.069633f),
+                        Rotation = new Vector3(0.0001032013f, -2.623022E-05f, -79.03922f),
+                        Heading = 280.9608f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(535.9063f, -3052.429f, 6.069633f),
+                            Rotation = new Vector3(0.0001033175f, -3.138557E-05f, 7.332377f),
+                            Heading = 7.332377f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(516.076f, -3051.262f, 6.069631f),
+                            Rotation = new Vector3(0.0001033338f, -3.138251E-05f, -84.93154f),
+                            Heading = 275.0685f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(515.8767f, -3048.829f, 6.069631f),
+                            Rotation = new Vector3(0.000103332f, -3.138409E-05f, -73.95679f),
+                            Heading = 286.0432f
+                        }
+                    }
+                },
+                
+                // Elysian Island 2
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(259.0757f, -2829.338f, 6.020677f),
+                        Rotation = new Vector3(0f, 0f, 167.6358f),
+                        Heading = 167.6358f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(250.2873f, -2830.109f, 6.039652f),
+                            Rotation = new Vector3(0f, 0f, -167.0082f),
+                            Heading = 192.9918f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(251.8873f, -2826.098f, 6.060141f),
+                            Rotation = new Vector3(0f, 0f, -22.0651f),
+                            Heading = 337.9349f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(252.9023f, -2828.257f, 6.037044f),
+                            Rotation = new Vector3(0f, 0f, -138.3253f),
+                            Heading = 221.6747f
+                        }
+                    }
+                },
+                
+                // Airport
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(-960.4897f, -2607.395f, 13.83099f),
+                        Rotation = new Vector3(0f, 0f, 61.26441f),
+                        Heading = 61.26441f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(-961.7932f, -2610.471f, 13.98079f),
+                            Rotation = new Vector3(0f, 0f, 45.96809f),
+                            Heading = 45.96809f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-960.4852f, -2616.772f, 13.9808f),
+                            Rotation = new Vector3(0f, 0f, 167.0476f),
+                            Heading = 167.0476f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-960.5225f, -2615.056f, 13.9808f),
+                            Rotation = new Vector3(0f, 0f, 15.14495f),
+                            Heading = 15.14495f
+                        }
+                    }
+                },
+                
+                // Vespucci
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(-857.0974f, -1089.754f, 2.162876f),
+                        Rotation = new Vector3(-8.01132E-05f, 3.212813E-06f, 24.86326f),
+                        Heading = 24.86326f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(-861.7628f, -1090.529f, 2.162877f),
+                            Rotation = new Vector3(-7.952783E-05f, 2.156467E-06f, 11.34489f),
+                            Heading = 11.34489f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-864.7281f, -1094.256f, 2.163f),
+                            Rotation = new Vector3(-7.952709E-05f, 2.166828E-06f, -30.08913f),
+                            Heading = 329.9109f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-862.457f, -1094.86f, 2.163f),
+                            Rotation = new Vector3(-7.952806E-05f, 2.174057E-06f, -27.98836f),
+                            Heading = 332.0116f
+                        }
+                    }
+                },
+                
+                // Bay city avenue
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(-1169.403f, -1772.228f, 3.869389f),
+                        Rotation = new Vector3(0f, 0f, -55.93684f),
+                        Heading = 304.0632f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(-1172.362f, -1779.364f, 3.908163f),
+                            Rotation = new Vector3(0f, 0f, -41.90586f),
+                            Heading = 318.0941f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-1177.615f, -1780.499f, 3.908465f),
+                            Rotation = new Vector3(0f, 0f, -55.35742f),
+                            Heading = 304.6426f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-1181.108f, -1774.811f, 3.908466f),
+                            Rotation = new Vector3(0f, 0f, -66.97275f),
+                            Heading = 293.0273f
+                        }
+                    }
+                },
+                
+                // Little Seoul
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(-616.1159f, -783.4374f, 25.12997f),
+                        Rotation = new Vector3(0f, 0f, -12.30859f),
+                        Heading = 347.6914f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(-609.6948f, -778.6781f, 25.05415f),
+                            Rotation = new Vector3(0f, 0f, 83.44904f),
+                            Heading = 83.44904f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-609.1064f, -774.5104f, 25.09307f),
+                            Rotation = new Vector3(0f, 0f, 135.8173f),
+                            Heading = 135.8173f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-609.1104f, -783.3165f, 25.0321f),
+                            Rotation = new Vector3(0f, 0f, 35.94813f),
+                            Heading = 35.94814f
+                        }
+                    }
+                },
+                
+                // Rockford hills
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(-1140.827f, -354.8393f, 37.67485f),
+                        Rotation = new Vector3(0f, 0f, -10.97587f),
+                        Heading = 349.0241f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(-1145.596f, -354.3349f, 37.82365f),
+                            Rotation = new Vector3(0f, 0f, -32.40831f),
+                            Heading = 327.5917f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-1145.648f, -340.8232f, 37.82365f),
+                            Rotation = new Vector3(0f, 0f, -80.16206f),
+                            Heading = 279.838f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-1137.295f, -365.7561f, 37.82382f),
+                            Rotation = new Vector3(0f, 0f, 13.6225f),
+                            Heading = 13.6225f
+                        }
+                    }
+                },
+                
+                // Pacific Bluffs
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(-1804.24f, -350.9272f, 49.13223f),
+                        Rotation = new Vector3(0f, 0f, 26.63698f),
+                        Heading = 26.63698f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(-1807.783f, -350.6983f, 49.14813f),
+                            Rotation = new Vector3(0f, 0f, -19.72607f),
+                            Heading = 340.2739f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-1802.878f, -357.7564f, 49.19448f),
+                            Rotation = new Vector3(0f, 0f, -9.971686f),
+                            Heading = 350.0283f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-1805.372f, -357.7415f, 49.22982f),
+                            Rotation = new Vector3(0f, 0f, 1.601322f),
+                            Heading = 1.601322f
+                        }
+                    }
+                },
+                
+                // Vinewood West
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(-637.3102f, 407.927f, 101.2205f),
+                        Rotation = new Vector3(0f, 0f, -86.41068f),
+                        Heading = 273.5893f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(-635.4222f, 400.7935f, 101.1381f),
+                            Rotation = new Vector3(0f, 0f, -57.08348f),
+                            Heading = 302.9165f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-640.4891f, 415.511f, 101.2802f),
+                            Rotation = new Vector3(0f, 0f, -115.3604f),
+                            Heading = 244.6396f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-644.5282f, 409.3786f, 101.2092f),
+                            Rotation = new Vector3(0f, 0f, -97.10477f),
+                            Heading = 262.8952f
+                        }
+                    }
+                },
+                
+                // Fort Zancudo
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(-1608.419f, 2975.795f, 32.49631f),
+                        Rotation = new Vector3(0f, 0f, -100.0347f),
+                        Heading = 259.9653f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(-1611.167f, 2966.981f, 32.96322f),
+                            Rotation = new Vector3(0f, 0f, -53.28904f),
+                            Heading = 306.711f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-1618.984f, 2968.175f, 32.92686f),
+                            Rotation = new Vector3(0f, 0f, -86.08567f),
+                            Heading = 273.9143f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-1607.08f, 2985.182f, 33.21974f),
+                            Rotation = new Vector3(0f, 0f, -147.3501f),
+                            Heading = 212.6499f
+                        }
+                    }
+                },
+                
+                // Paleto Forest
+                new MissionWithVehiclePosition
+                {
+                    VehiclePosition = new WPosition
+                    {
+                        Position = new Vector3(-743.3853f, 5536.341f, 33.48572f),
+                        Rotation = new Vector3(0f, 0f, 25.88297f),
+                        Heading = 25.88297f
+                    },
+                    PedPositions = new List<WPosition>
+                    {
+                        new WPosition
+                        {
+                            Position = new Vector3(-740.9667f, 5543.255f, 33.60592f),
+                            Rotation = new Vector3(0f, 0f, 94.59106f),
+                            Heading = 94.59106f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-748.4689f, 5552.496f, 33.60598f),
+                            Rotation = new Vector3(0f, 0f, 107.3971f),
+                            Heading = 107.3971f
+                        },
+                        new WPosition
+                        {
+                            Position = new Vector3(-748.8306f, 5528.382f, 33.60598f),
+                            Rotation = new Vector3(0f, 0f, 31.83799f),
+                            Heading = 31.83799f
+                        }
+                    }
+                },
+                
+                
+                
+                
             };
 
         #endregion

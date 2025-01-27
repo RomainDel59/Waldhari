@@ -16,9 +16,9 @@ namespace Waldhari.Common.Files
     /// </summary>
     public static class Localization
     {
-        public static string CurCulture = "fr-FR";
-
-        private static readonly CultureInfo DefaultCulture = CultureInfo.GetCultureInfo(CurCulture);
+        private static readonly CultureInfo DefaultCulture = CultureInfo.GetCultureInfo("en-US");
+        
+        public static string CurCulture = null;
 
         internal const string LocaleNotFoundTxt = "-MISSINGLOCALE-";
 

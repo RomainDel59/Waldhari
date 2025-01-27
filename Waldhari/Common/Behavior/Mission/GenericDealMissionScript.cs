@@ -22,6 +22,7 @@ namespace Waldhari.Common.Behavior.Mission
         protected abstract int PriceByUnit { get; }
         protected abstract void DeductAmount(int amount);
         protected abstract WPosition Storage { get; }
+        protected abstract string GetProductMessage { get; }
         protected abstract void ShowStartedMessage();
 
         protected GenericDealMissionScript(string name)
@@ -75,7 +76,7 @@ namespace Waldhari.Common.Behavior.Mission
             return new Step
             {
                 Name = "GetProduct",
-                MessageKey = "methlab_deal_step_get_product",
+                MessageKey = GetProductMessage,
                 Action = () =>
                 {
                     _cabinetBlip.Create();

@@ -1,4 +1,5 @@
-﻿using Waldhari.Common.Files;
+﻿using System.Globalization;
+using Waldhari.Common.Files;
 
 namespace Waldhari.Common
 {
@@ -14,7 +15,7 @@ namespace Waldhari.Common
         public int LoggerLevel;
         public bool ShowBlips;
         
-        // In game minutes
+        // In minutes
         public int RandomEventCooldown;
         
         public int WantedChance;
@@ -29,16 +30,18 @@ namespace Waldhari.Common
         public int EnemiesAppearanceDistance;
         public int EnemiesDisappearanceDistance;
         
+        // All businesses accessible by any character
+        public bool UniversalBusinesses;
+        
         
         
         #endregion
         
         protected override void SetDefaults()
         {
-            PreferredLanguage = "fr-FR";
+            PreferredLanguage = CultureInfo.CurrentCulture.Name;
             
-            //todo: set to 3
-            LoggerLevel = 5;
+            LoggerLevel = 3;
             ShowBlips = true;
 
             RandomEventCooldown = 2;
@@ -53,7 +56,9 @@ namespace Waldhari.Common
             
             EnemiesAppearanceDistance = 50;
             EnemiesDisappearanceDistance = 1000;
-            
+
+            UniversalBusinesses = false;
+
         }
     }
 }
