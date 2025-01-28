@@ -25,45 +25,79 @@ namespace Waldhari.Common.UI
         public static void ManageContact(iFruitContact contact, Property.Owner owner)
         {
             var character = PlayerHelper.GetCharacterId();
-            if (character != owner && !GlobalOptions.Instance.UniversalBusinesses)
+            
+            // If universal business is activated
+            if (GlobalOptions.Instance.UniversalBusinesses)
             {
-                if (ContactExists(contact))
+                // If there is an owner
+                if (owner != Property.Owner.None)
                 {
-                    Logger.Debug(
-                        $"Current player ='{character}', " +
-                        $"Contact='{contact.Name}' exists but player is not owner='{owner}' : " +
-                        $"removing contact.");
-                    if (!GetCharacterPhone().Contacts.Remove(contact))
-                    {
-                        Logger.Warning(
-                            $"Current player ='{character}', " +
-                            $"Contact='{contact.Name}' exists but player is not owner='{owner}' : " +
-                            $"can not remove contact!");
-                    }
-                    Logger.Debug($"number of contact={Phones[character].Contacts.Count}");
+                    AddContact(contact, owner, character);
+                }
+                // If there is no owner
+                else
+                {
+                    RemoveContact(contact, owner, character);
                 }
             }
-            else
+            // If universal business is not activated and 
+            else 
             {
-                if (!ContactExists(contact))
+                // If the current character is the owner
+                if (owner == character)
                 {
-                    Logger.Debug(
-                        $"Current player ='{character}', " +
-                        $"Contact='{contact.Name}' does not exist but player is owner='{owner}' : " +
-                        $"adding contact.");
-                    var total = GetCharacterPhone().Contacts.Count;
-                    GetCharacterPhone().Contacts.Add(contact);
-                    // should have +1
-                    if (total == GetCharacterPhone().Contacts.Count)
-                    {
-                        Logger.Warning(
-                            $"Current player ='{character}', " +
-                            $"Contact='{contact.Name}' does not exist but player is owner='{owner}' : " +
-                            $"can not add contact!");
-                    }
-                    Logger.Debug($"number of contact={Phones[character].Contacts.Count}");
+                    AddContact(contact, owner, character);
+                }
+                // If the current character is not the owner
+                else
+                {
+                    RemoveContact(contact, owner, character);
                 }
             }
+            
+        }
+
+        private static void AddContact(iFruitContact contact, Property.Owner owner, Property.Owner character)
+        {
+            // If exist already, nothing to do
+            if (ContactExists(contact)) return;
+            
+            Logger.Debug(
+                $"Current player ='{character}', " +
+                $"Contact='{contact.Name}' does not exist but player is owner='{owner}' : " +
+                $"adding contact.");
+            var total = GetCharacterPhone().Contacts.Count;
+            GetCharacterPhone().Contacts.Add(contact);
+            // should have +1
+            if (total == GetCharacterPhone().Contacts.Count)
+            {
+                Logger.Warning(
+                    $"Current player ='{character}', " +
+                    $"Contact='{contact.Name}' does not exist but player is owner='{owner}' : " +
+                    $"can not add contact!");
+            }
+            Logger.Debug($"number of contact={Phones[character].Contacts.Count}");
+        }
+
+        private static void RemoveContact(iFruitContact contact, Property.Owner owner, Property.Owner character)
+        {
+            // If not exist already, nothing to do
+            if (!ContactExists(contact)) return;
+            
+            Logger.Debug(
+                $"Current player ='{character}', " +
+                $"Contact='{contact.Name}' exists but player is not owner='{owner}' : " +
+                $"removing contact.");
+            
+            if (!GetCharacterPhone().Contacts.Remove(contact))
+            {
+                Logger.Warning(
+                    $"Current player ='{character}', " +
+                    $"Contact='{contact.Name}' exists but player is not owner='{owner}' : " +
+                    $"can not remove contact!");
+            }
+            
+            Logger.Debug($"number of contact={Phones[character].Contacts.Count}");
         }
 
         private static bool ContactExists(iFruitContact contact)
