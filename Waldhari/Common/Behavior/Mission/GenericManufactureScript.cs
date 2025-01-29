@@ -25,7 +25,7 @@ namespace Waldhari.Common.Behavior.Mission
         protected GenericManufactureScript(string name)
             : base(name, false, null)
         {
-            checkIfAnotherMissionIsActiveToLaunch = false;
+            CheckIfAnotherMissionIsActiveToLaunch = false;
         }
 
         protected override void StartComplement()

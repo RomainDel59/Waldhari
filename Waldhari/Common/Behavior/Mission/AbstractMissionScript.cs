@@ -65,7 +65,7 @@ namespace Waldhari.Common.Behavior.Mission
         /// </summary>
         protected int CurrentStep;
 
-        protected bool checkIfAnotherMissionIsActiveToLaunch = true;
+        protected bool CheckIfAnotherMissionIsActiveToLaunch = true;
         
         /// <summary>
         /// Indicates whether the mission is currently active.
@@ -175,7 +175,7 @@ namespace Waldhari.Common.Behavior.Mission
 
             try
             {
-                if(checkIfAnotherMissionIsActiveToLaunch)
+                if(CheckIfAnotherMissionIsActiveToLaunch)
                 {
                     if (IsAnyMissionActive() || Game.IsMissionActive || Game.IsRandomEventActive)
                         throw new MissionException("already_in_mission");
