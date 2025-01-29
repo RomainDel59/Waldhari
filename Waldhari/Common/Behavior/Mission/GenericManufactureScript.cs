@@ -75,7 +75,7 @@ namespace Waldhari.Common.Behavior.Mission
                 CompletionAction = () =>
                 {
                     var minutes = ManufactureTime;
-                    Logger.Debug($"Will wait {minutes} minutes");
+                    Logger.Debug($"Will wait {minutes} minutes before complete manufacture");
                     _waitEndTime = Game.GameTime + minutes * 60 * 1000;
                 }
             };

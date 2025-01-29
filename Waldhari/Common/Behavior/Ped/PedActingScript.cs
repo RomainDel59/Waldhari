@@ -13,9 +13,10 @@ namespace Waldhari.Common.Behavior.Ped
     {
         public WPed WPed;
         public bool ActWithoutWeapon;
-        
-        private bool _hasMoved;
-        
+        public bool PedIsRunning = true;
+
+        public bool HasMoved { get; private set; }
+
         private bool _isGoingBackPosition;
         private bool _actingStopped;
         
@@ -32,7 +33,7 @@ namespace Waldhari.Common.Behavior.Ped
         {
             Tick += OnTick;
             Aborted += OnAborted;
-            _hasMoved = true; //make it play animation or scenario the first time
+            HasMoved = true; //make it play animation or scenario the first time
         }
 
         private void OnAborted(object sender, EventArgs e)
@@ -56,7 +57,7 @@ namespace Waldhari.Common.Behavior.Ped
             // acting when fight is finished
             if (IsInCombat())
             {
-                _hasMoved = true;
+                HasMoved = true;
                 return;
             }
             
@@ -69,21 +70,28 @@ namespace Waldhari.Common.Behavior.Ped
                 }
 
                 Logger.Debug($"Ped moved from initial position (scenario={WPed.Scenario}, animationName={WPed.AnimationName}) : make it run back");
-                _hasMoved = true;
-                WPed.Ped.Task.RunTo(WPed.InitialPosition.Position);
+                HasMoved = true;
+                if(PedIsRunning)
+                {
+                    WPed.Ped.Task.RunTo(WPed.InitialPosition.Position);
+                }
+                else
+                {
+                    WPed.Ped.Task.GoTo(WPed.InitialPosition.Position);
+                }
                 _isGoingBackPosition = true;
             }
             else
             {
                 _isGoingBackPosition = false;
 
-                if (_hasMoved)
+                if (HasMoved)
                 {
                     Logger.Debug($"Ped is at initial position (scenario={WPed.Scenario}, animationName={WPed.AnimationName}) : make it do acting");
                     WPed.MoveInPosition();
                     if (HasScenarioToDo()) PlayScenario();
                     else if (HasAnimationToDo()) PlayAnimation();
-                    _hasMoved = false;
+                    HasMoved = false;
                 }
                 else
                 {

@@ -6,6 +6,7 @@ using iFruitAddon2;
 using LemonUI;
 using LemonUI.Menus;
 using Waldhari.Common.Entities;
+using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Files;
 using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
@@ -71,6 +72,48 @@ namespace Waldhari.WeedFarm
                     Heading = 357.7547f
                 }
             };
+
+            public static readonly List<WPositionHelper.GuardPositions> GuardPositionsList =
+                new List<WPositionHelper.GuardPositions>
+                {
+                    new WPositionHelper.GuardPositions
+                    {
+                        Position = new List<WPosition>
+                        {
+                            new WPosition
+                            {
+                                Position = new Vector3(2218.663f, 5600.003f, 54.50877f),
+                                Rotation = new Vector3(-2.945041E-07f, -4.635889E-05f, 157.818f),
+                                Heading = 157.818f
+                            },
+                            new WPosition
+                            {
+                                Position = new Vector3(2215.679f, 5610.32f, 54.50102f),
+                                Rotation = new Vector3(-2.870833E-07f, -4.635937E-05f, 17.52297f),
+                                Heading = 17.52297f 
+                            }
+                        }
+                    },
+                    new WPositionHelper.GuardPositions
+                    {
+                        Position = new List<WPosition>
+                        {
+                            new WPosition
+                            {
+                                Position = new Vector3(2197.66f, 5582.771f, 53.70533f),
+                                Rotation = new Vector3(-3.105117E-07f, -4.633842E-05f, -150.0599f),
+                                Heading = 209.9401f
+                            },
+                            new WPosition
+                            {
+                                Position = new Vector3(2203.246f, 5605.534f, 53.76904f),
+                                Rotation = new Vector3(-2.932144E-07f, -4.634442E-05f, -66.31038f),
+                                Heading = 293.6896f
+                            }
+                        }
+                    }
+                };
+
         }
         
         #region Worker

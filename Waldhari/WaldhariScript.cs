@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using GTA;
+using Waldhari.Common.Behavior.Mission;
 using Waldhari.Common.Files;
 using Waldhari.Common.UI;
 
@@ -61,19 +62,14 @@ namespace Waldhari
                 
                 
                 
-                //test
-                 // _test = InstantiateScript<EnemyGroupScript>();
-                 // _test?.DefineGroup(WGroupHelper.CreateRivalMembers(10));
             }
 
             if (Game.IsControlJustPressed(Control.Context))
             {
                 //test
-                // _test?.MarkAsNoLongerNeeded();
-                // _test?.Abort();
-                // _test = null;
+                var script = InstantiateScript<GenericGuardMissionScript>();
+                script.Start();
             }
         }
-        // private EnemyGroupScript _test;
     }
 }

@@ -872,5 +872,18 @@ namespace Waldhari.Common.Entities.Helpers
         }
 
         #endregion
+        
+        #region GuardPosition
+
+        public class GuardPositions
+        {
+            // List of position for a unique guard
+            public List<WPosition> Position;
+            
+            // Actual position of the guard
+            public int ActualPosition = 0;
+        }
+        
+        #endregion
     }
 }
