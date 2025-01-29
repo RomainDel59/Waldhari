@@ -157,10 +157,9 @@ namespace Waldhari.Common.Behavior.Mission
                 Logger.Debug("Ped added to player relationship group");
             }
             
-            // todo: random vehiclehash
             _van = new WVehicle
             {
-                VehicleHash = VehicleHash.Burrito,
+                VehicleHash = WVehicleHelper.GetRandomVan(),
                 InitialPosition = Parking
             };
             _van.Create();

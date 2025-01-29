@@ -130,8 +130,7 @@ namespace Waldhari.Common.Behavior.Mission
             _cabinetBlip.Position = Storage.Position;
             
             var client = new WPed
-            {
-                //todo: random pedhash 
+            { 
                 PedHash = PedHash.Rurmeth01AMM,
                 InitialPosition = WPositionHelper.GetRandomAlonePedPosition(),
                 Scenario = "WORLD_HUMAN_SMOKING"
