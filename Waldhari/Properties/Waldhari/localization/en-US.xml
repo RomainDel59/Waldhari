@@ -369,7 +369,7 @@
         </LocaleKey>
         <LocaleKey>
             <Key>weedfarm_help</Key>
-            <Value>{0}~n~Price: {1} $~n~Grants access to ~y~farm missions~s~~n~Press {2} to buy.</Value>
+            <Value>{0}~n~Price: ${1}~n~Grants access to ~y~farm missions~s~~n~Press {2} to buy.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>weedfarm_buy_failure</Key>
@@ -473,7 +473,7 @@
         <!-- Bulk mission -->
         <LocaleKey>
             <Key>weedfarm_bulk_started</Key>
-            <Value>Hello, Sir, a wholesaler agreed to take all the merchandise for ~g~{0} $~s~. I’ve prepared a vehicle at the farm. You can deliver it to them.</Value>
+            <Value>Hello, Sir, a wholesaler agreed to take all the merchandise for ~g~${0}~s~. I’ve prepared a vehicle at the farm. You can deliver it to them.</Value>
         </LocaleKey>
 
 
@@ -490,7 +490,7 @@
         </LocaleKey>
         <LocaleKey>
             <Key>cokework_help</Key>
-            <Value>{0}~n~Price: {1} $~n~Grants access to ~y~workshop missions~s~~n~Press {2} to purchase.</Value>
+            <Value>{0}~n~Price: ${1}~n~Grants access to ~y~workshop missions~s~~n~Press {2} to purchase.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>cokework_buy_failure</Key>
@@ -594,7 +594,7 @@
         <!-- Bulk mission -->
         <LocaleKey>
             <Key>cokework_bulk_started</Key>
-            <Value>Hola jefe, a buyer is interested in our entire stock for ~g~{0} $~s~, I've prepared the goods at the workshop.</Value>
+            <Value>Hola jefe, a buyer is interested in our entire stock for ~g~${0}~s~, I've prepared the goods at the workshop.</Value>
         </LocaleKey>
 
 
