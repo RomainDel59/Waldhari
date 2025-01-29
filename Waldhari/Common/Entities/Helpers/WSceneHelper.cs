@@ -6,7 +6,7 @@ namespace Waldhari.Common.Entities.Helpers
 {
     public static class WSceneHelper
     {
-        public static List<PedActingScript> CreateTransactionScene(WPositionHelper.MissionWithVehiclePosition position, WGroupHelper.Gang gang)
+        public static List<PedActingScript> CreateTransactionScene(WPositionHelper.MissionWithVanPosition position, WGroupHelper.Gang gang)
         {
             var result = new List<PedActingScript>();
 

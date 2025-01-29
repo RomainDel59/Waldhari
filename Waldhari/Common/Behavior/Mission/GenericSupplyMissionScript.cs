@@ -159,7 +159,7 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void CreateScene()
         {
-            var randomPosition = WPositionHelper.GetRandomMissionWithVehiclePosition();
+            var randomPosition = WPositionHelper.GetRandomMissionWithVanPosition();
             var gang = WGroupHelper.GetRandomGang();
 
             _supplierActingScripts = WSceneHelper.CreateTransactionScene(randomPosition,gang);

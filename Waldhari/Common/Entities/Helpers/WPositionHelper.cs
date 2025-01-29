@@ -52,7 +52,7 @@ namespace Waldhari.Common.Entities.Helpers
 
         #region MissionWithVehiclePossiblePositions
 
-        public class MissionWithVehiclePosition
+        public class MissionWithVanPosition
         {
             public WPosition VehiclePosition;
 
@@ -60,25 +60,25 @@ namespace Waldhari.Common.Entities.Helpers
             public List<WPosition> PedPositions;
         }
 
-        private static int _lastGivenMissionWithVehiclePosition = -1;
+        private static int _lastGivenMissionWithVanPosition = -1;
 
-        public static MissionWithVehiclePosition GetRandomMissionWithVehiclePosition()
+        public static MissionWithVanPosition GetRandomMissionWithVanPosition()
         {
-            var index = RandomHelper.Next(0, MissionWithVehiclePositions.Count);
-            while (_lastGivenMissionWithVehiclePosition == index)
+            var index = RandomHelper.Next(0, MissionWithVanPositions.Count);
+            while (_lastGivenMissionWithVanPosition == index)
             {
-                index = RandomHelper.Next(0, MissionWithVehiclePositions.Count);
+                index = RandomHelper.Next(0, MissionWithVanPositions.Count);
             }
 
-            _lastGivenMissionWithVehiclePosition = index;
-            return MissionWithVehiclePositions[index];
+            _lastGivenMissionWithVanPosition = index;
+            return MissionWithVanPositions[index];
         }
 
-        private static readonly List<MissionWithVehiclePosition> MissionWithVehiclePositions =
-            new List<MissionWithVehiclePosition>
+        private static readonly List<MissionWithVanPosition> MissionWithVanPositions =
+            new List<MissionWithVanPosition>
             {
                 // East of Procopio Beach at Mount Chiliad
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -110,7 +110,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
 
                 // Behind You Tool Market at San Chianski Mountain
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -142,7 +142,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
 
                 // Sawmill in Paleto Forest
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -174,7 +174,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
 
                 // Beach of North Chumash
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -206,7 +206,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
 
                 // Between sheds in the North of Grapeseed
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -238,7 +238,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
 
                 // Marlowe Vineyards in Tongva Hills
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -270,7 +270,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
 
                 // Palmer-Taylor Power Station parking at San Chianski Mountain
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -302,7 +302,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
 
                 // Murrieta Oil Field in El Burro Height
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -334,7 +334,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
 
                 // Shed in Rogers Salvage & Scrap at La Puerta
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -366,7 +366,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Davis Quartz terraced mining site
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -398,7 +398,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // A trail in Mount Gordo
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -430,7 +430,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Palomino Highlands
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -462,7 +462,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Buccaneer way
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -494,7 +494,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Elysian Island
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -526,7 +526,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Elysian Island 2
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -558,7 +558,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Airport
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -590,7 +590,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Vespucci
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -622,7 +622,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Bay city avenue
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -654,7 +654,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Little Seoul
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -686,7 +686,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Rockford hills
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -718,7 +718,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Pacific Bluffs
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -750,7 +750,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Vinewood West
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -782,7 +782,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Fort Zancudo
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -814,7 +814,7 @@ namespace Waldhari.Common.Entities.Helpers
                 },
                 
                 // Paleto Forest
-                new MissionWithVehiclePosition
+                new MissionWithVanPosition
                 {
                     VehiclePosition = new WPosition
                     {
@@ -857,7 +857,7 @@ namespace Waldhari.Common.Entities.Helpers
         private static int _lastGivenAlonePedPosition = -1;
         public static WPosition GetRandomAlonePedPosition()
         {
-            var pedPositions = MissionWithVehiclePositions
+            var pedPositions = MissionWithVanPositions
                 .SelectMany(mission => mission.PedPositions)
                 .ToList();
             
