@@ -30,10 +30,7 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void StartComplement()
         {
-            if (!Instances.Remove(this))
-            {
-                Logger.Warning($"Cannot remove {Name} manufacture script");
-            }
+            // Nothing to do
         }
 
         private int _nextTick;

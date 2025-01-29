@@ -74,7 +74,7 @@ namespace Waldhari.Common.Behavior.Mission
         protected static readonly List<AbstractMissionScript> Instances = new List<AbstractMissionScript>();
         public static bool IsAnyMissionActive()
         {
-            foreach (var instance in Instances.Where(instance => instance._isActive))
+            foreach (var instance in Instances.Where(instance => instance._isActive && instance.CheckIfAnotherMissionIsActiveToLaunch))
             {
                 Logger.Debug($"Instance {instance.Name} is active");
                 return true;
