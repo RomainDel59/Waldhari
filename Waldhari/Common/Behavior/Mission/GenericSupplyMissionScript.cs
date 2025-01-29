@@ -159,7 +159,7 @@ namespace Waldhari.Common.Behavior.Mission
 
         protected override void CreateScene()
         {
-            var randomPosition = WPositionHelper.GetRandomMissionWithVehiclePosition();
+            var randomPosition = WPositionHelper.GetRandomMissionWithVanPosition();
             var gang = WGroupHelper.GetRandomGang();
 
             _supplierActingScripts = WSceneHelper.CreateTransactionScene(randomPosition,gang);
@@ -175,10 +175,9 @@ namespace Waldhari.Common.Behavior.Mission
                 Logger.Debug("Ped added to player relationship group");
             }
             
-            // todo: random vehiclehash
             _van = new WVehicle
             {
-                VehicleHash = VehicleHash.Burrito,
+                VehicleHash = WVehicleHelper.GetRandomVan(),
                 InitialPosition = randomPosition.VehiclePosition
             };
             _van.Create();

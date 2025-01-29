@@ -14,12 +14,11 @@ namespace Waldhari.CokeWork.Missions
 
 
         protected override WPosition Destination => CokeWorkHelper.Positions.Parking;
-        protected override WPosition Workstation => CokeWorkHelper.Positions.GetWorkstation();
         protected override void ShowStartedMessage()
         {
             CokeWorkHelper.ShowFromContact("cokework_pickupped_started");
         }
-        protected override string PedMessageKey => "chemist";
+        protected override string PedMessageKey => "supervisor";
         protected override string FailPedDeadMessageKey => "cokework_pickupped_fail_dead";
         protected override string RendezvousMessageKey => "cokework_pickupped_step_rendezvous";
         protected override string WaitMessageKey => "cokework_pickupped_step_wait";

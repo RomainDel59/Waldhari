@@ -15,7 +15,6 @@ namespace Waldhari.Common.Behavior.Mission
         private WBlip _destinationBlip;
         
         protected abstract WPosition Destination { get; }
-        protected abstract WPosition Workstation { get; }
         protected abstract void ShowStartedMessage();
         protected abstract string PedMessageKey { get; }
         protected abstract string FailPedDeadMessageKey { get; }

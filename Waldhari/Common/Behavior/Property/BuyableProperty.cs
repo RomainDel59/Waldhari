@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using GTA;
 using Waldhari.Common.Files;
-using Waldhari.Common.Misc;
 using Waldhari.Common.UI;
 
 namespace Waldhari.Common.Behavior.Property
@@ -26,7 +25,7 @@ namespace Waldhari.Common.Behavior.Property
                 new List<string>
                 {
                     Localization.GetTextByKey(Property.NameKey),
-                    NumberHelper.ConvertToAmount(Property.Price),
+                    Property.Price.ToString(),
                     NotificationHelper.GetInputContextSecondary()
                 },
                 -1

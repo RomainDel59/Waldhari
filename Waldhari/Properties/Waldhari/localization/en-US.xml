@@ -369,7 +369,7 @@
         </LocaleKey>
         <LocaleKey>
             <Key>weedfarm_help</Key>
-            <Value>{0}~n~Price: {1} $~n~Grants access to ~y~farm missions~s~~n~Press {2} to buy.</Value>
+            <Value>{0}~n~Price: ${1}~n~Grants access to ~y~farm missions~s~~n~Press {2} to buy.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>weedfarm_buy_failure</Key>
@@ -391,15 +391,15 @@
         <!-- Menu -->
         <LocaleKey>
             <Key>weedfarm_menu_check_supply_title</Key>
-            <Value>Raw Material Stock</Value>
+            <Value>Supply Stock</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>weedfarm_menu_check_supply_description</Key>
-            <Value>Check the volume of raw materials in stock.</Value>
+            <Value>Check the volume of supplies in stock.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>weedfarm_supply_amount</Key>
-            <Value>There are currently ~g~{0} kg~s~ of raw materials in stock.</Value>
+            <Value>There are currently ~g~{0} kg~s~ of supplies in stock.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>weedfarm_menu_check_product_title</Key>
@@ -443,7 +443,7 @@
         <!-- Supply mission -->
         <LocaleKey>
             <Key>weedfarm_supply_started</Key>
-            <Value>Hello Sir! I have ordered the ~g~raw materials~s~, you can pick them up from the ~y~supplier~s~.</Value>
+            <Value>Hello Sir! I have ordered the ~g~supplies~s~, you can pick them up from the ~y~supplier~s~.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>weedfarm_supply_step_drive</Key>
@@ -473,7 +473,7 @@
         <!-- Bulk mission -->
         <LocaleKey>
             <Key>weedfarm_bulk_started</Key>
-            <Value>Hello, Sir, a wholesaler agreed to take all the merchandise for ~g~{0} $~s~. I’ve prepared a vehicle at the farm. You can deliver it to them.</Value>
+            <Value>Hello, Sir, a wholesaler agreed to take all the merchandise for ~g~${0}~s~. I’ve prepared a vehicle at the farm. You can deliver it to them.</Value>
         </LocaleKey>
 
 
@@ -490,7 +490,7 @@
         </LocaleKey>
         <LocaleKey>
             <Key>cokework_help</Key>
-            <Value>{0}~n~Price: {1} $~n~Grants access to ~y~workshop missions~s~~n~Press {2} to purchase.</Value>
+            <Value>{0}~n~Price: ${1}~n~Grants access to ~y~workshop missions~s~~n~Press {2} to purchase.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>cokework_buy_failure</Key>
@@ -512,15 +512,15 @@
         <!-- Menu -->
         <LocaleKey>
             <Key>cokework_menu_check_supply_title</Key>
-            <Value>Raw Materials Stock</Value>
+            <Value>Supplies Stock</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>cokework_menu_check_supply_description</Key>
-            <Value>Check the amount of raw materials in stock.</Value>
+            <Value>Check the amount of supplies in stock.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>cokework_supply_amount</Key>
-            <Value>There are currently ~g~{0} kg~s~ of raw materials in stock.</Value>
+            <Value>There are currently ~g~{0} kg~s~ of supplies in stock.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>cokework_menu_check_product_title</Key>
@@ -564,7 +564,7 @@
         <!-- Supply mission -->
         <LocaleKey>
             <Key>cokework_supply_started</Key>
-            <Value>Hola jefe! I've ordered the ~g~raw materials~s~, you can head to the meeting point with the ~y~supplier~s~.</Value>
+            <Value>Hola jefe! I've ordered the ~g~supplies~s~, you can head to the meeting point with the ~y~supplier~s~.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>cokework_supply_step_drive</Key>
@@ -594,7 +594,7 @@
         <!-- Bulk mission -->
         <LocaleKey>
             <Key>cokework_bulk_started</Key>
-            <Value>Hola jefe, a buyer is interested in our entire stock for ~g~{0} $~s~, I've prepared the goods at the workshop.</Value>
+            <Value>Hola jefe, a buyer is interested in our entire stock for ~g~${0}~s~, I've prepared the goods at the workshop.</Value>
         </LocaleKey>
 
 

@@ -1,10 +1,34 @@
-﻿using GTA;
+﻿using System.Collections.Generic;
+using GTA;
 using Waldhari.Common.Files;
+using Waldhari.Common.Misc;
 
 namespace Waldhari.Common.Entities.Helpers
 {
     public static class WVehicleHelper
     {
+        private static List<VehicleHash> _vanHashes = new List<VehicleHash>
+        {
+            VehicleHash.Burrito,
+            VehicleHash.Burrito2,
+            VehicleHash.Burrito3,
+            VehicleHash.Burrito4,
+            VehicleHash.Burrito5,
+            VehicleHash.Pony,
+            VehicleHash.Pony2,
+            VehicleHash.Speedo,
+            VehicleHash.Speedo2,
+            VehicleHash.Speedo4,
+            VehicleHash.Youga2,
+            VehicleHash.Youga3,
+            VehicleHash.Youga4
+        };
+
+        public static VehicleHash GetRandomVan()
+        {
+            var index = RandomHelper.Next(0, _vanHashes.Count);
+            return _vanHashes[index];
+        }
         
         /// <summary>
         /// Makes a ped wrap into a vehicle and wait for it.

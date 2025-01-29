@@ -53,11 +53,10 @@ namespace Waldhari.Common.Entities.Helpers
                 nameKey = "property_with_price";
                 
                 values.Add(name);
-                values.Add(NumberHelper.ConvertToAmount(price));
+                values.Add(price.ToString());
                 
                 Logger.Debug("name="+name);
                 Logger.Debug("price="+price);
-                Logger.Debug("NumberHelper.ConvertToAmount(price)="+NumberHelper.ConvertToAmount(price));
             }
             
             var propertyBlip = new WBlip

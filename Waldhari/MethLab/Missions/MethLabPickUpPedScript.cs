@@ -14,7 +14,6 @@ namespace Waldhari.MethLab.Missions
 
 
         protected override WPosition Destination => MethLabHelper.Positions.Parking;
-        protected override WPosition Workstation => MethLabHelper.Positions.GetWorkstation();
         protected override void ShowStartedMessage()
         {
             MethLabHelper.ShowFromContact("methlab_pickupped_started");

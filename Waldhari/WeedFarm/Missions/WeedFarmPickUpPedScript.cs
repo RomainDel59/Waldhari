@@ -14,7 +14,6 @@ namespace Waldhari.WeedFarm.Missions
 
 
         protected override WPosition Destination => WeedFarmHelper.Positions.Parking;
-        protected override WPosition Workstation => WeedFarmHelper.Positions.GetWorkstation();
         protected override void ShowStartedMessage()
         {
             WeedFarmHelper.ShowFromContact("weedfarm_pickupped_started");

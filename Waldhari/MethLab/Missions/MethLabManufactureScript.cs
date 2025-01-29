@@ -37,7 +37,7 @@ namespace Waldhari.MethLab.Missions
             if (amount > MethLabSave.Instance.Supply)
                 amount = MethLabSave.Instance.Supply;
 
-            //at least one gram producted
+            //at least one gram produced
             var product = Math.Max(1, amount * yieldPerKg - loss);
 
             MethLabSave.Instance.Supply -= amount;
