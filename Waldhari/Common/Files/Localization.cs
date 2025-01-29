@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
+using Waldhari.Common.Misc;
 
 namespace Waldhari.Common.Files
 {
@@ -108,7 +110,13 @@ namespace Waldhari.Common.Files
             // Merge values if exist
             if (values != null && values.Count > 0)
             {
-                text = string.Format(text, values.ToArray());
+                var convertedValues = values.Select(
+                    value => int.TryParse(value, out int number) ? 
+                        NumberHelper.ConvertToAmount(number) : 
+                        value
+                    ).ToArray();
+                
+                text = string.Format(text, convertedValues);
                 Logger.Debug($"text with values='{text}'");
             }
             
