@@ -14,7 +14,6 @@ namespace Waldhari.CokeWork.Missions
 
 
         protected override WPosition Destination => CokeWorkHelper.Positions.Parking;
-        protected override WPosition Workstation => CokeWorkHelper.Positions.GetWorkstation();
         protected override void ShowStartedMessage()
         {
             CokeWorkHelper.ShowFromContact("cokework_pickupped_started");
