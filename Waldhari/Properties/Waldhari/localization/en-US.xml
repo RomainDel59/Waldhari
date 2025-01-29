@@ -391,15 +391,15 @@
         <!-- Menu -->
         <LocaleKey>
             <Key>weedfarm_menu_check_supply_title</Key>
-            <Value>Raw Material Stock</Value>
+            <Value>Supply Stock</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>weedfarm_menu_check_supply_description</Key>
-            <Value>Check the volume of raw materials in stock.</Value>
+            <Value>Check the volume of supplies in stock.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>weedfarm_supply_amount</Key>
-            <Value>There are currently ~g~{0} kg~s~ of raw materials in stock.</Value>
+            <Value>There are currently ~g~{0} kg~s~ of supplies in stock.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>weedfarm_menu_check_product_title</Key>
@@ -443,7 +443,7 @@
         <!-- Supply mission -->
         <LocaleKey>
             <Key>weedfarm_supply_started</Key>
-            <Value>Hello Sir! I have ordered the ~g~raw materials~s~, you can pick them up from the ~y~supplier~s~.</Value>
+            <Value>Hello Sir! I have ordered the ~g~supplies~s~, you can pick them up from the ~y~supplier~s~.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>weedfarm_supply_step_drive</Key>
@@ -512,15 +512,15 @@
         <!-- Menu -->
         <LocaleKey>
             <Key>cokework_menu_check_supply_title</Key>
-            <Value>Raw Materials Stock</Value>
+            <Value>Supplies Stock</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>cokework_menu_check_supply_description</Key>
-            <Value>Check the amount of raw materials in stock.</Value>
+            <Value>Check the amount of supplies in stock.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>cokework_supply_amount</Key>
-            <Value>There are currently ~g~{0} kg~s~ of raw materials in stock.</Value>
+            <Value>There are currently ~g~{0} kg~s~ of supplies in stock.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>cokework_menu_check_product_title</Key>
@@ -564,7 +564,7 @@
         <!-- Supply mission -->
         <LocaleKey>
             <Key>cokework_supply_started</Key>
-            <Value>Hola jefe! I've ordered the ~g~raw materials~s~, you can head to the meeting point with the ~y~supplier~s~.</Value>
+            <Value>Hola jefe! I've ordered the ~g~supplies~s~, you can head to the meeting point with the ~y~supplier~s~.</Value>
         </LocaleKey>
         <LocaleKey>
             <Key>cokework_supply_step_drive</Key>
