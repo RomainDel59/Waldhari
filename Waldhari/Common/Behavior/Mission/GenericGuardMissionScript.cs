@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GTA;
+using LemonUI.Menus;
 using Waldhari.Common.Behavior.Ped;
 using Waldhari.Common.Entities;
 using Waldhari.Common.Entities.Helpers;
 using Waldhari.Common.Files;
-using Waldhari.WeedFarm;
+using Waldhari.Common.UI;
 
 namespace Waldhari.Common.Behavior.Mission
 {
@@ -13,41 +14,33 @@ namespace Waldhari.Common.Behavior.Mission
     //todo: make it abstract
     public class GenericGuardMissionScript : AbstractMissionScript
     {
-        // Parameters //todo: should be buyable by phone
-        public List<WPositionHelper.GuardPositions> guardPositionsList = WeedFarmHelper.Positions.GuardPositionsList;
-        public int numberOfGuards = 2;
+        // Parameters
+        public List<WPositionHelper.GuardPositions> GuardPositionsList;
+        public int NumberOfGuards;
         
-        private List<PedActingScript> guardScriptList;
-        private WGroup wGroup;
+        private List<PedActingScript> _guardScriptList;
         
-        //todo: name comes from class implemented this
-        public GenericGuardMissionScript() : base("GenericGuardMissionScript", false, null)
+        public GenericGuardMissionScript(string name) : base(name, false, null)
         {
             IsPlayerMission = false;
         }
 
         protected override void StartComplement()
         {
-            guardScriptList = new List<PedActingScript>();
+            _guardScriptList = new List<PedActingScript>();
             
-            for (int i = 0; i < numberOfGuards; i++)
+            for (int i = 0; i < NumberOfGuards; i++)
             {
                 AddGuard(i);
             }
         }
 
-        public void AddGuard(int index)
+        private void AddGuard(int index)
         {
-            if (numberOfGuards > guardPositionsList.Count)
-            {
-                Logger.Warning($"Can't add guard to {Name}, the number of positions {guardPositionsList.Count} exceeded");
-                return;
-            }
-            
             var wPed = new WPed
             {
                 PedHash = PedHash.SecuroGuardMale01,
-                InitialPosition = guardPositionsList[index].Position[0],
+                InitialPosition = GuardPositionsList[index].Position[0],
                 Scenario = WPed.PedScenario.Guard
             };
             wPed.Create();
@@ -58,13 +51,13 @@ namespace Waldhari.Common.Behavior.Mission
             script.PedIsRunning = false;
             script.WPed = wPed;
             
-            guardScriptList.Add(script);
+            _guardScriptList.Add(script);
         }
 
         protected override bool OnTickComplement()
         {
             // If there is no guard, continue to wait
-            if (numberOfGuards == 0) _waitEndTime = Game.GameTime + Minutes * 60 * 1000;
+            if (NumberOfGuards == 0) _waitEndTime = Game.GameTime + Minutes * 60 * 1000;
             return true;
         }
 
@@ -97,7 +90,7 @@ namespace Waldhari.Common.Behavior.Mission
                 Action = () =>
                 {
                     // While one of the guard is in combat, will wait again from begining
-                    if (guardScriptList.All(guard => !guard.IsInCombat()))
+                    if (_guardScriptList.All(guard => !guard.IsInCombat()))
                     {
                         _waitEndTime = Game.GameTime + Minutes * 60 * 1000;
                     }
@@ -108,14 +101,14 @@ namespace Waldhari.Common.Behavior.Mission
                 {
                     Logger.Debug($"Guards change position started");
 
-                    for (int i = 0; i < numberOfGuards; i++)
+                    for (int i = 0; i < NumberOfGuards; i++)
                     {
-                        guardPositionsList[i].ActualPosition++;
-                        if (guardPositionsList[i].ActualPosition >= guardPositionsList[i].Position.Count)
+                        GuardPositionsList[i].ActualPosition++;
+                        if (GuardPositionsList[i].ActualPosition >= GuardPositionsList[i].Position.Count)
                         {
-                            guardPositionsList[i].ActualPosition = 0;
+                            GuardPositionsList[i].ActualPosition = 0;
                         }
-                        guardScriptList[i].WPed.InitialPosition = guardPositionsList[i].Position[guardPositionsList[i].ActualPosition];
+                        _guardScriptList[i].WPed.InitialPosition = GuardPositionsList[i].Position[GuardPositionsList[i].ActualPosition];
                     }
                 }
             };
@@ -129,7 +122,7 @@ namespace Waldhari.Common.Behavior.Mission
                 MessageKey = null,
                 Action = () => { },
                 CompletionCondition =
-                    () => guardScriptList.All(guard => !guard.HasMoved),
+                    () => _guardScriptList.All(guard => !guard.HasMoved),
                 CompletionAction = () =>
                 {
                     Logger.Debug($"Guards will wait {Minutes} minutes before change position");
@@ -151,6 +144,34 @@ namespace Waldhari.Common.Behavior.Mission
         protected override void CleanScene()
         {
             // nothing
+        }
+
+
+        public void AddMenuItem(NativeMenu menu)
+        {
+            MenuHelper.CreateActionItem(
+                title: "rentguard_menu_title",
+                description: "rentguard_menu_description",
+                menu: menu,
+                action: () =>
+                {
+                    if (NumberOfGuards+1 > GuardPositionsList.Count)
+                    {
+                        Logger.Info($"Can't add guard to {Name}, the number of positions {GuardPositionsList.Count} exceeded");
+                        return;
+                    }
+
+                    if (GlobalOptions.Instance.GuardPrice > Game.Player.Money)
+                    {
+                        NotificationHelper.ShowFailure("not_enough_money");
+                        return;
+                    }
+
+                    NumberOfGuards++;
+                    AddGuard(NumberOfGuards-1);
+                    NotificationHelper.ShowFromSecuroServ("rentguard_done");
+                }
+            );
         }
         
     }

@@ -51,6 +51,19 @@ namespace Waldhari.Common.UI
         {
             menu.Add(new NativeItem("----------"));
         }
+
+        public static void CreateActionItem(string title, string description, NativeMenu menu, Action action)
+        {
+            var item = new NativeItem(
+                Localization.GetTextByKey(title),
+                Localization.GetTextByKey(description)
+            );
+            item.Activated += (sender, e) =>
+            {
+                action();
+            };
+            menu.Add(item);
+        }
         
     }
 }

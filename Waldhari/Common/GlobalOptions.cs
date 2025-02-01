@@ -6,6 +6,7 @@ namespace Waldhari.Common
     public class GlobalOptions : File<GlobalOptions>
     {
         public static GlobalOptions Instance;
+        
 
         protected override void SetInstance(GlobalOptions instance) => Instance = instance;
         
@@ -33,6 +34,8 @@ namespace Waldhari.Common
         // All businesses accessible by any character
         public bool UniversalBusinesses;
         
+        public int GuardPrice;
+        
         
         
         #endregion
@@ -58,6 +61,8 @@ namespace Waldhari.Common
             EnemiesDisappearanceDistance = 1000;
 
             UniversalBusinesses = false;
+
+            GuardPrice = 100000;
 
         }
     }

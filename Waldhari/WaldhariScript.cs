@@ -10,6 +10,9 @@ namespace Waldhari
     {
         public WaldhariScript()
         {
+            //todo: add notification icons ?
+            //AddSecuroServIcon();
+            
             Tick += OnTick;
         }
 
@@ -70,5 +73,37 @@ namespace Waldhari
                 // script.Start();
             }
         }
+        
+        //todo: add notification icons ?
+        //
+        // private void AddSecuroServIcon()
+        // {
+        //     string newIcon = "CHAR_GANGAPP";
+        //
+        //     // Retrieve the s_iconNames field using reflection
+        //     FieldInfo field = typeof(Notification).GetField("s_iconNames", BindingFlags.NonPublic | BindingFlags.Static);
+        //
+        //     if (field == null)
+        //     {
+        //         GTA.UI.Screen.ShowSubtitle("Error: Unable to find s_iconNames.");
+        //         return;
+        //     }
+        //
+        //     // Get the existing array
+        //     string[] oldArray = (string[])field.GetValue(null);
+        //
+        //     // Create a new array with an increased size
+        //     string[] newArray = new string[oldArray.Length + 1];
+        //
+        //     // Copy the old array into the new one
+        //     oldArray.CopyTo(newArray, 0);
+        //
+        //     // Add the new icon at the last position
+        //     newArray[newArray.Length - 1] = newIcon;
+        //
+        //     // Replace the array in the Notification class
+        //     field.SetValue(null, newArray);
+        // }
+
     }
 }

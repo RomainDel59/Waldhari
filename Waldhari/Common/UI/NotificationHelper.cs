@@ -35,6 +35,12 @@ namespace Waldhari.Common.UI
         {
             ShowWithIcon(NotificationIcon.Default, senderKey, messageKey, messageValues);
         }
+        
+        public static void ShowFromSecuroServ(string messageKey, List<string> messageValues = null)
+        {
+            //todo: how to use CHAR_GANGAPP icon ??
+            ShowWithIcon(NotificationIcon.Default, "securoserv", messageKey, messageValues);
+        }
 
         public static void Subtitle(string messageKey, int seconds = 5)
         {

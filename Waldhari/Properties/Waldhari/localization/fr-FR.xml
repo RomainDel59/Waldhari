@@ -17,6 +17,10 @@
             <Key>property_with_price</Key>
             <Value>{0} : {1} $</Value>
         </LocaleKey>
+        <LocaleKey>
+            <Key>not_enough_money</Key>
+            <Value>Vous n'avez pas assez d'~r~argent~s~ pour ça.</Value>
+        </LocaleKey>
         
         <!-- Names -->
         <LocaleKey>
@@ -138,6 +142,24 @@
         <LocaleKey>
             <Key>property_bought</Key>
             <Value>Propriété achetée</Value>
+        </LocaleKey>
+        
+        <!-- Rent guard -->
+        <LocaleKey>
+            <Key>rentguard_menu_title</Key>
+            <Value>Sécuriser avec SecuroServ</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>rentguard_menu_description</Key>
+            <Value>Loue un agent envoyé par SecuroServ pour garder la propriété.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>rentguard_done</Key>
+            <Value>Opération sécurisée validée.~n~Votre agent de protection est en poste et surveille activement votre propriété. Restez confiant, nous veillons sur vous 24h/24.</Value>
+        </LocaleKey>
+        <LocaleKey>
+            <Key>securoserv</Key>
+            <Value>SecuroServ</Value>
         </LocaleKey>
         
         <!-- Pick up ped mission -->
