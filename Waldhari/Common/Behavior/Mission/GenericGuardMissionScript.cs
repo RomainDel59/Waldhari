@@ -23,7 +23,7 @@ namespace Waldhari.Common.Behavior.Mission
         //todo: name comes from class implemented this
         public GenericGuardMissionScript() : base("GenericGuardMissionScript", false, null)
         {
-            CheckIfAnotherMissionIsActiveToLaunch = false;
+            IsPlayerMission = false;
         }
 
         protected override void StartComplement()

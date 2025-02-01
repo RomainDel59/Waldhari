@@ -65,20 +65,19 @@ namespace Waldhari.Common.Behavior.Mission
         /// </summary>
         protected int CurrentStep;
 
-        protected bool CheckIfAnotherMissionIsActiveToLaunch = true;
+        protected bool IsPlayerMission = true;
         
         /// <summary>
         /// Indicates whether the mission is currently active.
         /// </summary>
         private bool _isActive;
         protected static readonly List<AbstractMissionScript> Instances = new List<AbstractMissionScript>();
-        public static bool IsAnyMissionActive()
+        public static bool IsAnyPlayerMissionActive()
         {
-            foreach (var instance in Instances.Where(instance => instance._isActive && instance.CheckIfAnotherMissionIsActiveToLaunch))
+            foreach (var instance in Instances.Where(instance => instance._isActive && instance.IsPlayerMission))
             {
                 Logger.Debug($"Instance {instance.Name} is active");
                 return true;
-
             }
             
             return false;
@@ -175,9 +174,9 @@ namespace Waldhari.Common.Behavior.Mission
 
             try
             {
-                if(CheckIfAnotherMissionIsActiveToLaunch)
+                if(IsPlayerMission)
                 {
-                    if (IsAnyMissionActive() || Game.IsMissionActive || Game.IsRandomEventActive)
+                    if (IsAnyPlayerMissionActive() || Game.IsMissionActive || Game.IsRandomEventActive)
                         throw new MissionException("already_in_mission");
                 }
 

@@ -39,7 +39,7 @@ namespace Waldhari.Common.Behavior.Mission.Helper
             if (nextTry > Game.GameTime) return;
 
             // If a mission is active (including defense)
-            if (AbstractMissionScript.IsAnyMissionActive() || Game.IsMissionActive || Game.IsRandomEventActive)
+            if (AbstractMissionScript.IsAnyPlayerMissionActive() || Game.IsMissionActive || Game.IsRandomEventActive)
             {
                 AddCooldown<T>();
                 return;
