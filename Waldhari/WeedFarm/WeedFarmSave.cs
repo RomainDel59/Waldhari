@@ -16,6 +16,8 @@ namespace Waldhari.WeedFarm
         public int Supply;
         public int Product;
         
+        public int Guards;
+        
         #endregion
         
         protected override void SetDefaults()
@@ -24,6 +26,7 @@ namespace Waldhari.WeedFarm
             Worker = false;
             Supply = 0;
             Product = 0;
+            Guards = 0;
         }
 
     }

@@ -78,7 +78,7 @@ namespace Waldhari.WeedFarm
                 {
                     new WPositionHelper.GuardPositions
                     {
-                        Position = new List<WPosition>
+                        PositionList = new List<WPosition>
                         {
                             new WPosition
                             {
@@ -96,7 +96,7 @@ namespace Waldhari.WeedFarm
                     },
                     new WPositionHelper.GuardPositions
                     {
-                        Position = new List<WPosition>
+                        PositionList = new List<WPosition>
                         {
                             new WPosition
                             {
@@ -207,6 +207,11 @@ namespace Waldhari.WeedFarm
                 () => WeedFarmSave.Instance.Product
             );
 
+            // Separator
+            MenuHelper.CreateSeparator(_menu);
+            
+            _guardScript.AddMenuItem(_menu);
+
             Logger.Debug($"Menu='{_menu.Name}' created");
 
             return _menu;
@@ -257,5 +262,12 @@ namespace Waldhari.WeedFarm
         }
 
         #endregion
+
+        private static WeedFarmGuardScript _guardScript;
+        public static void StartGuardScript()
+        {
+            _guardScript = Script.InstantiateScript<WeedFarmGuardScript>();
+            _guardScript.Start();
+        }
     }
 }

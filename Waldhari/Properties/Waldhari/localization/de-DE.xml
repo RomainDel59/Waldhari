@@ -146,6 +146,10 @@
 
         <!-- Rent guard -->
         <LocaleKey>
+            <Key>rentguard_nomore</Key>
+            <Value>Unsere Schutzdienste sind derzeit stark nachgefragt. Momentan stehen keine weiteren Agenten zur Verfügung.</Value>
+        </LocaleKey>
+        <LocaleKey>
             <Key>rentguard_menu_title</Key>
             <Value>Mit SecuroServ absichern</Value>
         </LocaleKey>

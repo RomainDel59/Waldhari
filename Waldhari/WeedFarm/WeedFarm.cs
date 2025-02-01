@@ -41,8 +41,16 @@ namespace Waldhari.WeedFarm
             Tick += OnTick;
         }
         
+        private static bool _guardScriptStarted;
+        
         private void OnTick(object sender, EventArgs e)
         {
+            if (!_guardScriptStarted)
+            {
+                WeedFarmHelper.StartGuardScript();
+                _guardScriptStarted = true;
+            }
+            
             WeedFarmHelper.ProcessMenu();
             PhoneHelper.ManageContact(WeedFarmHelper.GetContact(), Property.Holder);
             
@@ -55,6 +63,8 @@ namespace Waldhari.WeedFarm
 
             // Nothing to do if not bought
             if (!Property.IsOwned()) return;
+            
+            // When property is bought
             _isWaitingForBuyer = false;
             
             // To lower material usage :

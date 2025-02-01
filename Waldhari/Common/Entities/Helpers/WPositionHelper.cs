@@ -878,7 +878,7 @@ namespace Waldhari.Common.Entities.Helpers
         public class GuardPositions
         {
             // List of position for a unique guard
-            public List<WPosition> Position;
+            public List<WPosition> PositionList;
             
             // Actual position of the guard
             public int ActualPosition = 0;

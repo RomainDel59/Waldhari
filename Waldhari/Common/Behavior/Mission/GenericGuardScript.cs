@@ -11,8 +11,7 @@ using Waldhari.Common.UI;
 namespace Waldhari.Common.Behavior.Mission
 {
     [ScriptAttributes(NoDefaultInstance = true)]
-    //todo: make it abstract
-    public class GenericGuardMissionScript : AbstractMissionScript
+    public abstract class GenericGuardScript : AbstractMissionScript
     {
         // Parameters
         public List<WPositionHelper.GuardPositions> GuardPositionsList;
@@ -20,7 +19,7 @@ namespace Waldhari.Common.Behavior.Mission
         
         private List<PedActingScript> _guardScriptList;
         
-        public GenericGuardMissionScript(string name) : base(name, false, null)
+        public GenericGuardScript(string name) : base(name, false, null)
         {
             IsPlayerMission = false;
         }
@@ -37,19 +36,28 @@ namespace Waldhari.Common.Behavior.Mission
 
         private void AddGuard(int index)
         {
+            Logger.Debug($"Adding guard {index}");
+            
             var wPed = new WPed
             {
                 PedHash = PedHash.SecuroGuardMale01,
-                InitialPosition = GuardPositionsList[index].Position[0],
+                InitialPosition = GuardPositionsList[index].PositionList[0],
                 Scenario = WPed.PedScenario.Guard
             };
             wPed.Create();
+            
+            Logger.Debug($"Guard {index} created.");
+            
             wPed.Ped.RelationshipGroup = Game.Player.Character.RelationshipGroup;
             wPed.AddWeapon(WeaponsHelper.GetRandomGangVehicleWeapon());
+            
+            Logger.Debug($"Guard {index} weapon added.");
             
             var script = InstantiateScript<PedActingScript>();
             script.PedIsRunning = false;
             script.WPed = wPed;
+            
+            Logger.Debug($"Guard {index} script initiated.");
             
             _guardScriptList.Add(script);
         }
@@ -59,6 +67,8 @@ namespace Waldhari.Common.Behavior.Mission
             // If there is no guard, continue to wait
             if (NumberOfGuards == 0) _waitEndTime = Game.GameTime + Minutes * 60 * 1000;
             return true;
+            
+            //todo: manage guard death
         }
 
         protected override List<string> EndComplement()
@@ -78,7 +88,7 @@ namespace Waldhari.Common.Behavior.Mission
             AddStep(GetChangingPosition(), false);
         }
 
-        private const int Minutes = 1;//todo: change to 5 minutes
+        private const int Minutes = 2;
         private int _waitEndTime = Game.GameTime + Minutes * 60 * 1000;
         
         private Step GetStepWait()
@@ -104,11 +114,11 @@ namespace Waldhari.Common.Behavior.Mission
                     for (int i = 0; i < NumberOfGuards; i++)
                     {
                         GuardPositionsList[i].ActualPosition++;
-                        if (GuardPositionsList[i].ActualPosition >= GuardPositionsList[i].Position.Count)
+                        if (GuardPositionsList[i].ActualPosition >= GuardPositionsList[i].PositionList.Count)
                         {
                             GuardPositionsList[i].ActualPosition = 0;
                         }
-                        _guardScriptList[i].WPed.InitialPosition = GuardPositionsList[i].Position[GuardPositionsList[i].ActualPosition];
+                        _guardScriptList[i].WPed.InitialPosition = GuardPositionsList[i].PositionList[GuardPositionsList[i].ActualPosition];
                     }
                 }
             };
@@ -157,7 +167,8 @@ namespace Waldhari.Common.Behavior.Mission
                 {
                     if (NumberOfGuards+1 > GuardPositionsList.Count)
                     {
-                        Logger.Info($"Can't add guard to {Name}, the number of positions {GuardPositionsList.Count} exceeded");
+                        Logger.Info($"Can't add guard to {Name}, the number of positions {GuardPositionsList.Count} reached");
+                        NotificationHelper.ShowFromSecuroServ("rentguard_nomore");
                         return;
                     }
 
@@ -166,13 +177,18 @@ namespace Waldhari.Common.Behavior.Mission
                         NotificationHelper.ShowFailure("not_enough_money");
                         return;
                     }
+                    
+                    Game.Player.Money -= GlobalOptions.Instance.GuardPrice;
+                    Game.DoAutoSave();
 
                     NumberOfGuards++;
                     AddGuard(NumberOfGuards-1);
                     NotificationHelper.ShowFromSecuroServ("rentguard_done");
+                    Save();
                 }
             );
         }
-        
+
+        protected abstract void Save();
     }
 }
