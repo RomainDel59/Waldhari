@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using GTA;
-using Waldhari.Common.Behavior.Mission;
 using Waldhari.Common.Files;
 using Waldhari.Common.UI;
 
@@ -67,8 +66,8 @@ namespace Waldhari
             if (Game.IsControlJustPressed(Control.Context))
             {
                 //test
-                var script = InstantiateScript<GenericGuardMissionScript>();
-                script.Start();
+                // var script = InstantiateScript<GenericGuardMissionScript>();
+                // script.Start();
             }
         }
     }
